@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creators Latam · Starter Kit para proyectos con IA</title>
+<meta name="description" content="Repositorio base para arrancar proyectos con Claude Code, Cursor o cualquier LLM. Agentes preconfigurados, skills y reglas que nos ahorran horas en cada proyecto." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Creators Latam · Starter Kit para proyectos con IA" />
+<meta property="og:description" content="El repo base que usamos para lanzar proyectos con IA en 48 horas." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:        #FAFAFB;
+    --bg-alt:    #F3F4F8;
+    --card:      #FFFFFF;
+    --ink:       #0A0F1C;
+    --ink-soft:  #4B5563;
+    --muted:     #9AA0B0;
+    --line:      #E6E8F0;
+    --pink:      #FF3B77;
+    --pink-2:    #FF2D8A;
+    --magenta:   #D426C5;
+    --purple:    #8B3FFF;
+    --violet:    #6A2BF5;
+    --blue:      #2563EB;
+    --green:     #14B87A;
+    --shadow-sm: 0 2px 8px rgba(15,23,42,.04);
+    --shadow:    0 8px 30px rgba(15,23,42,.06);
+    --shadow-lg: 0 20px 50px rgba(15,23,42,.10);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 250, 251, .85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+  .brand-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    display: inline-block;
+  }
+  .brand span.soft { color: var(--ink-soft); font-weight: 500; }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  .cta-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, var(--pink), var(--pink-2));
+    color: white;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 8px 20px -8px rgba(255,59,119,.6);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .cta-sm:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -10px rgba(255,59,119,.7); }
+
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 96px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,59,119,.12), transparent 60%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 20%; left: -250px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(139,63,255,.10), transparent 60%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+  }
+  .eyebrow-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 4px rgba(20,184,122,.15);
+  }
+
+  h1.display {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: clamp(44px, 7vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin: 0 0 24px;
+    max-width: 14ch;
+  }
+  h1.display .grad {
+    background: linear-gradient(90deg, var(--purple), var(--magenta), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .lead {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 36px;
+  }
+  .lead strong { color: var(--ink); font-weight: 600; }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink), var(--pink-2));
+    color: white;
+    box-shadow: 0 14px 30px -10px rgba(255,59,119,.55);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -10px rgba(255,59,119,.7); }
+  .btn-ghost {
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 860px;
+    margin-top: 40px;
+  }
+  .stat .num {
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--blue);
+    letter-spacing: -0.03em;
+  }
+  .stat .num sup, .stat .num .suffix {
+    font-size: 22px;
+    vertical-align: middle;
+  }
+  .stat .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  @media (max-width: 760px) {
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .stat .num { font-size: 32px; }
+  }
+
+  /* ===== SECTION ===== */
+  section.sec { padding: 96px 0; }
+  .sec-eyebrow {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pink);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  h2.sec-title {
+    font-weight: 800;
+    font-size: clamp(34px, 4.5vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0 0 20px;
+    max-width: 18ch;
+  }
+  h2.sec-title .grad {
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .sec-sub {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 48px;
+  }
+
+  /* ===== PILLARS (3 cards) ===== */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .card-num {
+    position: absolute;
+    top: 22px; right: 26px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--line);
+    font-size: 28px;
+  }
+  .card-icon {
+    width: 54px; height: 54px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(139,63,255,.1), rgba(255,59,119,.1));
+    font-size: 24px;
+    margin-bottom: 18px;
+  }
+  .card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--pink);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .card p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Section alt bg */
+  .bg-alt { background: var(--bg-alt); }
+
+  /* ===== LLM RANK ===== */
+  .rank-list {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .rank-item {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 20px;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .rank-item:last-child { border-bottom: 0; }
+  .rank-pos {
+    font-weight: 900;
+    font-size: 38px;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .rank-name { font-weight: 700; font-size: 19px; }
+  .rank-note { color: var(--ink-soft); font-size: 14px; margin-top: 2px; }
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--bg-alt);
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .pill.hot { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; }
+
+  /* ===== TREE ===== */
+  .tree-block {
+    background: #0B0F1A;
+    color: #E4E6EC;
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow-x: auto;
+  }
+  .tree-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #8B8F9B;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .tree-header::before {
+    content: "●  ●  ●";
+    color: #4B5161;
+    letter-spacing: 0.1em;
+    margin-right: 10px;
+  }
+  .tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.85;
+    white-space: pre;
+    margin: 0;
+  }
+  .tree .dir  { color: #FFB86C; font-weight: 600; }
+  .tree .key  { color: #FF6B9D; }
+  .tree .note { color: #6A6E7A; font-style: italic; }
+
+  /* ===== CHECK LIST ===== */
+  .check {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .check li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .check li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    position: relative;
+    margin-top: 2px;
+  }
+  .check li::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    margin-left: 6px;
+    margin-top: 3px;
+  }
+  .check li strong {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+  .check li span {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  @media (max-width: 760px) { .check { grid-template-columns: 1fr; } }
+
+  /* ===== AGENTS TABLE ===== */
+  .agents {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .agent {
+    display: grid;
+    grid-template-columns: 54px 200px 1fr;
+    gap: 20px;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .agent:last-child { border-bottom: 0; }
+  .agent:hover { background: var(--bg-alt); }
+  .agent-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pink);
+    letter-spacing: 0.05em;
+  }
+  .agent-name {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .agent-role { color: var(--ink-soft); font-size: 14.5px; line-height: 1.5; }
+  @media (max-width: 760px) {
+    .agent { grid-template-columns: 50px 1fr; }
+    .agent-role { grid-column: 2; }
+  }
+
+  /* ===== FLOW ===== */
+  .flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 48px 24px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    font-weight: 800;
+    font-size: clamp(24px, 4vw, 40px);
+    letter-spacing: -0.02em;
+    padding: 4px 16px;
+  }
+  .flow-step:nth-child(1) { color: var(--ink); }
+  .flow-step:nth-child(3) { background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .flow-step:nth-child(5) { color: var(--ink); }
+  .flow-arrow {
+    color: var(--pink);
+    font-weight: 800;
+    font-size: 24px;
+  }
+
+  /* ===== PULL QUOTE ===== */
+  .pull {
+    margin: 56px 0;
+    padding: 40px 0 40px 40px;
+    border-left: 4px solid;
+    border-image: linear-gradient(180deg, var(--purple), var(--pink)) 1;
+    font-size: clamp(22px, 2.6vw, 30px);
+    font-weight: 600;
+    line-height: 1.35;
+    max-width: 44ch;
+    letter-spacing: -0.015em;
+  }
+
+  /* ===== PROMPT BOX ===== */
+  .prompt-box {
+    background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06));
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px 32px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 500;
+    position: relative;
+  }
+  .prompt-box::before {
+    content: "INSTRUCCIÓN AL AGENTE";
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--pink);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  /* ===== PRINCIPLES ===== */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .principle {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .principle:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .principle-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 28px;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+  .principle h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .principle p { margin: 0; font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
+
+  /* ===== CTA FINAL ===== */
+  .cta-final {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white;
+    border-radius: 28px;
+    padding: 64px 48px;
+    text-align: center;
+    box-shadow: 0 30px 60px -20px rgba(139,63,255,.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-final::before, .cta-final::after {
+    content: "";
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+  }
+  .cta-final::before { top: -150px; left: -100px; }
+  .cta-final::after { bottom: -200px; right: -100px; }
+
+  .cta-final h2 {
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin: 0 0 16px;
+    line-height: 1.05;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-final p {
+    font-size: 18px;
+    opacity: 0.9;
+    max-width: 56ch;
+    margin: 0 auto 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-final .cta-inner { position: relative; z-index: 1; }
+  .btn-white {
+    background: white;
+    color: var(--ink);
+    padding: 18px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    box-shadow: 0 18px 40px -10px rgba(0,0,0,.25);
+  }
+  .btn-white:hover { transform: translateY(-2px); }
+
+  .code-pill {
+    display: inline-block;
+    background: rgba(0,0,0,.25);
+    padding: 14px 22px;
+    border-radius: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    margin: 20px 0;
+    color: white;
+    position: relative;
+    z-index: 1;
+  }
+  .code-pill .prompt { color: rgba(255,255,255,.5); user-select: none; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 64px 0 48px;
+    border-top: 1px solid var(--line);
+    background: white;
+  }
+  .foot-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .foot-row h4 {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+    font-weight: 700;
+  }
+  .foot-row a {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    padding: 4px 0;
+    transition: color .15s;
+  }
+  .foot-row a:hover { color: var(--pink); }
+  .foot-copy {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.55;
+    max-width: 38ch;
+    margin-top: 10px;
+  }
+  .foot-bottom {
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 760px) {
+    .foot-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ===== UTILS ===== */
+  mark {
+    background: linear-gradient(120deg, rgba(139,63,255,.2), rgba(255,59,119,.2));
+    color: var(--ink);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  code.inline {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg-alt);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.88em;
+    color: var(--pink);
+    font-weight: 500;
+  }
+  .muted { color: var(--ink-soft); }
+
+  @media (max-width: 860px) {
+    .pillars { grid-template-columns: 1fr; }
+    .stats { gap: 16px; }
+    section.sec { padding: 72px 0; }
+    .cta-final { padding: 48px 28px; border-radius: 20px; }
+    .foot-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-dot"></span>
+      Creators <span class="soft">Latam</span>
+    </a>
+    <div class="nav-links">
+      <a href="#filosofia">Filosofía</a>
+      <a href="#estructura">Estructura</a>
+      <a href="#agentes">Agentes</a>
+      <a href="#reglas">Reglas</a>
+      <a href="#cta">Usar el repo</a>
+    </div>
+    <a href="https://github.com/tamibot/creators-latam-starter" class="cta-sm">Ver en GitHub →</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow"><span class="eyebrow-dot"></span> STARTER KIT · V1.0 · 2026</span>
+    <h1 class="display">Arranca proyectos con <span class="grad">IA en minutos</span>, no en días.</h1>
+    <p class="lead">
+      Nuestro <strong>repositorio base</strong> con 11 agentes preconfigurados, skills y reglas de oro. Clonás, copiás tu <code class="inline">.env</code>, abrís Claude Code — y ya tenés un equipo de IA listo para trabajar.
+    </p>
+
+    <div class="cta-row">
+      <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-primary">Clonar el repo →</a>
+      <a href="#filosofia" class="btn btn-ghost">Cómo funciona</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num">11</div><div class="lbl">Agentes base</div></div>
+      <div class="stat"><div class="num">2</div><div class="lbl">Skills fundacionales</div></div>
+      <div class="stat"><div class="num">10</div><div class="lbl">Reglas de oro</div></div>
+      <div class="stat"><div class="num">+2<span class="suffix">h</span></div><div class="lbl">Ahorradas por proyecto</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILOSOFÍA ============ -->
+<section class="sec" id="filosofia">
+  <div class="container">
+    <span class="sec-eyebrow">01 · Filosofía</span>
+    <h2 class="sec-title">Los tres pilares que orquestamos <span class="grad">desde el día uno.</span></h2>
+    <p class="sec-sub">
+      Trabajar con IA en serio no es "abrir ChatGPT y pedir". Es orquestar tres capas que, si las tienes claras desde el arranque, nunca más te perdés en el medio de un proyecto.
+    </p>
+
+    <div class="pillars">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-icon">💻</div>
+        <div class="card-tag">La interfaz</div>
+        <h3>IDE</h3>
+        <p>Claude Code, Cursor, Codex, Antigravity. Es donde vivís, escribís y leés. El lente por el que pasa todo.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <div class="card-icon">⚡</div>
+        <div class="card-tag">El control</div>
+        <h3>Terminal</h3>
+        <p>Bash, zsh. Conecta directo con tu máquina: permisos, instalaciones, ejecución. Desde acá se mueve todo.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <div class="card-icon">☁️</div>
+        <div class="card-tag">El respaldo</div>
+        <h3>GitHub</h3>
+        <p>Versionado, respaldo, migración entre equipos. Si no está en la nube, no existe.</p>
+      </div>
+    </div>
+
+    <div class="pull">
+      Si no tenés los tres claros, cada proyecto nuevo te cuesta el doble.
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section class="sec bg-alt">
+  <div class="container">
+    <span class="sec-eyebrow">02 · El stack</span>
+    <h2 class="sec-title">Ranking de LLMs <span class="grad">que usamos cada día.</span></h2>
+    <p class="sec-sub">
+      No hay un "mejor modelo" universal. Hay uno mejor para la tarea, y uno más barato para el volumen. Este es el orden que manejamos.
+    </p>
+
+    <div class="rank-list">
+      <div class="rank-item">
+        <div class="rank-pos">1</div>
+        <div>
+          <div class="rank-name">GPT 5.4 · OpenAI</div>
+          <div class="rank-note">Mejor razonamiento general cuando necesitás precisión.</div>
+        </div>
+        <span class="pill hot">Top razonamiento</span>
+      </div>
+      <div class="rank-item">
+        <div class="rank-pos">2</div>
+        <div>
+          <div class="rank-name">Gemini Pro 3.1 · Google</div>
+          <div class="rank-note">Tremendo para contexto largo. 1M tokens reales.</div>
+        </div>
+        <span class="pill">Ventana grande</span>
+      </div>
+      <div class="rank-item">
+        <div class="rank-pos">3</div>
+        <div>
+          <div class="rank-name">Claude Opus · Anthropic</div>
+          <div class="rank-note">El que usamos vía Antigravity por el consumo gratuito diario y sus agentes.</div>
+        </div>
+        <span class="pill">Agentes & IDE</span>
+      </div>
+    </div>
+
+    <div class="pull">
+      Cambiar de modelo es una decisión táctica, no un reflejo. Si no avanza, cambiás. Si avanza, no toques.
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTEXTO ============ -->
+<section class="sec">
+  <div class="container">
+    <span class="sec-eyebrow">03 · Ventana de contexto</span>
+    <h2 class="sec-title">La regla del <span class="grad">medio millón.</span></h2>
+    <p class="sec-sub">
+      Antes teníamos 124.000 tokens. Hoy casi todos los modelos llegan a <strong>1 millón</strong>. Suena a mucho, pero colapsa más rápido de lo que creés.
+    </p>
+
+    <p style="max-width: 62ch; font-size: 17px;">
+      Cuando la conversación está llegando a los <strong>~500k tokens</strong>, <mark>compilá</mark>. Todos los modelos tienen la opción: resume toda la conversación y reiniciás desde cero, conservando el hilo. No es un riesgo, es higiene. Si no compilás, vas a empezar a generar errores del mismo modelo: responde raro, se olvida del contexto real, confunde archivos.
+    </p>
+
+    <div class="pull">
+      Compilar no es admitir derrota. Es la buena práctica más barata que existe.
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESTRUCTURA ============ -->
+<section class="sec bg-alt" id="estructura">
+  <div class="container">
+    <span class="sec-eyebrow">04 · Arquitectura de carpetas</span>
+    <h2 class="sec-title">Donde vive todo. <span class="grad">Sin excepciones.</span></h2>
+    <p class="sec-sub">
+      Si usás Mac, arranca en el escritorio — iCloud respalda todo automáticamente. Una carpeta madre, y dentro: <strong>una subcarpeta por cliente</strong>. Tu propia agencia es un cliente más.
+    </p>
+
+    <div class="tree-block">
+      <div class="tree-header">carpeta · cliente · proyecto</div>
+<pre class="tree"><span class="dir">📁 Escritorio/</span>
+└── <span class="dir">📁 Cliente-X/</span>            <span class="note"># una carpeta por cliente</span>
+    ├── <span class="dir">📁 Proyecto-A/</span>
+    │   ├── README.md           <span class="note"># descripción del proyecto</span>
+    │   ├── CLAUDE.md           <span class="note"># reglas de oro que el modelo lee auto</span>
+    │   ├── LLM.md              <span class="note"># manual de bienvenida para agentes</span>
+    │   ├── <span class="key">.env</span>                <span class="note"># credenciales locales · NUNCA subir</span>
+    │   ├── <span class="dir">📁 .claude/agents/</span>  <span class="note"># 11 agentes preconfigurados</span>
+    │   ├── <span class="dir">📁 .claude/skills/</span>  <span class="note"># PDF→MD, Plan paso a paso</span>
+    │   ├── <span class="dir">📁 templates/</span>       <span class="note"># NV, brief, API research</span>
+    │   ├── <span class="dir">📁 documentation/</span>   <span class="note"># todo lo del cliente</span>
+    │   ├── <span class="dir">📁 workflows/</span>       <span class="note"># flujos específicos del proyecto</span>
+    │   ├── <span class="dir">📁 output/</span>          <span class="note"># entregables finales — lo que el cliente ve</span>
+    │   └── <span class="dir">📁 data_original/</span>   <span class="note"># PDFs, screenshots, raw uploads</span>
+    ├── <span class="dir">📁 Proyecto-B/</span>
+    └── <span class="dir">📁 Proyecto-C/</span>
+</pre>
+    </div>
+
+    <h3 style="margin: 56px 0 20px; font-size: 22px; font-weight: 700;">¿Para qué sirve cada carpeta?</h3>
+    <ul class="check">
+      <li><div><strong>README.md</strong><span>Lo primero que lee cualquier persona (o agente) que entra a la carpeta.</span></div></li>
+      <li><div><strong>.env</strong><span>Credenciales. Queda local, nunca se sube al repo.</span></div></li>
+      <li><div><strong>documentation/</strong><span>Toda la documentación que el cliente te pasa, ordenada.</span></div></li>
+      <li><div><strong>workflows/</strong><span>Flujos de trabajo específicos del proyecto, como receta.</span></div></li>
+      <li><div><strong>output/</strong><span>Lo único que le importa al cliente. Cero fricción para encontrarlo.</span></div></li>
+      <li><div><strong>data_original/</strong><span>El buzón de entrada. PDFs, contratos, screenshots. Sin tocar.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ AGENTES ============ -->
+<section class="sec" id="agentes">
+  <div class="container">
+    <span class="sec-eyebrow">05 · El escuadrón</span>
+    <h2 class="sec-title">11 agentes. <span class="grad">Un agente, un job.</span></h2>
+    <p class="sec-sub">
+      Viven en <code class="inline">.claude/agents/</code>. Claude Code los detecta automáticamente al abrir el repo. Cuando un agente hace dos cosas, hace mal las dos — mejor once chicos y claros que tres "multipropósito" confundidos.
+    </p>
+
+    <div class="agents">
+      <div class="agent"><div class="agent-id">AG · 01</div><div class="agent-name">Documentador</div><div class="agent-role">Mantiene al día toda la documentación del proyecto. Lo que cambia, lo refleja.</div></div>
+      <div class="agent"><div class="agent-id">AG · 02</div><div class="agent-name">GitHub Keeper</div><div class="agent-role">Gestiona el repo: commits, branches, conflictos. El repo nunca se desordena.</div></div>
+      <div class="agent"><div class="agent-id">AG · 03</div><div class="agent-name">Compilador de Datos</div><div class="agent-role">Especializado en juntar, limpiar y estructurar datos dispersos.</div></div>
+      <div class="agent"><div class="agent-id">AG · 04</div><div class="agent-name">Chronicler</div><div class="agent-role">Documenta en vivo lo que va ocurriendo. Tu registro operativo.</div></div>
+      <div class="agent"><div class="agent-id">AG · 05</div><div class="agent-name">Credentials Manager</div><div class="agent-role">Gestiona <code class="inline">.env</code> y accesos. Último filtro antes de commit.</div></div>
+      <div class="agent"><div class="agent-id">AG · 06</div><div class="agent-name">Project Manager</div><div class="agent-role">Supervisa como PM. Orden, tiempos, bloqueos. La vista de arriba.</div></div>
+      <div class="agent"><div class="agent-id">AG · 07</div><div class="agent-name">Tester</div><div class="agent-role">Único job: testeos. Nada de código productivo, nada de otras tareas.</div></div>
+      <div class="agent"><div class="agent-id">AG · 08</div><div class="agent-name">Integraciones</div><div class="agent-role">Experto en conectar APIs, webhooks, servicios externos. Tu pegamento.</div></div>
+      <div class="agent"><div class="agent-id">AG · 09</div><div class="agent-name">Arquitecto</div><div class="agent-role">Le explicás el plan y te lo ayuda a optimizar antes de ejecutar.</div></div>
+      <div class="agent"><div class="agent-id">AG · 10</div><div class="agent-name">Versionador</div><div class="agent-role">Supervisa versiones. Regla dura: <strong>reemplazar antes que duplicar</strong>.</div></div>
+      <div class="agent"><div class="agent-id">AG · 11</div><div class="agent-name">Purgador</div><div class="agent-role">Barre lo que ya no se usa. Carpeta limpia = contexto limpio.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="sec bg-alt">
+  <div class="container">
+    <span class="sec-eyebrow">06 · Skills fundacionales</span>
+    <h2 class="sec-title">Las dos habilidades <span class="grad">que siempre instalamos.</span></h2>
+    <p class="sec-sub">
+      Los skills son habilidades que le enseñás al sistema paso a paso. Hay dos que montamos por defecto en todo proyecto.
+    </p>
+
+    <div class="pillars" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="card">
+        <div class="card-tag">Skill 01</div>
+        <h3>PDF a Markdown</h3>
+        <p>Los modelos leen markdown <strong>10× más rápido y barato</strong> que PDFs. Todo PDF que entra a <code class="inline">data_original/</code> pasa por acá antes de usarse.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag">Skill 02</div>
+        <h3>Plan Paso a Paso</h3>
+        <p>Obliga al sistema a <mark>pensar antes de paralelizar</mark>. Sin esto, 50 tareas simultáneas colapsan la máquina. Con esto, terminan.</p>
+      </div>
+    </div>
+
+    <div class="pull">
+      El precio de un plan bien armado es un poquito más de tiempo. El precio de no tenerlo es que se te rompa el proyecto a la mitad.
+    </div>
+  </div>
+</section>
+
+<!-- ============ RITUAL ============ -->
+<section class="sec">
+  <div class="container">
+    <span class="sec-eyebrow">07 · Ritual con el cliente</span>
+    <h2 class="sec-title">Del levantamiento <span class="grad">al output.</span></h2>
+    <p class="sec-sub">
+      Trabajar con IA sin metodología con el cliente es como manejar F1 sin pits. Este es el flujo que seguimos siempre.
+    </p>
+
+    <h3 style="font-size: 22px; margin: 40px 0 16px; font-weight: 700;">El mantra operativo</h3>
+
+    <div class="flow">
+      <span class="flow-step">MD sucio</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">MD limpio</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Ejecutás</span>
+    </div>
+
+    <p style="max-width: 62ch; margin-top: 32px; font-size: 17px;">
+      Primero escribimos todo el contexto en un <strong>Markdown sucio</strong> — notas, requisitos, dudas, lo que sea. Después lo pasamos por un LLM de contexto grande (Gemini, GPT) y lo transformamos en un MD limpio, estructurado, ejecutable. Ese MD limpio es el <em>NV</em>: el prompt final que le pasamos al agente.
+    </p>
+
+    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">La regla del NV: antes de que ejecute, que hable</h3>
+
+    <div class="prompt-box">
+      Antes de comenzar, decime si tenés dudas, qué no te queda claro y qué información te falta. No inicies nada hasta que yo te avise. Cuando estés listo, avanzás por pasos; si algo no avanza, te detenés y me avisás.
+    </div>
+
+    <p style="max-width: 62ch; margin-top: 24px; font-size: 17px;">
+      Esto resuelve el <strong>80% de los errores</strong> antes de que ocurran. La mitad de las veces el agente devuelve preguntas que nos hacen darnos cuenta de que el brief al cliente estaba incompleto. Barato.
+    </p>
+
+    <div class="pull">
+      Si el MD no avanza, el problema no es el modelo. Es el MD.
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGLAS ============ -->
+<section class="sec bg-alt" id="reglas">
+  <div class="container">
+    <span class="sec-eyebrow">08 · Reglas de oro</span>
+    <h2 class="sec-title">Lo que <span class="grad">no se negocia.</span></h2>
+    <p class="sec-sub">
+      El resumen de lo que, con el tiempo, dejamos de discutir. Si las rompemos, el proyecto lo paga.
+    </p>
+
+    <div class="principles">
+      <div class="principle"><div class="principle-num">01</div><div><h3>Conectá GitHub primero.</h3><p>Repo conectado, permisos de terminal, <code class="inline">.env</code> en local. Si no, construyes sobre arena.</p></div></div>
+      <div class="principle"><div class="principle-num">02</div><div><h3>Un cliente = una carpeta madre.</h3><p>Incluso tu propia agencia. Así "el contexto de la empresa" siempre está junto.</p></div></div>
+      <div class="principle"><div class="principle-num">03</div><div><h3>Compilá a los 500k tokens.</h3><p>No esperes al millón. Compilar temprano es gratis; depurar errores del modelo confundido, no.</p></div></div>
+      <div class="principle"><div class="principle-num">04</div><div><h3>Reemplazar &gt; duplicar.</h3><p>Nada de <code class="inline">plan_v2_final_final.md</code>. Git guarda el historial.</p></div></div>
+      <div class="principle"><div class="principle-num">05</div><div><h3>Purgá lo que no se usa.</h3><p>Carpeta limpia = contexto limpio. El ruido en la carpeta es ruido en el modelo.</p></div></div>
+      <div class="principle"><div class="principle-num">06</div><div><h3>Todo lo final va a <code class="inline">output/</code>.</h3><p>Cero excepciones. No gastás tiempo buscando entre archivos internos.</p></div></div>
+      <div class="principle"><div class="principle-num">07</div><div><h3>Un agente, un job.</h3><p>Cuando un agente hace dos cosas, hace mal las dos. Once chicos &gt; tres confundidos.</p></div></div>
+      <div class="principle"><div class="principle-num">08</div><div><h3>El NV nunca arranca sin confirmar.</h3><p>"Decime dudas antes de iniciar" es fijo. Te ahorra 40 min de ejecución errada.</p></div></div>
+      <div class="principle"><div class="principle-num">09</div><div><h3>Plan paso a paso &gt; todo en paralelo.</h3><p>Paralelización mal hecha colapsa la máquina y quema tokens.</p></div></div>
+      <div class="principle"><div class="principle-num">10</div><div><h3>Si no avanza, no es el modelo.</h3><p>Es el prompt, el contexto o el plan. Cambiar de LLM es la última carta.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="sec" id="cta">
+  <div class="container">
+    <div class="cta-final">
+      <div class="cta-inner">
+        <h2>¿Listo para arrancar<br>en 3 comandos?</h2>
+        <p>Cloná el repo, copiá tu <code style="background:rgba(0,0,0,.2);padding:2px 8px;border-radius:6px;">.env</code> y abrí tu IDE. El escuadrón completo ya está esperándote.</p>
+        <div class="code-pill">
+          <span class="prompt">$ </span>git clone https://github.com/tamibot/creators-latam-starter.git
+        </div>
+        <br>
+        <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-white">Ir al repositorio →</a>
+        <p style="margin-top: 32px; font-size: 15px;">
+          ¿Preferís que lo montemos completo para tu empresa?<br>
+          Escribinos: <strong>+51 995 547 575</strong> · <a href="https://www.creatorslatam.com/" style="text-decoration: underline;">creatorslatam.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-row">
+      <div>
+        <div class="brand" style="margin-bottom: 12px;"><span class="brand-dot"></span>Creators <span class="soft">Latam</span></div>
+        <p class="foot-copy">
+          Automatizamos la gestión de clientes con ChatBots con Inteligencia Artificial y CRM. 24/7. Desde Lima, para toda LatAm.
+        </p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <a href="#filosofia">Filosofía</a>
+        <a href="#estructura">Estructura</a>
+        <a href="#agentes">Agentes</a>
+        <a href="#reglas">Reglas</a>
+      </div>
+      <div>
+        <h4>Recursos</h4>
+        <a href="https://github.com/tamibot/creators-latam-starter">Repositorio</a>
+        <a href="https://github.com/tamibot/creators-latam-starter#readme">Documentación</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/tree/main/templates">Templates</a>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="https://www.creatorslatam.com/">creatorslatam.com</a>
+        <a href="tel:+51995547575">+51 995 547 575</a>
+        <a href="https://wa.me/51995547575">WhatsApp</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Creators Latam · Lima, Perú</span>
+      <span>Starter Kit v1.0 · Documento vivo</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

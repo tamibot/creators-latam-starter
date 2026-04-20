@@ -1,0 +1,48 @@
+# === Credenciales ===
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+credentials.json
+secrets/
+
+# === Datos del cliente ===
+data_original/*
+!data_original/.gitkeep
+output/*
+!output/.gitkeep
+
+# === Dependencias ===
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# === Build / caches ===
+dist/
+build/
+.next/
+.cache/
+.parcel-cache/
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Editores ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === Logs ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Claude Code local ===
+.claude/settings.local.json
