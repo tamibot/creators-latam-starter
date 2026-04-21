@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Creators Latam · Una forma de trabajar con IA</title>
-<meta name="description" content="Instala. Colabora. Ejecuta. 4 pasos, 27 agentes y tu equipo arrancando en minutos." />
+<meta name="description" content="Instala. Colabora. Ejecuta. 4 pasos, 30 agentes y tu equipo arrancando en minutos." />
 <meta property="og:title" content="Creators Latam · Una forma de trabajar con IA" />
 <meta property="og:description" content="Instala. Colabora. Ejecuta. 4 pasos." />
 <meta property="og:type" content="website" />
@@ -153,6 +153,22 @@
     box-shadow: 0 8px 20px -8px rgba(255,59,119,.5);
   }
   .step.active .step-num { animation: stepPulse 2s infinite; }
+  .step.done .step-num {
+    background: linear-gradient(135deg, var(--green), var(--green));
+    animation: none;
+  }
+  .step.done .step-num::after {
+    content: "✓";
+    position: absolute;
+    font-size: 18px;
+    color: white;
+    font-weight: 900;
+  }
+  .step.done .step-num { color: transparent; position: relative; }
+  .step.done {
+    border-color: var(--green);
+    background: linear-gradient(135deg, rgba(20,184,122,.04), rgba(20,184,122,.02));
+  }
   .step-icon {
     font-size: 40px;
     margin: 12px 0 16px;
@@ -457,7 +473,7 @@
   .cmd-card .cmd-code { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; background: #0B0F1A; color: #76E0B0; padding: 5px 10px; border-radius: 6px; margin-bottom: 10px; }
   .cmd-card h4 { margin: 0 0 6px; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
   .cmd-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
-  .cmd-card .tag-crit { position: absolute; top: 12px; right: 12px; background: rgba(255,59,119,.1); color: var(--pink); font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 999px; letter-spacing: 0.08em; }
+  .cmd-card .tag-crit { position: absolute; top: 12px; right: 12px; background: rgba(255,59,119,.1); color: var(--pink); font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 999px; letter-spacing: 0.08em; text-transform: uppercase; }
 
   /* ===== PULL QUOTE ===== */
   .pull { margin: 48px 0; padding: 32px 0 32px 36px; border-left: 4px solid; border-image: linear-gradient(180deg, var(--purple), var(--pink)) 1; font-size: clamp(22px, 2.6vw, 28px); font-weight: 600; line-height: 1.35; max-width: 44ch; letter-spacing: -0.015em; }
@@ -540,11 +556,11 @@
     <a href="#" class="brand"><span class="brand-dot"></span>Creators <span class="soft">Latam</span></a>
     <div class="nav-links">
       <a href="#flujo">El flujo</a>
-      <a href="#equipo">Equipo IA</a>
-      <a href="#colaborativo">Colaborativo</a>
+      <a href="#equipo">30 agentes</a>
+      <a href="#documentos">Docs</a>
+      <a href="#colaborativo">Colaborar</a>
       <a href="#timing">Timing</a>
       <a href="#comandos">Comandos</a>
-      <a href="#changelog">Changelog</a>
       <a href="#faq">FAQ</a>
     </div>
     <a href="https://github.com/tamibot/creators-latam-starter" class="cta-sm">Ver repo →</a>
@@ -554,10 +570,10 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
-    <span class="eyebrow reveal"><span class="eyebrow-dot"></span> v1.6 · 2026 · Forma de trabajar</span>
+    <span class="eyebrow reveal"><span class="eyebrow-dot"></span> v1.7 · 2026 · Forma de trabajar</span>
     <h1 class="display reveal">Instalá. Colaborá. <span class="grad">Ejecutá.</span></h1>
     <p class="lead reveal">
-      Una <strong>forma de trabajar</strong> con IA — no un set de herramientas. <strong>4 pasos</strong> claros: definís el <strong>entregable</strong>, validás el <strong>stack</strong>, armás el <strong>equipo</strong> y ejecutás el <strong>plan</strong>. El starter viene con 27 agentes listos.
+      Una <strong>forma de trabajar</strong> con IA — no un set de herramientas. <strong>4 pasos</strong> claros: definís el <strong>entregable</strong>, validás el <strong>stack</strong>, armás el <strong>equipo</strong> y ejecutás el <strong>plan</strong>. El starter viene con 30 agentes listos.
     </p>
 
     <div class="cta-row reveal">
@@ -700,14 +716,13 @@
 <section class="sec bg-alt" id="equipo">
   <div class="container">
     <span class="sec-eyebrow reveal">El equipo de IA</span>
-    <h2 class="sec-title reveal">27 agentes. <span class="grad">Cada uno con su job.</span></h2>
+    <h2 class="sec-title reveal">30 agentes. <span class="grad">Cada uno con su job.</span></h2>
     <p class="sec-sub reveal">
       Los <strong>supervisores</strong> (con cinta rosa) coordinan y auditan. Los <strong>operativos</strong> ejecutan. Claude Code los detecta automático.
     </p>
 
-    <!-- Cards con emoji por agente -->
     <div class="agents-grid reveal">
-      <!-- SUPERVISORES -->
+      <!-- SUPERVISORES (9) -->
       <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🤝</span><span class="agent-id">AG 18</span><h4>Kickoff Cliente</h4><p class="agent-job">Primera reunión, minuta, brief</p></div>
       <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🧭</span><span class="agent-id">AG 15</span><h4>Onboarding PM</h4><p class="agent-job">Guía las 3 fases del plan</p></div>
       <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🎼</span><span class="agent-id">AG 13</span><h4>Orquestador</h4><p class="agent-job">Delega qué agente, qué orden</p></div>
@@ -718,14 +733,13 @@
       <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🧠</span><span class="agent-id">AG 20</span><h4>Analizador Patrones</h4><p class="agent-job">Aprende entre proyectos</p></div>
       <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">📈</span><span class="agent-id">AG 23</span><h4>Status Dashboard</h4><p class="agent-job">Estado del proyecto ahora</p></div>
 
-      <!-- OPERATIVOS -->
+      <!-- OPERATIVOS (21) -->
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📝</span><span class="agent-id">AG 01</span><h4>Documentador</h4><p class="agent-job">Docs siempre al día</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🐙</span><span class="agent-id">AG 02</span><h4>GitHub Keeper</h4><p class="agent-job">Commits, branches, orden</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📦</span><span class="agent-id">AG 03</span><h4>Compilador Datos</h4><p class="agent-job">Limpia y estructura data</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📜</span><span class="agent-id">AG 04</span><h4>Chronicler</h4><p class="agent-job">Bitácora viva</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔑</span><span class="agent-id">AG 05</span><h4>Credentials Mgr</h4><p class="agent-job">Gestiona .env y accesos</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧪</span><span class="agent-id">AG 07</span><h4>Tester</h4><p class="agent-job">Solo testea, no arregla</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔌</span><span class="agent-id">AG 08</span><h4>Integraciones</h4><p class="agent-job">APIs, webhooks, servicios</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧷</span><span class="agent-id">AG 10</span><h4>Versionador</h4><p class="agent-job">Reemplaza > duplica</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧹</span><span class="agent-id">AG 11</span><h4>Purgador</h4><p class="agent-job">Barre lo muerto</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📐</span><span class="agent-id">AG 12</span><h4>Diagramador</h4><p class="agent-job">Mermaid sin errores</p></div>
@@ -737,21 +751,78 @@
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">💰</span><span class="agent-id">AG 25</span><h4>Cost Tracker</h4><p class="agent-job">Estima y monitorea costos</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📦</span><span class="agent-id">AG 26</span><h4>Handoff Cliente</h4><p class="agent-job">Paquete final al cliente</p></div>
       <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔐</span><span class="agent-id">AG 27</span><h4>Security Auditor</h4><p class="agent-job">Secrets, CVE, permisos</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">👋</span><span class="agent-id">AG 28</span><h4>Onboarder Colab</h4><p class="agent-job">Welcome para nuevos devs</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🎨</span><span class="agent-id">AG 29</span><h4>HTML Renderer</h4><p class="agent-job">MD → HTML hermoso</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📄</span><span class="agent-id">AG 30</span><h4>PDF Exporter</h4><p class="agent-job">HTML → PDF validado</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📊</span><span class="agent-id">AG 31</span><h4>Dashboard Builder</h4><p class="agent-job">HTML standalone interactivo</p></div>
     </div>
 
     <p style="margin-top: 32px; text-align: center; color: var(--ink-soft); font-size: 14px;">
-      + podés crear <strong>agentes custom</strong> del proyecto en Fase 3 del Plan Maestro.
+      + podés crear <strong>agentes custom</strong> con <code class="inline">./tooling/new-agent.sh</code> (wizard interactivo).
+    </p>
+  </div>
+</section>
+
+<!-- ============ FLUJO DE DOCUMENTOS ============ -->
+<section class="sec" id="documentos">
+  <div class="container">
+    <span class="sec-eyebrow reveal">Presentar información</span>
+    <h2 class="sec-title reveal">MD → HTML → PDF <span class="grad">(no imprimas MD directo).</span></h2>
+    <p class="sec-sub reveal">
+      El MD es para pensar y trabajar. El HTML es para presentar. El PDF es para firmar/archivar. Tres agentes, un flujo limpio.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr; gap: 0; align-items: center; margin: 40px 0;" class="reveal">
+      <div style="background: white; border: 1px solid var(--line); border-radius: 16px; padding: 24px 20px; text-align: center; box-shadow: var(--shadow-sm);">
+        <div style="font-size: 42px;">📝</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 0.1em; margin-top: 6px;">MD · FUENTE</div>
+        <h4 style="font-size: 15px; font-weight: 700; margin: 6px 0;">Lo que trabajás</h4>
+        <p style="font-size: 12.5px; color: var(--ink-soft); margin: 0;">Plan Maestro, bitácora, docs internas. Editable siempre.</p>
+      </div>
+      <div style="font-size: 24px; color: var(--pink); text-align: center;">→</div>
+      <div style="background: linear-gradient(135deg, rgba(139,63,255,.05), rgba(255,59,119,.05)); border: 1px solid rgba(255,59,119,.3); border-radius: 16px; padding: 24px 20px; text-align: center; box-shadow: var(--shadow-sm);">
+        <div style="font-size: 42px;">🎨</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 0.1em; margin-top: 6px;">AG 29 · HTML RENDERER</div>
+        <h4 style="font-size: 15px; font-weight: 700; margin: 6px 0;">Presentación</h4>
+        <p style="font-size: 12.5px; color: var(--ink-soft); margin: 0;">Mermaid renderizado, tipografía de marca, colores, print-ready.</p>
+      </div>
+      <div style="font-size: 24px; color: var(--pink); text-align: center;">→</div>
+      <div style="background: white; border: 1px solid var(--line); border-radius: 16px; padding: 24px 20px; text-align: center; box-shadow: var(--shadow-sm);">
+        <div style="font-size: 42px;">📄</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 0.1em; margin-top: 6px;">AG 30 · PDF EXPORTER</div>
+        <h4 style="font-size: 15px; font-weight: 700; margin: 6px 0;">Archivo final</h4>
+        <p style="font-size: 12.5px; color: var(--ink-soft); margin: 0;">Playwright + validación visual. Si no se ve bien, vuelve al AG 29.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 24px 28px; background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(255,59,119,.04)); border: 1px solid rgba(245,158,11,.3); border-radius: 14px;">
+      <p style="margin: 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--pink); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">⚠️ Bug que nos pasó</p>
+      <p style="margin: 0; font-size: 15px;">
+        Si le pedís a un LLM imprimir un <code class="inline">.md</code> directo a PDF, queda feo: los Mermaid quedan como código, las tablas se cortan, sin tipografía. <strong>Solución:</strong> pasás por <code class="inline">html-renderer</code> primero, y el <code class="inline">pdf-exporter</code> valida visualmente antes de exportar.
+      </p>
+    </div>
+
+    <div style="margin-top: 24px; padding: 24px 28px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 14px;">
+      <p style="margin: 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--pink); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">💡 Tip</p>
+      <p style="margin: 0; font-size: 15px;">
+        En VS Code / Cursor, si no se ve un diagrama Mermaid en un <code class="inline">.md</code>, presioná <code class="inline">Cmd + Shift + V</code> (Mac) o <code class="inline">Ctrl + Shift + V</code> (Win) para ver el preview renderizado. Así validás antes de exportar.
+      </p>
+    </div>
+
+    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">¿Y el dashboard interactivo?</h3>
+    <p style="max-width: 62ch;">
+      Si lo que necesitás es un <strong>dashboard standalone</strong> (HTML con filtros, gráficos Chart.js, tablas ordenables — un archivo que el cliente abre en el navegador), usás el agente <code class="inline">dashboard-builder</code> directo. No pasa por PDF porque es interactivo.
     </p>
   </div>
 </section>
 
 <!-- ============ COLABORATIVO ============ -->
-<section class="sec" id="colaborativo">
+<section class="sec bg-alt" id="colaborativo">
   <div class="container">
     <span class="sec-eyebrow reveal">Trabajo colaborativo</span>
     <h2 class="sec-title reveal">El repo es tu <span class="grad">oficina compartida.</span></h2>
     <p class="sec-sub reveal">
-      Todo vive en GitHub: agentes, reglas, plan, entregables. Cualquier colaborador del equipo cuenta con los mismos 27 agentes y el mismo proceso. Git maneja los accesos, tu plan maneja la disciplina.
+      Todo vive en GitHub: agentes, reglas, plan, entregables. Cualquier colaborador del equipo cuenta con los mismos 30 agentes y el mismo proceso. Git maneja los accesos, tu plan maneja la disciplina.
     </p>
 
     <div class="collab-hero reveal">
@@ -892,15 +963,23 @@
     <h2 class="sec-title reveal">Atajos <span class="grad">que te salvan el día.</span></h2>
     <p class="sec-sub reveal">Aprendelos de memoria.</p>
 
+    <h3 style="font-size: 20px; margin: 0 0 12px; font-weight: 700;">Nativos de Claude Code</h3>
     <div class="commands reveal">
       <div class="cmd-card"><span class="tag-crit">crítico</span><div class="cmd-code">/compact</div><h4>Compilar contexto</h4><p>Resume la conversación cerca del límite de tokens.</p></div>
       <div class="cmd-card"><span class="tag-crit">crítico</span><div class="cmd-code">ESC ESC</div><h4>Rewind</h4><p>Volver a un turno anterior. Para cuando el modelo se equivocó.</p></div>
       <div class="cmd-card"><div class="cmd-code">/clear</div><h4>Limpiar chat</h4><p>Borra conversación, mantiene proyecto abierto.</p></div>
       <div class="cmd-card"><div class="cmd-code">/cost</div><h4>Uso de tokens</h4><p>Cuántos tokens llevás en la sesión.</p></div>
-      <div class="cmd-card"><div class="cmd-code">/doctor</div><h4>Health check</h4><p>Diagnostica setup (Node, MCP, permisos).</p></div>
       <div class="cmd-card"><div class="cmd-code">/agents</div><h4>Gestionar agentes</h4><p>Listar, crear, editar.</p></div>
       <div class="cmd-card"><div class="cmd-code">/init</div><h4>Generar CLAUDE.md</h4><p>Para repos sin él.</p></div>
       <div class="cmd-card"><div class="cmd-code">Shift + Tab</div><h4>Plan mode</h4><p>El modelo propone antes de ejecutar.</p></div>
+    </div>
+
+    <h3 style="font-size: 20px; margin: 40px 0 12px; font-weight: 700;">Custom del starter</h3>
+    <p style="color: var(--ink-soft); font-size: 14.5px; margin: 0 0 20px;">Slash commands específicos del starter en <code class="inline">.claude/commands/</code>.</p>
+    <div class="commands reveal">
+      <div class="cmd-card"><span class="tag-crit">starter</span><div class="cmd-code">/plan-maestro</div><h4>Generar scaffold</h4><p>Crea <code>documentation/plan-maestro.md</code> y arranca el onboarding-pm.</p></div>
+      <div class="cmd-card"><span class="tag-crit">starter</span><div class="cmd-code">/status</div><h4>Estado actual</h4><p>Invoca al <code>status-dashboard</code>, muestra el MD inline con Gantt.</p></div>
+      <div class="cmd-card"><span class="tag-crit">starter</span><div class="cmd-code">/doctor</div><h4>Health check</h4><p>Corre <code>./tooling/doctor.sh</code> y resume issues con sugerencias de fix.</p></div>
     </div>
   </div>
 </section>
@@ -1030,7 +1109,7 @@
 
     <div class="faq-group-title">Forma de trabajo</div>
     <div class="faq-list">
-      <details class="faq-item reveal"><summary>¿Por qué "forma de trabajo" y no solo herramientas?</summary><div class="faq-body">Porque 10 herramientas no arreglan la falta de proceso. El starter te da el <strong>proceso</strong> (4 pasos, 27 agentes, reglas) para que cualquier stack que uses después funcione.</div></details>
+      <details class="faq-item reveal"><summary>¿Por qué "forma de trabajo" y no solo herramientas?</summary><div class="faq-body">Porque 10 herramientas no arreglan la falta de proceso. El starter te da el <strong>proceso</strong> (4 pasos, 30 agentes, reglas) para que cualquier stack que uses después funcione.</div></details>
       <details class="faq-item reveal"><summary>¿Qué pasa si el cliente no quiere el Plan Maestro?</summary><div class="faq-body">No trabajamos. Los proyectos sin plan firmado terminan mal para ambos. Mejor no arrancar.</div></details>
       <details class="faq-item reveal"><summary>¿Es obligatorio investigar en foros en el Paso 2?</summary><div class="faq-body">Sí. Las docs oficiales mienten por omisión. Los foros te cuentan los problemas reales.</div></details>
     </div>
@@ -1045,7 +1124,7 @@
 
     <div class="faq-group-title">Colaboración</div>
     <div class="faq-list">
-      <details class="faq-item reveal"><summary>¿Cómo trabaja un equipo con esto?</summary><div class="faq-body">Invitás a GitHub, clonan, corren <code class="inline">install.sh</code>, abren Claude Code. Todos tienen los mismos 27 agentes. Trabajan en branches, abren PRs, el <code class="inline">guardian-reglas</code> audita antes del merge.</div></details>
+      <details class="faq-item reveal"><summary>¿Cómo trabaja un equipo con esto?</summary><div class="faq-body">Invitás a GitHub, clonan, corren <code class="inline">install.sh</code>, abren Claude Code. Todos tienen los mismos 30 agentes. Trabajan en branches, abren PRs, el <code class="inline">guardian-reglas</code> audita antes del merge.</div></details>
       <details class="faq-item reveal"><summary>¿Cómo onboardear a un colaborador nuevo?</summary><div class="faq-body">Invocás <code class="inline">mapa-sistema</code>, te genera <code class="inline">documentation/mapa-sistema.md</code> con todo lo que hay. El colaborador lo lee en 10 min.</div></details>
       <details class="faq-item reveal"><summary>¿Cómo manejamos permisos de quien puede hacer qué?</summary><div class="faq-body">GitHub permissions + branch protection. Con protección de main, nadie mergea directo sin aprobación. El <code class="inline">guardian-reglas</code> valida las 10 reglas antes de mergear.</div></details>
     </div>
@@ -1069,7 +1148,7 @@ source ~/.zshrc</code></pre></div></details>
     <div class="cta-final reveal">
       <div class="inner">
         <h2>Listo para empezar<br>a trabajar mejor?</h2>
-        <p>Cloná, corré el instalador, generá el scaffold del plan. En minutos tenés el equipo de 27 agentes trabajando con vos.</p>
+        <p>Cloná, corré el instalador, generá el scaffold del plan. En minutos tenés el equipo de 30 agentes trabajando con vos.</p>
         <div class="code-pill" style="max-width: 620px; margin: 20px auto;">
 <span class="prompt">$ </span>git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto<br>
 <span class="prompt">$ </span>cd mi-proyecto &amp;&amp; ./tooling/install.sh<br>
@@ -1147,16 +1226,43 @@ source ~/.zshrc</code></pre></div></details>
     faqs.forEach((f, i) => { f.style.transitionDelay = (i * 30) + 'ms'; });
   })();
 
-  // Active step rotation
+  // Active step rotation at hero + "done" state on scroll past
   (function() {
     const steps = document.querySelectorAll('.step');
     if (steps.length === 0) return;
+
+    // Rotation at hero
     let currentIdx = 0;
-    setInterval(() => {
+    const rotator = setInterval(() => {
       steps.forEach(s => s.classList.remove('active'));
       steps[currentIdx].classList.add('active');
       currentIdx = (currentIdx + 1) % steps.length;
-    }, 2000);
+    }, 2200);
+
+    // When user scrolls past a section, mark steps as "done"
+    const sectionsMap = [
+      { id: 'metodologia', step: 0 },
+      { id: 'equipo', step: 1 },
+      { id: 'documentos', step: 2 },
+      { id: 'colaborativo', step: 3 }
+    ];
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = parseInt(e.target.dataset.stepIdx, 10);
+          for (let i = 0; i <= idx; i++) {
+            if (steps[i]) steps[i].classList.add('done');
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+    sectionsMap.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el) {
+        el.dataset.stepIdx = s.step;
+        io.observe(el);
+      }
+    });
   })();
 </script>
 

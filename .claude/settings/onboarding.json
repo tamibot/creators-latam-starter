@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_description": "Perfil ONBOARDING — muy restrictivo. Para colaboradores nuevos aprendiendo el sistema. Casi todo pide aprobación explícita para que vean qué está pasando antes de autorizar.",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "WebSearch",
+      "Bash(ls:*)",
+      "Bash(pwd)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git branch:*)",
+      "Bash(rg:*)",
+      "Bash(tree:*)",
+      "Bash(which:*)"
+    ],
+    "deny": [
+      "Bash(rm*)",
+      "Bash(sudo*)",
+      "Bash(git push*)",
+      "Bash(git commit*)",
+      "Bash(git reset*)",
+      "Bash(git merge*)",
+      "Bash(chmod:*)",
+      "Bash(curl * | sh)",
+      "Bash(wget * | sh)",
+      "Bash(npm install*)",
+      "Bash(pip install*)",
+      "Bash(brew install*)",
+      "Bash(docker*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ],
+    "defaultMode": "default"
+  }
+}

@@ -1,6 +1,6 @@
 # Agentes · Creators Latam Starter
 
-**27 agentes** — un agente, un job.
+**30 agentes** — un agente, un job.
 
 Claude Code los detecta automáticamente. Invocalos con `/agents` o pediles por nombre.
 
@@ -18,7 +18,7 @@ Claude Code los detecta automáticamente. Invocalos con `/agents` o pediles por 
 | 20 | 🧠 | [`analizador-patrones`](analizador-patrones.md) | Aprende entre proyectos |
 | 23 | 📈 | [`status-dashboard`](status-dashboard.md) | Foto del estado actual del proyecto |
 
-## 🛠️ Operativos (18 · ejecutan el trabajo)
+## 🛠️ Operativos (21 · ejecutan el trabajo)
 
 | # | Emoji | Nombre | Job |
 |---|---|---|---|
@@ -28,7 +28,6 @@ Claude Code los detecta automáticamente. Invocalos con `/agents` o pediles por 
 | 04 | 📜 | [`chronicler`](chronicler.md) | Bitácora viva |
 | 05 | 🔑 | [`credentials-manager`](credentials-manager.md) | Gestiona `.env` y accesos |
 | 07 | 🧪 | [`tester`](tester.md) | Solo testea. No arregla |
-| 08 | 🔌 | [`integraciones`](integraciones.md) | APIs, webhooks, servicios |
 | 10 | 🧷 | [`versionador`](versionador.md) | Reemplaza > duplica |
 | 11 | 🧹 | [`purgador`](purgador.md) | Barre lo muerto |
 | 12 | 📐 | [`diagramador-mermaid`](diagramador-mermaid.md) | Diagramas Mermaid sin errores |
@@ -40,6 +39,10 @@ Claude Code los detecta automáticamente. Invocalos con `/agents` o pediles por 
 | 25 | 💰 | [`cost-tracker`](cost-tracker.md) | Estima y monitorea costos |
 | 26 | 📦 | [`handoff-cliente`](handoff-cliente.md) | Paquete final al cliente |
 | 27 | 🔐 | [`security-auditor`](security-auditor.md) | Secrets, CVE, permisos, OWASP |
+| 28 | 👋 | [`onboarder-colaborador`](onboarder-colaborador.md) | Welcome para colaboradores nuevos |
+| 29 | 🎨 | [`html-renderer`](html-renderer.md) | MD → HTML profesional con Mermaid |
+| 30 | 📄 | [`pdf-exporter`](pdf-exporter.md) | HTML → PDF con validación visual |
+| 31 | 📊 | [`dashboard-builder`](dashboard-builder.md) | Dashboards HTML standalone interactivos |
 
 ## Flujo de un proyecto
 

@@ -6,6 +6,55 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/) · sigue [SemV
 
 ---
 
+## [1.7.0] · 2026-04-21
+
+### Removed · consolidación
+- **`integraciones`** (AG 08) eliminado — su funcionalidad está cubierta completamente por `integrador-herramientas` (AG 17), que además aplica la jerarquía API > SDK > MCP > webhook.
+
+### Added · 4 agentes nuevos (30 totales)
+- `onboarder-colaborador` (AG 28) 👋 — welcome personalizado para colaboradores nuevos del repo. Genera `documentation/onboarding/<nombre>.md` con lectura recomendada, setup local y 3 tickets según rol.
+- `html-renderer` (AG 29) 🎨 — convierte MD/contenido a HTML profesional con Mermaid renderizado, tipografía de marca, print styles. **Nunca más imprimas MD directo a PDF.**
+- `pdf-exporter` (AG 30) 📄 — toma HTML renderizado, valida visualmente con screenshot preview, exporta PDF con Playwright. Si el preview se ve mal, delega a html-renderer.
+- `dashboard-builder` (AG 31) 📊 — dashboards HTML standalone con Chart.js, filtros, tablas ordenables. Un archivo, sin backend.
+
+### Added · tooling
+- `tooling/new-agent.sh` — wizard interactivo para crear agentes custom del proyecto. Valida nombre, frontmatter, duplicados.
+
+### Added · slash commands
+- `.claude/commands/plan-maestro.md` — `/plan-maestro` genera scaffold y arranca onboarding-pm.
+- `.claude/commands/status.md` — `/status` invoca status-dashboard y muestra inline.
+- `.claude/commands/doctor.md` — `/doctor` corre `tooling/doctor.sh` y delega fixes.
+
+### Added · variantes de settings
+- `.claude/settings/development.json` — perfil permisivo (copia del actual).
+- `.claude/settings/production.json` — restrictivo para infra/datos reales.
+- `.claude/settings/onboarding.json` — muy restrictivo para colaboradores aprendiendo.
+- `.claude/settings/README.md` — cómo switchear entre perfiles.
+
+### Added · templates
+- `templates/retrospectiva.md` — retro estructurada post-proyecto, alimenta al analizador-patrones.
+
+### Added · GitHub
+- `.github/ISSUE_TEMPLATE/bug_report.md`
+- `.github/ISSUE_TEMPLATE/feature_request.md`
+- `.github/ISSUE_TEMPLATE/new_agent.md`
+- `.github/PULL_REQUEST_TEMPLATE.md` con checklist del guardián.
+- `.github/dependabot.yml` para updates mensuales de GitHub Actions.
+
+### Added · landing
+- Flujo visual **MD → HTML → PDF** explicando el bug común ("MD directo a PDF queda feo").
+- Agentes 28-31 visibles en la grid con emojis (👋 🎨 📄 📊).
+- Sección de slash commands (nativos + custom del starter).
+- Steps del hero ahora se marcan como "done" (verde ✓) conforme scrolleás las secciones.
+- Nav simplificado con link directo a docs.
+
+### Changed
+- Total agentes: 27 → 30 (eliminé 1, agregué 4).
+- Supervisores: 9 · Operativos: 21.
+- Skills: 4 (sin cambios).
+
+---
+
 ## [1.6.0] · 2026-04-21
 
 ### Added · agentes de ejecución, seguridad y handoff
