@@ -394,7 +394,13 @@ done
 if [ ${#MISSING_TERM[@]} -eq 0 ]; then
   ok "Todos los CLI modernos ya instalados, salto."
 else
-  info "Faltan: $(echo ${MISSING_TERM[@]} | tr ' ' ',' | tr ':' ' ' | awk -F',' '{for(i=1;i<=NF;i++){split($i,a," "); printf "%s ", a[1]}}')"
+  # Listar los que faltan de forma segura
+  missing_names=()
+  for entry in "${MISSING_TERM[@]}"; do
+    missing_names+=("${entry%:*}")
+  done
+  info "Faltan: $(IFS=, ; echo "${missing_names[*]}")"
+
   if confirm "¿Instalar los que faltan?" y; then
     for entry in "${MISSING_TERM[@]}"; do
       pkg="${entry%:*}"

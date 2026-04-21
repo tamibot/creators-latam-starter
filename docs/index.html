@@ -30,6 +30,7 @@
     --violet:    #6A2BF5;
     --blue:      #2563EB;
     --green:     #14B87A;
+    --amber:     #F59E0B;
     --shadow-sm: 0 2px 8px rgba(15,23,42,.04);
     --shadow:    0 8px 30px rgba(15,23,42,.06);
     --shadow-lg: 0 20px 50px rgba(15,23,42,.10);
@@ -46,9 +47,76 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
   .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  /* ============================================================
+     ANIMACIONES
+     ============================================================ */
+
+  /* Scroll progress bar */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    z-index: 100;
+    transition: width .1s linear;
+    will-change: width;
+  }
+
+  /* Fade in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+
+  /* Blob pulse */
+  @keyframes blobPulse {
+    0%, 100% { transform: scale(1) translate(0,0); opacity: .6; }
+    50%      { transform: scale(1.15) translate(20px,-20px); opacity: .8; }
+  }
+  .hero-blob { animation: blobPulse 12s ease-in-out infinite; }
+  .hero-blob-2 { animation: blobPulse 15s ease-in-out infinite reverse; }
+
+  /* Arrow bounce */
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* Typing dots */
+  @keyframes blink { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+  .typing-dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--pink); margin: 0 2px;
+    animation: blink 1.4s infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: .2s; }
+  .typing-dot:nth-child(3) { animation-delay: .4s; }
+
+  /* Phase number pulse on view */
+  @keyframes phasePulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255,59,119,.4); }
+    70%  { box-shadow: 0 0 0 16px rgba(255,59,119,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,59,119,0); }
+  }
+  .phase.in .phase-num { animation: phasePulse 1.8s ease-out 1; }
+
+  /* Subtle grid background for the dark sections */
+  .bg-dark-grid {
+    background-color: #0B0F1A;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
 
   /* ===== NAV ===== */
   .nav {
@@ -62,8 +130,16 @@
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
   .brand-dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--purple), var(--pink)); display: inline-block; }
   .brand span.soft { color: var(--ink-soft); font-weight: 500; }
-  .nav-links { display: flex; gap: 28px; font-weight: 500; color: var(--ink-soft); font-size: 15px; }
+  .nav-links { display: flex; gap: 24px; font-weight: 500; color: var(--ink-soft); font-size: 14.5px; }
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; bottom: -6px;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    transition: width .25s ease;
+  }
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
   .cta-sm {
     display: inline-flex; align-items: center; gap: 6px;
     background: linear-gradient(135deg, var(--pink), var(--pink-2));
@@ -73,21 +149,24 @@
     transition: transform .15s, box-shadow .15s;
   }
   .cta-sm:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -10px rgba(255,59,119,.7); }
-  @media (max-width: 760px) { .nav-links { display: none; } }
+  @media (max-width: 900px) { .nav-links { display: none; } }
 
   /* ===== HERO ===== */
   .hero { padding: 96px 0 72px; position: relative; overflow: hidden; }
-  .hero::before {
-    content: ""; position: absolute; top: -200px; right: -200px;
+  .hero::before, .hero::after {
+    content: ""; position: absolute;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(255,59,119,.12), transparent 60%);
     pointer-events: none;
   }
+  .hero::before {
+    top: -200px; right: -200px;
+    background: radial-gradient(circle, rgba(255,59,119,.12), transparent 60%);
+    animation: blobPulse 12s ease-in-out infinite;
+  }
   .hero::after {
-    content: ""; position: absolute; top: 20%; left: -250px;
-    width: 600px; height: 600px;
+    top: 20%; left: -250px;
     background: radial-gradient(circle, rgba(139,63,255,.10), transparent 60%);
-    pointer-events: none;
+    animation: blobPulse 15s ease-in-out infinite reverse;
   }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
@@ -126,15 +205,15 @@
   @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; } .stat .num { font-size: 32px; } }
 
   /* ===== SECTION ===== */
-  section.sec { padding: 96px 0; }
+  section.sec { padding: 96px 0; position: relative; }
   .sec-eyebrow { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); font-weight: 600; margin-bottom: 16px; }
-  h2.sec-title { font-weight: 800; font-size: clamp(34px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; max-width: 20ch; }
+  h2.sec-title { font-weight: 800; font-size: clamp(34px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; max-width: 22ch; }
   h2.sec-title .grad { background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .sec-sub { font-size: 18px; color: var(--ink-soft); max-width: 64ch; margin: 0 0 48px; }
 
   .bg-alt { background: var(--bg-alt); }
 
-  /* ===== PHASES (nueva sección central) ===== */
+  /* ===== PHASES ===== */
   .phase {
     background: white;
     border: 1px solid var(--line);
@@ -144,7 +223,9 @@
     box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;
+    transition: box-shadow .3s, transform .3s;
   }
+  .phase.in { box-shadow: var(--shadow); }
   .phase::before {
     content: "";
     position: absolute;
@@ -213,6 +294,7 @@
     margin-bottom: 8px;
   }
   .phase-label.bad { background: rgba(255,59,119,.1); color: var(--pink); }
+  .phase-label.info { background: rgba(37,99,235,.1); color: var(--blue); }
   .phase ul.check-list { list-style: none; padding: 0; margin: 16px 0; }
   .phase ul.check-list li { padding: 8px 0 8px 30px; position: relative; font-size: 15px; color: var(--ink-soft); }
   .phase ul.check-list li::before {
@@ -224,7 +306,6 @@
     display: flex; align-items: center; justify-content: center;
   }
 
-  /* Flow between phases */
   .phase-arrow {
     display: flex; justify-content: center; align-items: center;
     margin: -8px 0 12px;
@@ -236,9 +317,8 @@
     font-weight: 300;
     animation: bounce 2s infinite;
   }
-  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-  /* ===== PILLARS (3 cards reusable) ===== */
+  /* ===== PILLARS ===== */
   .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .card { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 32px 28px; box-shadow: var(--shadow-sm); position: relative; transition: transform .2s, box-shadow .2s; }
   .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
@@ -256,10 +336,11 @@
   .tree .dir { color: #FFB86C; font-weight: 600; }
   .tree .key { color: #FF6B9D; }
   .tree .note { color: #6A6E7A; font-style: italic; }
+  .tree .cmd { color: #76E0B0; }
 
   /* ===== AGENTS TABLE ===== */
   .agents { background: white; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-sm); }
-  .agent { display: grid; grid-template-columns: 54px 220px 1fr; gap: 20px; padding: 20px 28px; border-bottom: 1px solid var(--line); align-items: center; }
+  .agent { display: grid; grid-template-columns: 54px 220px 1fr; gap: 20px; padding: 20px 28px; border-bottom: 1px solid var(--line); align-items: center; transition: background .15s; }
   .agent:last-child { border-bottom: 0; }
   .agent:hover { background: var(--bg-alt); }
   .agent-id { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: 0.05em; }
@@ -270,6 +351,115 @@
 
   /* ===== PULL QUOTE ===== */
   .pull { margin: 56px 0; padding: 40px 0 40px 40px; border-left: 4px solid; border-image: linear-gradient(180deg, var(--purple), var(--pink)) 1; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; line-height: 1.35; max-width: 44ch; letter-spacing: -0.015em; }
+
+  /* ===== TIMELINE (qué esperar) ===== */
+  .timeline { display: grid; grid-template-columns: 200px 1fr; gap: 0; margin: 48px 0; }
+  .timeline-row { display: contents; }
+  .timeline-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--pink);
+    font-weight: 700;
+    text-align: right;
+    padding: 20px 24px 20px 0;
+    border-right: 2px solid var(--line);
+    position: relative;
+  }
+  .timeline-time::after {
+    content: "";
+    position: absolute;
+    right: -6px; top: 26px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    box-shadow: 0 0 0 4px white;
+  }
+  .timeline-content { padding: 20px 0 20px 32px; border-left: 0; }
+  .timeline-content h4 { margin: 0 0 6px; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .timeline-content p { margin: 0; font-size: 14.5px; color: var(--ink-soft); line-height: 1.5; }
+  .timeline-warn {
+    background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(255,59,119,.05));
+    border: 1px solid rgba(245,158,11,.3);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-top: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .timeline-warn::before { content: "⏱️"; font-size: 22px; }
+  .timeline-warn strong { display: block; font-size: 15px; margin-bottom: 4px; color: var(--ink); }
+  .timeline-warn span { font-size: 14px; color: var(--ink-soft); }
+  @media (max-width: 720px) {
+    .timeline { grid-template-columns: 1fr; gap: 12px; }
+    .timeline-row { display: block; }
+    .timeline-time { text-align: left; border-right: 0; padding: 0 0 4px; }
+    .timeline-time::after { display: none; }
+    .timeline-content { padding: 0 0 20px; border-bottom: 1px solid var(--line); }
+  }
+
+  /* ===== COMMAND CARDS ===== */
+  .commands {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .cmd-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 24px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+    position: relative;
+  }
+  .cmd-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--pink); }
+  .cmd-card .cmd-code {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    background: #0B0F1A;
+    color: #76E0B0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  .cmd-card h4 { margin: 0 0 8px; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+  .cmd-card p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+  .cmd-card .tag-crit {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,59,119,.1); color: var(--pink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; font-weight: 700;
+    padding: 3px 8px; border-radius: 999px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ===== PRACTICES ===== */
+  .practice-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 20px;
+    padding: 22px 28px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .practice-item:hover { border-color: var(--pink); box-shadow: var(--shadow-sm); }
+  .practice-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(139,63,255,.12), rgba(255,59,119,.12));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .practice-item h4 { margin: 0 0 6px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .practice-item p { margin: 0; color: var(--ink-soft); font-size: 14.5px; line-height: 1.55; }
+  .practice-item p code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: var(--bg-alt); padding: 1px 6px; border-radius: 4px; color: var(--pink); }
 
   /* ===== PRINCIPLES ===== */
   .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -283,12 +473,12 @@
   /* ===== CTA FINAL ===== */
   .cta-final { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; border-radius: 28px; padding: 64px 48px; text-align: center; box-shadow: 0 30px 60px -20px rgba(139,63,255,.4); position: relative; overflow: hidden; }
   .cta-final::before, .cta-final::after { content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,.08); }
-  .cta-final::before { top: -150px; left: -100px; }
-  .cta-final::after { bottom: -200px; right: -100px; }
+  .cta-final::before { top: -150px; left: -100px; animation: blobPulse 14s ease-in-out infinite; }
+  .cta-final::after { bottom: -200px; right: -100px; animation: blobPulse 16s ease-in-out infinite reverse; }
   .cta-final h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 16px; line-height: 1.05; position: relative; z-index: 1; }
   .cta-final p { font-size: 18px; opacity: 0.9; max-width: 56ch; margin: 0 auto 32px; position: relative; z-index: 1; }
   .cta-final .cta-inner { position: relative; z-index: 1; }
-  .btn-white { background: white; color: var(--ink); padding: 18px 32px; border-radius: 999px; font-weight: 700; box-shadow: 0 18px 40px -10px rgba(0,0,0,.25); }
+  .btn-white { background: white; color: var(--ink); padding: 18px 32px; border-radius: 999px; font-weight: 700; box-shadow: 0 18px 40px -10px rgba(0,0,0,.25); transition: transform .15s; }
   .btn-white:hover { transform: translateY(-2px); }
   .code-pill { display: inline-block; background: rgba(0,0,0,.25); padding: 14px 22px; border-radius: 14px; font-family: 'JetBrains Mono', monospace; font-size: 14px; margin: 20px 0; color: white; position: relative; z-index: 1; text-align: left; }
   .code-pill .prompt { color: rgba(255,255,255,.5); user-select: none; }
@@ -302,6 +492,21 @@
   .faq-item summary::after { content: "+"; font-size: 24px; font-weight: 300; color: var(--pink); transition: transform .2s; flex-shrink: 0; margin-left: 16px; }
   .faq-item[open] summary::after { transform: rotate(45deg); }
   .faq-body { padding: 0 24px 22px; color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+  .faq-body pre { background: #0B0F1A; color: #E4E6EC; padding: 14px; border-radius: 10px; font-size: 13px; overflow-x: auto; }
+
+  /* FAQ grouping */
+  .faq-group-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pink);
+    font-weight: 700;
+    margin: 36px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-group-title:first-of-type { margin-top: 0; }
 
   /* ===== FOOTER ===== */
   footer { padding: 64px 0 48px; border-top: 1px solid var(--line); background: white; }
@@ -317,6 +522,26 @@
   mark { background: linear-gradient(120deg, rgba(139,63,255,.2), rgba(255,59,119,.2)); color: var(--ink); padding: 2px 8px; border-radius: 6px; font-weight: 600; }
   code.inline { font-family: 'JetBrains Mono', monospace; background: var(--bg-alt); padding: 2px 8px; border-radius: 6px; font-size: 0.88em; color: var(--pink); font-weight: 500; }
   .muted { color: var(--ink-soft); }
+
+  /* Benefits banner */
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .benefit {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px;
+    text-align: left;
+  }
+  .benefit .benefit-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .benefit h4 { font-size: 15px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .benefit p { font-size: 13.5px; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+  @media (max-width: 760px) { .benefits { grid-template-columns: repeat(2, 1fr); } }
+
   @media (max-width: 860px) {
     .pillars { grid-template-columns: 1fr; }
     .stats { gap: 16px; }
@@ -330,6 +555,9 @@
 </head>
 <body>
 
+<!-- Scroll progress indicator -->
+<div class="scroll-progress" id="scrollProgress" style="width: 0%;"></div>
+
 <!-- ============ NAV ============ -->
 <nav class="nav">
   <div class="container nav-inner">
@@ -339,9 +567,10 @@
     </a>
     <div class="nav-links">
       <a href="#metodologia">Metodología</a>
-      <a href="#plan-maestro">Plan Maestro</a>
+      <a href="#timing">Qué esperar</a>
       <a href="#sistema">El Sistema</a>
-      <a href="#reglas">Reglas</a>
+      <a href="#comandos">Comandos</a>
+      <a href="#practicas">Tips</a>
       <a href="#faq">FAQ</a>
     </div>
     <a href="https://github.com/tamibot/creators-latam-starter" class="cta-sm">Ver repo →</a>
@@ -351,51 +580,82 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
-    <span class="eyebrow"><span class="eyebrow-dot"></span> METODOLOGÍA · V1.3 · 2026</span>
-    <h1 class="display">Cómo trabajamos con IA. <span class="grad">Metodología primero</span>, herramientas después.</h1>
-    <p class="lead">
+    <span class="eyebrow reveal"><span class="eyebrow-dot"></span> METODOLOGÍA · V1.4 · 2026</span>
+    <h1 class="display reveal">Cómo trabajamos con IA. <span class="grad">Metodología primero</span>, herramientas después.</h1>
+    <p class="lead reveal reveal-delay-1">
       La IA no es un problema de <em>qué stack instalás</em>. Es un problema de <strong>qué entregás y cómo se produce</strong>. Nuestro método pasa por 3 fases — y <strong>no se ejecuta nada</strong> hasta que el Plan Maestro esté firmado.
     </p>
 
-    <div class="cta-row">
+    <div class="cta-row reveal reveal-delay-2">
       <a href="#metodologia" class="btn btn-primary">Ver la metodología ↓</a>
       <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-ghost">Clonar el starter</a>
     </div>
 
-    <div class="stats">
-      <div class="stat"><div class="num">3</div><div class="lbl">Fases obligatorias</div></div>
-      <div class="stat"><div class="num">15</div><div class="lbl">Agentes preconfigurados</div></div>
-      <div class="stat"><div class="num">3</div><div class="lbl">Skills fundacionales</div></div>
+    <div class="stats reveal reveal-delay-3">
+      <div class="stat"><div class="num" data-count="3">0</div><div class="lbl">Fases obligatorias</div></div>
+      <div class="stat"><div class="num" data-count="15">0</div><div class="lbl">Agentes preconfigurados</div></div>
+      <div class="stat"><div class="num" data-count="3">0</div><div class="lbl">Skills fundacionales</div></div>
       <div class="stat"><div class="num">1<span class="suffix"> plan</span></div><div class="lbl">Firmado antes de ejecutar</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ EL PROBLEMA ============ -->
-<section class="sec bg-alt">
+<!-- ============ BENEFICIOS ============ -->
+<section class="sec bg-alt" style="padding: 80px 0;">
   <div class="container">
-    <span class="sec-eyebrow">El problema</span>
-    <h2 class="sec-title">Instalar un stack <span class="grad">no es tener un proceso.</span></h2>
-    <p class="sec-sub">
+    <span class="sec-eyebrow reveal">Beneficios</span>
+    <h2 class="sec-title reveal">Lo que <span class="grad">ganás</span> con esta forma de trabajo.</h2>
+
+    <div class="benefits reveal reveal-delay-1">
+      <div class="benefit">
+        <span class="benefit-icon">⚡</span>
+        <h4>60% menos rework</h4>
+        <p>El Plan Maestro firmado elimina sorpresas. Se corrige lo que haga falta <em>antes</em> de escribir código.</p>
+      </div>
+      <div class="benefit">
+        <span class="benefit-icon">🎯</span>
+        <h4>Entregables claros</h4>
+        <p>El cliente sabe exactamente qué va a recibir, en qué formato y cuándo. No hay "y esto?" al final.</p>
+      </div>
+      <div class="benefit">
+        <span class="benefit-icon">🧠</span>
+        <h4>IA con criterio</h4>
+        <p>Los agentes no improvisan. Siguen reglas, auditan lo que hacen y paran si no entienden.</p>
+      </div>
+      <div class="benefit">
+        <span class="benefit-icon">🔁</span>
+        <h4>Replicable</h4>
+        <p>La misma metodología sirve para CRM, scraping, dashboards, chatbots. Un solo proceso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EL PROBLEMA ============ -->
+<section class="sec">
+  <div class="container">
+    <span class="sec-eyebrow reveal">El problema</span>
+    <h2 class="sec-title reveal">Instalar un stack <span class="grad">no es tener un proceso.</span></h2>
+    <p class="sec-sub reveal">
       La mayoría de los proyectos con IA fallan no por falta de herramientas — fallan por falta de <strong>claridad en qué hay que entregar</strong>, por no haber <strong>investigado el stack</strong>, y por armar el <strong>equipo sin plan</strong>.
     </p>
-    <div class="pull">
+    <div class="pull reveal">
       Antes de tocar una sola API: definí el entregable, contrastá el stack, armá el equipo. En ese orden. Siempre.
     </div>
   </div>
 </section>
 
-<!-- ============ METODOLOGÍA (sección central) ============ -->
-<section class="sec" id="metodologia">
+<!-- ============ METODOLOGÍA ============ -->
+<section class="sec bg-alt" id="metodologia">
   <div class="container">
-    <span class="sec-eyebrow">La metodología</span>
-    <h2 class="sec-title">Tres fases. <span class="grad">Ninguna se saltea.</span></h2>
-    <p class="sec-sub">
+    <span class="sec-eyebrow reveal">La metodología</span>
+    <h2 class="sec-title reveal">Tres fases. <span class="grad">Ninguna se saltea.</span></h2>
+    <p class="sec-sub reveal">
       Cada fase termina con validación explícita del cliente. No avanzamos hasta que la anterior esté firmada. Al final, tenés un <strong>Plan Maestro</strong> que el cliente aprueba y recién ahí se ejecuta.
     </p>
 
     <!-- ===== FASE 1 ===== -->
-    <div class="phase">
+    <div class="phase reveal">
       <div class="phase-head">
         <div class="phase-num">1</div>
         <div>
@@ -453,7 +713,7 @@
     <div class="phase-arrow"></div>
 
     <!-- ===== FASE 2 ===== -->
-    <div class="phase">
+    <div class="phase reveal">
       <div class="phase-head">
         <div class="phase-num">2</div>
         <div>
@@ -512,7 +772,7 @@
     <div class="phase-arrow"></div>
 
     <!-- ===== FASE 3 ===== -->
-    <div class="phase">
+    <div class="phase reveal">
       <div class="phase-head">
         <div class="phase-num">3</div>
         <div>
@@ -533,7 +793,7 @@
           <li>Agentes del starter que aplican a este proyecto</li>
           <li>Agentes <strong>custom</strong> específicos (con descripción, tools)</li>
           <li>Skills adicionales que hay que agregar</li>
-          <li>Plan de trabajo con Gantt (generado por el agente <code class="inline">diagramador-mermaid</code>)</li>
+          <li>Plan de trabajo con Gantt (generado por <code class="inline">diagramador-mermaid</code>)</li>
           <li>Puntos de validación con el cliente en cada hito</li>
           <li>Canal oficial de comunicación + cadencia de sync</li>
         </ul>
@@ -564,65 +824,81 @@
       </div>
     </div>
 
-    <div class="pull" style="margin-top: 64px;">
+    <div class="pull reveal" style="margin-top: 64px;">
       Si la Fase 1 no está firmada, no existe Fase 2. Si la Fase 2 no está firmada, no existe Fase 3. Disciplina.
     </div>
   </div>
 </section>
 
-<!-- ============ PLAN MAESTRO ============ -->
-<section class="sec bg-alt" id="plan-maestro">
+<!-- ============ TIMING / QUÉ ESPERAR ============ -->
+<section class="sec" id="timing">
   <div class="container">
-    <span class="sec-eyebrow">El entregable de las 3 fases</span>
-    <h2 class="sec-title">El <span class="grad">Plan Maestro.</span></h2>
-    <p class="sec-sub">
-      Un único documento que el cliente firma. Vive en <code class="inline">documentation/plan-maestro.md</code>. Con este plan aprobado, recién ahí el equipo operativo arranca.
+    <span class="sec-eyebrow reveal">Qué esperar</span>
+    <h2 class="sec-title reveal">Timeline realista. <span class="grad">Sin sorpresas.</span></h2>
+    <p class="sec-sub reveal">
+      Cuánto tarda cada paso en serio. Si algo dura más de lo indicado, algo está mal — no es normal.
     </p>
 
-    <div class="tree-block">
-      <div class="tree-header">documentation/plan-maestro.md</div>
-<pre class="tree"><span class="dir">📋 Plan Maestro · Acme · Sistema de leads</span>
-│
-├── <span class="key">🎯 FASE 1 · Entregables</span>
-│   ├── Entregable A: reporte-leads.xlsx
-│   │   ├── Formato, ubicación, frecuencia
-│   │   ├── Columnas con fuente de datos
-│   │   ├── KPIs con fórmulas
-│   │   └── Criterio de aprobación
-│   └── ✅ Checkpoint firmado por cliente
-│
-├── <span class="key">🛠️ FASE 2 · Stack Tecnológico</span>
-│   ├── Lo que ya tiene el cliente
-│   ├── TDRs / restricciones
-│   ├── Research por herramienta (→ documentation/stack/)
-│   ├── Stack final + alternativas descartadas
-│   └── ✅ Checkpoint firmado por cliente
-│
-├── <span class="key">👥 FASE 3 · Equipo y Plan</span>
-│   ├── Agentes del starter que usamos
-│   ├── Agentes custom del proyecto
-│   ├── Skills adicionales
-│   ├── Gantt de ejecución (Mermaid)
-│   ├── Puntos de validación
-│   └── ✅ Checkpoint firmado por cliente
-│
-├── 🔒 Fuera de alcance
-├── ⚠️ Riesgos conocidos
-└── 🚀 Activación — handoff al orquestador</pre>
+    <div class="timeline reveal">
+      <div class="timeline-row">
+        <div class="timeline-time">15–30 min</div>
+        <div class="timeline-content">
+          <h4>Primera instalación del starter</h4>
+          <p>En una Mac nueva sin nada: descargar Homebrew, Python, ffmpeg, Docker, marker (incluye modelos ~2GB), whisper-cpp, CLIs modernos. Es largo la primera vez, <strong>pero no te asustes</strong> — la siguiente corrida es en segundos.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">2–5 seg</div>
+        <div class="timeline-content">
+          <h4>Instalaciones posteriores</h4>
+          <p>El script audita qué tenés instalado y salta lo que ya existe. En un proyecto nuevo clonado, <em>si ya usaste el starter antes</em>, tarda segundos en validar.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">30 min – 3 días</div>
+        <div class="timeline-content">
+          <h4>Fase 1 del Plan Maestro (Entregables)</h4>
+          <p>Depende de qué tan claro tenga el cliente lo que quiere. Si vino con idea vaga: 3 días de ida y vuelta. Si vino con screenshot del Excel que imagina: 30 minutos.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">1–2 días</div>
+        <div class="timeline-content">
+          <h4>Fase 2 (Stack + research)</h4>
+          <p>Research obligatorio en foros por cada herramienta externa. Esto no se acelera — es donde evitás los sustos futuros (rate limits, precios, limitaciones no documentadas).</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">4–8 horas</div>
+        <div class="timeline-content">
+          <h4>Fase 3 (Equipo + Gantt)</h4>
+          <p>Con las fases 1 y 2 cerradas, armar el equipo de agentes y el Gantt es rápido. El <code class="inline">diagramador-mermaid</code> te hace el Gantt en 15 min.</p>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">Variable</div>
+        <div class="timeline-content">
+          <h4>Ejecución (post-firma)</h4>
+          <p>Recién acá arranca el código. El Gantt de la Fase 3 ya estableció las semanas. Con el Plan Maestro firmado, es ejecución pura.</p>
+        </div>
+      </div>
     </div>
 
-    <p style="margin-top: 24px; font-size: 15px;">
-      Quien guía este documento es el agente <strong><code class="inline">onboarding-pm</code></strong> — arranca todo proyecto nuevo preguntando las Fases 1→3 y no te deja avanzar hasta que estén firmadas. Template completo en <a href="https://github.com/tamibot/creators-latam-starter/blob/main/templates/plan-maestro.md" style="color:var(--pink);font-weight:600;">templates/plan-maestro.md</a>.
-    </p>
+    <div class="timeline-warn reveal">
+      <div>
+        <strong>¿Sentís que la instalación está colgada?</strong>
+        <span>Los modelos de <code class="inline" style="background:rgba(0,0,0,.06);">marker</code> tardan la primera vez (~2GB). Si llevás más de 30 minutos sin ver progreso, cancelá con <code class="inline" style="background:rgba(0,0,0,.06);">Ctrl+C</code> y correlo de nuevo — el script detecta qué ya bajó.</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ SISTEMA QUE EJECUTA ============ -->
-<section class="sec" id="sistema">
+<!-- ============ EL SISTEMA ============ -->
+<section class="sec bg-alt" id="sistema">
   <div class="container">
-    <span class="sec-eyebrow">El sistema que ejecuta</span>
-    <h2 class="sec-title">Cuando el Plan Maestro está firmado, <span class="grad">el sistema arranca.</span></h2>
-    <p class="sec-sub">
+    <span class="sec-eyebrow reveal">El sistema que ejecuta</span>
+    <h2 class="sec-title reveal">Cuando el Plan Maestro está firmado, <span class="grad">el sistema arranca.</span></h2>
+    <p class="sec-sub reveal">
       Acá es donde el starter kit entra: carpetas, agentes, skills y herramientas. Es el <strong>cómo</strong> — el <strong>qué</strong> ya lo definimos en las 3 fases.
     </p>
 
@@ -631,7 +907,7 @@
       Una carpeta madre por cliente. Adentro, una subcarpeta por proyecto. El starter replica esta estructura en todos.
     </p>
 
-    <div class="tree-block" style="margin-top: 24px;">
+    <div class="tree-block reveal" style="margin-top: 24px;">
       <div class="tree-header">carpeta · cliente · proyecto</div>
 <pre class="tree"><span class="dir">📁 Cliente-X/Proyecto-A/</span>
 ├── CLAUDE.md              <span class="note"># reglas que Claude lee auto</span>
@@ -651,7 +927,7 @@
       <strong>15 agentes</strong>: 10 operativos ejecutan el trabajo, 5 supervisores coordinan. Claude Code los detecta automáticamente al abrir el repo.
     </p>
 
-    <div class="agents" style="margin-top: 24px;">
+    <div class="agents reveal" style="margin-top: 24px;">
       <div class="agent"><div class="agent-id">AG · 15</div><div class="agent-name">Onboarding PM <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">⭐ Arranca todo proyecto nuevo. Guía las 3 fases y produce el Plan Maestro.</div></div>
       <div class="agent"><div class="agent-id">AG · 13</div><div class="agent-name">Orquestador <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">Con el plan aprobado, descompone tareas y decide a qué agente delegar cada sub-tarea.</div></div>
       <div class="agent"><div class="agent-id">AG · 06</div><div class="agent-name">Project Manager <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">Visión estratégica: estado, plazos, bloqueos, prioridades semanales.</div></div>
@@ -675,7 +951,7 @@
 
     <h3 style="font-size: 22px; margin: 56px 0 16px; font-weight: 700;">Skills fundacionales</h3>
 
-    <div class="pillars">
+    <div class="pillars reveal">
       <div class="card">
         <div class="card-tag">Skill 01</div>
         <h3>PDF / Docs → Markdown</h3>
@@ -692,48 +968,220 @@
         <p>Obliga al sistema a <mark>pensar antes de paralelizar</mark>. Evita colapsos.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <h3 style="font-size: 22px; margin: 56px 0 16px; font-weight: 700;">Herramientas que monta el instalador</h3>
-    <p style="max-width: 62ch;">
-      Un único script (<code class="inline">./tooling/install.sh</code>) — <strong>detecta qué ya tenés</strong> y salta lo instalado. Solo instala lo que falta.
+<!-- ============ COMANDOS ESENCIALES ============ -->
+<section class="sec" id="comandos">
+  <div class="container">
+    <span class="sec-eyebrow reveal">Comandos esenciales</span>
+    <h2 class="sec-title reveal">Atajos de Claude Code <span class="grad">que sí o sí tenés que usar.</span></h2>
+    <p class="sec-sub reveal">
+      Los comandos que más nos salvan el día. Aprendelos de memoria — son la diferencia entre perder horas o avanzar tranquilo.
     </p>
 
-    <div class="tree-block" style="margin-top: 24px;">
-      <div class="tree-header">categorías</div>
-<pre class="tree"><span class="key">Prerrequisitos</span>  Homebrew · git · gh · Python 3.12 · uv · nvm + Node · ffmpeg · Docker
-<span class="key">Documentos</span>     marker · markitdown
-<span class="key">Video/Audio</span>    yt-dlp · whisper.cpp · google-genai SDK
-<span class="key">Terminal</span>       ripgrep · fd · bat · fzf · jq · delta · glow · zoxide · tree
-<span class="key">Diagramas</span>      mermaid-cli (on-demand via npx)</pre>
+    <div class="commands reveal">
+      <div class="cmd-card">
+        <span class="tag-crit">crítico</span>
+        <div class="cmd-code">/compact</div>
+        <h4>Compilar el contexto</h4>
+        <p>Cuando la conversación llega cerca de 500k tokens, esto la resume y reinicia. Usalo antes de que el modelo empiece a inventar. <strong>Regla:</strong> al 50% del contexto, compactás.</p>
+      </div>
+
+      <div class="cmd-card">
+        <span class="tag-crit">crítico</span>
+        <div class="cmd-code">ESC ESC</div>
+        <h4>Rewind (volver atrás)</h4>
+        <p>Doble Escape te deja volver a un turno anterior. Cuando el modelo se equivocó y querés reintentar desde un punto limpio — sin empezar de cero.</p>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-code">/clear</div>
+        <h4>Limpiar el chat</h4>
+        <p>Borra la conversación actual pero mantiene el proyecto abierto. Útil cuando el contexto se ensució y no tiene sentido compactarlo.</p>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-code">/cost</div>
+        <h4>Ver uso de tokens</h4>
+        <p>Muestra cuántos tokens llevás usados en la sesión. Revisá antes de meter otro PDF grande — no quemes el contexto en vano.</p>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-code">/doctor</div>
+        <h4>Health check</h4>
+        <p>Diagnostica tu setup: Node, npm, MCP, permisos. Primer comando cuando algo "raro" pasa. Te ahorra investigar solo.</p>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-code">/agents</div>
+        <h4>Gestionar agentes</h4>
+        <p>Listá, creá, editá agentes desde Claude Code. Útil para crear rápido los agentes custom de la Fase 3 del Plan Maestro.</p>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-code">/init</div>
+        <h4>Generar CLAUDE.md</h4>
+        <p>Si abrís un repo sin <code>CLAUDE.md</code>, este comando te lo arma explorando el código. Base mínima para que el modelo entienda el proyecto.</p>
+      </div>
+
+      <div class="cmd-card">
+        <div class="cmd-code">/config</div>
+        <h4>Settings</h4>
+        <p>Abrir settings del IDE. Ajustar modelo, permisos, tema, idioma. Lo que antes editabas a mano en <code>settings.json</code>.</p>
+      </div>
     </div>
 
-    <div style="margin-top: 40px; padding: 28px 32px; background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06)); border: 1px solid var(--line); border-radius: 16px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px;">Tip</div>
-      <p style="margin: 0; color: var(--ink); font-size: 15px;">
-        Si usás <strong>Claude Code</strong>, NO necesitás setear <code class="inline">ANTHROPIC_API_KEY</code> — Claude Code usa su propia sesión. Solo necesitarías la API key si vas a llamar a la API de Anthropic desde código.
-      </p>
+    <h3 style="font-size: 22px; margin: 64px 0 16px; font-weight: 700;">Atajos de teclado</h3>
+    <div class="commands reveal">
+      <div class="cmd-card">
+        <div class="cmd-code">Shift + Tab</div>
+        <h4>Toggle "plan mode"</h4>
+        <p>Entrás al modo planeamiento antes de ejecutar. El modelo te propone el plan y vos aprobás. Crítico para tareas grandes.</p>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-code">Ctrl + R</div>
+        <h4>Toggle verbose / modo extendido</h4>
+        <p>Ver más detalle de lo que hace el modelo. Útil cuando algo falla y querés saber exactamente qué pasó.</p>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-code">Ctrl + C</div>
+        <h4>Cancelar ejecución</h4>
+        <p>Para el comando que está corriendo. No cierra la sesión. Si el agente se está yendo por la tangente, cortalo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEJORES PRÁCTICAS ============ -->
+<section class="sec bg-alt" id="practicas">
+  <div class="container">
+    <span class="sec-eyebrow reveal">Mejores prácticas</span>
+    <h2 class="sec-title reveal">Tips que <span class="grad">aprendimos a la mala.</span></h2>
+    <p class="sec-sub reveal">
+      Reglas pequeñas pero firmes que, con el tiempo, dejamos de cuestionar. Son la diferencia entre un proyecto que avanza y uno que se empantana.
+    </p>
+
+    <h3 style="font-size: 22px; margin: 32px 0 16px; font-weight: 700;">Formatos y naming</h3>
+    <div style="margin-bottom: 32px;">
+      <div class="practice-item reveal">
+        <div class="practice-icon">📄</div>
+        <div>
+          <h4>Markdown por default, para todo lo que Claude tenga que leer</h4>
+          <p>Notas, briefs, planes, transcripciones. Los modelos leen MD <strong>10× más rápido</strong> que PDFs, DOCX o HTML. Si entra un PDF a <code>data_original/</code>, pasalo a MD con <code>marker</code> antes de que el agente lo toque.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">🏷️</div>
+        <div>
+          <h4>Archivos con nombre descriptivo, sin espacios ni acentos</h4>
+          <p>Usá <code>reporte-leads-abril2026.xlsx</code>, no <code>"Reporte Leads (Abril 2026).xlsx"</code>. Los espacios rompen comandos, los acentos rompen encoding. <code>kebab-case</code> siempre.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">📂</div>
+        <div>
+          <h4>Un cliente = una carpeta madre. Siempre.</h4>
+          <p>Incluso tu propia agencia. Así cuando decís "el contexto de la empresa" ya está todo junto. El modelo aterriza en segundos.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">Cómo hablarle al modelo</h3>
+    <div style="margin-bottom: 32px;">
+      <div class="practice-item reveal">
+        <div class="practice-icon">🎯</div>
+        <div>
+          <h4>Todo mensaje largo arranca con "Antes de comenzar, dime si tienes dudas"</h4>
+          <p>El prompt del NV te ahorra 40 min de ejecución errada. Template completo en <code>templates/nv-prompt.md</code>. Si no usás esto, el modelo adivina — y adivinar en producción es caro.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">🧭</div>
+        <div>
+          <h4>Instrucciones claras &gt; instrucciones extensas</h4>
+          <p>No escribas 2 pantallas de prompt. Escribí 5 bullets claros con: objetivo, entrada, salida esperada, restricciones, criterio de corte. Si necesitás más, partí la tarea en 2.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">🛑</div>
+        <div>
+          <h4>Si el modelo se va por la tangente, cortá con Ctrl+C</h4>
+          <p>No dejes que se auto-corrija 5 veces quemando tokens. Cortá, reformulá el prompt, arrancá de nuevo. Es más barato.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">Higiene del contexto</h3>
+    <div style="margin-bottom: 32px;">
+      <div class="practice-item reveal">
+        <div class="practice-icon">♻️</div>
+        <div>
+          <h4>Compilá a los 500k tokens</h4>
+          <p>No esperes al millón. <code>/compact</code> temprano es gratis; depurar errores del modelo confundido, no. El síntoma de "hay que compilar" es el modelo olvidándose de archivos que hace rato usaste.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">🧹</div>
+        <div>
+          <h4>Purgá la carpeta cada ciertos pasos</h4>
+          <p>El agente <code>purgador</code> barre archivos no usados, TODOs viejos, carpetas vacías. Carpeta limpia = contexto limpio. El ruido en la carpeta es ruido en el modelo.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">🚫</div>
+        <div>
+          <h4>Reemplazar &gt; duplicar. Confiá en git.</h4>
+          <p>Nada de <code>plan_v2_final_FINAL.md</code>. El <code>versionador</code> edita en sitio y git guarda el historial. Si necesitás revertir, hacé <code>git log</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">Seguridad</h3>
+    <div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">🔐</div>
+        <div>
+          <h4>Credenciales: sólo en <code>.env</code>, nunca en código</h4>
+          <p>El <code>credentials-manager</code> chequea antes de cada commit. Si querés estar más seguro, usá <code>gitleaks</code> en un pre-commit hook. Una credencial en un commit público = rotarla YA.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">⛔</div>
+        <div>
+          <h4>Si no usás Claude Code, no setées <code>ANTHROPIC_API_KEY</code></h4>
+          <p>Claude Code usa su propia sesión. Solo setées la key si hacés llamadas a la API desde código. Menos keys en el <code>.env</code>, menos superficie de ataque.</p>
+        </div>
+      </div>
+      <div class="practice-item reveal">
+        <div class="practice-icon">👀</div>
+        <div>
+          <h4>Antes de cada commit grande: <code>/agents</code> → <code>guardian-reglas</code></h4>
+          <p>Audita que las 10 reglas de oro se cumplan. Detecta duplicados, credenciales filtradas, carpetas muertas. Si reporta crítico, no commites hasta resolver.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ REGLAS ============ -->
-<section class="sec bg-alt" id="reglas">
+<section class="sec" id="reglas">
   <div class="container">
-    <span class="sec-eyebrow">10 reglas de oro</span>
-    <h2 class="sec-title">Lo que <span class="grad">no se negocia.</span></h2>
-    <p class="sec-sub">
+    <span class="sec-eyebrow reveal">10 reglas de oro</span>
+    <h2 class="sec-title reveal">Lo que <span class="grad">no se negocia.</span></h2>
+    <p class="sec-sub reveal">
       El resumen de lo que, con el tiempo, dejamos de discutir. Si las rompemos, el proyecto lo paga.
     </p>
 
-    <div class="principles">
-      <div class="principle"><div class="principle-num">01</div><div><h3>GitHub primero.</h3><p>Repo conectado, permisos de terminal, <code class="inline">.env</code> en local. Si no, construyes sobre arena.</p></div></div>
-      <div class="principle"><div class="principle-num">02</div><div><h3>Un cliente = una carpeta madre.</h3><p>Incluso tu propia agencia. Así "el contexto de la empresa" siempre está junto.</p></div></div>
-      <div class="principle"><div class="principle-num">03</div><div><h3>Compilá a los 500k tokens.</h3><p>No esperes al millón. Compilar temprano es gratis.</p></div></div>
-      <div class="principle"><div class="principle-num">04</div><div><h3>Reemplazar &gt; duplicar.</h3><p>Nada de <code class="inline">plan_v2_final_final.md</code>. Git guarda el historial.</p></div></div>
-      <div class="principle"><div class="principle-num">05</div><div><h3>Purgá lo que no se usa.</h3><p>Carpeta limpia = contexto limpio.</p></div></div>
+    <div class="principles reveal">
+      <div class="principle"><div class="principle-num">01</div><div><h3>Plan Maestro antes de ejecutar.</h3><p>Las 3 fases firmadas. Sin plan firmado, no arranca nada.</p></div></div>
+      <div class="principle"><div class="principle-num">02</div><div><h3>GitHub primero.</h3><p>Repo conectado, permisos de terminal, <code class="inline">.env</code> en local. Si no, construyes sobre arena.</p></div></div>
+      <div class="principle"><div class="principle-num">03</div><div><h3>Un cliente = una carpeta madre.</h3><p>Incluso tu propia agencia. Así "el contexto de la empresa" siempre está junto.</p></div></div>
+      <div class="principle"><div class="principle-num">04</div><div><h3>Compilá a los 500k tokens.</h3><p>No esperes al millón. Compilar temprano es gratis.</p></div></div>
+      <div class="principle"><div class="principle-num">05</div><div><h3>Reemplazar &gt; duplicar.</h3><p>Nada de <code class="inline">plan_v2_final_final.md</code>. Git guarda el historial.</p></div></div>
       <div class="principle"><div class="principle-num">06</div><div><h3>Todo lo final va a <code class="inline">output/</code>.</h3><p>Cero excepciones. El cliente no busca entre archivos internos.</p></div></div>
       <div class="principle"><div class="principle-num">07</div><div><h3>Un agente, un job.</h3><p>Cuando un agente hace dos cosas, hace mal las dos.</p></div></div>
-      <div class="principle"><div class="principle-num">08</div><div><h3>Plan Maestro antes de ejecutar.</h3><p>Las 3 fases firmadas. Sin plan firmado, no arranca nada.</p></div></div>
+      <div class="principle"><div class="principle-num">08</div><div><h3>El NV nunca arranca sin confirmar.</h3><p>"Decime dudas antes de iniciar" es fijo. Te ahorra 40 min de ejecución errada.</p></div></div>
       <div class="principle"><div class="principle-num">09</div><div><h3>Plan paso a paso &gt; paralelo.</h3><p>Paralelización mal hecha colapsa la máquina y quema tokens.</p></div></div>
       <div class="principle"><div class="principle-num">10</div><div><h3>Si no avanza, no es el modelo.</h3><p>Es el prompt, el contexto o el plan. Cambiar de LLM es la última carta.</p></div></div>
     </div>
@@ -741,85 +1189,175 @@
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="sec" id="faq">
+<section class="sec bg-alt" id="faq">
   <div class="container">
-    <span class="sec-eyebrow">FAQ</span>
-    <h2 class="sec-title">Preguntas <span class="grad">frecuentes.</span></h2>
-    <p class="sec-sub">
-      Lo que más nos preguntan. Si no está acá, escribinos por WhatsApp al +51 995 547 575.
+    <span class="sec-eyebrow reveal">FAQ</span>
+    <h2 class="sec-title reveal">Preguntas <span class="grad">frecuentes.</span></h2>
+    <p class="sec-sub reveal">
+      Lo que más nos preguntan, agrupado. Si no está acá, WhatsApp al +51 995 547 575.
     </p>
 
+    <!-- GRUPO: Metodología -->
+    <div class="faq-group-title">Metodología</div>
+
     <div class="faq-list">
-      <details class="faq-item">
+      <details class="faq-item reveal">
         <summary>¿Por qué arrancan con "Plan Maestro" y no directamente con el código?</summary>
         <div class="faq-body">
           Porque sin entregable definido, stack validado y equipo armado, el código que escribís es al pedo. El 80% de los proyectos fallidos que vimos empezaron con "dale, codeá". El Plan Maestro toma 2–5 días y ahorra semanas.
         </div>
       </details>
 
-      <details class="faq-item">
-        <summary>¿Cuánto tarda la Fase 1 (entregables)?</summary>
+      <details class="faq-item reveal">
+        <summary>¿Qué pasa si el cliente no quiere pasar por las 3 fases?</summary>
         <div class="faq-body">
-          Entre 30 minutos y 3 días, dependiendo de cuán claro tenga el cliente lo que quiere. El agente <code class="inline">onboarding-pm</code> te guía con preguntas — no te deja avanzar hasta tener formato, columnas, KPIs, fuentes y criterio de aprobación por cada entregable.
+          Le explicamos que no trabajamos sin plan firmado. Si insiste, agradecemos pero no tomamos el proyecto. Los proyectos sin plan terminan siendo los más problemáticos y no son rentables para ninguno de los dos.
         </div>
       </details>
 
-      <details class="faq-item">
+      <details class="faq-item reveal">
         <summary>¿Es obligatorio investigar en foros en la Fase 2?</summary>
         <div class="faq-body">
           Sí. Las docs oficiales siempre están incompletas o desactualizadas. Los foros te muestran los problemas reales de la gente que ya integró. Para cada API, revisamos StackOverflow, Reddit, GitHub issues recientes y HackerNews. Queda documentado en <code class="inline">documentation/stack/&lt;herramienta&gt;.md</code>.
         </div>
       </details>
 
-      <details class="faq-item">
+      <details class="faq-item reveal">
+        <summary>¿Puedo agregar una Fase 4 (deployment / operaciones)?</summary>
+        <div class="faq-body">
+          Sí — las 3 fases son el mínimo. Si el proyecto lo amerita, el <code class="inline">onboarding-pm</code> puede sumar fases específicas (deployment, monitoring, handover al equipo del cliente). El template es extensible.
+        </div>
+      </details>
+    </div>
+
+    <!-- GRUPO: Setup -->
+    <div class="faq-group-title">Setup e instalación</div>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>¿Cuánto tarda instalar todo?</summary>
+        <div class="faq-body">
+          Primera vez en una Mac vacía: <strong>15–30 min</strong> (descarga Homebrew + Python + modelos marker ~2GB). En corridas siguientes: <strong>segundos</strong> — el instalador detecta qué ya tenés y salta lo instalado. No reinstala nada.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
         <summary>Necesito <code class="inline">ANTHROPIC_API_KEY</code>?</summary>
         <div class="faq-body">
           Si usás <strong>Claude Code</strong> como IDE, <strong>no</strong> — Claude Code usa su propia sesión de login. Solo necesitás <code class="inline">ANTHROPIC_API_KEY</code> si vas a llamar a la API de Anthropic desde tu código (ej: un script Python). El <code class="inline">.env.example</code> del starter lo aclara.
         </div>
       </details>
 
-      <details class="faq-item">
-        <summary>¿El instalador es rápido o tarda mucho?</summary>
-        <div class="faq-body">
-          La primera vez en una Mac vacía: <strong>20–40 min</strong> (descarga de Homebrew + Python + modelos de whisper si los pedís). En corridas siguientes: <strong>segundos</strong> — el instalador <mark>detecta qué ya tenés y salta lo instalado</mark>. No reinstala Homebrew, Python, etc.
-        </div>
-      </details>
-
-      <details class="faq-item">
+      <details class="faq-item reveal">
         <summary>¿Corre en Windows?</summary>
         <div class="faq-body">
           El script asume macOS. Para Windows, pedile a Claude/Cursor que aplique lo mismo usando <code class="inline">winget</code> o <code class="inline">scoop</code>. Las herramientas (Python, Node, Docker, yt-dlp, marker) tienen soporte Windows nativo. Linux: reemplazar <code class="inline">brew</code> por <code class="inline">apt</code>/<code class="inline">dnf</code>.
         </div>
       </details>
 
-      <details class="faq-item">
+      <details class="faq-item reveal">
+        <summary>¿Qué hace <code class="inline">.claude/settings.json</code>?</summary>
+        <div class="faq-body">
+          Define qué comandos puede ejecutar Claude Code sin pedirte autorización cada vez. Pre-aprobamos los seguros (<code class="inline">git</code>, <code class="inline">brew</code>, <code class="inline">pip</code>, <code class="inline">npm</code>) y bloqueamos los peligrosos (<code class="inline">rm -rf /</code>, <code class="inline">git push --force</code>, leer <code class="inline">.env</code>).
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>¿Puedo usar Cursor o Codex en vez de Claude Code?</summary>
+        <div class="faq-body">
+          Sí. La estructura de <code class="inline">.claude/agents/</code> y <code class="inline">.claude/skills/</code> es específica de Claude Code, pero las reglas en <code class="inline">CLAUDE.md</code> y los templates son universales — cualquier LLM puede seguirlos. Adaptá agentes en formato del IDE que uses.
+        </div>
+      </details>
+    </div>
+
+    <!-- GRUPO: Agentes -->
+    <div class="faq-group-title">Agentes y ejecución</div>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
         <summary>¿Puedo armar agentes custom para mi proyecto?</summary>
         <div class="faq-body">
           Sí — el <code class="inline">onboarding-pm</code> los propone en la Fase 3 del Plan Maestro. Creás un <code class="inline">.md</code> en <code class="inline">.claude/agents/</code> con frontmatter estándar (copiá cualquier agente existente como modelo). Claude Code lo detecta al reiniciar.
         </div>
       </details>
 
-      <details class="faq-item">
-        <summary>¿Qué hace <code class="inline">.claude/settings.json</code>?</summary>
+      <details class="faq-item reveal">
+        <summary>¿Cuánto cuesta en tokens una sesión típica?</summary>
         <div class="faq-body">
-          Define qué comandos puede ejecutar Claude Code sin pedirte autorización cada vez. Pre-aprobamos los seguros (<code class="inline">git</code>, <code class="inline">brew</code>, <code class="inline">pip</code>) y bloqueamos los peligrosos (<code class="inline">rm -rf /</code>, <code class="inline">git push --force</code>, leer <code class="inline">.env</code>).
+          Depende del proyecto. Una sesión de Fase 1 (entregables) suele ser ~20k-50k tokens input. Una sesión de Fase 3 con generación de código: 100k-500k. Usá <code class="inline">/cost</code> para ver en tiempo real. El suscription de Claude Pro suele cubrirlo bien.
         </div>
       </details>
 
-      <details class="faq-item">
+      <details class="faq-item reveal">
+        <summary>¿Qué hago si un agente se va por la tangente?</summary>
+        <div class="faq-body">
+          1) <code class="inline">Ctrl+C</code> para cortar. 2) <code class="inline">ESC ESC</code> para volver al turno anterior (rewind). 3) Reformulá el prompt siguiendo el formato del NV (objetivo, entrada, salida, restricciones, corte). Si el agente se va por la tangente seguido, el prompt probablemente es ambiguo — pediles al <code class="inline">arquitecto</code> que lo revise.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
         <summary>¿Cómo actualizo el starter cuando sacamos una versión nueva?</summary>
         <div class="faq-body">
-          <pre style="background:#0B0F1A;color:#E4E6EC;padding:16px;border-radius:10px;font-size:13px;overflow-x:auto;margin-top:8px;"><code>git remote add starter https://github.com/tamibot/creators-latam-starter.git
+<pre><code>git remote add starter https://github.com/tamibot/creators-latam-starter.git
 git fetch starter
 git merge starter/main --allow-unrelated-histories</code></pre>
           El agente <code class="inline">versionador</code> te ayuda con los conflictos.
         </div>
       </details>
 
-      <details class="faq-item">
+      <details class="faq-item reveal">
         <summary>¿Qué diferencia tiene con starters de Vercel / Next?</summary>
         <div class="faq-body">
           Aquellos son <strong>templates de código</strong>. Éste es un <strong>starter de proceso</strong>: reglas, agentes, metodología de 3 fases. Se monta <em>sobre</em> cualquier stack técnico (React, Python, Node, Go).
+        </div>
+      </details>
+    </div>
+
+    <!-- GRUPO: Troubleshooting -->
+    <div class="faq-group-title">Troubleshooting</div>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>La instalación se colgó — ¿qué hago?</summary>
+        <div class="faq-body">
+          Los modelos de <code class="inline">marker</code> tardan la primera vez (~2GB). Si llevás más de 30 min sin ver progreso, cancelá con <code class="inline">Ctrl+C</code> y correlo de nuevo — el script detecta qué ya bajó y retoma. Si insiste, instalá ese paquete manual: <code class="inline">uv pip install marker-pdf</code>.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>El modelo no encuentra un archivo que yo veo en la carpeta</summary>
+        <div class="faq-body">
+          Probablemente es un problema de contexto. Reiniciá con <code class="inline">/clear</code> o <code class="inline">/compact</code> y volvé a mencionar el archivo con ruta completa. Si persiste, es que el archivo está fuera del workspace del modelo — chequeá los permisos en <code class="inline">.claude/settings.json</code>.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>Docker Desktop no arranca después de instalar</summary>
+        <div class="faq-body">
+          Abrilo manualmente desde Applications al menos una vez — pide permisos de macOS que no se pueden dar automáticamente. Después ya arranca solo.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>"command not found: brew" después de instalarlo</summary>
+        <div class="faq-body">
+          Agregá Homebrew al PATH. En Apple Silicon:
+<pre><code>echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
+source ~/.zshrc</code></pre>
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>"externally-managed-environment" al instalar con pip</summary>
+        <div class="faq-body">
+          Es Python 3.12 protegiéndote de romper el sistema. Usá <code class="inline">uv pip install --system</code> (incluido en el starter) o <code class="inline">pip3 install --user --break-system-packages</code> si sabés lo que hacés.
+        </div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary>El agente no aparece en <code class="inline">/agents</code></summary>
+        <div class="faq-body">
+          Cerrá y reabrí Claude Code. Los agentes se cargan al iniciar la sesión. Si aún no aparecen, chequeá que el frontmatter del archivo esté bien (tiene que tener <code class="inline">---</code>, <code class="inline">name:</code>, <code class="inline">description:</code>, otro <code class="inline">---</code>).
         </div>
       </details>
     </div>
@@ -829,11 +1367,11 @@ git merge starter/main --allow-unrelated-histories</code></pre>
 <!-- ============ CTA FINAL ============ -->
 <section class="sec" id="cta">
   <div class="container">
-    <div class="cta-final">
+    <div class="cta-final reveal">
       <div class="cta-inner">
         <h2>¿Listo para arrancar<br>con metodología?</h2>
         <p>Cloná el starter, corré el instalador, invocá al <code style="background:rgba(0,0,0,.2);padding:2px 8px;border-radius:6px;">onboarding-pm</code>. Las 3 fases te guían hasta el Plan Maestro.</p>
-        <div class="code-pill" style="max-width: 600px; margin: 24px auto;">
+        <div class="code-pill" style="max-width: 620px; margin: 24px auto;">
           <span class="prompt">$ </span>git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto<br>
           <span class="prompt">$ </span>cd mi-proyecto &amp;&amp; ./tooling/install.sh<br>
           <span class="prompt">$ </span>claude                      <span style="color:rgba(255,255,255,.5);">  # pedile: "invocá onboarding-pm"</span>
@@ -862,15 +1400,16 @@ git merge starter/main --allow-unrelated-histories</code></pre>
       <div>
         <h4>Metodología</h4>
         <a href="#metodologia">Las 3 fases</a>
-        <a href="#plan-maestro">Plan Maestro</a>
+        <a href="#timing">Qué esperar</a>
         <a href="#sistema">El sistema</a>
         <a href="#reglas">Reglas de oro</a>
       </div>
       <div>
-        <h4>Recursos</h4>
-        <a href="https://github.com/tamibot/creators-latam-starter">Repositorio</a>
-        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/INSTALL.md">Guía de instalación</a>
-        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/templates/plan-maestro.md">Template plan maestro</a>
+        <h4>Operación</h4>
+        <a href="#comandos">Comandos Claude Code</a>
+        <a href="#practicas">Mejores prácticas</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/INSTALL.md">Guía instalación</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/templates/plan-maestro.md">Plan Maestro</a>
       </div>
       <div>
         <h4>Contacto</h4>
@@ -881,10 +1420,80 @@ git merge starter/main --allow-unrelated-histories</code></pre>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Creators Latam · Lima, Perú</span>
-      <span>Starter Kit v1.3 · Metodología primero</span>
+      <span>Starter Kit v1.4 · Metodología primero</span>
     </div>
   </div>
 </footer>
+
+<script>
+  // === Scroll progress bar ===
+  (function() {
+    const bar = document.getElementById('scrollProgress');
+    function update() {
+      const h = document.documentElement;
+      const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // === Reveal on scroll (IntersectionObserver) ===
+  (function() {
+    const els = document.querySelectorAll('.reveal, .phase');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(e => e.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(el => io.observe(el));
+  })();
+
+  // === Count up animation for stats ===
+  (function() {
+    const nums = document.querySelectorAll('[data-count]');
+    if (!('IntersectionObserver' in window)) {
+      nums.forEach(n => n.textContent = n.dataset.count);
+      return;
+    }
+    const animate = (el) => {
+      const target = parseInt(el.dataset.count, 10);
+      const dur = 900;
+      const start = performance.now();
+      function frame(t) {
+        const p = Math.min(1, (t - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animate(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    nums.forEach(n => io.observe(n));
+  })();
+
+  // === Stagger the FAQ reveal a bit for nicer feel ===
+  (function() {
+    const faqs = document.querySelectorAll('.faq-item');
+    faqs.forEach((f, i) => {
+      f.style.transitionDelay = (i * 40) + 'ms';
+    });
+  })();
+</script>
 
 </body>
 </html>

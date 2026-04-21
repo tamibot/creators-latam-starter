@@ -82,7 +82,18 @@
       "Bash(zoxide:*)",
       "Bash(curl:*)",
       "Bash(wget:*)",
-      "Bash(open:*)"
+      "Bash(open:*)",
+      "Bash(xcode-select:*)",
+      "Bash(claude:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(tr:*)",
+      "Bash(diff:*)",
+      "Bash(tee:*)",
+      "Bash(date:*)",
+      "Bash(uname:*)",
+      "Bash(env:*)",
+      "Bash(printenv:*)"
     ],
     "deny": [
       "Bash(rm -rf /*)",
