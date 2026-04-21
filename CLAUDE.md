@@ -51,7 +51,7 @@ No esperes al millón. Compilar temprano es gratis; depurar errores del modelo c
 **Cero excepciones.** Si el cliente pide el Excel, está en `output/`. No se busca entre archivos internos.
 
 ### 07. Un agente, un job
-Cuando un agente hace dos cosas, hace mal las dos. Mejor 15 agentes chicos que 3 "multipropósito" confundidos. Los agentes base están en `.claude/agents/` — 10 operativos + 5 supervisores (`onboarding-pm`, `orquestador`, `project-manager`, `arquitecto`, `guardian-reglas`).
+Cuando un agente hace dos cosas, hace mal las dos. Mejor 22 agentes chicos que 3 "multipropósito" confundidos. Los agentes base están en `.claude/agents/` — 15 operativos + 7 supervisores (`kickoff-cliente`, `onboarding-pm`, `orquestador`, `project-manager`, `arquitecto`, `guardian-reglas`, `mapa-sistema`, `analizador-patrones`).
 
 ### 08. El NV nunca arranca sin confirmar
 Toda ejecución larga empieza con:
@@ -87,7 +87,7 @@ MD sucio  →  MD limpio (NV)  →  Ejecutás
 ```
 ./
 ├── .claude/settings.json  → permisos preaprobados para Claude
-├── .claude/agents/        → 15 agentes (10 operativos + 5 supervisores)
+├── .claude/agents/        → 22 agentes (10 operativos + 5 supervisores)
 ├── .claude/skills/        → 3 skills base (pdf, video, plan)
 ├── tooling/               → install.sh + docs de herramientas externas
 ├── templates/             → NV, brief, API research

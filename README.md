@@ -1,5 +1,12 @@
 # Creators Latam · Starter Kit para Proyectos con IA
 
+[![Version](https://img.shields.io/badge/version-1.5.0-ff3b77)](./CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-8b3fff)](./LICENSE)
+[![Agentes](https://img.shields.io/badge/agentes-22-ff2d8a)](./.claude/agents/README.md)
+[![Skills](https://img.shields.io/badge/skills-3-14b87a)](./.claude/skills/README.md)
+[![CI](https://github.com/tamibot/creators-latam-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/tamibot/creators-latam-starter/actions/workflows/ci.yml)
+[![Landing](https://img.shields.io/badge/landing-online-2563eb)](https://tamibot.github.io/creators-latam-starter/)
+
 > **Metodología primero, herramientas después.** Nuestro método de 3 fases (Entregable → Stack → Equipo) para que los proyectos con IA no fallen por falta de proceso. El starter es el sistema que lo ejecuta.
 
 **Creators Latam** · [creatorslatam.com](https://www.creatorslatam.com/) · +51 995 547 575
@@ -59,7 +66,7 @@ Lo guía el agente [`onboarding-pm`](./.claude/agents/onboarding-pm.md).
 
 El **sistema que ejecuta** la metodología. Cuando el Plan Maestro está firmado, el starter te da:
 
-- **15 agentes pre-configurados** (10 operativos + 5 supervisores, incluyendo el Onboarding PM que guía las 3 fases).
+- **22 agentes pre-configurados** (10 operativos + 5 supervisores, incluyendo el Onboarding PM que guía las 3 fases).
 - **3 skills fundacionales** (PDF→MD, Video/Audio→texto, Plan Paso a Paso).
 - **Templates** para Plan Maestro, NV, brief, research de APIs.
 - **`.claude/settings.json`** con permisos preaprobados (deja de autorizar cada comando).
@@ -122,21 +129,24 @@ creators-latam-starter/
 
 ---
 
-## El escuadrón de agentes (15 total)
+## El escuadrón de agentes (22 total)
 
 Vive en `.claude/agents/`. Un agente, un job.
 
-### Supervisores (coordinan y auditan · 5)
+### Supervisores (coordinan y auditan · 7)
 
 | # | Agente | Job |
 |---|---|---|
 | 15 | **Onboarding PM** ⭐ | Guía las 3 fases hasta firmar el Plan Maestro |
+| 18 | **Kickoff Cliente** | Primera reunión con cliente: minuta + brief + preview Fase 1 |
 | 13 | **Orquestador** | Con plan aprobado: descompone y delega tarea por tarea |
 | 06 | **Project Manager** | Visión estratégica: estado, plazos, prioridades |
 | 09 | **Arquitecto** | Revisa planes técnicos antes de ejecutar |
 | 14 | **Guardián de Reglas** | Audita las 10 reglas de oro pre-commit/release |
+| 19 | **Mapa Sistema** | Catálogo visual de todos los agentes/skills/integraciones |
+| 20 | **Analizador Patrones** | Modo aprendizaje entre proyectos — detecta recurrencias |
 
-### Operativos (ejecutan · 10)
+### Operativos (ejecutan · 15)
 
 | # | Agente | Job |
 |---|---|---|
@@ -150,6 +160,10 @@ Vive en `.claude/agents/`. Un agente, un job.
 | 10 | Versionador | Reemplaza > duplica |
 | 11 | Purgador | Barre lo muerto |
 | 12 | Diagramador Mermaid | Diagramas validados, 0 errores de sintaxis |
+| 16 | Test-Debug Loop | Ciclo prueba → error → fix → re-prueba con criterio de corte |
+| 17 | Integrador Herramientas | Conecta APIs/MCP/n8n priorizando API > SDK > MCP > webhook |
+| 21 | Comentarios Adicionales | Recolector de feedback estructurado post-fase |
+| 22 | Archivero | Curador activo: orquesta versionador+purgador, detecta misubicaciones |
 
 Durante la Fase 3 del Plan Maestro, el `onboarding-pm` puede proponer agentes custom adicionales.
 

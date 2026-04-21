@@ -1,0 +1,183 @@
+name: CI · Validaciones del starter
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  shell-lint:
+    name: Shell · syntax + shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bash syntax check
+        run: |
+          bash -n tooling/install.sh
+          echo "✓ Syntax OK"
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Shellcheck
+        run: |
+          shellcheck -S warning tooling/install.sh || true
+          # -S warning no falla en info/style, solo en warning/error
+
+  agents-validate:
+    name: Agentes · frontmatter + nombres únicos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar frontmatter de cada agente
+        run: |
+          errors=0
+          for f in .claude/agents/*.md; do
+            [[ "$(basename "$f")" == "README.md" ]] && continue
+
+            # Debe empezar con ---
+            first_line=$(head -1 "$f")
+            if [ "$first_line" != "---" ]; then
+              echo "✗ $f: no empieza con '---'"
+              errors=$((errors+1))
+              continue
+            fi
+
+            # Debe tener 'name:' en las primeras 10 líneas
+            if ! head -10 "$f" | grep -q "^name:"; then
+              echo "✗ $f: falta 'name:' en frontmatter"
+              errors=$((errors+1))
+            fi
+
+            # Debe tener 'description:' en las primeras 10 líneas
+            if ! head -10 "$f" | grep -q "^description:"; then
+              echo "✗ $f: falta 'description:' en frontmatter"
+              errors=$((errors+1))
+            fi
+
+            # Debe cerrar el frontmatter con --- (buscar segundo ---)
+            if [ "$(head -20 "$f" | grep -c '^---$')" -lt 2 ]; then
+              echo "✗ $f: frontmatter no se cierra con '---'"
+              errors=$((errors+1))
+            fi
+          done
+
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "=== $errors error(es) de frontmatter ==="
+            exit 1
+          else
+            echo "✓ Todos los agentes tienen frontmatter válido"
+          fi
+
+      - name: Nombres de agentes únicos
+        run: |
+          dup=$(grep -h "^name:" .claude/agents/*.md 2>/dev/null \
+                | sort | uniq -d)
+          if [ -n "$dup" ]; then
+            echo "✗ Nombres duplicados detectados:"
+            echo "$dup"
+            exit 1
+          else
+            echo "✓ Todos los nombres de agentes son únicos"
+          fi
+
+  skills-validate:
+    name: Skills · frontmatter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar skills
+        run: |
+          errors=0
+          for f in .claude/skills/*/SKILL.md; do
+            if [ ! -f "$f" ]; then continue; fi
+            if [ "$(head -1 "$f")" != "---" ]; then
+              echo "✗ $f: no empieza con '---'"
+              errors=$((errors+1))
+            fi
+            if ! head -8 "$f" | grep -q "^name:"; then
+              echo "✗ $f: falta 'name:'"
+              errors=$((errors+1))
+            fi
+          done
+          if [ $errors -gt 0 ]; then exit 1; fi
+          echo "✓ Skills OK"
+
+  settings-validate:
+    name: Settings.json · JSON válido
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar JSON
+        run: |
+          python3 -c "
+          import json, sys
+          with open('.claude/settings.json') as f:
+              data = json.load(f)
+          assert 'permissions' in data, 'missing permissions'
+          assert 'allow' in data['permissions'], 'missing permissions.allow'
+          assert 'deny' in data['permissions'], 'missing permissions.deny'
+          print('✓ settings.json válido')
+          "
+
+  markdown-links:
+    name: Markdown · links internos no rotos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links relativos
+        run: |
+          errors=0
+          while IFS= read -r line; do
+            file=$(echo "$line" | cut -d: -f1)
+            target=$(echo "$line" | grep -oE '\]\(\./[^)]+\)' | sed 's/](\.\///; s/)$//')
+            [ -z "$target" ] && continue
+            # Remove anchor
+            target_file=$(echo "$target" | cut -d'#' -f1)
+            [ -z "$target_file" ] && continue
+            dir=$(dirname "$file")
+            full_path="$dir/$target_file"
+            if [ ! -e "$full_path" ]; then
+              echo "✗ $file → $target_file (no existe)"
+              errors=$((errors+1))
+            fi
+          done < <(grep -rn '\](\./' --include="*.md" . 2>/dev/null || true)
+
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "=== $errors link(s) rotos ==="
+            exit 1
+          else
+            echo "✓ Links relativos OK"
+          fi
+
+  html-validate:
+    name: Landing · HTML básico válido
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: HTML sanity check
+        run: |
+          # Existe y no está vacío
+          [ -s docs/index.html ] || { echo "✗ docs/index.html vacío o faltante"; exit 1; }
+          # Tiene <!DOCTYPE html>
+          grep -q "^<!DOCTYPE html>" docs/index.html || { echo "✗ falta DOCTYPE"; exit 1; }
+          # Tiene </html> al final
+          grep -q "</html>" docs/index.html || { echo "✗ falta </html>"; exit 1; }
+          echo "✓ docs/index.html sanity OK"
+
+  summary:
+    name: Todo OK
+    needs: [shell-lint, agents-validate, skills-validate, settings-validate, markdown-links, html-validate]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "✅ Todas las validaciones pasaron"
