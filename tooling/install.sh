@@ -268,7 +268,7 @@ echo "    1. Editá ${B}.env${R} con tus credenciales reales."
 echo "    2. Si instalaste gh → ${B}gh auth login${R}"
 echo "    3. Si instalaste nvm → agregalo a tu shell rc y ${B}nvm install --lts${R}"
 echo "    4. Abrí tu IDE: ${B}claude${R} (o ${B}cursor .${R})"
-echo "    5. Los 12 agentes y 3 skills están listos en .claude/"
+echo "    5. Los 14 agentes y 3 skills están listos en .claude/"
 echo
 info "Dudas → tooling/README.md o https://github.com/tamibot/creators-latam-starter"
 echo

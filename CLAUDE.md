@@ -36,7 +36,7 @@ Carpeta limpia = contexto limpio. El Purgador entra cada cierto tiempo. El ruido
 **Cero excepciones.** Si el cliente pide el Excel, está en `output/`. No se busca entre archivos internos.
 
 ### 07. Un agente, un job
-Cuando un agente hace dos cosas, hace mal las dos. Mejor 12 agentes chicos que 3 "multipropósito" confundidos. Los agentes base están en `.claude/agents/`.
+Cuando un agente hace dos cosas, hace mal las dos. Mejor 14 agentes chicos que 3 "multipropósito" confundidos. Los agentes base están en `.claude/agents/` — 10 operativos + 4 supervisores (`project-manager`, `arquitecto`, `orquestador`, `guardian-reglas`).
 
 ### 08. El NV nunca arranca sin confirmar
 Toda ejecución larga empieza con:
@@ -69,7 +69,7 @@ MD sucio  →  MD limpio (NV)  →  Ejecutás
 ```
 ./
 ├── .claude/settings.json  → permisos preaprobados para Claude
-├── .claude/agents/        → 12 agentes especializados
+├── .claude/agents/        → 14 agentes (10 operativos + 4 supervisores)
 ├── .claude/skills/        → 3 skills base (pdf, video, plan)
 ├── tooling/               → install.sh + docs de herramientas externas
 ├── templates/             → NV, brief, API research

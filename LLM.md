@@ -9,7 +9,7 @@
 Este es un proyecto basado en el **Starter Kit de Creators Latam**. La estructura y reglas son estándar entre todos nuestros proyectos:
 
 - **`CLAUDE.md`** — las 10 reglas de oro. Son obligatorias.
-- **`.claude/agents/`** — 11 agentes especializados. Un agente, un job.
+- **`.claude/agents/`** — 14 agentes especializados (10 operativos + 4 supervisores). Un agente, un job.
 - **`.claude/skills/`** — habilidades base (PDF→MD, Plan paso a paso).
 - **`templates/`** — plantillas para el NV, brief del cliente y research de APIs.
 - **`output/`** — TODO entregable final va acá. Sin excepciones.
@@ -22,9 +22,11 @@ Este es un proyecto basado en el **Starter Kit de Creators Latam**. La estructur
 
 1. **Leé `CLAUDE.md`** — las reglas no se negocian.
 2. **Preguntá antes de ejecutar.** El NV template está en `templates/nv-prompt.md`.
-3. **Planificá antes de paralelizar.** Usá el skill `plan-paso-a-paso`.
-4. **Convertí PDFs a MD** con el skill `pdf-a-markdown` antes de leerlos.
-5. **Delegá a agentes especializados** cuando la tarea lo justifique.
+3. **Para tareas complejas, invocá al `orquestador`** — él decide a quién delegar.
+4. **Antes de commits grandes, invocá al `guardian-reglas`** — audita compliance.
+5. **Planificá antes de paralelizar.** Usá el skill `plan-paso-a-paso`.
+6. **Convertí PDFs a MD** con el skill `pdf-a-markdown` antes de leerlos.
+7. **Videos/audio → texto** con el skill `video-a-texto`.
 
 ---
 

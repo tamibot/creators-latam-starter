@@ -10,7 +10,7 @@
 
 Es el **repositorio base** que usamos internamente en Creators Latam para que cualquier proyecto nuevo arranque con:
 
-- **12 agentes pre-configurados** (Documentador, GitHub Keeper, Tester, Arquitecto, Diagramador Mermaid…)
+- **14 agentes pre-configurados** (10 operativos + 4 supervisores: Orquestador, Guardián de Reglas, Project Manager, Arquitecto)
 - **3 skills fundacionales** (PDF/Docs → MD, Video/Audio → texto, Plan Paso a Paso)
 - **Arquitectura de carpetas estándar** (`output/`, `data_original/`, `documentation/`…)
 - **Templates** del "NV" (prompt de arranque con validación), brief de cliente y research de APIs
@@ -37,7 +37,9 @@ cp .env.example .env    # editá con tus credenciales
 claude                  # Claude Code detecta todo solo
 ```
 
-En Claude Code, al abrir el repo vas a ver los 12 agentes disponibles con `/agents` y los 3 skills con `/skills`.
+📖 **Guía completa paso a paso:** [`INSTALL.md`](./INSTALL.md)
+
+En Claude Code, al abrir el repo vas a ver los 14 agentes disponibles con `/agents` y los 3 skills con `/skills`.
 
 ---
 
@@ -51,7 +53,7 @@ creators-latam-starter/
 ├── .env.example          → plantilla de credenciales
 ├── .claude/
 │   ├── settings.json     → permisos preaprobados para Claude Code
-│   ├── agents/           → los 12 agentes
+│   ├── agents/           → los 14 agentes
 │   └── skills/           → pdf-a-markdown, video-a-texto, plan-paso-a-paso
 ├── tooling/
 │   ├── install.sh        → instalador interactivo de herramientas
@@ -84,8 +86,19 @@ Vive en `.claude/agents/`. Un agente, un job.
 | 10 | Versionador | Reemplaza > duplica. Usa git para historial |
 | 11 | Purgador | Barre lo que ya no se usa |
 | 12 | Diagramador Mermaid | Diagramas validados, 0 errores de sintaxis |
+| 13 | Orquestador | Decide a quién delegar cada sub-tarea, y en qué orden |
+| 14 | Guardián de Reglas | Audita que el proyecto cumpla las 10 reglas de oro |
 
 Detalles completos en [`.claude/agents/`](./.claude/agents/).
+
+### Supervisión del escuadrón
+
+Los agentes 06, 09, 13 y 14 son **supervisores** — no ejecutan tareas, coordinan y auditan:
+
+- **Project Manager** (06) — visión estratégica (plazos, estado, prioridades semanales).
+- **Arquitecto** (09) — revisa planes *antes* de ejecutar. Filtro de calidad anticipado.
+- **Orquestador** (13) — delegación táctica: "para esta tarea específica, ¿quién la hace?"
+- **Guardián de Reglas** (14) — auditoría pre-commit/release: verifica las 10 reglas de oro.
 
 ---
 

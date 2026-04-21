@@ -766,7 +766,7 @@
     <span class="eyebrow"><span class="eyebrow-dot"></span> STARTER KIT · V1.0 · 2026</span>
     <h1 class="display">Arranca proyectos con <span class="grad">IA en minutos</span>, no en días.</h1>
     <p class="lead">
-      Nuestro <strong>repositorio base</strong> con 12 agentes, 3 skills, permisos preaprobados y un instalador que te deja todas las herramientas listas. <strong>Clonás, corrés un script, abrís tu IDE</strong> — y ya tenés un equipo de IA trabajando.
+      Nuestro <strong>repositorio base</strong> con 14 agentes, 3 skills, permisos preaprobados y un instalador que te deja todas las herramientas listas. <strong>Clonás, corrés un script, abrís tu IDE</strong> — y ya tenés un equipo de IA trabajando.
     </p>
 
     <div class="cta-row">
@@ -775,7 +775,7 @@
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="num">12</div><div class="lbl">Agentes base</div></div>
+      <div class="stat"><div class="num">14</div><div class="lbl">Agentes base</div></div>
       <div class="stat"><div class="num">3</div><div class="lbl">Skills fundacionales</div></div>
       <div class="stat"><div class="num">10</div><div class="lbl">Reglas de oro</div></div>
       <div class="stat"><div class="num">1<span class="suffix"> comando</span></div><div class="lbl">Instala todo</div></div>
@@ -901,7 +901,7 @@
     │   ├── CLAUDE.md           <span class="note"># reglas de oro que el modelo lee auto</span>
     │   ├── LLM.md              <span class="note"># manual de bienvenida para agentes</span>
     │   ├── <span class="key">.env</span>                <span class="note"># credenciales locales · NUNCA subir</span>
-    │   ├── <span class="dir">📁 .claude/agents/</span>  <span class="note"># 12 agentes preconfigurados</span>
+    │   ├── <span class="dir">📁 .claude/agents/</span>  <span class="note"># 14 agentes preconfigurados</span>
     │   ├── <span class="dir">📁 .claude/skills/</span>  <span class="note"># PDF→MD, Video→texto, Plan paso a paso</span>
     │   ├── <span class="key">.claude/settings.json</span>   <span class="note"># permisos preaprobados</span>
     │   ├── <span class="dir">📁 tooling/</span>          <span class="note"># install.sh + docs de herramientas</span>
@@ -931,9 +931,9 @@
 <section class="sec" id="agentes">
   <div class="container">
     <span class="sec-eyebrow">05 · El escuadrón</span>
-    <h2 class="sec-title">12 agentes. <span class="grad">Un agente, un job.</span></h2>
+    <h2 class="sec-title">14 agentes. <span class="grad">Un agente, un job.</span></h2>
     <p class="sec-sub">
-      Viven en <code class="inline">.claude/agents/</code>. Claude Code los detecta automáticamente al abrir el repo. Cuando un agente hace dos cosas, hace mal las dos — mejor once chicos y claros que tres "multipropósito" confundidos.
+      Viven en <code class="inline">.claude/agents/</code>. Claude Code los detecta automáticamente al abrir el repo. Cuando un agente hace dos cosas, hace mal las dos — mejor catorce chicos y claros que tres "multipropósito" confundidos.
     </p>
 
     <div class="agents">
@@ -949,6 +949,19 @@
       <div class="agent"><div class="agent-id">AG · 10</div><div class="agent-name">Versionador</div><div class="agent-role">Supervisa versiones. Regla dura: <strong>reemplazar antes que duplicar</strong>.</div></div>
       <div class="agent"><div class="agent-id">AG · 11</div><div class="agent-name">Purgador</div><div class="agent-role">Barre lo que ya no se usa. Carpeta limpia = contexto limpio.</div></div>
       <div class="agent"><div class="agent-id">AG · 12</div><div class="agent-name">Diagramador Mermaid</div><div class="agent-role">Diagramas validados, 0 errores de sintaxis. Flowcharts, ER, secuencia, gantt y más.</div></div>
+      <div class="agent"><div class="agent-id">AG · 13</div><div class="agent-name">Orquestador <span style="display:inline-block;padding:2px 8px;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border-radius:999px;font-size:10px;font-weight:700;margin-left:6px;letter-spacing:.05em;text-transform:uppercase;">Supervisor</span></div><div class="agent-role">Coordinador táctico. Descompone tareas, decide a qué agente delegar y en qué orden. Supervisa handoffs.</div></div>
+      <div class="agent"><div class="agent-id">AG · 14</div><div class="agent-name">Guardián de Reglas <span style="display:inline-block;padding:2px 8px;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border-radius:999px;font-size:10px;font-weight:700;margin-left:6px;letter-spacing:.05em;text-transform:uppercase;">Supervisor</span></div><div class="agent-role">Audita que se cumplan las 10 reglas de oro antes de commits, releases o entregables. Reporta, no arregla.</div></div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 28px 32px; background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06)); border: 1px solid var(--line); border-radius: 16px;">
+      <h3 style="font-size: 18px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.01em;">Cómo se organiza el escuadrón</h3>
+      <p style="margin: 0 0 16px; color: var(--ink-soft); font-size: 15px;">10 agentes <strong>operativos</strong> ejecutan el trabajo. 4 agentes <strong>supervisores</strong> coordinan, revisan y auditan.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 14px;">
+        <div><strong style="color:var(--pink);">Project Manager</strong><br><span class="muted">Estado general, plazos, prioridades.</span></div>
+        <div><strong style="color:var(--pink);">Arquitecto</strong><br><span class="muted">Revisa planes antes de ejecutar.</span></div>
+        <div><strong style="color:var(--pink);">Orquestador</strong><br><span class="muted">Decide a quién delegar cada sub-tarea.</span></div>
+        <div><strong style="color:var(--pink);">Guardián</strong><br><span class="muted">Audita las 10 reglas pre-commit.</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1029,13 +1042,22 @@
 
 <span class="note"># 3. Rellená credenciales y abrí tu IDE</span>
 <span class="key">$</span> cp .env.example .env
-<span class="key">$</span> claude                  <span class="note"># los 12 agentes + 3 skills ya están listos</span>
+<span class="key">$</span> claude                  <span class="note"># los 14 agentes + 3 skills ya están listos</span>
 </pre>
     </div>
 
     <p style="max-width: 62ch; margin-top: 32px; font-size: 15px; color: var(--ink-soft);">
       Windows: pediles a Claude/Cursor que aplique lo mismo usando <code class="inline">winget</code> o <code class="inline">scoop</code> en vez de <code class="inline">brew</code>. Linux: <code class="inline">apt</code> o <code class="inline">dnf</code>.
     </p>
+
+    <div style="margin-top: 48px; padding: 32px 36px; background: var(--ink); color: white; border-radius: 20px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; box-shadow: var(--shadow-lg);">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #FF8FB5; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px;">Guía detallada</div>
+        <h3 style="font-size: 22px; font-weight: 700; margin: 0 0 6px; color: white;">¿Primera vez? Paso a paso en INSTALL.md</h3>
+        <p style="margin: 0; color: rgba(255,255,255,.7); font-size: 15px;">Desde Mac recién desempaquetada hasta Claude Code corriendo con los 14 agentes. 8 pasos, con troubleshooting y links a todas las docs oficiales.</p>
+      </div>
+      <a href="https://github.com/tamibot/creators-latam-starter/blob/main/INSTALL.md" style="background: white; color: var(--ink); padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: 14px; white-space: nowrap; box-shadow: 0 10px 24px -8px rgba(0,0,0,.3);">Ver INSTALL.md →</a>
+    </div>
   </div>
 </section>
 
@@ -1094,7 +1116,7 @@
       <div class="principle"><div class="principle-num">04</div><div><h3>Reemplazar &gt; duplicar.</h3><p>Nada de <code class="inline">plan_v2_final_final.md</code>. Git guarda el historial.</p></div></div>
       <div class="principle"><div class="principle-num">05</div><div><h3>Purgá lo que no se usa.</h3><p>Carpeta limpia = contexto limpio. El ruido en la carpeta es ruido en el modelo.</p></div></div>
       <div class="principle"><div class="principle-num">06</div><div><h3>Todo lo final va a <code class="inline">output/</code>.</h3><p>Cero excepciones. No gastás tiempo buscando entre archivos internos.</p></div></div>
-      <div class="principle"><div class="principle-num">07</div><div><h3>Un agente, un job.</h3><p>Cuando un agente hace dos cosas, hace mal las dos. Doce chicos &gt; tres confundidos.</p></div></div>
+      <div class="principle"><div class="principle-num">07</div><div><h3>Un agente, un job.</h3><p>Cuando un agente hace dos cosas, hace mal las dos. Catorce chicos &gt; tres confundidos.</p></div></div>
       <div class="principle"><div class="principle-num">08</div><div><h3>El NV nunca arranca sin confirmar.</h3><p>"Decime dudas antes de iniciar" es fijo. Te ahorra 40 min de ejecución errada.</p></div></div>
       <div class="principle"><div class="principle-num">09</div><div><h3>Plan paso a paso &gt; todo en paralelo.</h3><p>Paralelización mal hecha colapsa la máquina y quema tokens.</p></div></div>
       <div class="principle"><div class="principle-num">10</div><div><h3>Si no avanza, no es el modelo.</h3><p>Es el prompt, el contexto o el plan. Cambiar de LLM es la última carta.</p></div></div>
