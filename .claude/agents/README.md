@@ -1,6 +1,6 @@
 # Agentes · Creators Latam Starter
 
-Los **11 agentes base** que montamos en todo proyecto. Un agente, un job.
+Los **12 agentes base** que montamos en todo proyecto. Un agente, un job.
 
 Claude Code los detecta automáticamente desde esta carpeta. Invocalos con `/agents` o dejá que Claude delegue por sí mismo cuando la descripción del agente coincida con la tarea.
 
@@ -17,6 +17,7 @@ Claude Code los detecta automáticamente desde esta carpeta. Invocalos con `/age
 | 09 | [`arquitecto`](arquitecto.md) | Revisa planes antes de ejecutar |
 | 10 | [`versionador`](versionador.md) | Reemplaza > duplica. Confía en git |
 | 11 | [`purgador`](purgador.md) | Barre lo muerto. Carpeta limpia = contexto limpio |
+| 12 | [`diagramador-mermaid`](diagramador-mermaid.md) | Diagramas Mermaid validados, 0 errores de sintaxis |
 
 ## Cómo agregar un agente nuevo del proyecto
 

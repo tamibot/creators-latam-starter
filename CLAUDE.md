@@ -36,7 +36,7 @@ Carpeta limpia = contexto limpio. El Purgador entra cada cierto tiempo. El ruido
 **Cero excepciones.** Si el cliente pide el Excel, está en `output/`. No se busca entre archivos internos.
 
 ### 07. Un agente, un job
-Cuando un agente hace dos cosas, hace mal las dos. Mejor 11 agentes chicos que 3 "multipropósito" confundidos. Los agentes base están en `.claude/agents/`.
+Cuando un agente hace dos cosas, hace mal las dos. Mejor 12 agentes chicos que 3 "multipropósito" confundidos. Los agentes base están en `.claude/agents/`.
 
 ### 08. El NV nunca arranca sin confirmar
 Toda ejecución larga empieza con:
@@ -68,17 +68,21 @@ MD sucio  →  MD limpio (NV)  →  Ejecutás
 
 ```
 ./
-├── .claude/agents/     → agentes de Claude Code
-├── .claude/skills/     → skills base
-├── templates/          → NV, brief, API research
-├── workflows/          → flujos específicos del proyecto
-├── documentation/      → lo que pasa el cliente
-├── data_original/      → PDFs, raw uploads (no tocar)
-├── output/             → entregables finales
-└── .env                → credenciales locales (NUNCA subir)
+├── .claude/settings.json  → permisos preaprobados para Claude
+├── .claude/agents/        → 12 agentes especializados
+├── .claude/skills/        → 3 skills base (pdf, video, plan)
+├── tooling/               → install.sh + docs de herramientas externas
+├── templates/             → NV, brief, API research
+├── workflows/             → flujos específicos del proyecto
+├── documentation/         → lo que pasa el cliente (incluye diagramas)
+├── data_original/         → PDFs, raw uploads (no tocar)
+├── output/                → entregables finales
+└── .env                   → credenciales locales (NUNCA subir)
 ```
 
 - Todo PDF que entra a `data_original/` se convierte a MD antes de usarse (skill `pdf-a-markdown`).
+- Todo video/audio pasa por skill `video-a-texto` antes de análisis.
+- Los diagramas van a `documentation/diagramas/` y los hace el agente `diagramador-mermaid`.
 - Nada sensible se commitea. `.env` está en `.gitignore`.
 
 ---

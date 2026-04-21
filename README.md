@@ -10,11 +10,13 @@
 
 Es el **repositorio base** que usamos internamente en Creators Latam para que cualquier proyecto nuevo arranque con:
 
-- **11 agentes pre-configurados** (Documentador, GitHub Keeper, Tester, Arquitecto…)
-- **2 skills fundacionales** (PDF → Markdown, Plan Paso a Paso)
+- **12 agentes pre-configurados** (Documentador, GitHub Keeper, Tester, Arquitecto, Diagramador Mermaid…)
+- **3 skills fundacionales** (PDF/Docs → MD, Video/Audio → texto, Plan Paso a Paso)
 - **Arquitectura de carpetas estándar** (`output/`, `data_original/`, `documentation/`…)
 - **Templates** del "NV" (prompt de arranque con validación), brief de cliente y research de APIs
 - **Reglas de oro** ya escritas en `CLAUDE.md` para que el modelo las siga desde el primer mensaje
+- **Permisos preaprobados** en `.claude/settings.json` para no estar autorizando cada comando
+- **Script de instalación** (`tooling/install.sh`) que te deja todas las herramientas listas
 
 Si trabajás con LLMs en serio, este repo te ahorra ~2 horas en cada proyecto nuevo.
 
@@ -25,20 +27,17 @@ Si trabajás con LLMs en serio, este repo te ahorra ~2 horas en cada proyecto nu
 ```bash
 # 1. Clonar como base de un proyecto nuevo
 git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto
-cd mi-proyecto
-rm -rf .git && git init
+cd mi-proyecto && rm -rf .git && git init
 
-# 2. Copiar variables de entorno
-cp .env.example .env
-# Editar .env con tus credenciales reales (NUNCA se sube al repo)
+# 2. Instalar herramientas (interactivo — te pregunta qué querés)
+./tooling/install.sh
 
-# 3. Abrir con tu IDE favorito
-claude       # Claude Code detecta .claude/agents y .claude/skills automáticamente
-# o
-cursor .
+# 3. Copiar variables de entorno y abrir tu IDE
+cp .env.example .env    # editá con tus credenciales
+claude                  # Claude Code detecta todo solo
 ```
 
-En Claude Code, al abrir el repo vas a ver los 11 agentes disponibles con `/agents` y podés invocarlos directamente.
+En Claude Code, al abrir el repo vas a ver los 12 agentes disponibles con `/agents` y los 3 skills con `/skills`.
 
 ---
 
@@ -51,13 +50,18 @@ creators-latam-starter/
 ├── LLM.md                → manual de bienvenida para cualquier LLM
 ├── .env.example          → plantilla de credenciales
 ├── .claude/
-│   ├── agents/           → los 11 agentes de Claude Code
-│   └── skills/           → PDF→MD, Plan Paso a Paso
+│   ├── settings.json     → permisos preaprobados para Claude Code
+│   ├── agents/           → los 12 agentes
+│   └── skills/           → pdf-a-markdown, video-a-texto, plan-paso-a-paso
+├── tooling/
+│   ├── install.sh        → instalador interactivo de herramientas
+│   └── README.md         → qué hace cada herramienta, qué instala
 ├── templates/            → NV prompt, brief cliente, research API
 ├── workflows/            → flujos específicos del proyecto
 ├── documentation/        → todo lo que te pasa el cliente
 ├── data_original/        → PDFs, screenshots, raw data
-└── output/               → los entregables finales (lo único que el cliente ve)
+├── output/               → los entregables finales (lo único que el cliente ve)
+└── docs/                 → landing (GitHub Pages)
 ```
 
 ---
@@ -79,6 +83,7 @@ Vive en `.claude/agents/`. Un agente, un job.
 | 09 | Arquitecto | Revisa el plan antes de ejecutar |
 | 10 | Versionador | Reemplaza > duplica. Usa git para historial |
 | 11 | Purgador | Barre lo que ya no se usa |
+| 12 | Diagramador Mermaid | Diagramas validados, 0 errores de sintaxis |
 
 Detalles completos en [`.claude/agents/`](./.claude/agents/).
 
@@ -88,8 +93,25 @@ Detalles completos en [`.claude/agents/`](./.claude/agents/).
 
 Viven en `.claude/skills/`.
 
-- **pdf-a-markdown** → convierte PDFs en MD porque los modelos leen MD 10× más rápido.
-- **plan-paso-a-paso** → obliga al sistema a pensar antes de paralelizar.
+- **`pdf-a-markdown`** → convierte PDFs/DOCX/XLSX en MD con marker o markitdown.
+- **`video-a-texto`** → YouTube/TikTok/archivos locales a texto vía Gemini, yt-dlp o whisper.
+- **`plan-paso-a-paso`** → obliga al sistema a pensar antes de paralelizar.
+
+---
+
+## Herramientas que instala `install.sh`
+
+Detalle completo en [`tooling/README.md`](./tooling/README.md).
+
+| Categoría | Qué se instala |
+|---|---|
+| **Prerrequisitos** | Homebrew, git, gh, Python 3.12, uv, nvm+Node LTS, ffmpeg, Docker Desktop |
+| **Documentos** | `marker-pdf`, `markitdown` |
+| **Video/Audio** | `yt-dlp`, `whisper.cpp`, SDK `google-genai` |
+| **Terminal** | `ripgrep`, `fd`, `bat`, `fzf`, `jq`, `delta`, `glow`, `zoxide`, `tree` |
+| **Diagramas** | `@mermaid-js/mermaid-cli` (on-demand vía npx) |
+
+El script es **interactivo**: pregunta antes de cada bloque. Si ya tenés algo, lo saltea.
 
 ---
 
@@ -118,6 +140,45 @@ Las reglas completas están en [`CLAUDE.md`](./CLAUDE.md).
 
 ---
 
+## ❓ Preguntas frecuentes
+
+### ¿Esto corre en Windows?
+El script `tooling/install.sh` asume macOS. **Para Windows**, pedile a Claude/Cursor que aplique lo mismo usando `winget` o `scoop` en lugar de `brew`. Los paquetes Python/Node/Docker tienen instaladores nativos. En Linux, reemplazá `brew` por `apt`/`dnf`.
+
+### ¿Necesito todas las herramientas?
+No. El instalador es **interactivo**: te pregunta bloque por bloque. Los prerrequisitos sí los recomendamos todos. El resto depende del proyecto (si no vas a procesar video, saltealo).
+
+### ¿Por qué viene Gemini y no otros modelos?
+El skill `video-a-texto` aprovecha que **Gemini acepta video como input directo** (hasta ~1h) — algo que Claude y GPT-4 todavía no ofrecen de forma nativa tan simple. Conseguís el token gratis en [aistudio.google.com/apikey](https://aistudio.google.com/apikey). Para el resto de tareas, usá el LLM que prefieras.
+
+### ¿Qué hace `.claude/settings.json`?
+Define qué comandos puede ejecutar Claude Code sin pedirte autorización cada vez. Pre-aprobamos los seguros (`git`, `brew`, `pip`, `npm`, etc.) y **bloqueamos** los peligrosos (`rm -rf /`, `git push --force`, lectura de `.env`). Si querés ser más estricto, editá ese archivo.
+
+### ¿Es seguro dar tantos permisos preaprobados?
+El `.claude/settings.json` tiene una lista blanca (lo que se permite) y una **lista negra crítica** (lo que nunca se permite, como `rm -rf`, force-push o leer `.env`). Igual el agente te pide confirmación para operaciones destructivas o que afectan repos remotos.
+
+### ¿Puedo agregar mis propios agentes?
+Sí. Creá un `.md` en `.claude/agents/` con el frontmatter estándar (ver cualquier agente existente). Claude Code lo detecta al reiniciar.
+
+### ¿Cómo actualizo el starter a una versión más nueva?
+```bash
+git remote add starter https://github.com/tamibot/creators-latam-starter.git
+git fetch starter
+git merge starter/main --allow-unrelated-histories
+# Resolver conflictos si los hay (el Versionador te ayuda)
+```
+
+### ¿Por qué no hay herramienta de web scraping?
+La sacamos a propósito para mantener el starter liviano. Si la necesitás para un proyecto específico, agregala en `tooling/` del proyecto y documentala.
+
+### ¿Qué diferencia tiene con los starters de Vercel/Next?
+Aquellos son templates de código. Éste es un **starter de proceso**: reglas, agentes, skills, estructura. Se monta **sobre** cualquier stack técnico.
+
+### Me rompió algo el instalador, ¿qué hago?
+El script nunca borra nada y saltea lo que ya tenés. Si algo falló, revisá el output — te dice qué paquete específico no pudo instalar y probablemente tengas que correrlo manualmente (`brew install <pkg>`) para ver el error real.
+
+---
+
 ## Contacto
 
 ¿Querés que montemos el sistema completo para tu empresa? Automatizamos gestión de clientes con ChatBots con IA + CRM, 24/7.
@@ -127,4 +188,4 @@ Las reglas completas están en [`CLAUDE.md`](./CLAUDE.md).
 
 ---
 
-**Creators Latam** · Documento vivo · v1.0
+**Creators Latam** · Documento vivo · v1.1
