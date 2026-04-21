@@ -6,6 +6,44 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/) · sigue [SemV
 
 ---
 
+## [1.6.0] · 2026-04-21
+
+### Added · agentes de ejecución, seguridad y handoff
+- **+5 agentes** (27 totales):
+  - `status-dashboard` (AG 23) — foto visual del estado actual del proyecto con Gantt de progreso.
+  - `excel-builder` (AG 24) — genera .xlsx profesionales con 3 hojas mínimas (Resumen / Datos / Info), formato de marca, filtros, gráficos.
+  - `cost-tracker` (AG 25) — estimación pre-firma (Fase 2) y monitoreo mensual de costos API/cloud.
+  - `handoff-cliente` (AG 26) — empaquetado final al cliente con checklist obligatorio + template de handoff.
+  - `security-auditor` (AG 27) — escanea secrets, dependencias con CVE, permisos, webhooks sin HMAC, OWASP top 10.
+
+### Added · tooling scripts
+- `tooling/doctor.sh` — diagnóstico del proyecto. Checkea herramientas, frontmatter de agentes, permisos de `.env`, estructura canónica, gitleaks. Modo `--fix` para correcciones seguras.
+- `tooling/validate-plan.sh` — chequea que el Plan Maestro tenga las 3 fases firmadas por cliente + Creators Latam. Bloquea ejecución si no.
+- `tooling/migrate.sh` — actualiza tu proyecto con la última versión del starter vía `git merge`. Dry-run por defecto, `--apply` para ejecutar.
+- `tooling/install-gitleaks-hook.sh` — instala pre-commit hook con gitleaks para bloquear commits con secrets.
+
+### Added · skill
+- `plan-maestro` — skill scaffold generator para crear `documentation/plan-maestro.md` al arranque del proyecto.
+
+### Added · template
+- `templates/handoff-final.md` — template del paquete final al cliente (10 secciones firmables).
+
+### Added · landing
+- Flujo de 4 pasos destacados (Entregable → Stack → Equipo → Plan) con animación de rotación activa.
+- Visualización gráfica de los 27 agentes con **emoji por agente** + skills asociados.
+- Plan Maestro visualizado como documento con checklist de firmas.
+- Sección "Colaborativo" destacando trabajo en equipo via GitHub.
+- Tip sobre `Cmd+Shift+V` / `Ctrl+Shift+V` para ver Markdown renderizado en VS Code / Cursor.
+- CTA simplificado con 3 comandos visibles.
+- Nav simplificado y más compacto.
+
+### Changed
+- Total agentes: 22 → 27 (18 operativos + 9 supervisores).
+- Total skills: 3 → 4 (agregado `plan-maestro`).
+- Landing más visual, menos texto. Emojis por agente. Animaciones más sutiles.
+
+---
+
 ## [1.5.0] · 2026-04-21
 
 ### Added

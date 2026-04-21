@@ -417,6 +417,35 @@ hr
 echo
 
 # ============================================================
+# BLOQUE 4.5 · Security (gitleaks + pre-commit hook)
+# ============================================================
+say "[4.5/5] Seguridad (gitleaks + pre-commit hook)"
+echo
+
+if has gitleaks; then
+  ok "gitleaks ya instalado"
+else
+  if confirm "¿Instalar gitleaks (detecta secrets en commits)?" y; then
+    install_brew_if_missing gitleaks && INSTALLED_NOW+=("gitleaks")
+  fi
+fi
+
+if has gitleaks && [ -d .git ]; then
+  if [ -f .git/hooks/pre-commit ] && grep -q gitleaks .git/hooks/pre-commit 2>/dev/null; then
+    ok "pre-commit hook con gitleaks ya activo"
+  else
+    if confirm "¿Instalar pre-commit hook de gitleaks?" y; then
+      if [ -x tooling/install-gitleaks-hook.sh ]; then
+        ./tooling/install-gitleaks-hook.sh && INSTALLED_NOW+=("gitleaks-hook")
+      fi
+    fi
+  fi
+fi
+
+hr
+echo
+
+# ============================================================
 # BLOQUE 5 · Entorno del proyecto
 # ============================================================
 say "[5/5] Entorno del proyecto"

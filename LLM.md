@@ -9,7 +9,7 @@
 Este es un proyecto basado en el **Starter Kit de Creators Latam**. La estructura y reglas son estándar entre todos nuestros proyectos:
 
 - **`CLAUDE.md`** — las 10 reglas de oro. Son obligatorias.
-- **`.claude/agents/`** — 22 agentes especializados (15 operativos + 7 supervisores). Un agente, un job.
+- **`.claude/agents/`** — 27 agentes especializados (18 operativos + 9 supervisores). Un agente, un job.
   - Primera reunión con cliente: `kickoff-cliente`
   - Arrancar las 3 fases: `onboarding-pm`
   - Coordinar ejecución: `orquestador`
@@ -17,7 +17,12 @@ Este es un proyecto basado en el **Starter Kit de Creators Latam**. La estructur
   - Debugear flujos: `test-debug-loop`
   - Auditar reglas: `guardian-reglas`
   - Inventario visual: `mapa-sistema`
+  - Status actual: `status-dashboard`
   - Aprender de proyectos previos: `analizador-patrones`
+  - Generar Excel: `excel-builder`
+  - Costos mensuales: `cost-tracker`
+  - Entrega final: `handoff-cliente`
+  - Auditoría seguridad: `security-auditor`
 - **`.claude/skills/`** — habilidades base (PDF→MD, Plan paso a paso).
 - **`templates/`** — plantillas para el NV, brief del cliente y research de APIs.
 - **`output/`** — TODO entregable final va acá. Sin excepciones.

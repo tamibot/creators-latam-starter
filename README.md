@@ -1,9 +1,9 @@
 # Creators Latam · Starter Kit para Proyectos con IA
 
-[![Version](https://img.shields.io/badge/version-1.5.0-ff3b77)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.6.0-ff3b77)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-8b3fff)](./LICENSE)
-[![Agentes](https://img.shields.io/badge/agentes-22-ff2d8a)](./.claude/agents/README.md)
-[![Skills](https://img.shields.io/badge/skills-3-14b87a)](./.claude/skills/README.md)
+[![Agentes](https://img.shields.io/badge/agentes-27-ff2d8a)](./.claude/agents/README.md)
+[![Skills](https://img.shields.io/badge/skills-4-14b87a)](./.claude/skills/README.md)
 [![CI](https://github.com/tamibot/creators-latam-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/tamibot/creators-latam-starter/actions/workflows/ci.yml)
 [![Landing](https://img.shields.io/badge/landing-online-2563eb)](https://tamibot.github.io/creators-latam-starter/)
 
@@ -66,7 +66,7 @@ Lo guía el agente [`onboarding-pm`](./.claude/agents/onboarding-pm.md).
 
 El **sistema que ejecuta** la metodología. Cuando el Plan Maestro está firmado, el starter te da:
 
-- **22 agentes pre-configurados** (10 operativos + 5 supervisores, incluyendo el Onboarding PM que guía las 3 fases).
+- **27 agentes pre-configurados** (10 operativos + 5 supervisores, incluyendo el Onboarding PM que guía las 3 fases).
 - **3 skills fundacionales** (PDF→MD, Video/Audio→texto, Plan Paso a Paso).
 - **Templates** para Plan Maestro, NV, brief, research de APIs.
 - **`.claude/settings.json`** con permisos preaprobados (deja de autorizar cada comando).

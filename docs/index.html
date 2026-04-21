@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Creators Latam · Cómo trabajamos con IA</title>
-<meta name="description" content="Nuestra metodología de 3 fases para proyectos con IA. Primero el entregable, después el stack, después el equipo. El starter ejecuta lo que el plan define." />
-
-<meta property="og:title" content="Creators Latam · Cómo trabajamos con IA" />
-<meta property="og:description" content="Metodología de 3 fases. Forma de trabajo, no stack." />
+<title>Creators Latam · Una forma de trabajar con IA</title>
+<meta name="description" content="Instala. Colabora. Ejecuta. 4 pasos, 27 agentes y tu equipo arrancando en minutos." />
+<meta property="og:title" content="Creators Latam · Una forma de trabajar con IA" />
+<meta property="og:description" content="Instala. Colabora. Ejecuta. 4 pasos." />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,21 +15,19 @@
 
 <style>
   :root {
-    --bg:        #FAFAFB;
-    --bg-alt:    #F3F4F8;
-    --card:      #FFFFFF;
-    --ink:       #0A0F1C;
-    --ink-soft:  #4B5563;
-    --muted:     #9AA0B0;
-    --line:      #E6E8F0;
-    --pink:      #FF3B77;
-    --pink-2:    #FF2D8A;
-    --magenta:   #D426C5;
-    --purple:    #8B3FFF;
-    --violet:    #6A2BF5;
-    --blue:      #2563EB;
-    --green:     #14B87A;
-    --amber:     #F59E0B;
+    --bg:       #FAFAFB;
+    --bg-alt:   #F3F4F8;
+    --ink:      #0A0F1C;
+    --ink-soft: #4B5563;
+    --muted:    #9AA0B0;
+    --line:     #E6E8F0;
+    --pink:     #FF3B77;
+    --pink-2:   #FF2D8A;
+    --magenta:  #D426C5;
+    --purple:   #8B3FFF;
+    --blue:     #2563EB;
+    --green:    #14B87A;
+    --amber:    #F59E0B;
     --shadow-sm: 0 2px 8px rgba(15,23,42,.04);
     --shadow:    0 8px 30px rgba(15,23,42,.06);
     --shadow-lg: 0 20px 50px rgba(15,23,42,.10);
@@ -38,92 +35,53 @@
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body {
-    margin: 0; padding: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-  }
+  body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   a { color: inherit; text-decoration: none; }
   .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
-  /* ===== ANIMACIONES ===== */
+  /* ===== ANIMATIONS ===== */
 
-  .scroll-progress {
-    position: fixed; top: 0; left: 0; height: 3px;
-    background: linear-gradient(90deg, var(--purple), var(--pink));
-    z-index: 100; transition: width .1s linear; will-change: width;
-  }
+  /* Scroll progress */
+  .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--purple), var(--pink)); z-index: 100; transition: width .1s; }
 
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: .1s; }
-  .reveal-delay-2 { transition-delay: .2s; }
-  .reveal-delay-3 { transition-delay: .3s; }
-  .reveal-left { opacity: 0; transform: translateX(-20px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal-left.in { opacity: 1; transform: translateX(0); }
-  .reveal-right { opacity: 0; transform: translateX(20px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal-right.in { opacity: 1; transform: translateX(0); }
-  .reveal-scale { opacity: 0; transform: scale(.94); transition: opacity .7s ease, transform .7s ease; }
-  .reveal-scale.in { opacity: 1; transform: scale(1); }
 
-  @keyframes blobPulse {
-    0%, 100% { transform: scale(1) translate(0,0); opacity: .6; }
-    50%      { transform: scale(1.15) translate(20px,-20px); opacity: .8; }
-  }
+  /* Blob breathing */
+  @keyframes blob { 0%,100% { transform: scale(1) translate(0,0); opacity: .6; } 50% { transform: scale(1.15) translate(20px,-20px); opacity: .85; } }
 
-  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  /* Floating agents */
+  @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
+  /* Pulse (heart beat) */
+  @keyframes pulse { 0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,59,119,.4); } 50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(255,59,119,0); } }
+
+  /* Dash (marching ants) */
+  @keyframes dash { to { stroke-dashoffset: -24; } }
+
+  /* Rotate */
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* Gradient shimmer */
+  @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+  /* Fade slide in from left/right */
+  @keyframes slideInL { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes slideInR { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+
+  /* Step pulse */
+  @keyframes stepPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,59,119,.5); } 50% { box-shadow: 0 0 0 14px rgba(255,59,119,0); } }
+
+  /* Typing dots */
   @keyframes blink { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
 
-  @keyframes phasePulse {
-    0%   { box-shadow: 0 0 0 0 rgba(255,59,119,.4); }
-    70%  { box-shadow: 0 0 0 16px rgba(255,59,119,0); }
-    100% { box-shadow: 0 0 0 0 rgba(255,59,119,0); }
-  }
-  .phase.in .phase-num { animation: phasePulse 1.8s ease-out 1; }
-
-  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    33%      { transform: translateY(-10px) rotate(1deg); }
-    66%      { transform: translateY(6px) rotate(-1deg); }
-  }
-
-  /* Gradient text shimmer */
-  @keyframes shimmer {
-    0%   { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
-  }
-  .shimmer {
-    background: linear-gradient(90deg, var(--purple), var(--pink), var(--magenta), var(--pink), var(--purple));
-    background-size: 200% 100%;
-    -webkit-background-clip: text; background-clip: text;
-    color: transparent;
-    animation: shimmer 8s linear infinite;
-  }
-
-  /* Marching ants for phase arrows */
-  @keyframes dash { to { stroke-dashoffset: -20; } }
-
   /* ===== NAV ===== */
-  .nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(250, 250, 251, .85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(250, 250, 251, .85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
-  .brand-dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--purple), var(--pink)); display: inline-block; transition: transform .3s; }
-  .brand:hover .brand-dot { transform: rotate(45deg); }
+  .brand-dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--purple), var(--pink)); transition: transform .3s; }
+  .brand:hover .brand-dot { transform: rotate(90deg) scale(1.1); }
   .brand span.soft { color: var(--ink-soft); font-weight: 500; }
   .nav-links { display: flex; gap: 22px; font-weight: 500; color: var(--ink-soft); font-size: 14px; }
   .nav-links a { position: relative; }
@@ -136,201 +94,340 @@
 
   /* ===== HERO ===== */
   .hero { padding: 96px 0 72px; position: relative; overflow: hidden; }
-  .hero::before, .hero::after { content: ""; position: absolute; width: 600px; height: 600px; pointer-events: none; }
-  .hero::before { top: -200px; right: -200px; background: radial-gradient(circle, rgba(255,59,119,.12), transparent 60%); animation: blobPulse 12s ease-in-out infinite; }
-  .hero::after { top: 20%; left: -250px; background: radial-gradient(circle, rgba(139,63,255,.10), transparent 60%); animation: blobPulse 15s ease-in-out infinite reverse; }
+  .hero::before { content: ""; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,59,119,.14), transparent 60%); animation: blob 12s ease-in-out infinite; pointer-events: none; }
+  .hero::after { content: ""; position: absolute; top: 20%; left: -250px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(139,63,255,.12), transparent 60%); animation: blob 15s ease-in-out infinite reverse; pointer-events: none; }
 
-  .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ink); letter-spacing: 0.02em; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
-  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(20,184,122,.15); }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--ink); box-shadow: var(--shadow-sm); margin-bottom: 24px; }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(20,184,122,.15); animation: pulse 2s infinite; }
 
-  h1.display { font-family: 'Inter', sans-serif; font-weight: 900; font-size: clamp(44px, 7vw, 84px); line-height: 0.98; letter-spacing: -0.035em; margin: 0 0 24px; max-width: 16ch; }
-  h1.display .grad { background: linear-gradient(90deg, var(--purple), var(--magenta), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1.display { font-weight: 900; font-size: clamp(44px, 7vw, 84px); line-height: 0.98; letter-spacing: -0.035em; margin: 0 0 24px; max-width: 18ch; }
+  h1.display .grad { background: linear-gradient(90deg, var(--purple), var(--magenta), var(--pink), var(--magenta), var(--purple)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 8s linear infinite; }
 
   .lead { font-size: 20px; line-height: 1.55; color: var(--ink-soft); max-width: 62ch; margin: 0 0 36px; }
   .lead strong { color: var(--ink); font-weight: 600; }
 
-  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
   .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 999px; font-weight: 600; font-size: 15px; transition: transform .15s, box-shadow .15s; }
   .btn-primary { background: linear-gradient(135deg, var(--pink), var(--pink-2)); color: white; box-shadow: 0 14px 30px -10px rgba(255,59,119,.55); }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -10px rgba(255,59,119,.7); }
   .btn-ghost { background: white; color: var(--ink); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
   .btn-ghost:hover { border-color: var(--ink); }
 
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 860px; margin-top: 40px; }
-  .stat .num { font-weight: 800; font-size: 40px; color: var(--blue); letter-spacing: -0.03em; }
-  .stat .num .suffix { font-size: 22px; vertical-align: middle; }
-  .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
-  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; } .stat .num { font-size: 32px; } }
+  /* ===== 4 STEPS (el flujo principal) ===== */
+  .steps-wrap {
+    margin-top: 80px;
+    position: relative;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    position: relative;
+  }
+  .step {
+    background: white;
+    border: 2px solid var(--line);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+    cursor: default;
+  }
+  .step:hover {
+    transform: translateY(-8px);
+    border-color: var(--pink);
+    box-shadow: 0 20px 40px -15px rgba(255,59,119,.3);
+  }
+  .step-num {
+    position: absolute;
+    top: -18px; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 20px -8px rgba(255,59,119,.5);
+  }
+  .step.active .step-num { animation: stepPulse 2s infinite; }
+  .step-icon {
+    font-size: 40px;
+    margin: 12px 0 16px;
+    display: block;
+    animation: floatY 4s ease-in-out infinite;
+  }
+  .step h3 {
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: 1.5;
+  }
 
-  /* ===== SECTION ===== */
+  /* Connecting line between steps */
+  .steps::before {
+    content: "";
+    position: absolute;
+    top: 30%; left: 12.5%; right: 12.5%;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--pink) 0 8px, transparent 8px 16px);
+    z-index: -1;
+  }
+  @media (max-width: 860px) {
+    .steps { grid-template-columns: 1fr 1fr; }
+    .steps::before { display: none; }
+  }
+  @media (max-width: 500px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+
+  /* ===== SECTIONS ===== */
   section.sec { padding: 96px 0; position: relative; }
   .sec-eyebrow { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); font-weight: 600; margin-bottom: 16px; }
-  h2.sec-title { font-weight: 800; font-size: clamp(34px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; max-width: 22ch; }
+  h2.sec-title { font-weight: 800; font-size: clamp(32px, 4.5vw, 48px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; max-width: 22ch; }
   h2.sec-title .grad { background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .sec-sub { font-size: 18px; color: var(--ink-soft); max-width: 64ch; margin: 0 0 48px; }
   .bg-alt { background: var(--bg-alt); }
 
-  /* ===== WAY-OF-WORK MANIFESTO ===== */
+  /* ===== MANIFESTO ===== */
   .manifesto {
     background: linear-gradient(135deg, #0B0F1A, #1a0f2e);
     color: white;
-    padding: 80px 56px;
+    padding: 72px 56px;
     border-radius: 32px;
     margin: 48px 0;
     position: relative;
     overflow: hidden;
     box-shadow: 0 40px 80px -30px rgba(0,0,0,.4);
   }
-  .manifesto::before {
-    content: ""; position: absolute; top: -100px; right: -100px;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,59,119,.25), transparent 70%);
-    animation: blobPulse 12s ease-in-out infinite;
-  }
-  .manifesto::after {
-    content: ""; position: absolute; bottom: -200px; left: -150px;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(139,63,255,.2), transparent 70%);
-    animation: blobPulse 15s ease-in-out infinite reverse;
-  }
-  .manifesto h3 { position: relative; z-index: 1; font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 24px; max-width: 26ch; }
+  .manifesto::before { content: ""; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,59,119,.25), transparent 70%); animation: blob 12s ease-in-out infinite; }
+  .manifesto::after { content: ""; position: absolute; bottom: -200px; left: -150px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(139,63,255,.2), transparent 70%); animation: blob 15s ease-in-out infinite reverse; }
+  .manifesto .inner { position: relative; z-index: 1; }
+  .manifesto h3 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 24ch; }
   .manifesto h3 span.grad { background: linear-gradient(90deg, #FF8FB5, #E8A3FF); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .manifesto p { position: relative; z-index: 1; font-size: 17px; line-height: 1.65; color: rgba(255,255,255,.75); max-width: 62ch; margin: 0 0 20px; }
-  .manifesto .highlight {
-    display: inline-block;
-    padding: 4px 10px;
-    background: rgba(255,59,119,.2);
-    border: 1px solid rgba(255,59,119,.4);
-    border-radius: 6px;
-    color: #FF8FB5;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 600;
+  .manifesto p { font-size: 17px; line-height: 1.65; color: rgba(255,255,255,.75); max-width: 62ch; margin: 0 0 20px; }
+  .manifesto .highlight { display: inline-block; padding: 4px 10px; background: rgba(255,59,119,.2); border: 1px solid rgba(255,59,119,.4); border-radius: 6px; color: #FF8FB5; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; }
+  .manifesto .split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.1); }
+  .manifesto .split h4 { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #FF8FB5; margin: 0 0 12px; }
+  .manifesto .split ul { list-style: none; padding: 0; margin: 0; }
+  .manifesto .split li { padding: 6px 0 6px 24px; position: relative; color: rgba(255,255,255,.85); font-size: 15px; }
+  .manifesto .split li::before { content: "→"; position: absolute; left: 0; color: var(--pink); font-weight: 700; }
+  .manifesto .split .is-not li::before { content: "✗"; color: #FF6B6B; }
+  @media (max-width: 760px) { .manifesto { padding: 48px 28px; } .manifesto .split { grid-template-columns: 1fr; } }
+
+  /* ===== AGENT CARDS (con emojis visuales) ===== */
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 32px;
   }
-  .manifesto .split {
-    position: relative; z-index: 1;
+  .agent-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 16px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+    position: relative;
+    text-align: center;
+    cursor: default;
+  }
+  .agent-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: var(--shadow);
+    border-color: var(--pink);
+    z-index: 2;
+  }
+  .agent-card.supervisor {
+    background: linear-gradient(135deg, rgba(139,63,255,.04), rgba(255,59,119,.04));
+    border-color: rgba(255,59,119,.25);
+  }
+  .agent-card .agent-emoji {
+    font-size: 36px;
+    display: block;
+    margin: 0 0 10px;
+    transition: transform .3s;
+  }
+  .agent-card:hover .agent-emoji { transform: rotate(-6deg) scale(1.15); }
+  .agent-card .agent-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--pink);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .agent-card h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .agent-card .agent-job {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .agent-card .agent-skills {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .agent-card .skill-tag {
+    font-size: 9px;
+    padding: 2px 6px;
+    background: var(--bg-alt);
+    border-radius: 6px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .agent-card .agent-role {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .agent-card.supervisor .agent-role { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; }
+  .agent-card.operativo .agent-role { background: var(--bg-alt); color: var(--muted); }
+
+  /* ===== BENEFITS ===== */
+  .benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .benefit { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 24px 22px; text-align: left; transition: transform .2s, box-shadow .2s; }
+  .benefit:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .benefit .benefit-icon { font-size: 28px; margin-bottom: 12px; display: inline-block; animation: floatY 5s ease-in-out infinite; }
+  .benefit:nth-child(2) .benefit-icon { animation-delay: .5s; }
+  .benefit:nth-child(3) .benefit-icon { animation-delay: 1s; }
+  .benefit:nth-child(4) .benefit-icon { animation-delay: 1.5s; }
+  .benefit h4 { font-size: 16px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .benefit p { font-size: 14px; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+  @media (max-width: 760px) { .benefits { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ===== COLLAB ===== */
+  .collab-hero {
+    background: linear-gradient(135deg, rgba(139,63,255,.05), rgba(255,59,119,.05));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .collab-hero::before {
+    content: "";
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,63,255,.1), transparent 60%);
+    animation: blob 14s ease-in-out infinite;
+  }
+  .collab-hero .inner { position: relative; z-index: 1; max-width: 560px; }
+  .collab-hero h3 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .collab-hero p { color: var(--ink-soft); font-size: 16px; line-height: 1.6; margin: 0 0 24px; }
+  .collab-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .collab-step {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .collab-step .emoji { font-size: 28px; display: block; margin-bottom: 8px; }
+  .collab-step h5 { font-size: 13px; font-weight: 700; margin: 0 0 4px; }
+  .collab-step p { font-size: 12px; color: var(--ink-soft); margin: 0; line-height: 1.4; }
+  @media (max-width: 760px) { .collab-flow { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ===== PLAN MAESTRO VIZ ===== */
+  .plan-viz {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
-    margin-top: 40px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255,255,255,.1);
-  }
-  .manifesto .split h4 { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #FF8FB5; margin: 0 0 12px; }
-  .manifesto .split ul { list-style: none; padding: 0; margin: 0; }
-  .manifesto .split li { padding: 6px 0 6px 24px; position: relative; color: rgba(255,255,255,.8); font-size: 15px; }
-  .manifesto .split li::before { content: "→"; position: absolute; left: 0; color: var(--pink); font-weight: 700; }
-  .manifesto .split .is-not li::before { content: "✗"; color: #FF6B6B; }
-  @media (max-width: 760px) {
-    .manifesto { padding: 48px 28px; }
-    .manifesto .split { grid-template-columns: 1fr; }
-  }
-
-  /* ===== PHASES ===== */
-  .phase { background: white; border: 1px solid var(--line); border-radius: 24px; padding: 48px 44px; margin-bottom: 28px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; transition: box-shadow .3s, transform .3s; }
-  .phase.in { box-shadow: var(--shadow); }
-  .phase::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--purple), var(--pink)); }
-  .phase-head { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
-  .phase-num { flex-shrink: 0; width: 72px; height: 72px; border-radius: 20px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; font-weight: 900; font-size: 30px; box-shadow: 0 10px 24px -8px rgba(139,63,255,.4); }
-  .phase-head h3 { margin: 6px 0 4px; font-size: clamp(26px, 3vw, 34px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-  .phase-head .phase-subtitle { color: var(--pink); font-weight: 600; font-size: 15px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; }
-  .phase-body { font-size: 16.5px; line-height: 1.65; color: var(--ink); }
-  .phase-body p { margin: 0 0 16px; max-width: 68ch; }
-  .phase-question { background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06)); border-left: 3px solid var(--pink); padding: 18px 24px; border-radius: 0 12px 12px 0; margin: 24px 0; font-size: 17px; font-style: italic; font-weight: 500; color: var(--ink); }
-  .phase-example { background: #0B0F1A; color: #E4E6EC; padding: 28px 32px; border-radius: 14px; font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.7; margin: 24px 0 8px; overflow-x: auto; }
-  .phase-example .label { color: #FF8FB5; font-weight: 600; }
-  .phase-example .val { color: #E4E6EC; }
-  .phase-example .comment { color: #6A6E7A; font-style: italic; }
-  .phase-label { display: inline-block; background: rgba(20,184,122,.1); color: #0A7C4F; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 12px; border-radius: 6px; font-weight: 700; letter-spacing: 0.08em; margin-right: 6px; margin-bottom: 8px; }
-  .phase-label.bad { background: rgba(255,59,119,.1); color: var(--pink); }
-  .phase-label.info { background: rgba(37,99,235,.1); color: var(--blue); }
-  .phase ul.check-list { list-style: none; padding: 0; margin: 16px 0; }
-  .phase ul.check-list li { padding: 8px 0 8px 30px; position: relative; font-size: 15px; color: var(--ink-soft); }
-  .phase ul.check-list li::before { content: "✓"; position: absolute; left: 0; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; }
-
-  /* Animated arrow between phases */
-  .phase-arrow { display: flex; justify-content: center; align-items: center; margin: -8px 0 12px; }
-  .phase-arrow svg { width: 40px; height: 60px; }
-  .phase-arrow svg path { stroke: var(--pink); stroke-width: 2; fill: none; stroke-dasharray: 6 4; animation: dash 1.5s linear infinite; }
-
-  /* ===== PILLARS ===== */
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .card { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 32px 28px; box-shadow: var(--shadow-sm); position: relative; transition: transform .2s, box-shadow .2s; }
-  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-  .card-num { position: absolute; top: 22px; right: 26px; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--line); font-size: 28px; }
-  .card-icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(139,63,255,.1), rgba(255,59,119,.1)); font-size: 24px; margin-bottom: 18px; }
-  .card h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px; }
-  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
-  .card p { color: var(--ink-soft); font-size: 15px; line-height: 1.55; margin: 0; }
-
-  /* ===== TREE ===== */
-  .tree-block { background: #0B0F1A; color: #E4E6EC; border-radius: 20px; padding: 32px 36px; box-shadow: var(--shadow-lg); position: relative; overflow-x: auto; }
-  .tree-header { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8B8F9B; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; display: flex; gap: 8px; align-items: center; }
-  .tree-header::before { content: "●  ●  ●"; color: #4B5161; letter-spacing: 0.1em; margin-right: 10px; }
-  .tree { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.85; white-space: pre; margin: 0; }
-  .tree .dir { color: #FFB86C; font-weight: 600; }
-  .tree .key { color: #FF6B9D; }
-  .tree .note { color: #6A6E7A; font-style: italic; }
-  .tree .cmd { color: #76E0B0; }
-
-  /* ===== AGENTS VISUAL (graph) ===== */
-  .agents-graph {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 40px 32px;
-    box-shadow: var(--shadow-sm);
-    overflow-x: auto;
-  }
-  .agents-graph .mermaid { background: transparent; }
-
-  /* Agents hexagonal pills */
-  .agent-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin: 32px 0;
-  }
-  .agent-pill {
-    display: inline-flex;
+    margin: 40px 0;
     align-items: center;
-    gap: 8px;
+  }
+  .plan-doc {
     background: white;
     border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 10px 18px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ink);
-    transition: transform .2s, box-shadow .2s, border-color .2s;
-    cursor: default;
+    border-radius: 16px;
+    padding: 28px 32px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
   }
-  .agent-pill:hover { transform: translateY(-3px) scale(1.04); box-shadow: var(--shadow); border-color: var(--pink); }
-  .agent-pill .pill-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: var(--pink); opacity: .6; }
-  .agent-pill.supervisor { background: linear-gradient(135deg, rgba(139,63,255,.08), rgba(255,59,119,.08)); border-color: rgba(255,59,119,.3); }
-  .agent-pill.supervisor .pill-num { color: white; background: linear-gradient(135deg, var(--purple), var(--pink)); padding: 2px 6px; border-radius: 6px; opacity: 1; }
-
-  /* ===== TABLE simple ===== */
-  .agents { background: white; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-sm); }
-  .agent { display: grid; grid-template-columns: 54px 220px 1fr; gap: 20px; padding: 18px 28px; border-bottom: 1px solid var(--line); align-items: center; transition: background .15s; }
-  .agent:last-child { border-bottom: 0; }
-  .agent:hover { background: var(--bg-alt); }
-  .agent-id { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: 0.05em; }
-  .agent-name { font-weight: 700; font-size: 15.5px; letter-spacing: -0.01em; }
-  .agent-role { color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
-  .supervisor-badge { display: inline-block; padding: 2px 8px; background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; border-radius: 999px; font-size: 10px; font-weight: 700; margin-left: 6px; letter-spacing: .05em; text-transform: uppercase; }
-  @media (max-width: 760px) { .agent { grid-template-columns: 50px 1fr; } .agent-role { grid-column: 2; } }
-
-  /* ===== PULL QUOTE ===== */
-  .pull { margin: 56px 0; padding: 40px 0 40px 40px; border-left: 4px solid; border-image: linear-gradient(180deg, var(--purple), var(--pink)) 1; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; line-height: 1.35; max-width: 44ch; letter-spacing: -0.015em; }
+  .plan-doc::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+  }
+  .plan-doc h4 { font-size: 13px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin: 6px 0 20px; }
+  .plan-fase {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .plan-fase:last-child { border-bottom: 0; }
+  .plan-fase .n {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .plan-fase .txt { flex: 1; font-weight: 600; font-size: 14.5px; }
+  .plan-fase .check { font-size: 18px; color: var(--green); }
+  .plan-doc .firma {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 2px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .plan-doc .firma strong { color: var(--pink); font-weight: 700; }
+  @media (max-width: 760px) { .plan-viz { grid-template-columns: 1fr; } }
 
   /* ===== TIMELINE ===== */
-  .timeline { display: grid; grid-template-columns: 200px 1fr; gap: 0; margin: 48px 0; }
+  .timeline { display: grid; grid-template-columns: 170px 1fr; gap: 0; margin: 48px 0; }
   .timeline-row { display: contents; }
   .timeline-time { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--pink); font-weight: 700; text-align: right; padding: 20px 24px 20px 0; border-right: 2px solid var(--line); position: relative; }
   .timeline-time::after { content: ""; position: absolute; right: -6px; top: 26px; width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); box-shadow: 0 0 0 4px white; }
-  .timeline-content { padding: 20px 0 20px 32px; border-left: 0; }
+  .timeline-content { padding: 20px 0 20px 32px; }
   .timeline-content h4 { margin: 0 0 6px; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
   .timeline-content p { margin: 0; font-size: 14.5px; color: var(--ink-soft); line-height: 1.5; }
   .timeline-warn { background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(255,59,119,.05)); border: 1px solid rgba(245,158,11,.3); border-radius: 12px; padding: 18px 24px; margin-top: 32px; display: flex; align-items: flex-start; gap: 14px; }
@@ -339,222 +436,97 @@
   .timeline-warn span { font-size: 14px; color: var(--ink-soft); }
   @media (max-width: 720px) {
     .timeline { grid-template-columns: 1fr; gap: 12px; }
-    .timeline-row { display: block; }
     .timeline-time { text-align: left; border-right: 0; padding: 0 0 4px; }
     .timeline-time::after { display: none; }
     .timeline-content { padding: 0 0 20px; border-bottom: 1px solid var(--line); }
   }
 
-  /* ===== COMMANDS ===== */
-  .commands { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 32px 0; }
-  .cmd-card { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; transition: transform .2s, box-shadow .2s, border-color .2s; position: relative; }
+  /* ===== CODE BLOCK ===== */
+  .code-block { background: #0B0F1A; color: #E4E6EC; border-radius: 16px; padding: 24px 28px; box-shadow: var(--shadow-lg); font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.8; overflow-x: auto; position: relative; }
+  .code-block::before { content: "●  ●  ●"; color: #4B5161; position: absolute; top: 12px; left: 18px; font-size: 12px; letter-spacing: 0.2em; }
+  .code-block pre { margin: 0; padding-top: 20px; white-space: pre-wrap; word-break: break-word; }
+  .code-block .prompt { color: rgba(255,255,255,.4); user-select: none; }
+  .code-block .cmt { color: #6A6E7A; font-style: italic; }
+  .code-block .key { color: #FF8FB5; font-weight: 600; }
+  .code-block .val { color: #76E0B0; }
+
+  /* ===== CMD CARDS ===== */
+  .commands { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 32px 0; }
+  .cmd-card { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; transition: transform .2s, box-shadow .2s, border-color .2s; position: relative; }
   .cmd-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--pink); }
-  .cmd-card .cmd-code { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; background: #0B0F1A; color: #76E0B0; padding: 6px 12px; border-radius: 8px; margin-bottom: 12px; }
-  .cmd-card h4 { margin: 0 0 8px; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
-  .cmd-card p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
-  .cmd-card .tag-crit { position: absolute; top: 14px; right: 14px; background: rgba(255,59,119,.1); color: var(--pink); font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 999px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .cmd-card .cmd-code { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; background: #0B0F1A; color: #76E0B0; padding: 5px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .cmd-card h4 { margin: 0 0 6px; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+  .cmd-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+  .cmd-card .tag-crit { position: absolute; top: 12px; right: 12px; background: rgba(255,59,119,.1); color: var(--pink); font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 999px; letter-spacing: 0.08em; }
 
-  /* ===== INTEGRATIONS ===== */
-  .integrations-hierarchy {
-    display: grid;
-    gap: 12px;
-    margin: 32px 0;
-  }
-  .integ-row {
-    display: grid;
-    grid-template-columns: 48px 140px 1fr;
-    gap: 20px;
-    padding: 18px 24px;
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    align-items: center;
-    transition: border-color .15s;
-  }
-  .integ-row:hover { border-color: var(--pink); }
-  .integ-row .rank {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 800;
-    font-size: 22px;
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    -webkit-background-clip: text; background-clip: text;
-    color: transparent;
-    text-align: center;
-  }
-  .integ-row .name { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
-  .integ-row .why { color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
-  .integ-row.best { background: linear-gradient(135deg, rgba(139,63,255,.05), rgba(255,59,119,.05)); border-color: rgba(255,59,119,.3); }
-  .integ-row.last-resort { opacity: 0.55; }
-
-  /* ===== PRACTICES ===== */
-  .practice-item { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 22px 28px; background: white; border: 1px solid var(--line); border-radius: 14px; margin-bottom: 12px; align-items: flex-start; transition: border-color .15s, box-shadow .15s; }
-  .practice-item:hover { border-color: var(--pink); box-shadow: var(--shadow-sm); }
-  .practice-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, rgba(139,63,255,.12), rgba(255,59,119,.12)); display: flex; align-items: center; justify-content: center; font-size: 22px; }
-  .practice-item h4 { margin: 0 0 6px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
-  .practice-item p { margin: 0; color: var(--ink-soft); font-size: 14.5px; line-height: 1.55; }
-  .practice-item p code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: var(--bg-alt); padding: 1px 6px; border-radius: 4px; color: var(--pink); }
-
-  /* ===== PRINCIPLES ===== */
-  .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .principle { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 24px 28px; display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: flex-start; box-shadow: var(--shadow-sm); transition: transform .15s, box-shadow .15s; }
-  .principle:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .principle-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 28px; background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
-  .principle h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
-  .principle p { margin: 0; font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
-  @media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
+  /* ===== PULL QUOTE ===== */
+  .pull { margin: 48px 0; padding: 32px 0 32px 36px; border-left: 4px solid; border-image: linear-gradient(180deg, var(--purple), var(--pink)) 1; font-size: clamp(22px, 2.6vw, 28px); font-weight: 600; line-height: 1.35; max-width: 44ch; letter-spacing: -0.015em; }
 
   /* ===== CHANGELOG ===== */
-  .changelog-list {
-    position: relative;
-    padding-left: 28px;
-  }
-  .changelog-list::before {
-    content: "";
-    position: absolute;
-    left: 6px; top: 10px; bottom: 10px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--purple), var(--pink));
-  }
-  .changelog-entry {
-    position: relative;
-    padding-bottom: 28px;
-  }
-  .changelog-entry::before {
-    content: "";
-    position: absolute;
-    left: -28px; top: 8px;
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    box-shadow: 0 0 0 4px var(--bg-alt);
-  }
-  .changelog-entry .ver {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--pink);
-    letter-spacing: 0.03em;
-  }
+  .changelog-list { position: relative; padding-left: 28px; }
+  .changelog-list::before { content: ""; position: absolute; left: 6px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(180deg, var(--purple), var(--pink)); }
+  .changelog-entry { position: relative; padding-bottom: 24px; }
+  .changelog-entry::before { content: ""; position: absolute; left: -28px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); box-shadow: 0 0 0 4px var(--bg); }
+  .changelog-entry .ver { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; color: var(--pink); }
   .changelog-entry .date { color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace; margin-left: 8px; }
   .changelog-entry .title { font-weight: 700; margin: 4px 0 6px; font-size: 16px; letter-spacing: -0.01em; }
   .changelog-entry ul { margin: 0; padding-left: 18px; }
-  .changelog-entry ul li { font-size: 14.5px; color: var(--ink-soft); margin: 4px 0; line-height: 1.55; }
+  .changelog-entry ul li { font-size: 14px; color: var(--ink-soft); margin: 3px 0; line-height: 1.55; }
+  .changelog-entry .highlight { background: rgba(255,59,119,.08); padding: 1px 6px; border-radius: 4px; color: var(--pink); font-weight: 600; font-size: 0.92em; }
 
-  /* ===== COLLAB FORM ===== */
-  .collab-box {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-  }
-  .collab-box::before {
-    content: "";
-    position: absolute;
-    top: -100px; right: -100px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(139,63,255,.08), transparent 70%);
-    animation: blobPulse 14s ease-in-out infinite;
-    pointer-events: none;
-  }
-  .collab-box .text { position: relative; z-index: 1; }
-  .collab-box h3 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 12px; }
-  .collab-box p { font-size: 16px; color: var(--ink-soft); line-height: 1.6; margin: 0; }
-  .collab-links {
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; gap: 14px;
-  }
-  .collab-link {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 22px;
-    background: var(--bg-alt);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    transition: transform .15s, border-color .15s, background .15s;
-  }
-  .collab-link:hover { transform: translateX(4px); border-color: var(--pink); background: white; }
-  .collab-link .ic {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; color: white;
-    flex-shrink: 0;
-  }
-  .collab-link .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  .collab-link .val { font-weight: 700; font-size: 16px; color: var(--ink); letter-spacing: -0.01em; }
-  @media (max-width: 860px) {
-    .collab-box { grid-template-columns: 1fr; gap: 32px; padding: 32px 28px; }
-  }
-
-  /* ===== CTA FINAL ===== */
-  .cta-final { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; border-radius: 28px; padding: 64px 48px; text-align: center; box-shadow: 0 30px 60px -20px rgba(139,63,255,.4); position: relative; overflow: hidden; }
-  .cta-final::before, .cta-final::after { content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,.08); }
-  .cta-final::before { top: -150px; left: -100px; animation: blobPulse 14s ease-in-out infinite; }
-  .cta-final::after { bottom: -200px; right: -100px; animation: blobPulse 16s ease-in-out infinite reverse; }
-  .cta-final h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 16px; line-height: 1.05; position: relative; z-index: 1; }
-  .cta-final p { font-size: 18px; opacity: 0.9; max-width: 56ch; margin: 0 auto 32px; position: relative; z-index: 1; }
-  .cta-final .cta-inner { position: relative; z-index: 1; }
-  .btn-white { background: white; color: var(--ink); padding: 18px 32px; border-radius: 999px; font-weight: 700; box-shadow: 0 18px 40px -10px rgba(0,0,0,.25); transition: transform .15s; }
-  .btn-white:hover { transform: translateY(-2px); }
-  .code-pill { display: inline-block; background: rgba(0,0,0,.25); padding: 14px 22px; border-radius: 14px; font-family: 'JetBrains Mono', monospace; font-size: 14px; margin: 20px 0; color: white; position: relative; z-index: 1; text-align: left; }
-  .code-pill .prompt { color: rgba(255,255,255,.5); user-select: none; }
+  /* ===== COLLAB SECTION LINKS ===== */
+  .collab-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
+  .collab-link { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: white; border: 1px solid var(--line); border-radius: 12px; transition: transform .15s, border-color .15s; }
+  .collab-link:hover { transform: translateX(4px); border-color: var(--pink); }
+  .collab-link .ic { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, var(--purple), var(--pink)); display: flex; align-items: center; justify-content: center; font-size: 18px; color: white; flex-shrink: 0; }
+  .collab-link .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .collab-link .val { font-weight: 700; font-size: 14px; color: var(--ink); }
+  @media (max-width: 760px) { .collab-links { grid-template-columns: 1fr; } }
 
   /* ===== FAQ ===== */
-  .faq-list { display: flex; flex-direction: column; gap: 12px; }
-  .faq-item { background: white; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-sm); transition: border-color .15s, box-shadow .15s; overflow: hidden; }
-  .faq-item[open] { border-color: var(--pink); box-shadow: 0 8px 24px -8px rgba(255,59,119,.2); }
-  .faq-item summary { padding: 20px 24px; font-weight: 600; font-size: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; letter-spacing: -0.01em; }
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .faq-item { background: white; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-sm); transition: border-color .15s; overflow: hidden; }
+  .faq-item[open] { border-color: var(--pink); }
+  .faq-item summary { padding: 18px 22px; font-weight: 600; font-size: 15.5px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
   .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary::after { content: "+"; font-size: 24px; font-weight: 300; color: var(--pink); transition: transform .2s; flex-shrink: 0; margin-left: 16px; }
+  .faq-item summary::after { content: "+"; font-size: 22px; font-weight: 300; color: var(--pink); transition: transform .2s; flex-shrink: 0; margin-left: 14px; }
   .faq-item[open] summary::after { transform: rotate(45deg); }
-  .faq-body { padding: 0 24px 22px; color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
-  .faq-body pre { background: #0B0F1A; color: #E4E6EC; padding: 14px; border-radius: 10px; font-size: 13px; overflow-x: auto; }
-  .faq-group-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); font-weight: 700; margin: 36px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .faq-body { padding: 0 22px 20px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.6; }
+  .faq-body pre { background: #0B0F1A; color: #E4E6EC; padding: 12px; border-radius: 8px; font-size: 12.5px; overflow-x: auto; }
+  .faq-group-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); font-weight: 700; margin: 30px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
   .faq-group-title:first-of-type { margin-top: 0; }
 
+  /* ===== CTA FINAL ===== */
+  .cta-final { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; border-radius: 28px; padding: 56px 40px; text-align: center; box-shadow: 0 30px 60px -20px rgba(139,63,255,.4); position: relative; overflow: hidden; }
+  .cta-final::before, .cta-final::after { content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,.08); }
+  .cta-final::before { top: -150px; left: -100px; animation: blob 14s ease-in-out infinite; }
+  .cta-final::after { bottom: -200px; right: -100px; animation: blob 16s ease-in-out infinite reverse; }
+  .cta-final .inner { position: relative; z-index: 1; }
+  .cta-final h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 14px; line-height: 1.05; }
+  .cta-final p { font-size: 17px; opacity: 0.9; max-width: 52ch; margin: 0 auto 28px; }
+  .btn-white { background: white; color: var(--ink); padding: 16px 28px; border-radius: 999px; font-weight: 700; box-shadow: 0 18px 40px -10px rgba(0,0,0,.25); transition: transform .15s; }
+  .btn-white:hover { transform: translateY(-2px); }
+  .code-pill { display: inline-block; background: rgba(0,0,0,.25); padding: 14px 22px; border-radius: 14px; font-family: 'JetBrains Mono', monospace; font-size: 13.5px; margin: 16px 0; color: white; text-align: left; }
+  .code-pill .prompt { color: rgba(255,255,255,.5); }
+
   /* ===== FOOTER ===== */
-  footer { padding: 64px 0 48px; border-top: 1px solid var(--line); background: white; }
-  .foot-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  footer { padding: 56px 0 44px; border-top: 1px solid var(--line); background: white; }
+  .foot-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
   .foot-row h4 { font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 700; }
-  .foot-row a { display: block; color: var(--ink-soft); font-size: 14.5px; padding: 4px 0; transition: color .15s; }
+  .foot-row a { display: block; color: var(--ink-soft); font-size: 14px; padding: 4px 0; transition: color .15s; }
   .foot-row a:hover { color: var(--pink); }
-  .foot-copy { color: var(--ink-soft); font-size: 14.5px; line-height: 1.55; max-width: 38ch; margin-top: 10px; }
-  .foot-bottom { padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
+  .foot-copy { color: var(--ink-soft); font-size: 14px; line-height: 1.55; max-width: 38ch; margin-top: 10px; }
+  .foot-bottom { padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
   @media (max-width: 760px) { .foot-row { grid-template-columns: 1fr 1fr; } }
 
   /* UTILS */
   mark { background: linear-gradient(120deg, rgba(139,63,255,.2), rgba(255,59,119,.2)); color: var(--ink); padding: 2px 8px; border-radius: 6px; font-weight: 600; }
-  code.inline { font-family: 'JetBrains Mono', monospace; background: var(--bg-alt); padding: 2px 8px; border-radius: 6px; font-size: 0.88em; color: var(--pink); font-weight: 500; }
-  .muted { color: var(--ink-soft); }
-
-  .benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
-  .benefit { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; text-align: left; transition: transform .2s, box-shadow .2s; }
-  .benefit:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-  .benefit .benefit-icon { font-size: 22px; margin-bottom: 10px; display: block; }
-  .benefit h4 { font-size: 15px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.01em; }
-  .benefit p { font-size: 13.5px; color: var(--ink-soft); margin: 0; line-height: 1.5; }
-  @media (max-width: 760px) { .benefits { grid-template-columns: repeat(2, 1fr); } }
+  code.inline { font-family: 'JetBrains Mono', monospace; background: var(--bg-alt); padding: 2px 7px; border-radius: 5px; font-size: 0.88em; color: var(--pink); font-weight: 500; }
 
   @media (max-width: 860px) {
-    .pillars { grid-template-columns: 1fr; }
-    .stats { gap: 16px; }
     section.sec { padding: 72px 0; }
-    .cta-final { padding: 48px 28px; border-radius: 20px; }
-    .phase { padding: 32px 24px; border-radius: 18px; }
-    .phase-head { flex-direction: column; gap: 16px; }
-    .phase-num { width: 56px; height: 56px; font-size: 24px; }
-    .integ-row { grid-template-columns: 40px 1fr; }
-    .integ-row .why { grid-column: 2; }
+    .cta-final { padding: 40px 24px; border-radius: 20px; }
+    .collab-hero { padding: 40px 28px; }
   }
 </style>
 </head>
@@ -565,17 +537,13 @@
 <!-- ============ NAV ============ -->
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="#" class="brand">
-      <span class="brand-dot"></span>
-      Creators <span class="soft">Latam</span>
-    </a>
+    <a href="#" class="brand"><span class="brand-dot"></span>Creators <span class="soft">Latam</span></a>
     <div class="nav-links">
-      <a href="#metodologia">Metodología</a>
-      <a href="#sistema">Agentes</a>
-      <a href="#integraciones">Conexiones</a>
+      <a href="#flujo">El flujo</a>
+      <a href="#equipo">Equipo IA</a>
+      <a href="#colaborativo">Colaborativo</a>
       <a href="#timing">Timing</a>
       <a href="#comandos">Comandos</a>
-      <a href="#practicas">Tips</a>
       <a href="#changelog">Changelog</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -586,58 +554,83 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
-    <span class="eyebrow reveal"><span class="eyebrow-dot"></span> FORMA DE TRABAJO · V1.5 · 2026</span>
-    <h1 class="display reveal">Esto no es una herramienta. <span class="shimmer">Es una forma de trabajo.</span></h1>
-    <p class="lead reveal reveal-delay-1">
-      Nuestro método de 3 fases para proyectos con IA. Primero definís <strong>qué entregás</strong> (desde el final). Después validás <strong>con qué lo hacés</strong> (investigando). Y recién ahí <strong>armás el equipo</strong>. Sin Plan Maestro firmado, no arranca nada.
+    <span class="eyebrow reveal"><span class="eyebrow-dot"></span> v1.6 · 2026 · Forma de trabajar</span>
+    <h1 class="display reveal">Instalá. Colaborá. <span class="grad">Ejecutá.</span></h1>
+    <p class="lead reveal">
+      Una <strong>forma de trabajar</strong> con IA — no un set de herramientas. <strong>4 pasos</strong> claros: definís el <strong>entregable</strong>, validás el <strong>stack</strong>, armás el <strong>equipo</strong> y ejecutás el <strong>plan</strong>. El starter viene con 27 agentes listos.
     </p>
 
-    <div class="cta-row reveal reveal-delay-2">
-      <a href="#metodologia" class="btn btn-primary">Ver la metodología ↓</a>
-      <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-ghost">Ver repositorio</a>
+    <div class="cta-row reveal">
+      <a href="#flujo" class="btn btn-primary">Ver cómo funciona ↓</a>
+      <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-ghost">Clonar el repo</a>
     </div>
 
-    <div class="stats reveal reveal-delay-3">
-      <div class="stat"><div class="num" data-count="3">0</div><div class="lbl">Fases obligatorias</div></div>
-      <div class="stat"><div class="num" data-count="22">0</div><div class="lbl">Agentes preconfigurados</div></div>
-      <div class="stat"><div class="num" data-count="3">0</div><div class="lbl">Skills fundacionales</div></div>
-      <div class="stat"><div class="num">1<span class="suffix"> plan</span></div><div class="lbl">Firmado antes de ejecutar</div></div>
+    <!-- ===== 4 STEPS · núcleo del mensaje ===== -->
+    <div class="steps-wrap reveal" id="flujo">
+      <div class="steps">
+        <div class="step active">
+          <div class="step-num">1</div>
+          <span class="step-icon">🎯</span>
+          <h3>Entregable</h3>
+          <p>Qué recibe el cliente. Formato, columnas, KPIs, fuentes, criterio de OK.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <span class="step-icon">🛠️</span>
+          <h3>Stack</h3>
+          <p>Con qué lo hacemos. Research en foros, no solo lo que dice el cliente.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <span class="step-icon">👥</span>
+          <h3>Equipo</h3>
+          <p>Qué agentes usamos, qué agentes custom hay que crear, qué orden.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <span class="step-icon">🚀</span>
+          <h3>Plan</h3>
+          <p>Los 3 anteriores consolidados. Firma del cliente. Ejecución.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ MANIFIESTO ============ -->
-<section class="sec" style="padding-top: 48px;">
+<section class="sec">
   <div class="container">
-    <div class="manifesto reveal-scale">
-      <h3>No es <span class="grad">qué instalás</span>. Es <span class="grad">cómo pensás</span> el proyecto antes de tocar código.</h3>
-      <p>
-        Cualquiera puede clonar un starter, instalar 10 herramientas y abrir Claude Code. El resultado de eso es un proyecto que <strong>arranca rápido y se empantana a la mitad</strong>. Porque cuando llega el problema, no hay un proceso que te saque — solo herramientas que no sabés qué hacen.
-      </p>
-      <p>
-        Nosotros hacemos lo opuesto: <span class="highlight">primero pensamos, después ejecutamos</span>. El Plan Maestro firmado es el contrato entre vos, el cliente y el sistema. Con ese plan en mano, las herramientas son solo el cómo.
-      </p>
+    <div class="manifesto reveal">
+      <div class="inner">
+        <h3>No es <span class="grad">qué instalás</span>. Es <span class="grad">cómo pensás</span> el proyecto antes de tocar código.</h3>
+        <p>
+          Cualquiera puede clonar un starter y abrir Claude Code. El resultado: un proyecto que <strong>arranca rápido y se empantana</strong>. No hay proceso — solo herramientas.
+        </p>
+        <p>
+          Nosotros hacemos lo opuesto: <span class="highlight">primero pensamos, después ejecutamos</span>. El Plan Maestro firmado es el contrato entre vos, el cliente y el sistema.
+        </p>
 
-      <div class="split">
-        <div>
-          <h4>✓ ES</h4>
-          <ul>
-            <li>Una disciplina (qué, cómo, con qué)</li>
-            <li>Un contrato firmable con el cliente</li>
-            <li>Agentes que ejecutan un plan claro</li>
-            <li>Research obligatorio antes de elegir</li>
-            <li>Auditoría antes de cada entregable</li>
-          </ul>
-        </div>
-        <div class="is-not">
-          <h4>✗ NO ES</h4>
-          <ul>
-            <li>Un boilerplate de código</li>
-            <li>Un conjunto de plugins</li>
-            <li>Una receta "instalá y listo"</li>
-            <li>Una alternativa a pensar</li>
-            <li>Tecnología específica (usa la que quieras)</li>
-          </ul>
+        <div class="split">
+          <div>
+            <h4>✓ ES</h4>
+            <ul>
+              <li>Una disciplina (qué, cómo, con qué)</li>
+              <li>Un contrato firmable con el cliente</li>
+              <li>Agentes que ejecutan un plan claro</li>
+              <li>Research obligatorio antes de elegir</li>
+              <li>Trabajo colaborativo por git</li>
+            </ul>
+          </div>
+          <div class="is-not">
+            <h4>✗ NO ES</h4>
+            <ul>
+              <li>Un boilerplate de código</li>
+              <li>Un conjunto de plugins</li>
+              <li>Una receta "instalá y listo"</li>
+              <li>Una alternativa a pensar</li>
+              <li>Tecnología específica</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -645,705 +638,447 @@
 </section>
 
 <!-- ============ BENEFICIOS ============ -->
-<section class="sec bg-alt" style="padding: 80px 0;">
+<section class="sec bg-alt" style="padding: 72px 0;">
   <div class="container">
     <span class="sec-eyebrow reveal">Beneficios</span>
-    <h2 class="sec-title reveal">Lo que <span class="grad">ganás</span> con esta forma de trabajo.</h2>
+    <h2 class="sec-title reveal">Lo que <span class="grad">ganás</span>.</h2>
 
-    <div class="benefits reveal reveal-delay-1">
-      <div class="benefit">
-        <span class="benefit-icon">⚡</span>
-        <h4>60% menos rework</h4>
-        <p>El Plan Maestro firmado elimina sorpresas. Se corrige lo que haga falta <em>antes</em> de escribir código.</p>
-      </div>
-      <div class="benefit">
-        <span class="benefit-icon">🎯</span>
-        <h4>Entregables claros</h4>
-        <p>El cliente sabe exactamente qué va a recibir, en qué formato y cuándo. Sin "¿y esto?" al final.</p>
-      </div>
-      <div class="benefit">
-        <span class="benefit-icon">🧠</span>
-        <h4>IA con criterio</h4>
-        <p>Los agentes no improvisan. Siguen reglas, auditan lo que hacen y paran si no entienden.</p>
-      </div>
-      <div class="benefit">
-        <span class="benefit-icon">🔁</span>
-        <h4>Replicable</h4>
-        <p>La misma metodología sirve para CRM, scraping, dashboards, chatbots. Un solo proceso.</p>
-      </div>
+    <div class="benefits reveal">
+      <div class="benefit"><span class="benefit-icon">⚡</span><h4>60% menos rework</h4><p>El plan firmado elimina sorpresas. Se corrige antes, no después.</p></div>
+      <div class="benefit"><span class="benefit-icon">🎯</span><h4>Entregables claros</h4><p>Cliente sabe exactamente qué recibe, en qué formato, cuándo.</p></div>
+      <div class="benefit"><span class="benefit-icon">🧠</span><h4>IA con criterio</h4><p>Los agentes no improvisan. Siguen reglas, auditan, paran si no entienden.</p></div>
+      <div class="benefit"><span class="benefit-icon">🔁</span><h4>Replicable</h4><p>Un solo proceso sirve para CRM, scraping, dashboards, bots.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ METODOLOGÍA ============ -->
-<section class="sec" id="metodologia">
+<!-- ============ PLAN MAESTRO VISUALIZADO ============ -->
+<section class="sec">
   <div class="container">
-    <span class="sec-eyebrow reveal">La metodología</span>
-    <h2 class="sec-title reveal">Tres fases. <span class="grad">Ninguna se saltea.</span></h2>
+    <span class="sec-eyebrow reveal">El output</span>
+    <h2 class="sec-title reveal">El Plan Maestro: <span class="grad">un solo documento</span>, tres firmas.</h2>
     <p class="sec-sub reveal">
-      Cada fase termina con validación explícita del cliente. No avanzamos hasta que la anterior esté firmada. Al final: <strong>Plan Maestro</strong> que el cliente aprueba.
+      Los 4 pasos se consolidan en un único MD que el cliente firma. <strong>Sin firmas, nada arranca.</strong>
     </p>
 
-    <!-- FASE 1 -->
-    <div class="phase reveal">
-      <div class="phase-head">
-        <div class="phase-num">1</div>
-        <div>
-          <div class="phase-subtitle">FASE 1</div>
-          <h3>Entregables · pensar desde el final</h3>
+    <div class="plan-viz reveal">
+      <div class="plan-doc">
+        <h4>📋 documentation/plan-maestro.md</h4>
+        <div class="plan-fase"><div class="n">1</div><div class="txt">Entregables</div><div class="check">✓</div></div>
+        <div class="plan-fase"><div class="n">2</div><div class="txt">Stack Tecnológico</div><div class="check">✓</div></div>
+        <div class="plan-fase"><div class="n">3</div><div class="txt">Equipo y Plan de trabajo</div><div class="check">✓</div></div>
+        <div class="firma">
+          Firmado por cliente: <strong>✓</strong><br>
+          Firmado por Creators Latam: <strong>✓</strong>
         </div>
       </div>
-      <div class="phase-body">
-        <p>Trabajamos de adelante hacia atrás. Primero definimos <strong>qué archivo, pantalla o experiencia tiene que existir cuando terminemos</strong>. Después vemos cómo se produce.</p>
-        <div class="phase-question">¿Qué cosa concreta recibe el cliente cuando el proyecto termina perfecto?</div>
+      <div>
+        <p style="font-size:17px; margin: 0 0 16px;">
+          El agente <code class="inline">onboarding-pm</code> te guía las 3 fases. El skill <code class="inline">plan-maestro</code> genera el scaffold inicial.
+        </p>
+        <p style="font-size:17px; margin: 0 0 16px;">
+          Antes de arrancar la ejecución, un script valida las firmas:
+        </p>
+        <div class="code-block"><pre><span class="prompt">$ </span><span class="val">./tooling/validate-plan.sh</span>
 
-        <h4 style="font-size:15px;margin:24px 0 12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);">Ejemplo real</h4>
-        <div class="phase-example">
-<span class="label">Entregable:</span> <span class="val">reporte-leads-abril.xlsx</span>
-<span class="label">Ubicación:</span>  <span class="val">output/reportes/</span>
-<span class="label">Frecuencia:</span> <span class="val">semanal, lunes 9am</span>
+<span class="cmt">✓ plan-maestro.md existe</span>
+<span class="cmt">✓ Las 3 fases presentes</span>
+<span class="cmt">✓ Cliente: 3 / 3 firmas</span>
+<span class="cmt">✓ Creators Latam: 3 / 3 firmas</span>
 
-<span class="label">Columnas:</span>
-  · fecha                 <span class="comment"># de Kommo API (lead.created_at)</span>
-  · nombre, email         <span class="comment"># de Kommo API (contact fields)</span>
-  · empresa               <span class="comment"># enriquecimiento con Clearbit</span>
-  · canal                 <span class="comment"># de utm_source (HubSpot form)</span>
-  · estado                <span class="comment"># de Kommo pipeline stage</span>
-  · lifetime_value_usd    <span class="comment"># calculado: SUM(deals.amount)</span>
-
-<span class="label">KPIs al final del reporte:</span>
-  · leads_totales         <span class="comment"># COUNT(*)</span>
-  · tasa_conversion       <span class="comment"># qualified / total</span>
-  · CAC                   <span class="comment"># ad_spend / leads_convertidos</span>
-  · LTV:CAC               <span class="comment"># benchmark &gt; 3:1</span>
-
-<span class="label">Aprobación:</span>
-  El cliente abre el Excel y dice: <span class="val">"sí, esto es lo que necesitaba."</span>
-</div>
-
-        <span class="phase-label bad">✗ Anti-patrón</span>
-        <p style="font-size: 15px; margin-top: 4px;"><em>"Vamos a integrar la API de Kommo"</em> → eso es <strong>stack</strong>, no entregable. Volvé al entregable primero.</p>
-
-        <span class="phase-label">✓ Validación</span>
-        <ul class="check-list">
-          <li>Formato y ubicación exactos por cada entregable</li>
-          <li>Cada columna/campo con fuente de datos trazable</li>
-          <li>KPIs con fórmula definida</li>
-          <li>Criterio de aprobación documentado</li>
-          <li>Cliente confirma por escrito antes de avanzar</li>
-        </ul>
+<span class="key">Listo para ejecución.</span></pre></div>
       </div>
     </div>
 
-    <div class="phase-arrow">
-      <svg viewBox="0 0 40 60"><path d="M 20 5 L 20 55 M 10 40 L 20 55 L 30 40" /></svg>
-    </div>
-
-    <!-- FASE 2 -->
-    <div class="phase reveal">
-      <div class="phase-head">
-        <div class="phase-num">2</div>
-        <div>
-          <div class="phase-subtitle">FASE 2</div>
-          <h3>Stack Tecnológico · investigar, no adivinar</h3>
-        </div>
-      </div>
-      <div class="phase-body">
-        <p>Con los entregables claros, ahora sí vemos <strong>con qué herramientas los producimos</strong>. Pero <mark>no alcanza con lo que dijo el cliente</mark>. Para cada herramienta, research obligatorio.</p>
-        <div class="phase-question">¿Qué tiene hoy el cliente, qué herramientas elegimos, por qué éstas y no otras?</div>
-
-        <h4 style="font-size:15px;margin:24px 0 12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);">Fuentes que consultamos (por cada herramienta)</h4>
-
-        <div class="pillars" style="grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0;">
-          <div class="card" style="padding: 20px;"><div class="card-tag">Comunidad</div><h3 style="font-size: 17px;">Foros y Reddit</h3><p>StackOverflow, subreddit específico, HackerNews. ¿Qué problemas reportan los que ya integraron?</p></div>
-          <div class="card" style="padding: 20px;"><div class="card-tag">Código</div><h3 style="font-size: 17px;">GitHub Issues</h3><p>Issues abiertos de los últimos 6 meses. ¿Hay bugs críticos? ¿Cambios breaking?</p></div>
-          <div class="card" style="padding: 20px;"><div class="card-tag">Negocio</div><h3 style="font-size: 17px;">Precios y limits</h3><p>Tiers, rate limits, regiones, trampas en letra chica. Proyectar costo mensual real.</p></div>
-        </div>
-
-        <p style="margin-top: 24px;">Para cada herramienta completamos <code class="inline">templates/api-research.md</code> → queda en <code class="inline">documentation/stack/&lt;herramienta&gt;.md</code>.</p>
-
-        <span class="phase-label">✓ Validación</span>
-        <ul class="check-list">
-          <li>Research documentado por cada herramienta externa</li>
-          <li>Al menos 2 alternativas evaluadas por decisión</li>
-          <li>Riesgos conocidos y mitigación</li>
-          <li>Costo mensual total estimado y aprobado</li>
-          <li>TDRs del cliente revisados punto por punto</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase-arrow">
-      <svg viewBox="0 0 40 60"><path d="M 20 5 L 20 55 M 10 40 L 20 55 L 30 40" /></svg>
-    </div>
-
-    <!-- FASE 3 -->
-    <div class="phase reveal">
-      <div class="phase-head">
-        <div class="phase-num">3</div>
-        <div>
-          <div class="phase-subtitle">FASE 3</div>
-          <h3>Equipo y Plan · quién lo ejecuta y cuándo</h3>
-        </div>
-      </div>
-      <div class="phase-body">
-        <p>Ya sabemos <strong>qué</strong> (Fase 1) y <strong>con qué</strong> (Fase 2). Ahora armamos el equipo que lo va a hacer.</p>
-        <div class="phase-question">¿Qué agentes del starter aplican, qué agentes custom hay que crear, y en qué orden se ejecuta todo?</div>
-
-        <ul class="check-list">
-          <li>Agentes del starter que aplican a este proyecto</li>
-          <li>Agentes <strong>custom</strong> específicos (con descripción, tools)</li>
-          <li>Skills adicionales que hay que agregar</li>
-          <li>Plan de trabajo con Gantt (<code class="inline">diagramador-mermaid</code>)</li>
-          <li>Puntos de validación con el cliente en cada hito</li>
-          <li>Canal oficial de comunicación + cadencia de sync</li>
-        </ul>
-
-        <div class="phase-example" style="margin-top: 24px;">
-<span class="label">Semana 1 · Discovery</span>
-<span class="val">  ├─ kickoff-cliente  → primera reunión, minuta</span>
-<span class="val">  ├─ onboarding-pm   → completa Plan Maestro (Fases 1-3)</span>
-<span class="val">  └─ integrador-herramientas → research stack</span>
-
-<span class="label">Semana 2-3 · Build</span>
-<span class="val">  ├─ arquitecto      → review del plan técnico</span>
-<span class="val">  ├─ integraciones   → conecta Kommo + WhatsApp via n8n</span>
-<span class="val">  └─ compilador-datos → genera el Excel semanal</span>
-
-<span class="label">Semana 4 · Test & Handoff</span>
-<span class="val">  ├─ test-debug-loop → cierra bugs uno por uno</span>
-<span class="val">  ├─ guardian-reglas → audita antes de entregar</span>
-<span class="val">  ├─ mapa-sistema    → catálogo para el handoff</span>
-<span class="val">  └─ comentarios-adicionales → feedback post-entrega</span>
-</div>
-
-        <span class="phase-label">✓ Validación</span>
-        <ul class="check-list">
-          <li>Gantt aprobado por cliente con fechas firmes</li>
-          <li>Agentes custom creados en <code class="inline">.claude/agents/</code></li>
-          <li>Hitos de validación en el calendario del cliente</li>
-          <li>Canal de comunicación operativo</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pull reveal" style="margin-top: 64px;">
-      Si la Fase 1 no está firmada, no existe Fase 2. Si la Fase 2 no está firmada, no existe Fase 3. Disciplina.
+    <div class="pull reveal">
+      Si una fase no está firmada, la anterior queda abierta. Disciplina simple, impacto grande.
     </div>
   </div>
 </section>
 
-<!-- ============ SISTEMA DE AGENTES ============ -->
-<section class="sec bg-alt" id="sistema">
+<!-- ============ EQUIPO DE AGENTES ============ -->
+<section class="sec bg-alt" id="equipo">
   <div class="container">
-    <span class="sec-eyebrow reveal">El escuadrón</span>
-    <h2 class="sec-title reveal">22 agentes especializados. <span class="grad">Un agente, un job.</span></h2>
+    <span class="sec-eyebrow reveal">El equipo de IA</span>
+    <h2 class="sec-title reveal">27 agentes. <span class="grad">Cada uno con su job.</span></h2>
     <p class="sec-sub reveal">
-      15 operativos ejecutan el trabajo. 7 supervisores coordinan, auditan y aprenden. Claude Code los detecta automáticamente.
+      Los <strong>supervisores</strong> (con cinta rosa) coordinan y auditan. Los <strong>operativos</strong> ejecutan. Claude Code los detecta automático.
     </p>
 
-    <!-- Flujo visual con Mermaid -->
-    <h3 style="font-size: 22px; margin: 32px 0 16px; font-weight: 700;">Flujo de un proyecto</h3>
-    <div class="agents-graph reveal">
-      <div class="mermaid">
-flowchart TB
-    START([🤝 Primera llamada con cliente]):::start
-    KO[18 · kickoff-cliente<br/>minuta + brief]:::sup
-    OB[15 · onboarding-pm<br/>Plan Maestro · 3 fases]:::sup
-    PLAN{{📋 Plan Maestro<br/>FIRMADO}}:::plan
-    ORQ[13 · orquestador<br/>descompone + delega]:::sup
-    ARQ[09 · arquitecto<br/>review pre-ejecución]:::sup
+    <!-- Cards con emoji por agente -->
+    <div class="agents-grid reveal">
+      <!-- SUPERVISORES -->
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🤝</span><span class="agent-id">AG 18</span><h4>Kickoff Cliente</h4><p class="agent-job">Primera reunión, minuta, brief</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🧭</span><span class="agent-id">AG 15</span><h4>Onboarding PM</h4><p class="agent-job">Guía las 3 fases del plan</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🎼</span><span class="agent-id">AG 13</span><h4>Orquestador</h4><p class="agent-job">Delega qué agente, qué orden</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">📊</span><span class="agent-id">AG 06</span><h4>Project Manager</h4><p class="agent-job">Visión estratégica, plazos</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🏗️</span><span class="agent-id">AG 09</span><h4>Arquitecto</h4><p class="agent-job">Revisa planes pre-ejecución</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🛡️</span><span class="agent-id">AG 14</span><h4>Guardián Reglas</h4><p class="agent-job">Audita reglas pre-commit</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🗺️</span><span class="agent-id">AG 19</span><h4>Mapa Sistema</h4><p class="agent-job">Catálogo visual de todo</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🧠</span><span class="agent-id">AG 20</span><h4>Analizador Patrones</h4><p class="agent-job">Aprende entre proyectos</p></div>
+      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">📈</span><span class="agent-id">AG 23</span><h4>Status Dashboard</h4><p class="agent-job">Estado del proyecto ahora</p></div>
 
-    subgraph op ["🛠️ Operativos (15)"]
-      OPS1[documentador<br/>github-keeper<br/>compilador-datos<br/>chronicler<br/>credentials]
-      OPS2[tester<br/>test-debug-loop<br/>integraciones<br/>integrador-tools<br/>diagramador]
-      OPS3[versionador<br/>purgador<br/>archivero<br/>comentarios<br/>custom proyecto]
-    end
+      <!-- OPERATIVOS -->
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📝</span><span class="agent-id">AG 01</span><h4>Documentador</h4><p class="agent-job">Docs siempre al día</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🐙</span><span class="agent-id">AG 02</span><h4>GitHub Keeper</h4><p class="agent-job">Commits, branches, orden</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📦</span><span class="agent-id">AG 03</span><h4>Compilador Datos</h4><p class="agent-job">Limpia y estructura data</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📜</span><span class="agent-id">AG 04</span><h4>Chronicler</h4><p class="agent-job">Bitácora viva</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔑</span><span class="agent-id">AG 05</span><h4>Credentials Mgr</h4><p class="agent-job">Gestiona .env y accesos</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧪</span><span class="agent-id">AG 07</span><h4>Tester</h4><p class="agent-job">Solo testea, no arregla</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔌</span><span class="agent-id">AG 08</span><h4>Integraciones</h4><p class="agent-job">APIs, webhooks, servicios</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧷</span><span class="agent-id">AG 10</span><h4>Versionador</h4><p class="agent-job">Reemplaza > duplica</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧹</span><span class="agent-id">AG 11</span><h4>Purgador</h4><p class="agent-job">Barre lo muerto</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📐</span><span class="agent-id">AG 12</span><h4>Diagramador</h4><p class="agent-job">Mermaid sin errores</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔁</span><span class="agent-id">AG 16</span><h4>Test-Debug Loop</h4><p class="agent-job">Prueba → fix → re-prueba</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🌐</span><span class="agent-id">AG 17</span><h4>Integrador Tools</h4><p class="agent-job">API > SDK > MCP > hook</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">💬</span><span class="agent-id">AG 21</span><h4>Comentarios</h4><p class="agent-job">Feedback estructurado</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🗄️</span><span class="agent-id">AG 22</span><h4>Archivero</h4><p class="agent-job">Curador del filesystem</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📗</span><span class="agent-id">AG 24</span><h4>Excel Builder</h4><p class="agent-job">Genera .xlsx profesionales</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">💰</span><span class="agent-id">AG 25</span><h4>Cost Tracker</h4><p class="agent-job">Estima y monitorea costos</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📦</span><span class="agent-id">AG 26</span><h4>Handoff Cliente</h4><p class="agent-job">Paquete final al cliente</p></div>
+      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔐</span><span class="agent-id">AG 27</span><h4>Security Auditor</h4><p class="agent-job">Secrets, CVE, permisos</p></div>
+    </div>
 
-    GR[14 · guardian-reglas<br/>audita pre-commit]:::sup
-    PM[06 · project-manager<br/>reporta estado]:::sup
-    MAP[19 · mapa-sistema<br/>inventario visual]:::sup
-    AP[20 · analizador-patrones<br/>aprende entre proyectos]:::sup
+    <p style="margin-top: 32px; text-align: center; color: var(--ink-soft); font-size: 14px;">
+      + podés crear <strong>agentes custom</strong> del proyecto en Fase 3 del Plan Maestro.
+    </p>
+  </div>
+</section>
 
-    DELIV([📦 Entregables<br/>firmados]):::end
+<!-- ============ COLABORATIVO ============ -->
+<section class="sec" id="colaborativo">
+  <div class="container">
+    <span class="sec-eyebrow reveal">Trabajo colaborativo</span>
+    <h2 class="sec-title reveal">El repo es tu <span class="grad">oficina compartida.</span></h2>
+    <p class="sec-sub reveal">
+      Todo vive en GitHub: agentes, reglas, plan, entregables. Cualquier colaborador del equipo cuenta con los mismos 27 agentes y el mismo proceso. Git maneja los accesos, tu plan maneja la disciplina.
+    </p>
 
-    START --> KO
-    KO --> OB
-    OB --> PLAN
-    PLAN --> ORQ
-    ORQ --> ARQ
-    ARQ --> op
-    op --> GR
-    GR --> DELIV
-    PM -.monitorea.-> op
-    MAP -.cataloga.-> op
-    AP -.aprende.-> PLAN
+    <div class="collab-hero reveal">
+      <div class="inner">
+        <h3>🤝 Colaboración estructurada</h3>
+        <p>Invitás colaboradores a tu repo en GitHub. Cada uno clona, corre <code class="inline">./tooling/install.sh</code>, y ya está trabajando con el mismo sistema que vos.</p>
 
-    classDef start fill:#14B87A,stroke:#0A7C4F,color:#fff,font-weight:700
-    classDef sup fill:#FF3B77,stroke:#B22855,color:#fff,font-weight:600
-    classDef plan fill:#8B3FFF,stroke:#5A28B0,color:#fff,font-weight:700
-    classDef end fill:#2563EB,stroke:#1A4BA8,color:#fff,font-weight:700
+        <div class="collab-flow">
+          <div class="collab-step">
+            <span class="emoji">👥</span>
+            <h5>Invitás</h5>
+            <p>En GitHub, agregás colaboradores con permisos.</p>
+          </div>
+          <div class="collab-step">
+            <span class="emoji">📥</span>
+            <h5>Clonan</h5>
+            <p>Cada uno clona el repo y corre el instalador.</p>
+          </div>
+          <div class="collab-step">
+            <span class="emoji">🌿</span>
+            <h5>Crean branch</h5>
+            <p>Trabajan en su feature branch, nunca direct-to-main.</p>
+          </div>
+          <div class="collab-step">
+            <span class="emoji">✅</span>
+            <h5>Pull Request</h5>
+            <p>Proponen cambios. El guardián audita. Mergeás.</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Agent cloud -->
-    <h3 style="font-size: 22px; margin: 56px 0 16px; font-weight: 700;">Todos los agentes</h3>
-    <p style="max-width: 62ch; margin-bottom: 24px;">Los que tienen acento rosa son <strong>supervisores</strong> (coordinan, auditan, aprenden). Los demás son <strong>operativos</strong> (ejecutan trabajo).</p>
-
-    <div class="agent-cloud reveal">
-      <span class="agent-pill supervisor"><span class="pill-num">18</span>Kickoff Cliente</span>
-      <span class="agent-pill supervisor"><span class="pill-num">15</span>Onboarding PM ⭐</span>
-      <span class="agent-pill supervisor"><span class="pill-num">13</span>Orquestador</span>
-      <span class="agent-pill supervisor"><span class="pill-num">09</span>Arquitecto</span>
-      <span class="agent-pill supervisor"><span class="pill-num">06</span>Project Manager</span>
-      <span class="agent-pill supervisor"><span class="pill-num">14</span>Guardián Reglas</span>
-      <span class="agent-pill supervisor"><span class="pill-num">19</span>Mapa Sistema</span>
-      <span class="agent-pill supervisor"><span class="pill-num">20</span>Analizador Patrones</span>
-      <span class="agent-pill"><span class="pill-num">01</span>Documentador</span>
-      <span class="agent-pill"><span class="pill-num">02</span>GitHub Keeper</span>
-      <span class="agent-pill"><span class="pill-num">03</span>Compilador Datos</span>
-      <span class="agent-pill"><span class="pill-num">04</span>Chronicler</span>
-      <span class="agent-pill"><span class="pill-num">05</span>Credentials</span>
-      <span class="agent-pill"><span class="pill-num">07</span>Tester</span>
-      <span class="agent-pill"><span class="pill-num">08</span>Integraciones</span>
-      <span class="agent-pill"><span class="pill-num">10</span>Versionador</span>
-      <span class="agent-pill"><span class="pill-num">11</span>Purgador</span>
-      <span class="agent-pill"><span class="pill-num">12</span>Diagramador Mermaid</span>
-      <span class="agent-pill"><span class="pill-num">16</span>Test-Debug Loop</span>
-      <span class="agent-pill"><span class="pill-num">17</span>Integrador Tools</span>
-      <span class="agent-pill"><span class="pill-num">21</span>Comentarios</span>
-      <span class="agent-pill"><span class="pill-num">22</span>Archivero</span>
+    <div style="margin-top: 40px; padding: 24px 28px; background: var(--bg-alt); border-radius: 14px; border: 1px solid var(--line);">
+      <p style="margin: 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--pink); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">Tip de onboarding</p>
+      <p style="margin: 0; font-size: 15px;">
+        Cuando agregás un colaborador nuevo, invocá al agente <code class="inline">mapa-sistema</code> — te genera un <code class="inline">documentation/mapa-sistema.md</code> con <em>todo</em> lo que hay (agentes, skills, integraciones, custom). El colaborador lo lee en 10 min y está listo.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- ============ HERRAMIENTAS A CONECTAR ============ -->
-<section class="sec" id="integraciones">
+<!-- ============ INSTALACIÓN ============ -->
+<section class="sec bg-alt">
   <div class="container">
-    <span class="sec-eyebrow reveal">Conectar herramientas</span>
-    <h2 class="sec-title reveal">La lógica al <span class="grad">sumar nuevas herramientas.</span></h2>
+    <span class="sec-eyebrow reveal">Instalación</span>
+    <h2 class="sec-title reveal">3 comandos. <span class="grad">Empezás a trabajar.</span></h2>
     <p class="sec-sub reveal">
-      No usamos cualquier camino. Tenemos una jerarquía — siempre probamos la opción más robusta primero. El agente <code class="inline">integrador-herramientas</code> ejecuta esta lógica.
+      El instalador detecta qué ya tenés. Si todo está, sale en segundos. Si faltan cosas, las instala con tu autorización.
     </p>
 
-    <div class="integrations-hierarchy reveal">
-      <div class="integ-row best">
-        <div class="rank">1</div>
-        <div class="name">API REST oficial</div>
-        <div class="why">Default siempre. Universal, documentada, versionada, auditable.</div>
+    <div class="code-block reveal">
+      <pre><span class="cmt"># 1. Clonar el starter</span>
+<span class="prompt">$ </span><span class="val">git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto</span>
+<span class="prompt">$ </span><span class="val">cd mi-proyecto</span>
+
+<span class="cmt"># 2. Instalar herramientas (interactivo)</span>
+<span class="prompt">$ </span><span class="val">./tooling/install.sh</span>
+
+<span class="cmt"># 3. Abrir Claude Code y arrancar con el plan</span>
+<span class="prompt">$ </span><span class="val">claude</span>
+<span class="prompt">&gt; </span><span class="key">"Usá el skill plan-maestro para generar el scaffold, después invocá al agente kickoff-cliente"</span></pre>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px;">
+      <div style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 18px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 0.1em;">TOOL 1</div>
+        <h4 style="font-size: 15px; font-weight: 700; margin: 6px 0 4px;">./tooling/doctor.sh</h4>
+        <p style="font-size: 13px; color: var(--ink-soft); margin: 0;">Diagnóstico del proyecto. Chequea todo y sugiere fixes. Correlo periódico.</p>
       </div>
-      <div class="integ-row">
-        <div class="rank">2</div>
-        <div class="name">SDK oficial</div>
-        <div class="why">Cuando existe y se mantiene activo, ahorra boilerplate.</div>
+      <div style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 18px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 0.1em;">TOOL 2</div>
+        <h4 style="font-size: 15px; font-weight: 700; margin: 6px 0 4px;">./tooling/validate-plan.sh</h4>
+        <p style="font-size: 13px; color: var(--ink-soft); margin: 0;">Verifica que las 3 fases del plan estén firmadas antes de ejecutar.</p>
       </div>
-      <div class="integ-row">
-        <div class="rank">3</div>
-        <div class="name">MCP server</div>
-        <div class="why">Si la herramienta tiene MCP, Claude Code la consume nativo. Ideal para flujos con LLM en el medio.</div>
-      </div>
-      <div class="integ-row">
-        <div class="rank">4</div>
-        <div class="name">Webhook entrante/saliente</div>
-        <div class="why">Para eventos en tiempo real. Requiere endpoint expuesto + validación HMAC.</div>
-      </div>
-      <div class="integ-row">
-        <div class="rank">5</div>
-        <div class="name">n8n / Make / Zapier</div>
-        <div class="why">Orquestación visual cuando hay muchos sistemas. Backup del workflow en <code class="inline">workflows/</code>.</div>
-      </div>
-      <div class="integ-row last-resort">
-        <div class="rank">6</div>
-        <div class="name">UI automation (Playwright)</div>
-        <div class="why">Último recurso. Se rompe con cada cambio de UI.</div>
+      <div style="background: white; border: 1px solid var(--line); border-radius: 12px; padding: 18px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 0.1em;">TOOL 3</div>
+        <h4 style="font-size: 15px; font-weight: 700; margin: 6px 0 4px;">./tooling/migrate.sh</h4>
+        <p style="font-size: 13px; color: var(--ink-soft); margin: 0;">Actualiza tu proyecto a la última versión del starter con git merge.</p>
       </div>
     </div>
 
-    <h3 style="font-size: 22px; margin: 56px 0 16px; font-weight: 700;">Ejemplo: integrar Kommo + WhatsApp + Claude Code</h3>
-    <p style="max-width: 62ch;">El flujo que más usamos, como ejemplo de cómo aplicar la jerarquía. Tres capas conectadas bien.</p>
-
-    <div class="agents-graph reveal" style="margin-top: 24px;">
-      <div class="mermaid">
-flowchart LR
-    subgraph cliente ["👥 Cliente final"]
-      U[Usuario WhatsApp]
-    end
-
-    subgraph meta ["Meta Cloud"]
-      WA[WhatsApp Business API]
-    end
-
-    subgraph n8n ["n8n (nivel 5 · orquestación)"]
-      HOOK[Webhook IN]
-      ROUTE{Router}
-      SEND[HTTP Kommo API]
-    end
-
-    subgraph kommo ["Kommo CRM"]
-      API[API REST<br/>nivel 1]
-      CRM[(CRM data)]
-    end
-
-    subgraph claude ["🤖 Claude Code"]
-      MCP[MCP Server<br/>Kommo · nivel 3]
-    end
-
-    U --> WA
-    WA -->|webhook| HOOK
-    HOOK --> ROUTE
-    ROUTE -->|lead nuevo| SEND
-    SEND -->|POST| API
-    API --> CRM
-    CRM -->|query via MCP| MCP
-    MCP -.read/write.-> API
-
-    classDef best fill:#FFF0F5,stroke:#FF3B77,color:#0A0F1C,font-weight:600
-    classDef orch fill:#F0EBFF,stroke:#8B3FFF,color:#0A0F1C,font-weight:600
-    classDef ext fill:#E6F4FF,stroke:#2563EB,color:#0A0F1C
-    class API,MCP best
-    class HOOK,ROUTE,SEND orch
-    class WA,U ext
-      </div>
-    </div>
-
-    <div style="margin-top: 40px; padding: 28px 32px; background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06)); border: 1px solid var(--line); border-radius: 16px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px;">Regla</div>
-      <p style="margin: 0; color: var(--ink); font-size: 15px;">
-        Para <strong>cada</strong> herramienta nueva, <code class="inline">integrador-herramientas</code> presenta al menos <strong>2 alternativas con trade-offs explícitos</strong>. Nunca hay "la mejor" sin research — hay "la mejor para este caso, por estas razones".
+    <div style="margin-top: 32px; padding: 20px 24px; background: linear-gradient(135deg, rgba(245,158,11,.08), rgba(255,59,119,.04)); border: 1px solid rgba(245,158,11,.3); border-radius: 12px;">
+      <p style="margin: 0; font-size: 14px;">
+        <strong>💡 Viendo archivos MD con diagramas Mermaid en VS Code / Cursor?</strong><br>
+        Si el diagrama no se renderiza, presioná <code class="inline">Cmd + Shift + V</code> (Mac) o <code class="inline">Ctrl + Shift + V</code> (Windows) para ver la versión renderizada del markdown.
       </p>
     </div>
   </div>
 </section>
 
 <!-- ============ TIMING ============ -->
-<section class="sec bg-alt" id="timing">
+<section class="sec" id="timing">
   <div class="container">
     <span class="sec-eyebrow reveal">Qué esperar</span>
-    <h2 class="sec-title reveal">Timeline realista. <span class="grad">Sin sorpresas.</span></h2>
-    <p class="sec-sub reveal">
-      Cuánto tarda cada paso en serio. Si algo dura más de lo indicado, algo está mal — no es normal.
-    </p>
+    <h2 class="sec-title reveal">Timing realista. <span class="grad">Sin sorpresas.</span></h2>
+    <p class="sec-sub reveal">Cuánto tarda cada paso. Si algo dura más, algo está mal.</p>
 
     <div class="timeline reveal">
       <div class="timeline-row">
         <div class="timeline-time">15–30 min</div>
-        <div class="timeline-content"><h4>Primera instalación del starter</h4><p>En una Mac nueva sin nada: Homebrew + Python + ffmpeg + Docker + marker (modelos ~2GB) + whisper.cpp + CLIs modernos. Largo la primera vez, <strong>pero no te asustes</strong> — la siguiente corrida es en segundos.</p></div>
+        <div class="timeline-content"><h4>Primera instalación</h4><p>Mac vacía: Homebrew + Python + Docker + marker (2GB) + whisper.cpp + CLIs. Largo la primera vez. <strong>No te asustes.</strong></p></div>
       </div>
       <div class="timeline-row">
         <div class="timeline-time">2–5 seg</div>
-        <div class="timeline-content"><h4>Instalaciones posteriores</h4><p>El script audita qué tenés instalado y salta lo que ya existe. En un proyecto nuevo clonado, si ya usaste el starter antes, tarda segundos en validar.</p></div>
+        <div class="timeline-content"><h4>Instalaciones posteriores</h4><p>Detecta qué ya tenés y salta lo instalado.</p></div>
       </div>
       <div class="timeline-row">
         <div class="timeline-time">30 min – 3 días</div>
-        <div class="timeline-content"><h4>Fase 1 del Plan Maestro (Entregables)</h4><p>Depende de qué tan claro tenga el cliente lo que quiere. Idea vaga: 3 días. Con screenshot del Excel que imagina: 30 min.</p></div>
+        <div class="timeline-content"><h4>Paso 1 · Entregables</h4><p>Según claridad del cliente. Idea vaga: 3 días. Con mockup: 30 min.</p></div>
       </div>
       <div class="timeline-row">
         <div class="timeline-time">1–2 días</div>
-        <div class="timeline-content"><h4>Fase 2 (Stack + research)</h4><p>Research en foros por cada herramienta externa. No se acelera — acá evitás los sustos futuros.</p></div>
+        <div class="timeline-content"><h4>Paso 2 · Stack</h4><p>Research en foros por cada herramienta. No se acelera.</p></div>
       </div>
       <div class="timeline-row">
         <div class="timeline-time">4–8 horas</div>
-        <div class="timeline-content"><h4>Fase 3 (Equipo + Gantt)</h4><p>Con fases 1 y 2 cerradas, armar equipo y Gantt es rápido. El <code class="inline">diagramador-mermaid</code> te hace el Gantt en 15 min.</p></div>
+        <div class="timeline-content"><h4>Paso 3 · Equipo + Paso 4 · Plan</h4><p>Con los dos anteriores cerrados, armar equipo y Gantt es rápido.</p></div>
       </div>
       <div class="timeline-row">
         <div class="timeline-time">Variable</div>
-        <div class="timeline-content"><h4>Ejecución (post-firma)</h4><p>Recién acá arranca el código. El Gantt de la Fase 3 ya estableció las semanas. Ejecución pura.</p></div>
+        <div class="timeline-content"><h4>Ejecución (post-firma)</h4><p>El Gantt ya marcó las semanas. Ejecución pura.</p></div>
       </div>
     </div>
 
     <div class="timeline-warn reveal">
       <div>
-        <strong>¿Sentís que la instalación está colgada?</strong>
-        <span>Los modelos de <code class="inline" style="background:rgba(0,0,0,.06);">marker</code> tardan la primera vez (~2GB). Si llevás más de 30 minutos sin ver progreso, cancelá con <code class="inline" style="background:rgba(0,0,0,.06);">Ctrl+C</code> y correlo de nuevo — el script detecta qué ya bajó.</span>
+        <strong>¿La instalación parece colgada?</strong>
+        <span>Los modelos de <code class="inline" style="background:rgba(0,0,0,.06);">marker</code> tardan la primera vez (~2GB). Si llevás &gt;30 min sin progreso: <code class="inline" style="background:rgba(0,0,0,.06);">Ctrl+C</code> y re-correlo — detecta lo que ya bajó.</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ COMANDOS ============ -->
-<section class="sec" id="comandos">
+<section class="sec bg-alt" id="comandos">
   <div class="container">
-    <span class="sec-eyebrow reveal">Comandos esenciales</span>
-    <h2 class="sec-title reveal">Atajos de Claude Code <span class="grad">que sí o sí tenés que usar.</span></h2>
-    <p class="sec-sub reveal">
-      Los que más nos salvan el día. Aprendelos de memoria — son la diferencia entre perder horas o avanzar tranquilo.
-    </p>
+    <span class="sec-eyebrow reveal">Comandos Claude Code</span>
+    <h2 class="sec-title reveal">Atajos <span class="grad">que te salvan el día.</span></h2>
+    <p class="sec-sub reveal">Aprendelos de memoria.</p>
 
     <div class="commands reveal">
-      <div class="cmd-card"><span class="tag-crit">crítico</span><div class="cmd-code">/compact</div><h4>Compilar el contexto</h4><p>Cuando la conversación llega cerca de 500k tokens, esto la resume y reinicia. Usalo antes de que el modelo empiece a inventar.</p></div>
-      <div class="cmd-card"><span class="tag-crit">crítico</span><div class="cmd-code">ESC ESC</div><h4>Rewind (volver atrás)</h4><p>Doble Escape te deja volver a un turno anterior. Cuando el modelo se equivocó y querés reintentar desde un punto limpio.</p></div>
-      <div class="cmd-card"><div class="cmd-code">/clear</div><h4>Limpiar el chat</h4><p>Borra la conversación actual pero mantiene el proyecto abierto. Útil cuando el contexto se ensució.</p></div>
-      <div class="cmd-card"><div class="cmd-code">/cost</div><h4>Ver uso de tokens</h4><p>Muestra cuántos tokens llevás usados en la sesión. Revisá antes de meter otro PDF grande.</p></div>
-      <div class="cmd-card"><div class="cmd-code">/doctor</div><h4>Health check</h4><p>Diagnostica tu setup: Node, npm, MCP, permisos. Primer comando cuando algo "raro" pasa.</p></div>
-      <div class="cmd-card"><div class="cmd-code">/agents</div><h4>Gestionar agentes</h4><p>Listá, creá, editá agentes desde Claude Code. Útil para crear los agentes custom de Fase 3.</p></div>
-      <div class="cmd-card"><div class="cmd-code">/init</div><h4>Generar CLAUDE.md</h4><p>Si abrís un repo sin <code>CLAUDE.md</code>, te lo arma explorando el código.</p></div>
-      <div class="cmd-card"><div class="cmd-code">/config</div><h4>Settings</h4><p>Abrir settings del IDE. Ajustar modelo, permisos, tema, idioma.</p></div>
-    </div>
-
-    <h3 style="font-size: 22px; margin: 64px 0 16px; font-weight: 700;">Atajos de teclado</h3>
-    <div class="commands reveal">
-      <div class="cmd-card"><div class="cmd-code">Shift + Tab</div><h4>Toggle plan mode</h4><p>Entrás al modo planeamiento antes de ejecutar. El modelo te propone y vos aprobás.</p></div>
-      <div class="cmd-card"><div class="cmd-code">Ctrl + R</div><h4>Verbose</h4><p>Ver más detalle de lo que hace el modelo. Útil cuando algo falla.</p></div>
-      <div class="cmd-card"><div class="cmd-code">Ctrl + C</div><h4>Cancelar</h4><p>Para el comando actual. No cierra la sesión. Si el agente se va por la tangente, cortalo.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ MEJORES PRÁCTICAS ============ -->
-<section class="sec bg-alt" id="practicas">
-  <div class="container">
-    <span class="sec-eyebrow reveal">Mejores prácticas</span>
-    <h2 class="sec-title reveal">Tips que <span class="grad">aprendimos a la mala.</span></h2>
-    <p class="sec-sub reveal">
-      Reglas pequeñas pero firmes. La diferencia entre un proyecto que avanza y uno que se empantana.
-    </p>
-
-    <h3 style="font-size: 22px; margin: 32px 0 16px; font-weight: 700;">Formatos y naming</h3>
-    <div style="margin-bottom: 32px;">
-      <div class="practice-item reveal"><div class="practice-icon">📄</div><div><h4>Markdown por default, para todo lo que Claude lea</h4><p>Los modelos leen MD <strong>10× más rápido</strong> que PDFs/DOCX/HTML. Todo PDF pasa por <code>marker</code> antes que el agente lo toque.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">🏷️</div><div><h4>Archivos con nombre descriptivo, sin espacios ni acentos</h4><p>Usá <code>reporte-leads-abril2026.xlsx</code>, no <code>"Reporte Leads (Abril 2026).xlsx"</code>. <code>kebab-case</code> siempre.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">📂</div><div><h4>Un cliente = una carpeta madre. Siempre.</h4><p>Incluso tu propia agencia. "El contexto de la empresa" está todo junto. El modelo aterriza en segundos.</p></div></div>
-    </div>
-
-    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">Cómo hablarle al modelo</h3>
-    <div style="margin-bottom: 32px;">
-      <div class="practice-item reveal"><div class="practice-icon">🎯</div><div><h4>Todo mensaje largo arranca con "Antes de comenzar, dime si tienes dudas"</h4><p>El prompt del NV te ahorra 40 min de ejecución errada. Template en <code>templates/nv-prompt.md</code>.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">🧭</div><div><h4>Instrucciones claras &gt; instrucciones extensas</h4><p>5 bullets: objetivo, entrada, salida esperada, restricciones, criterio de corte. Si necesitás más, partí la tarea.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">🛑</div><div><h4>Si el modelo se va por la tangente, cortá con Ctrl+C</h4><p>No dejes que se auto-corrija 5 veces quemando tokens. Cortá, reformulá, arrancá de nuevo.</p></div></div>
-    </div>
-
-    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">Higiene del contexto</h3>
-    <div style="margin-bottom: 32px;">
-      <div class="practice-item reveal"><div class="practice-icon">♻️</div><div><h4>Compilá a los 500k tokens</h4><p><code>/compact</code> temprano es gratis; depurar errores del modelo confundido, no. Síntoma: el modelo se olvida de archivos que usaste hace rato.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">🧹</div><div><h4>Purgá la carpeta cada ciertos pasos</h4><p>El agente <code>archivero</code> orquesta <code>versionador</code> + <code>purgador</code>. Carpeta limpia = contexto limpio.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">🚫</div><div><h4>Reemplazar &gt; duplicar. Confiá en git.</h4><p>Nada de <code>plan_v2_final_FINAL.md</code>. El <code>versionador</code> edita en sitio y git guarda el historial.</p></div></div>
-    </div>
-
-    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">Seguridad</h3>
-    <div>
-      <div class="practice-item reveal"><div class="practice-icon">🔐</div><div><h4>Credenciales: sólo en <code>.env</code>, nunca en código</h4><p>El <code>credentials-manager</code> chequea antes de cada commit. Una credencial en un commit público = rotarla YA.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">⛔</div><div><h4>Si no usás Claude Code, no setées <code>ANTHROPIC_API_KEY</code></h4><p>Claude Code usa su propia sesión. Menos keys en el <code>.env</code>, menos superficie de ataque.</p></div></div>
-      <div class="practice-item reveal"><div class="practice-icon">👀</div><div><h4>Antes de cada commit grande: <code>guardian-reglas</code></h4><p>Audita las 10 reglas de oro. Si reporta crítico, no commites hasta resolver.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ REGLAS ============ -->
-<section class="sec" id="reglas">
-  <div class="container">
-    <span class="sec-eyebrow reveal">10 reglas de oro</span>
-    <h2 class="sec-title reveal">Lo que <span class="grad">no se negocia.</span></h2>
-    <p class="sec-sub reveal">El resumen de lo que, con el tiempo, dejamos de discutir.</p>
-
-    <div class="principles reveal">
-      <div class="principle"><div class="principle-num">01</div><div><h3>Plan Maestro antes de ejecutar.</h3><p>Las 3 fases firmadas. Sin plan firmado, no arranca nada.</p></div></div>
-      <div class="principle"><div class="principle-num">02</div><div><h3>GitHub primero.</h3><p>Repo conectado, permisos de terminal, <code class="inline">.env</code> en local.</p></div></div>
-      <div class="principle"><div class="principle-num">03</div><div><h3>Un cliente = una carpeta madre.</h3><p>Incluso tu propia agencia. El contexto junto.</p></div></div>
-      <div class="principle"><div class="principle-num">04</div><div><h3>Compilá a los 500k tokens.</h3><p>No esperes al millón. Compilar temprano es gratis.</p></div></div>
-      <div class="principle"><div class="principle-num">05</div><div><h3>Reemplazar &gt; duplicar.</h3><p>Nada de <code class="inline">plan_v2_final_final.md</code>.</p></div></div>
-      <div class="principle"><div class="principle-num">06</div><div><h3>Todo lo final va a <code class="inline">output/</code>.</h3><p>Cero excepciones.</p></div></div>
-      <div class="principle"><div class="principle-num">07</div><div><h3>Un agente, un job.</h3><p>Cuando un agente hace dos cosas, hace mal las dos.</p></div></div>
-      <div class="principle"><div class="principle-num">08</div><div><h3>El NV nunca arranca sin confirmar.</h3><p>"Decime dudas antes de iniciar" es fijo.</p></div></div>
-      <div class="principle"><div class="principle-num">09</div><div><h3>Plan paso a paso &gt; paralelo.</h3><p>Paralelización mal hecha colapsa y quema tokens.</p></div></div>
-      <div class="principle"><div class="principle-num">10</div><div><h3>Si no avanza, no es el modelo.</h3><p>Es el prompt, el contexto o el plan.</p></div></div>
+      <div class="cmd-card"><span class="tag-crit">crítico</span><div class="cmd-code">/compact</div><h4>Compilar contexto</h4><p>Resume la conversación cerca del límite de tokens.</p></div>
+      <div class="cmd-card"><span class="tag-crit">crítico</span><div class="cmd-code">ESC ESC</div><h4>Rewind</h4><p>Volver a un turno anterior. Para cuando el modelo se equivocó.</p></div>
+      <div class="cmd-card"><div class="cmd-code">/clear</div><h4>Limpiar chat</h4><p>Borra conversación, mantiene proyecto abierto.</p></div>
+      <div class="cmd-card"><div class="cmd-code">/cost</div><h4>Uso de tokens</h4><p>Cuántos tokens llevás en la sesión.</p></div>
+      <div class="cmd-card"><div class="cmd-code">/doctor</div><h4>Health check</h4><p>Diagnostica setup (Node, MCP, permisos).</p></div>
+      <div class="cmd-card"><div class="cmd-code">/agents</div><h4>Gestionar agentes</h4><p>Listar, crear, editar.</p></div>
+      <div class="cmd-card"><div class="cmd-code">/init</div><h4>Generar CLAUDE.md</h4><p>Para repos sin él.</p></div>
+      <div class="cmd-card"><div class="cmd-code">Shift + Tab</div><h4>Plan mode</h4><p>El modelo propone antes de ejecutar.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============ CHANGELOG ============ -->
-<section class="sec bg-alt" id="changelog">
+<section class="sec" id="changelog">
   <div class="container">
     <span class="sec-eyebrow reveal">Changelog</span>
-    <h2 class="sec-title reveal">Así <span class="grad">fue creciendo</span> el sistema.</h2>
-    <p class="sec-sub reveal">
-      Cada versión suma agentes, skills, mejores prácticas. El sistema <strong>aprende con cada proyecto</strong> gracias al <code class="inline">analizador-patrones</code>.
-    </p>
+    <h2 class="sec-title reveal">Así fue <span class="grad">creciendo</span> el sistema.</h2>
+    <p class="sec-sub reveal">Cada versión suma agentes, skills, tooling. El <code class="inline">analizador-patrones</code> detecta qué agregar en base a proyectos reales.</p>
 
     <div class="changelog-list reveal">
       <div class="changelog-entry">
-        <span class="ver">v1.5.0</span><span class="date">2026-04-21</span>
-        <div class="title">Agentes de onboarding, testing y aprendizaje</div>
+        <span class="ver">v1.6.0</span><span class="date">2026-04-21</span>
+        <div class="title">Ejecución, seguridad y handoff</div>
         <ul>
-          <li><strong>+7 agentes</strong> (22 totales): test-debug-loop, integrador-herramientas, kickoff-cliente, mapa-sistema, analizador-patrones, comentarios-adicionales, archivero.</li>
-          <li>Landing: manifiesto "es forma de trabajo, no stack" + visualización gráfica de agentes con Mermaid.</li>
-          <li>CI con GitHub Actions: valida frontmatter de agentes, links en MDs, JSON válido.</li>
-          <li>Badges en README (versión, licencia, agentes, CI).</li>
-          <li>CHANGELOG.md y tooling/prerequisitos.md.</li>
+          <li><strong>+5 agentes</strong> (27 total): <span class="highlight">status-dashboard</span>, <span class="highlight">excel-builder</span>, <span class="highlight">cost-tracker</span>, <span class="highlight">handoff-cliente</span>, <span class="highlight">security-auditor</span>.</li>
+          <li>3 scripts nuevos: <code class="inline">doctor.sh</code>, <code class="inline">validate-plan.sh</code>, <code class="inline">migrate.sh</code>.</li>
+          <li>Skill <code class="inline">plan-maestro</code> (scaffold generator).</li>
+          <li>Pre-commit hook con <code class="inline">gitleaks</code> integrado al install.</li>
+          <li>Template <code class="inline">handoff-final.md</code>.</li>
+          <li>Landing simplificada con 4 pasos destacados + emojis en agentes + sección colaborativa.</li>
+        </ul>
+      </div>
+
+      <div class="changelog-entry">
+        <span class="ver">v1.5.0</span><span class="date">2026-04-21</span>
+        <div class="title">Onboarding, testing y aprendizaje</div>
+        <ul>
+          <li>+7 agentes (22 total): test-debug-loop, integrador-herramientas, kickoff-cliente, mapa-sistema, analizador-patrones, comentarios-adicionales, archivero.</li>
+          <li>Landing con manifiesto "forma de trabajo, no stack" + Mermaid renderizado.</li>
+          <li>GitHub Actions: valida frontmatter agentes, links MDs, JSON válido.</li>
+          <li>CHANGELOG.md + badges en README.</li>
         </ul>
       </div>
 
       <div class="changelog-entry">
         <span class="ver">v1.4.0</span><span class="date">2026-04-21</span>
-        <div class="title">Landing animada, timing realista, comandos esenciales</div>
+        <div class="title">Landing animada + comandos</div>
         <ul>
-          <li>Secciones nuevas: Beneficios, Qué Esperar, Comandos Claude Code, Mejores Prácticas.</li>
-          <li>FAQ expandida a ~20 preguntas en 4 grupos.</li>
-          <li>Animaciones: scroll progress bar, fade-in on scroll, counter animation, pulse en fases.</li>
-          <li>Fix bug en install.sh, +10 comandos preaprobados en settings.json.</li>
+          <li>Secciones: Beneficios, Timing, Comandos, Mejores Prácticas.</li>
+          <li>FAQ expandida en 4 grupos.</li>
+          <li>Animaciones: scroll progress, fade-in, counter, pulse.</li>
         </ul>
       </div>
 
       <div class="changelog-entry">
         <span class="ver">v1.3.0</span><span class="date">2026-04-20</span>
-        <div class="title">Eje metodológico — 3 fases obligatorias</div>
+        <div class="title">Eje metodológico</div>
         <ul>
-          <li>Landing rehecha: metodología al centro, herramientas secundarias.</li>
-          <li>Nuevo agente <code class="inline">onboarding-pm</code> (AG 15) que guía las 3 fases.</li>
-          <li>Template <code class="inline">plan-maestro.md</code> firmable por fase.</li>
-          <li>Instalador inteligente: audita, salta lo que ya existe, sale en segundos si todo está.</li>
-          <li>Aclaración: <code class="inline">ANTHROPIC_API_KEY</code> no requerida con Claude Code.</li>
+          <li>Agente <code class="inline">onboarding-pm</code> (AG 15) guía las 3 fases.</li>
+          <li>Template <code class="inline">plan-maestro.md</code>.</li>
+          <li>Instalador inteligente que salta lo ya instalado.</li>
         </ul>
       </div>
 
       <div class="changelog-entry">
         <span class="ver">v1.2.0</span><span class="date">2026-04-20</span>
-        <div class="title">Supervisión del escuadrón</div>
+        <div class="title">Supervisores del escuadrón</div>
         <ul>
-          <li>Agentes <code class="inline">orquestador</code> (AG 13) y <code class="inline">guardian-reglas</code> (AG 14).</li>
-          <li>INSTALL.md, tooling/prerequisitos.md, LICENSE (MIT).</li>
+          <li>Agentes <code class="inline">orquestador</code> (AG 13), <code class="inline">guardian-reglas</code> (AG 14).</li>
+          <li>INSTALL.md, LICENSE MIT.</li>
         </ul>
       </div>
 
       <div class="changelog-entry">
         <span class="ver">v1.1.0</span><span class="date">2026-04-20</span>
-        <div class="title">Herramientas e integraciones</div>
+        <div class="title">Herramientas</div>
         <ul>
-          <li>Agente <code class="inline">diagramador-mermaid</code> (AG 12) con validación.</li>
-          <li>Skill <code class="inline">video-a-texto</code> (Gemini + yt-dlp + whisper.cpp).</li>
-          <li>Instalador interactivo con permisos preaprobados.</li>
-          <li>Stack: Homebrew, Python 3.12, uv, nvm, ffmpeg, Docker + CLIs modernos.</li>
+          <li>Agente <code class="inline">diagramador-mermaid</code>.</li>
+          <li>Skill <code class="inline">video-a-texto</code>.</li>
+          <li>Stack: Homebrew, Python, uv, nvm, ffmpeg, Docker + CLIs.</li>
         </ul>
       </div>
 
       <div class="changelog-entry">
         <span class="ver">v1.0.0</span><span class="date">2026-04-19</span>
-        <div class="title">Lanzamiento inicial</div>
+        <div class="title">Lanzamiento</div>
         <ul>
-          <li>11 agentes operativos, 2 skills fundacionales, templates, estructura canónica.</li>
+          <li>11 agentes, 2 skills, templates, estructura canónica.</li>
           <li>10 reglas de oro en CLAUDE.md.</li>
-          <li>Landing + GitHub Pages.</li>
         </ul>
       </div>
     </div>
 
-    <div style="margin-top: 40px; text-align: center;">
-      <a href="https://github.com/tamibot/creators-latam-starter/blob/main/CHANGELOG.md" style="color:var(--pink);font-weight:600;font-size:14px;">Ver CHANGELOG completo en GitHub →</a>
+    <div style="margin-top: 32px; text-align: center;">
+      <a href="https://github.com/tamibot/creators-latam-starter/blob/main/CHANGELOG.md" style="color:var(--pink); font-weight:600; font-size:14px;">Ver CHANGELOG completo →</a>
     </div>
   </div>
 </section>
 
 <!-- ============ COLABORACIONES ============ -->
-<section class="sec" id="colaboraciones">
+<section class="sec bg-alt">
   <div class="container">
     <span class="sec-eyebrow reveal">Colaboraciones</span>
-    <h2 class="sec-title reveal">¿Querés <span class="grad">sumar</span> o que trabajemos juntos?</h2>
+    <h2 class="sec-title reveal">¿Querés <span class="grad">sumar</span> o trabajar juntos?</h2>
     <p class="sec-sub reveal">
-      Si usás el starter, tenés ideas para mejorar el sistema, o querés que montemos algo a medida — escribinos.
+      Proyectos de IA con CRM, chatbots WhatsApp, automatizaciones n8n. También colaboraciones open source al starter.
     </p>
 
-    <div class="collab-box reveal">
-      <div class="text">
-        <h3>Contacto directo</h3>
-        <p>Respondemos en ~24h hábiles. Proyectos de IA con CRM, chatbots WhatsApp, automatizaciones n8n, integraciones custom. También colaboraciones open source al starter.</p>
-      </div>
-      <div class="collab-links">
-        <a href="mailto:info@creatorslatam.com?subject=Colaboraci%C3%B3n%20con%20el%20starter" class="collab-link">
-          <div class="ic">✉️</div>
-          <div>
-            <div class="label">Email</div>
-            <div class="val">info@creatorslatam.com</div>
-          </div>
-        </a>
-        <a href="https://wa.me/51995547575?text=Hola%20Creators%20Latam%2C%20vi%20el%20starter%20en%20GitHub%20y%20quiero%20saber%20m%C3%A1s" class="collab-link">
-          <div class="ic">💬</div>
-          <div>
-            <div class="label">WhatsApp</div>
-            <div class="val">+51 995 547 575</div>
-          </div>
-        </a>
-        <a href="https://www.creatorslatam.com/" class="collab-link">
-          <div class="ic">🌐</div>
-          <div>
-            <div class="label">Web oficial</div>
-            <div class="val">creatorslatam.com</div>
-          </div>
-        </a>
-        <a href="https://github.com/tamibot/creators-latam-starter/issues/new" class="collab-link">
-          <div class="ic">🐛</div>
-          <div>
-            <div class="label">Issue / Feature request</div>
-            <div class="val">GitHub Issues</div>
-          </div>
-        </a>
-      </div>
+    <div class="collab-links reveal">
+      <a href="mailto:info@creatorslatam.com?subject=Colaboraci%C3%B3n%20Creators%20Latam" class="collab-link">
+        <div class="ic">✉️</div>
+        <div><div class="label">Email</div><div class="val">info@creatorslatam.com</div></div>
+      </a>
+      <a href="https://wa.me/51995547575?text=Hola%2C%20vi%20el%20starter%20en%20GitHub" class="collab-link">
+        <div class="ic">💬</div>
+        <div><div class="label">WhatsApp</div><div class="val">+51 995 547 575</div></div>
+      </a>
+      <a href="https://www.creatorslatam.com/" class="collab-link">
+        <div class="ic">🌐</div>
+        <div><div class="label">Web oficial</div><div class="val">creatorslatam.com</div></div>
+      </a>
+      <a href="https://github.com/tamibot/creators-latam-starter/issues/new" class="collab-link">
+        <div class="ic">🐛</div>
+        <div><div class="label">Issue / Feature</div><div class="val">GitHub Issues</div></div>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="sec bg-alt" id="faq">
+<section class="sec" id="faq">
   <div class="container">
     <span class="sec-eyebrow reveal">FAQ</span>
     <h2 class="sec-title reveal">Preguntas <span class="grad">frecuentes.</span></h2>
-    <p class="sec-sub reveal">Lo que más nos preguntan, agrupado. Si no está acá, WhatsApp al +51 995 547 575.</p>
 
-    <div class="faq-group-title">Metodología</div>
+    <div class="faq-group-title">Forma de trabajo</div>
     <div class="faq-list">
-      <details class="faq-item reveal"><summary>¿Por qué arrancan con "Plan Maestro" y no directo con código?</summary><div class="faq-body">Porque sin entregable definido, stack validado y equipo armado, el código que escribís es al pedo. El 80% de los proyectos fallidos que vimos empezaron con "dale, codeá". El Plan Maestro toma 2–5 días y ahorra semanas.</div></details>
-      <details class="faq-item reveal"><summary>¿Qué pasa si el cliente no quiere pasar por las 3 fases?</summary><div class="faq-body">Le explicamos que no trabajamos sin plan firmado. Si insiste, agradecemos pero no tomamos el proyecto.</div></details>
-      <details class="faq-item reveal"><summary>¿Es obligatorio investigar en foros en la Fase 2?</summary><div class="faq-body">Sí. Las docs oficiales siempre están incompletas o desactualizadas. Los foros te muestran los problemas reales. Documentado en <code class="inline">documentation/stack/</code>.</div></details>
+      <details class="faq-item reveal"><summary>¿Por qué "forma de trabajo" y no solo herramientas?</summary><div class="faq-body">Porque 10 herramientas no arreglan la falta de proceso. El starter te da el <strong>proceso</strong> (4 pasos, 27 agentes, reglas) para que cualquier stack que uses después funcione.</div></details>
+      <details class="faq-item reveal"><summary>¿Qué pasa si el cliente no quiere el Plan Maestro?</summary><div class="faq-body">No trabajamos. Los proyectos sin plan firmado terminan mal para ambos. Mejor no arrancar.</div></details>
+      <details class="faq-item reveal"><summary>¿Es obligatorio investigar en foros en el Paso 2?</summary><div class="faq-body">Sí. Las docs oficiales mienten por omisión. Los foros te cuentan los problemas reales.</div></details>
     </div>
 
-    <div class="faq-group-title">Setup e instalación</div>
+    <div class="faq-group-title">Setup</div>
     <div class="faq-list">
-      <details class="faq-item reveal"><summary>¿Cuánto tarda instalar todo?</summary><div class="faq-body">Primera vez en Mac vacía: <strong>15–30 min</strong>. En corridas siguientes: <strong>segundos</strong> — el instalador detecta qué ya tenés y salta lo instalado.</div></details>
-      <details class="faq-item reveal"><summary>Necesito <code class="inline">ANTHROPIC_API_KEY</code>?</summary><div class="faq-body">Si usás Claude Code, <strong>no</strong>. Usa tu sesión de login. Solo la necesitás si llamás la API desde código.</div></details>
-      <details class="faq-item reveal"><summary>¿Corre en Windows?</summary><div class="faq-body">El script asume macOS. Para Windows, pedile a Claude/Cursor que aplique lo mismo con <code class="inline">winget</code> o <code class="inline">scoop</code>.</div></details>
-      <details class="faq-item reveal"><summary>¿Qué hace <code class="inline">.claude/settings.json</code>?</summary><div class="faq-body">Define qué comandos puede ejecutar Claude Code sin pedirte autorización cada vez. Lista blanca para seguros, deny crítico para destructivos (rm -rf, force-push, leer .env).</div></details>
-      <details class="faq-item reveal"><summary>¿Puedo usar Cursor o Codex en vez de Claude Code?</summary><div class="faq-body">Sí. La estructura de <code class="inline">.claude/</code> es específica de Claude Code, pero reglas y templates son universales.</div></details>
+      <details class="faq-item reveal"><summary>¿Cuánto tarda instalar?</summary><div class="faq-body">Mac vacía: 15–30 min. Después: segundos (detecta qué ya tenés).</div></details>
+      <details class="faq-item reveal"><summary>¿Necesito <code class="inline">ANTHROPIC_API_KEY</code>?</summary><div class="faq-body">Si usás Claude Code: <strong>no</strong>. Usa tu sesión. Sólo si llamás la API desde código.</div></details>
+      <details class="faq-item reveal"><summary>¿Corre en Windows?</summary><div class="faq-body">El script asume macOS. Para Windows, pedile a Claude que adapte usando <code class="inline">winget</code>/<code class="inline">scoop</code>.</div></details>
+      <details class="faq-item reveal"><summary>¿Puedo usar Cursor o Codex en lugar de Claude Code?</summary><div class="faq-body">Sí. <code class="inline">.claude/</code> es específico de Claude Code, pero <code class="inline">CLAUDE.md</code> y templates son universales.</div></details>
     </div>
 
-    <div class="faq-group-title">Agentes y ejecución</div>
+    <div class="faq-group-title">Colaboración</div>
     <div class="faq-list">
-      <details class="faq-item reveal"><summary>¿Puedo armar agentes custom para mi proyecto?</summary><div class="faq-body">Sí — el <code class="inline">onboarding-pm</code> los propone en Fase 3. Creás un <code class="inline">.md</code> en <code class="inline">.claude/agents/</code> con el frontmatter estándar.</div></details>
-      <details class="faq-item reveal"><summary>¿Cuánto cuesta en tokens una sesión típica?</summary><div class="faq-body">Fase 1 (entregables): ~20k-50k input. Fase 3 con generación de código: 100k-500k. Usá <code class="inline">/cost</code> para ver en tiempo real.</div></details>
-      <details class="faq-item reveal"><summary>¿Qué hago si un agente se va por la tangente?</summary><div class="faq-body">1) <code class="inline">Ctrl+C</code> para cortar. 2) <code class="inline">ESC ESC</code> para volver al turno anterior. 3) Reformulá siguiendo el NV (objetivo, entrada, salida, restricciones, corte).</div></details>
-      <details class="faq-item reveal"><summary>¿Cómo actualizo el starter cuando sacamos versión nueva?</summary><div class="faq-body"><pre><code>git remote add starter https://github.com/tamibot/creators-latam-starter.git
-git fetch starter
-git merge starter/main --allow-unrelated-histories</code></pre>El <code class="inline">versionador</code> ayuda con conflictos.</div></details>
-      <details class="faq-item reveal"><summary>¿Qué diferencia tiene con starters de Vercel/Next?</summary><div class="faq-body">Aquellos son <strong>templates de código</strong>. Éste es un <strong>starter de proceso</strong>: reglas, agentes, metodología. Se monta <em>sobre</em> cualquier stack.</div></details>
+      <details class="faq-item reveal"><summary>¿Cómo trabaja un equipo con esto?</summary><div class="faq-body">Invitás a GitHub, clonan, corren <code class="inline">install.sh</code>, abren Claude Code. Todos tienen los mismos 27 agentes. Trabajan en branches, abren PRs, el <code class="inline">guardian-reglas</code> audita antes del merge.</div></details>
+      <details class="faq-item reveal"><summary>¿Cómo onboardear a un colaborador nuevo?</summary><div class="faq-body">Invocás <code class="inline">mapa-sistema</code>, te genera <code class="inline">documentation/mapa-sistema.md</code> con todo lo que hay. El colaborador lo lee en 10 min.</div></details>
+      <details class="faq-item reveal"><summary>¿Cómo manejamos permisos de quien puede hacer qué?</summary><div class="faq-body">GitHub permissions + branch protection. Con protección de main, nadie mergea directo sin aprobación. El <code class="inline">guardian-reglas</code> valida las 10 reglas antes de mergear.</div></details>
     </div>
 
     <div class="faq-group-title">Troubleshooting</div>
     <div class="faq-list">
-      <details class="faq-item reveal"><summary>La instalación se colgó — ¿qué hago?</summary><div class="faq-body">Los modelos de <code class="inline">marker</code> tardan la primera vez (~2GB). Si &gt;30 min sin progreso: <code class="inline">Ctrl+C</code> y re-correlo. Detecta qué ya bajó.</div></details>
-      <details class="faq-item reveal"><summary>El modelo no encuentra un archivo que yo veo</summary><div class="faq-body">Problema de contexto. <code class="inline">/clear</code> o <code class="inline">/compact</code> y re-mencionar con ruta completa. Si persiste, chequeá permisos en <code class="inline">.claude/settings.json</code>.</div></details>
-      <details class="faq-item reveal"><summary>Docker Desktop no arranca después de instalar</summary><div class="faq-body">Abrilo manualmente desde Applications al menos una vez — pide permisos macOS que no pueden darse automáticamente.</div></details>
-      <details class="faq-item reveal"><summary>"command not found: brew" después de instalar</summary><div class="faq-body">Agregá Homebrew al PATH:<pre><code>echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
+      <details class="faq-item reveal"><summary>La instalación se colgó</summary><div class="faq-body">Marker descarga ~2GB la primera vez. Si &gt;30 min sin progreso: <code class="inline">Ctrl+C</code>, re-correlo. Detecta qué ya bajó.</div></details>
+      <details class="faq-item reveal"><summary>El diagrama Mermaid en un MD no se ve renderizado</summary><div class="faq-body">En VS Code / Cursor, presioná <code class="inline">Cmd + Shift + V</code> (Mac) o <code class="inline">Ctrl + Shift + V</code> (Win) para ver el preview renderizado del markdown.</div></details>
+      <details class="faq-item reveal"><summary>Docker Desktop no arranca</summary><div class="faq-body">Abrilo manualmente desde Applications una vez para aceptar permisos de macOS.</div></details>
+      <details class="faq-item reveal"><summary>"command not found: brew"</summary><div class="faq-body"><pre><code>echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
 source ~/.zshrc</code></pre></div></details>
-      <details class="faq-item reveal"><summary>"externally-managed-environment" al instalar con pip</summary><div class="faq-body">Python 3.12 protege el sistema. Usá <code class="inline">uv pip install --system</code> (incluido) o <code class="inline">pip3 install --user --break-system-packages</code>.</div></details>
-      <details class="faq-item reveal"><summary>El agente no aparece en <code class="inline">/agents</code></summary><div class="faq-body">Reiniciá Claude Code. Si aún no aparece, chequeá el frontmatter (<code>---</code>, <code>name:</code>, <code>description:</code>, <code>---</code>).</div></details>
+      <details class="faq-item reveal"><summary>El agente no aparece en <code class="inline">/agents</code></summary><div class="faq-body">Reiniciá Claude Code. Chequeá que el frontmatter esté bien formado.</div></details>
+      <details class="faq-item reveal"><summary>Doctor script muestra issues — cómo arreglo?</summary><div class="faq-body">Correr <code class="inline">./tooling/doctor.sh --fix</code> para correcciones seguras automáticas.</div></details>
     </div>
   </div>
 </section>
 
 <!-- ============ CTA FINAL ============ -->
-<section class="sec" id="cta">
+<section class="sec bg-alt">
   <div class="container">
     <div class="cta-final reveal">
-      <div class="cta-inner">
-        <h2>¿Listo para arrancar<br>con metodología?</h2>
-        <p>Cloná el starter, corré el instalador, invocá al <code style="background:rgba(0,0,0,.2);padding:2px 8px;border-radius:6px;">onboarding-pm</code>. Las 3 fases te guían hasta el Plan Maestro.</p>
-        <div class="code-pill" style="max-width: 620px; margin: 24px auto;">
-          <span class="prompt">$ </span>git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto<br>
-          <span class="prompt">$ </span>cd mi-proyecto &amp;&amp; ./tooling/install.sh<br>
-          <span class="prompt">$ </span>claude                      <span style="color:rgba(255,255,255,.5);">  # "invocá onboarding-pm"</span>
+      <div class="inner">
+        <h2>Listo para empezar<br>a trabajar mejor?</h2>
+        <p>Cloná, corré el instalador, generá el scaffold del plan. En minutos tenés el equipo de 27 agentes trabajando con vos.</p>
+        <div class="code-pill" style="max-width: 620px; margin: 20px auto;">
+<span class="prompt">$ </span>git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto<br>
+<span class="prompt">$ </span>cd mi-proyecto &amp;&amp; ./tooling/install.sh<br>
+<span class="prompt">$ </span>claude     <span style="color:rgba(255,255,255,.5);">  # "Usá skill plan-maestro"</span>
         </div>
         <br>
         <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-white">Ir al repositorio →</a>
-        <p style="margin-top: 32px; font-size: 15px;">
-          ¿Preferís que lo montemos completo para tu empresa?<br>
-          <strong>+51 995 547 575</strong> · <a href="https://www.creatorslatam.com/" style="text-decoration: underline;">creatorslatam.com</a>
+        <p style="margin-top: 28px; font-size: 14px;">
+          +51 995 547 575 · <a href="https://www.creatorslatam.com/" style="text-decoration: underline;">creatorslatam.com</a>
         </p>
       </div>
     </div>
@@ -1356,21 +1091,20 @@ source ~/.zshrc</code></pre></div></details>
     <div class="foot-row">
       <div>
         <div class="brand" style="margin-bottom: 12px;"><span class="brand-dot"></span>Creators <span class="soft">Latam</span></div>
-        <p class="foot-copy">Automatizamos la gestión de clientes con ChatBots con Inteligencia Artificial y CRM. 24/7. Desde Lima, para toda LatAm.</p>
+        <p class="foot-copy">Automatizamos gestión de clientes con ChatBots con IA y CRM. 24/7. Desde Lima, para toda LatAm.</p>
       </div>
       <div>
-        <h4>Metodología</h4>
-        <a href="#metodologia">Las 3 fases</a>
-        <a href="#sistema">Agentes</a>
-        <a href="#integraciones">Conectar herramientas</a>
-        <a href="#reglas">Reglas de oro</a>
+        <h4>Flujo</h4>
+        <a href="#flujo">Los 4 pasos</a>
+        <a href="#equipo">Equipo IA</a>
+        <a href="#colaborativo">Colaboración</a>
       </div>
       <div>
-        <h4>Operación</h4>
-        <a href="#timing">Qué esperar</a>
-        <a href="#comandos">Comandos</a>
-        <a href="#practicas">Mejores prácticas</a>
-        <a href="#changelog">Changelog</a>
+        <h4>Recursos</h4>
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/INSTALL.md">Guía instalación</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/CHANGELOG.md">Changelog</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/templates/plan-maestro.md">Plan Maestro</a>
+        <a href="#comandos">Comandos Claude Code</a>
       </div>
       <div>
         <h4>Contacto</h4>
@@ -1382,32 +1116,12 @@ source ~/.zshrc</code></pre></div></details>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Creators Latam · Lima, Perú</span>
-      <span>Starter Kit v1.5 · Metodología primero</span>
+      <span>Starter v1.6 · Forma de trabajar con IA</span>
     </div>
   </div>
 </footer>
 
-<!-- Mermaid for graph diagrams -->
-<script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({
-    startOnLoad: true,
-    theme: 'base',
-    themeVariables: {
-      primaryColor: '#FF3B77',
-      primaryTextColor: '#0A0F1C',
-      primaryBorderColor: '#B22855',
-      lineColor: '#8B3FFF',
-      secondaryColor: '#F3F4F8',
-      tertiaryColor: '#FAFAFB',
-      fontFamily: 'Inter, sans-serif',
-      fontSize: '14px'
-    }
-  });
-</script>
-
 <script>
-  // Scroll progress bar
   (function() {
     const bar = document.getElementById('scrollProgress');
     function update() {
@@ -1419,77 +1133,30 @@ source ~/.zshrc</code></pre></div></details>
     update();
   })();
 
-  // Reveal on scroll
   (function() {
-    const els = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .phase');
-    if (!('IntersectionObserver' in window)) {
-      els.forEach(e => e.classList.add('in'));
-      return;
-    }
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          io.unobserve(e.target);
-        }
-      });
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
     els.forEach(el => io.observe(el));
   })();
 
-  // Counter animation
-  (function() {
-    const nums = document.querySelectorAll('[data-count]');
-    if (!('IntersectionObserver' in window)) {
-      nums.forEach(n => n.textContent = n.dataset.count);
-      return;
-    }
-    const animate = (el) => {
-      const target = parseInt(el.dataset.count, 10);
-      const dur = 900;
-      const start = performance.now();
-      function frame(t) {
-        const p = Math.min(1, (t - start) / dur);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased);
-        if (p < 1) requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    };
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          animate(e.target);
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    nums.forEach(n => io.observe(n));
-  })();
-
-  // Stagger FAQs
   (function() {
     const faqs = document.querySelectorAll('.faq-item');
-    faqs.forEach((f, i) => { f.style.transitionDelay = (i * 40) + 'ms'; });
+    faqs.forEach((f, i) => { f.style.transitionDelay = (i * 30) + 'ms'; });
   })();
 
-  // Stagger agent pills
+  // Active step rotation
   (function() {
-    const pills = document.querySelectorAll('.agent-pill');
-    pills.forEach((p, i) => {
-      p.style.animation = `float ${6 + (i % 3)}s ease-in-out ${i * 0.05}s infinite`;
-      p.style.animationPlayState = 'paused';
-    });
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.animationPlayState = 'running';
-        } else {
-          e.target.style.animationPlayState = 'paused';
-        }
-      });
-    }, { threshold: 0.3 });
-    pills.forEach(p => io.observe(p));
+    const steps = document.querySelectorAll('.step');
+    if (steps.length === 0) return;
+    let currentIdx = 0;
+    setInterval(() => {
+      steps.forEach(s => s.classList.remove('active'));
+      steps[currentIdx].classList.add('active');
+      currentIdx = (currentIdx + 1) % steps.length;
+    }, 2000);
   })();
 </script>
 
