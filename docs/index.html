@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Creators Latam · Starter Kit para proyectos con IA</title>
-<meta name="description" content="Repositorio base para arrancar proyectos con Claude Code, Cursor o cualquier LLM. Agentes preconfigurados, skills y reglas que nos ahorran horas en cada proyecto." />
+<title>Creators Latam · Cómo trabajamos con IA</title>
+<meta name="description" content="Nuestra metodología de 3 fases para proyectos con IA. Primero el entregable, después el stack, después el equipo. El repo es sólo la ejecución." />
 
-<!-- Open Graph -->
-<meta property="og:title" content="Creators Latam · Starter Kit para proyectos con IA" />
-<meta property="og:description" content="El repo base que usamos para lanzar proyectos con IA en 48 horas." />
+<meta property="og:title" content="Creators Latam · Cómo trabajamos con IA" />
+<meta property="og:description" content="Metodología de 3 fases: entregable → stack → equipo. El repo es sólo la ejecución." />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,11 +36,9 @@
   }
 
   * { box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: 'Inter', system-ui, sans-serif;
@@ -50,693 +47,284 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-
   a { color: inherit; text-decoration: none; }
-
-  .container {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
   /* ===== NAV ===== */
   .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
+    position: sticky; top: 0; z-index: 50;
     background: rgba(250, 250, 251, .85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-  }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: -0.02em;
-  }
-  .brand-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    display: inline-block;
-  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+  .brand-dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--purple), var(--pink)); display: inline-block; }
   .brand span.soft { color: var(--ink-soft); font-weight: 500; }
-
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    font-weight: 500;
-    color: var(--ink-soft);
-    font-size: 15px;
-  }
+  .nav-links { display: flex; gap: 28px; font-weight: 500; color: var(--ink-soft); font-size: 15px; }
   .nav-links a:hover { color: var(--ink); }
-
   .cta-sm {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
     background: linear-gradient(135deg, var(--pink), var(--pink-2));
-    color: white;
-    padding: 10px 18px;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 14px;
+    color: white; padding: 10px 18px; border-radius: 999px;
+    font-weight: 600; font-size: 14px;
     box-shadow: 0 8px 20px -8px rgba(255,59,119,.6);
     transition: transform .15s, box-shadow .15s;
   }
   .cta-sm:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -10px rgba(255,59,119,.7); }
-
   @media (max-width: 760px) { .nav-links { display: none; } }
 
   /* ===== HERO ===== */
-  .hero {
-    padding: 96px 0 72px;
-    position: relative;
-    overflow: hidden;
-  }
+  .hero { padding: 96px 0 72px; position: relative; overflow: hidden; }
   .hero::before {
-    content: "";
-    position: absolute;
-    top: -200px; right: -200px;
+    content: ""; position: absolute; top: -200px; right: -200px;
     width: 600px; height: 600px;
     background: radial-gradient(circle, rgba(255,59,119,.12), transparent 60%);
     pointer-events: none;
   }
   .hero::after {
-    content: "";
-    position: absolute;
-    top: 20%; left: -250px;
+    content: ""; position: absolute; top: 20%; left: -250px;
     width: 600px; height: 600px;
     background: radial-gradient(circle, rgba(139,63,255,.10), transparent 60%);
     pointer-events: none;
   }
-
   .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: white;
-    border: 1px solid var(--line);
-    padding: 6px 14px;
-    border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--line);
+    padding: 6px 14px; border-radius: 999px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: 0.02em;
+    font-size: 12px; font-weight: 600;
+    color: var(--ink); letter-spacing: 0.02em;
     box-shadow: var(--shadow-sm);
     margin-bottom: 24px;
   }
-  .eyebrow-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 4px rgba(20,184,122,.15);
-  }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(20,184,122,.15); }
 
   h1.display {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
+    font-family: 'Inter', sans-serif; font-weight: 900;
     font-size: clamp(44px, 7vw, 84px);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-    margin: 0 0 24px;
-    max-width: 14ch;
+    line-height: 0.98; letter-spacing: -0.035em;
+    margin: 0 0 24px; max-width: 16ch;
   }
-  h1.display .grad {
-    background: linear-gradient(90deg, var(--purple), var(--magenta), var(--pink));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+  h1.display .grad { background: linear-gradient(90deg, var(--purple), var(--magenta), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-  .lead {
-    font-size: 20px;
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 62ch;
-    margin: 0 0 36px;
-  }
+  .lead { font-size: 20px; line-height: 1.55; color: var(--ink-soft); max-width: 62ch; margin: 0 0 36px; }
   .lead strong { color: var(--ink); font-weight: 600; }
 
-  .cta-row {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 56px;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 28px;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 15px;
-    transition: transform .15s, box-shadow .15s;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--pink), var(--pink-2));
-    color: white;
-    box-shadow: 0 14px 30px -10px rgba(255,59,119,.55);
-  }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 999px; font-weight: 600; font-size: 15px; transition: transform .15s, box-shadow .15s; }
+  .btn-primary { background: linear-gradient(135deg, var(--pink), var(--pink-2)); color: white; box-shadow: 0 14px 30px -10px rgba(255,59,119,.55); }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -10px rgba(255,59,119,.7); }
-  .btn-ghost {
-    background: white;
-    color: var(--ink);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-sm);
-  }
+  .btn-ghost { background: white; color: var(--ink); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
   .btn-ghost:hover { border-color: var(--ink); }
 
-  /* Stats */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    max-width: 860px;
-    margin-top: 40px;
-  }
-  .stat .num {
-    font-weight: 800;
-    font-size: 40px;
-    color: var(--blue);
-    letter-spacing: -0.03em;
-  }
-  .stat .num sup, .stat .num .suffix {
-    font-size: 22px;
-    vertical-align: middle;
-  }
-  .stat .lbl {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-  @media (max-width: 760px) {
-    .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .stat .num { font-size: 32px; }
-  }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 860px; margin-top: 40px; }
+  .stat .num { font-weight: 800; font-size: 40px; color: var(--blue); letter-spacing: -0.03em; }
+  .stat .num .suffix { font-size: 22px; vertical-align: middle; }
+  .stat .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; } .stat .num { font-size: 32px; } }
 
   /* ===== SECTION ===== */
   section.sec { padding: 96px 0; }
-  .sec-eyebrow {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--pink);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  h2.sec-title {
-    font-weight: 800;
-    font-size: clamp(34px, 4.5vw, 52px);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    margin: 0 0 20px;
-    max-width: 18ch;
-  }
-  h2.sec-title .grad {
-    background: linear-gradient(90deg, var(--purple), var(--pink));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .sec-sub {
-    font-size: 18px;
-    color: var(--ink-soft);
-    max-width: 62ch;
-    margin: 0 0 48px;
-  }
+  .sec-eyebrow { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); font-weight: 600; margin-bottom: 16px; }
+  h2.sec-title { font-weight: 800; font-size: clamp(34px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; max-width: 20ch; }
+  h2.sec-title .grad { background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sec-sub { font-size: 18px; color: var(--ink-soft); max-width: 64ch; margin: 0 0 48px; }
 
-  /* ===== PILLARS (3 cards) ===== */
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .card {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 32px 28px;
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    transition: transform .2s, box-shadow .2s;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-  .card-num {
-    position: absolute;
-    top: 22px; right: 26px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    color: var(--line);
-    font-size: 28px;
-  }
-  .card-icon {
-    width: 54px; height: 54px;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, rgba(139,63,255,.1), rgba(255,59,119,.1));
-    font-size: 24px;
-    margin-bottom: 18px;
-  }
-  .card h3 {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    margin: 0 0 8px;
-  }
-  .card-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--pink);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .card p {
-    color: var(--ink-soft);
-    font-size: 15px;
-    line-height: 1.55;
-    margin: 0;
-  }
-
-  /* Section alt bg */
   .bg-alt { background: var(--bg-alt); }
 
-  /* ===== LLM RANK ===== */
-  .rank-list {
+  /* ===== PHASES (nueva sección central) ===== */
+  .phase {
     background: white;
     border: 1px solid var(--line);
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 24px;
+    padding: 48px 44px;
+    margin-bottom: 28px;
     box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
   }
-  .rank-item {
-    display: grid;
-    grid-template-columns: 72px 1fr auto;
-    gap: 20px;
-    padding: 24px 28px;
-    border-bottom: 1px solid var(--line);
-    align-items: center;
+  .phase::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
   }
-  .rank-item:last-child { border-bottom: 0; }
-  .rank-pos {
-    font-weight: 900;
-    font-size: 38px;
+  .phase-head { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
+  .phase-num {
+    flex-shrink: 0;
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
     background: linear-gradient(135deg, var(--purple), var(--pink));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    letter-spacing: -0.04em;
-    line-height: 1;
+    color: white;
+    font-weight: 900;
+    font-size: 30px;
+    box-shadow: 0 10px 24px -8px rgba(139,63,255,.4);
   }
-  .rank-name { font-weight: 700; font-size: 19px; }
-  .rank-note { color: var(--ink-soft); font-size: 14px; margin-top: 2px; }
-  .pill {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--bg-alt);
-    color: var(--ink-soft);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .phase-head h3 {
+    margin: 6px 0 4px;
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
-  .pill.hot { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; }
-
-  /* ===== TREE ===== */
-  .tree-block {
+  .phase-head .phase-subtitle { color: var(--pink); font-weight: 600; font-size: 15px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; }
+  .phase-body { font-size: 16.5px; line-height: 1.65; color: var(--ink); }
+  .phase-body p { margin: 0 0 16px; max-width: 68ch; }
+  .phase-question {
+    background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06));
+    border-left: 3px solid var(--pink);
+    padding: 18px 24px;
+    border-radius: 0 12px 12px 0;
+    margin: 24px 0;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .phase-example {
     background: #0B0F1A;
     color: #E4E6EC;
-    border-radius: 20px;
-    padding: 32px 36px;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow-x: auto;
-  }
-  .tree-header {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: #8B8F9B;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  .tree-header::before {
-    content: "●  ●  ●";
-    color: #4B5161;
-    letter-spacing: 0.1em;
-    margin-right: 10px;
-  }
-  .tree {
+    padding: 28px 32px;
+    border-radius: 14px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 13.5px;
-    line-height: 1.85;
-    white-space: pre;
-    margin: 0;
+    line-height: 1.7;
+    margin: 24px 0 8px;
+    overflow-x: auto;
   }
-  .tree .dir  { color: #FFB86C; font-weight: 600; }
-  .tree .key  { color: #FF6B9D; }
+  .phase-example .label { color: #FF8FB5; font-weight: 600; }
+  .phase-example .val { color: #E4E6EC; }
+  .phase-example .comment { color: #6A6E7A; font-style: italic; }
+  .phase-label {
+    display: inline-block;
+    background: rgba(20,184,122,.1);
+    color: #0A7C4F;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-right: 6px;
+    margin-bottom: 8px;
+  }
+  .phase-label.bad { background: rgba(255,59,119,.1); color: var(--pink); }
+  .phase ul.check-list { list-style: none; padding: 0; margin: 16px 0; }
+  .phase ul.check-list li { padding: 8px 0 8px 30px; position: relative; font-size: 15px; color: var(--ink-soft); }
+  .phase ul.check-list li::before {
+    content: "✓";
+    position: absolute; left: 0; top: 8px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white; font-weight: 800; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Flow between phases */
+  .phase-arrow {
+    display: flex; justify-content: center; align-items: center;
+    margin: -8px 0 12px;
+  }
+  .phase-arrow::after {
+    content: "↓";
+    font-size: 28px;
+    color: var(--pink);
+    font-weight: 300;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* ===== PILLARS (3 cards reusable) ===== */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 32px 28px; box-shadow: var(--shadow-sm); position: relative; transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .card-num { position: absolute; top: 22px; right: 26px; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--line); font-size: 28px; }
+  .card-icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(139,63,255,.1), rgba(255,59,119,.1)); font-size: 24px; margin-bottom: 18px; }
+  .card h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 8px; }
+  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+  .card p { color: var(--ink-soft); font-size: 15px; line-height: 1.55; margin: 0; }
+
+  /* ===== TREE ===== */
+  .tree-block { background: #0B0F1A; color: #E4E6EC; border-radius: 20px; padding: 32px 36px; box-shadow: var(--shadow-lg); position: relative; overflow-x: auto; }
+  .tree-header { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8B8F9B; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px; display: flex; gap: 8px; align-items: center; }
+  .tree-header::before { content: "●  ●  ●"; color: #4B5161; letter-spacing: 0.1em; margin-right: 10px; }
+  .tree { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.85; white-space: pre; margin: 0; }
+  .tree .dir { color: #FFB86C; font-weight: 600; }
+  .tree .key { color: #FF6B9D; }
   .tree .note { color: #6A6E7A; font-style: italic; }
 
-  /* ===== CHECK LIST ===== */
-  .check {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px 32px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .check li {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .check li::before {
-    content: "";
-    flex-shrink: 0;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    position: relative;
-    margin-top: 2px;
-  }
-  .check li::after {
-    content: "✓";
-    position: absolute;
-    color: white;
-    font-size: 13px;
-    font-weight: 800;
-    margin-left: 6px;
-    margin-top: 3px;
-  }
-  .check li strong {
-    display: block;
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 3px;
-  }
-  .check li span {
-    font-size: 14px;
-    color: var(--ink-soft);
-    line-height: 1.5;
-  }
-  @media (max-width: 760px) { .check { grid-template-columns: 1fr; } }
-
   /* ===== AGENTS TABLE ===== */
-  .agents {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-  }
-  .agent {
-    display: grid;
-    grid-template-columns: 54px 200px 1fr;
-    gap: 20px;
-    padding: 20px 28px;
-    border-bottom: 1px solid var(--line);
-    align-items: center;
-  }
+  .agents { background: white; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .agent { display: grid; grid-template-columns: 54px 220px 1fr; gap: 20px; padding: 20px 28px; border-bottom: 1px solid var(--line); align-items: center; }
   .agent:last-child { border-bottom: 0; }
   .agent:hover { background: var(--bg-alt); }
-  .agent-id {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--pink);
-    letter-spacing: 0.05em;
-  }
-  .agent-name {
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: -0.01em;
-  }
+  .agent-id { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: var(--pink); letter-spacing: 0.05em; }
+  .agent-name { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
   .agent-role { color: var(--ink-soft); font-size: 14.5px; line-height: 1.5; }
-  @media (max-width: 760px) {
-    .agent { grid-template-columns: 50px 1fr; }
-    .agent-role { grid-column: 2; }
-  }
-
-  /* ===== FLOW ===== */
-  .flow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 48px 24px;
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    box-shadow: var(--shadow-sm);
-    flex-wrap: wrap;
-  }
-  .flow-step {
-    font-weight: 800;
-    font-size: clamp(24px, 4vw, 40px);
-    letter-spacing: -0.02em;
-    padding: 4px 16px;
-  }
-  .flow-step:nth-child(1) { color: var(--ink); }
-  .flow-step:nth-child(3) { background: linear-gradient(90deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .flow-step:nth-child(5) { color: var(--ink); }
-  .flow-arrow {
-    color: var(--pink);
-    font-weight: 800;
-    font-size: 24px;
-  }
+  .supervisor-badge { display: inline-block; padding: 2px 8px; background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; border-radius: 999px; font-size: 10px; font-weight: 700; margin-left: 6px; letter-spacing: .05em; text-transform: uppercase; }
+  @media (max-width: 760px) { .agent { grid-template-columns: 50px 1fr; } .agent-role { grid-column: 2; } }
 
   /* ===== PULL QUOTE ===== */
-  .pull {
-    margin: 56px 0;
-    padding: 40px 0 40px 40px;
-    border-left: 4px solid;
-    border-image: linear-gradient(180deg, var(--purple), var(--pink)) 1;
-    font-size: clamp(22px, 2.6vw, 30px);
-    font-weight: 600;
-    line-height: 1.35;
-    max-width: 44ch;
-    letter-spacing: -0.015em;
-  }
-
-  /* ===== PROMPT BOX ===== */
-  .prompt-box {
-    background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06));
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 28px 32px;
-    font-size: 16px;
-    line-height: 1.55;
-    color: var(--ink);
-    font-weight: 500;
-    position: relative;
-  }
-  .prompt-box::before {
-    content: "INSTRUCCIÓN AL AGENTE";
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    color: var(--pink);
-    margin-bottom: 14px;
-    font-weight: 700;
-  }
+  .pull { margin: 56px 0; padding: 40px 0 40px 40px; border-left: 4px solid; border-image: linear-gradient(180deg, var(--purple), var(--pink)) 1; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; line-height: 1.35; max-width: 44ch; letter-spacing: -0.015em; }
 
   /* ===== PRINCIPLES ===== */
-  .principles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  .principle {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 24px 28px;
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 16px;
-    align-items: flex-start;
-    box-shadow: var(--shadow-sm);
-    transition: transform .15s, box-shadow .15s;
-  }
+  .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .principle { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 24px 28px; display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: flex-start; box-shadow: var(--shadow-sm); transition: transform .15s, box-shadow .15s; }
   .principle:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .principle-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 800;
-    font-size: 28px;
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1;
-  }
+  .principle-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 28px; background: linear-gradient(135deg, var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
   .principle h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
   .principle p { margin: 0; font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
   @media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
 
   /* ===== CTA FINAL ===== */
-  .cta-final {
-    background: linear-gradient(135deg, var(--purple), var(--pink));
-    color: white;
-    border-radius: 28px;
-    padding: 64px 48px;
-    text-align: center;
-    box-shadow: 0 30px 60px -20px rgba(139,63,255,.4);
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-final::before, .cta-final::after {
-    content: "";
-    position: absolute;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.08);
-  }
+  .cta-final { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; border-radius: 28px; padding: 64px 48px; text-align: center; box-shadow: 0 30px 60px -20px rgba(139,63,255,.4); position: relative; overflow: hidden; }
+  .cta-final::before, .cta-final::after { content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,.08); }
   .cta-final::before { top: -150px; left: -100px; }
   .cta-final::after { bottom: -200px; right: -100px; }
-
-  .cta-final h2 {
-    font-size: clamp(32px, 4.5vw, 52px);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    margin: 0 0 16px;
-    line-height: 1.05;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-final p {
-    font-size: 18px;
-    opacity: 0.9;
-    max-width: 56ch;
-    margin: 0 auto 32px;
-    position: relative;
-    z-index: 1;
-  }
+  .cta-final h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; letter-spacing: -0.03em; margin: 0 0 16px; line-height: 1.05; position: relative; z-index: 1; }
+  .cta-final p { font-size: 18px; opacity: 0.9; max-width: 56ch; margin: 0 auto 32px; position: relative; z-index: 1; }
   .cta-final .cta-inner { position: relative; z-index: 1; }
-  .btn-white {
-    background: white;
-    color: var(--ink);
-    padding: 18px 32px;
-    border-radius: 999px;
-    font-weight: 700;
-    box-shadow: 0 18px 40px -10px rgba(0,0,0,.25);
-  }
+  .btn-white { background: white; color: var(--ink); padding: 18px 32px; border-radius: 999px; font-weight: 700; box-shadow: 0 18px 40px -10px rgba(0,0,0,.25); }
   .btn-white:hover { transform: translateY(-2px); }
-
-  .code-pill {
-    display: inline-block;
-    background: rgba(0,0,0,.25);
-    padding: 14px 22px;
-    border-radius: 14px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    margin: 20px 0;
-    color: white;
-    position: relative;
-    z-index: 1;
-  }
+  .code-pill { display: inline-block; background: rgba(0,0,0,.25); padding: 14px 22px; border-radius: 14px; font-family: 'JetBrains Mono', monospace; font-size: 14px; margin: 20px 0; color: white; position: relative; z-index: 1; text-align: left; }
   .code-pill .prompt { color: rgba(255,255,255,.5); user-select: none; }
 
+  /* ===== FAQ ===== */
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { background: white; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-sm); transition: border-color .15s, box-shadow .15s; overflow: hidden; }
+  .faq-item[open] { border-color: var(--pink); box-shadow: 0 8px 24px -8px rgba(255,59,119,.2); }
+  .faq-item summary { padding: 20px 24px; font-weight: 600; font-size: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; letter-spacing: -0.01em; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; font-size: 24px; font-weight: 300; color: var(--pink); transition: transform .2s; flex-shrink: 0; margin-left: 16px; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-body { padding: 0 24px 22px; color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+
   /* ===== FOOTER ===== */
-  footer {
-    padding: 64px 0 48px;
-    border-top: 1px solid var(--line);
-    background: white;
-  }
-  .foot-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-  .foot-row h4 {
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 14px;
-    font-weight: 700;
-  }
-  .foot-row a {
-    display: block;
-    color: var(--ink-soft);
-    font-size: 14.5px;
-    padding: 4px 0;
-    transition: color .15s;
-  }
+  footer { padding: 64px 0 48px; border-top: 1px solid var(--line); background: white; }
+  .foot-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .foot-row h4 { font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 700; }
+  .foot-row a { display: block; color: var(--ink-soft); font-size: 14.5px; padding: 4px 0; transition: color .15s; }
   .foot-row a:hover { color: var(--pink); }
-  .foot-copy {
-    color: var(--ink-soft);
-    font-size: 14.5px;
-    line-height: 1.55;
-    max-width: 38ch;
-    margin-top: 10px;
-  }
-  .foot-bottom {
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-  @media (max-width: 760px) {
-    .foot-row { grid-template-columns: 1fr 1fr; }
-  }
+  .foot-copy { color: var(--ink-soft); font-size: 14.5px; line-height: 1.55; max-width: 38ch; margin-top: 10px; }
+  .foot-bottom { padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
+  @media (max-width: 760px) { .foot-row { grid-template-columns: 1fr 1fr; } }
 
   /* ===== UTILS ===== */
-  mark {
-    background: linear-gradient(120deg, rgba(139,63,255,.2), rgba(255,59,119,.2));
-    color: var(--ink);
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-weight: 600;
-  }
-  code.inline {
-    font-family: 'JetBrains Mono', monospace;
-    background: var(--bg-alt);
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 0.88em;
-    color: var(--pink);
-    font-weight: 500;
-  }
+  mark { background: linear-gradient(120deg, rgba(139,63,255,.2), rgba(255,59,119,.2)); color: var(--ink); padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+  code.inline { font-family: 'JetBrains Mono', monospace; background: var(--bg-alt); padding: 2px 8px; border-radius: 6px; font-size: 0.88em; color: var(--pink); font-weight: 500; }
   .muted { color: var(--ink-soft); }
-
   @media (max-width: 860px) {
     .pillars { grid-template-columns: 1fr; }
     .stats { gap: 16px; }
     section.sec { padding: 72px 0; }
     .cta-final { padding: 48px 28px; border-radius: 20px; }
-    .foot-row { grid-template-columns: 1fr; }
+    .phase { padding: 32px 24px; border-radius: 18px; }
+    .phase-head { flex-direction: column; gap: 16px; }
+    .phase-num { width: 56px; height: 56px; font-size: 24px; }
   }
 </style>
 </head>
@@ -750,352 +338,380 @@
       Creators <span class="soft">Latam</span>
     </a>
     <div class="nav-links">
-      <a href="#filosofia">Filosofía</a>
-      <a href="#agentes">Agentes</a>
-      <a href="#herramientas">Herramientas</a>
+      <a href="#metodologia">Metodología</a>
+      <a href="#plan-maestro">Plan Maestro</a>
+      <a href="#sistema">El Sistema</a>
       <a href="#reglas">Reglas</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a href="https://github.com/tamibot/creators-latam-starter" class="cta-sm">Ver en GitHub →</a>
+    <a href="https://github.com/tamibot/creators-latam-starter" class="cta-sm">Ver repo →</a>
   </div>
 </nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
-    <span class="eyebrow"><span class="eyebrow-dot"></span> STARTER KIT · V1.0 · 2026</span>
-    <h1 class="display">Arranca proyectos con <span class="grad">IA en minutos</span>, no en días.</h1>
+    <span class="eyebrow"><span class="eyebrow-dot"></span> METODOLOGÍA · V1.3 · 2026</span>
+    <h1 class="display">Cómo trabajamos con IA. <span class="grad">Metodología primero</span>, herramientas después.</h1>
     <p class="lead">
-      Nuestro <strong>repositorio base</strong> con 14 agentes, 3 skills, permisos preaprobados y un instalador que te deja todas las herramientas listas. <strong>Clonás, corrés un script, abrís tu IDE</strong> — y ya tenés un equipo de IA trabajando.
+      La IA no es un problema de <em>qué stack instalás</em>. Es un problema de <strong>qué entregás y cómo se produce</strong>. Nuestro método pasa por 3 fases — y <strong>no se ejecuta nada</strong> hasta que el Plan Maestro esté firmado.
     </p>
 
     <div class="cta-row">
-      <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-primary">Clonar el repo →</a>
-      <a href="#filosofia" class="btn btn-ghost">Cómo funciona</a>
+      <a href="#metodologia" class="btn btn-primary">Ver la metodología ↓</a>
+      <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-ghost">Clonar el starter</a>
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="num">14</div><div class="lbl">Agentes base</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">Fases obligatorias</div></div>
+      <div class="stat"><div class="num">15</div><div class="lbl">Agentes preconfigurados</div></div>
       <div class="stat"><div class="num">3</div><div class="lbl">Skills fundacionales</div></div>
-      <div class="stat"><div class="num">10</div><div class="lbl">Reglas de oro</div></div>
-      <div class="stat"><div class="num">1<span class="suffix"> comando</span></div><div class="lbl">Instala todo</div></div>
+      <div class="stat"><div class="num">1<span class="suffix"> plan</span></div><div class="lbl">Firmado antes de ejecutar</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ FILOSOFÍA ============ -->
-<section class="sec" id="filosofia">
-  <div class="container">
-    <span class="sec-eyebrow">01 · Filosofía</span>
-    <h2 class="sec-title">Los tres pilares que orquestamos <span class="grad">desde el día uno.</span></h2>
-    <p class="sec-sub">
-      Trabajar con IA en serio no es "abrir ChatGPT y pedir". Es orquestar tres capas que, si las tienes claras desde el arranque, nunca más te perdés en el medio de un proyecto.
-    </p>
-
-    <div class="pillars">
-      <div class="card">
-        <div class="card-num">01</div>
-        <div class="card-icon">💻</div>
-        <div class="card-tag">La interfaz</div>
-        <h3>IDE</h3>
-        <p>Claude Code, Cursor, Codex, Antigravity. Es donde vivís, escribís y leés. El lente por el que pasa todo.</p>
-      </div>
-      <div class="card">
-        <div class="card-num">02</div>
-        <div class="card-icon">⚡</div>
-        <div class="card-tag">El control</div>
-        <h3>Terminal</h3>
-        <p>Bash, zsh. Conecta directo con tu máquina: permisos, instalaciones, ejecución. Desde acá se mueve todo.</p>
-      </div>
-      <div class="card">
-        <div class="card-num">03</div>
-        <div class="card-icon">☁️</div>
-        <div class="card-tag">El respaldo</div>
-        <h3>GitHub</h3>
-        <p>Versionado, respaldo, migración entre equipos. Si no está en la nube, no existe.</p>
-      </div>
-    </div>
-
-    <div class="pull">
-      Si no tenés los tres claros, cada proyecto nuevo te cuesta el doble.
-    </div>
-  </div>
-</section>
-
-<!-- ============ STACK ============ -->
+<!-- ============ EL PROBLEMA ============ -->
 <section class="sec bg-alt">
   <div class="container">
-    <span class="sec-eyebrow">02 · El stack</span>
-    <h2 class="sec-title">Ranking de LLMs <span class="grad">que usamos cada día.</span></h2>
+    <span class="sec-eyebrow">El problema</span>
+    <h2 class="sec-title">Instalar un stack <span class="grad">no es tener un proceso.</span></h2>
     <p class="sec-sub">
-      No hay un "mejor modelo" universal. Hay uno mejor para la tarea, y uno más barato para el volumen. Este es el orden que manejamos.
+      La mayoría de los proyectos con IA fallan no por falta de herramientas — fallan por falta de <strong>claridad en qué hay que entregar</strong>, por no haber <strong>investigado el stack</strong>, y por armar el <strong>equipo sin plan</strong>.
     </p>
-
-    <div class="rank-list">
-      <div class="rank-item">
-        <div class="rank-pos">1</div>
-        <div>
-          <div class="rank-name">GPT 5.4 · OpenAI</div>
-          <div class="rank-note">Mejor razonamiento general cuando necesitás precisión.</div>
-        </div>
-        <span class="pill hot">Top razonamiento</span>
-      </div>
-      <div class="rank-item">
-        <div class="rank-pos">2</div>
-        <div>
-          <div class="rank-name">Gemini Pro 3.1 · Google</div>
-          <div class="rank-note">Tremendo para contexto largo. 1M tokens reales.</div>
-        </div>
-        <span class="pill">Ventana grande</span>
-      </div>
-      <div class="rank-item">
-        <div class="rank-pos">3</div>
-        <div>
-          <div class="rank-name">Claude Opus · Anthropic</div>
-          <div class="rank-note">El que usamos vía Antigravity por el consumo gratuito diario y sus agentes.</div>
-        </div>
-        <span class="pill">Agentes & IDE</span>
-      </div>
-    </div>
-
     <div class="pull">
-      Cambiar de modelo es una decisión táctica, no un reflejo. Si no avanza, cambiás. Si avanza, no toques.
+      Antes de tocar una sola API: definí el entregable, contrastá el stack, armá el equipo. En ese orden. Siempre.
     </div>
   </div>
 </section>
 
-<!-- ============ CONTEXTO ============ -->
-<section class="sec">
+<!-- ============ METODOLOGÍA (sección central) ============ -->
+<section class="sec" id="metodologia">
   <div class="container">
-    <span class="sec-eyebrow">03 · Ventana de contexto</span>
-    <h2 class="sec-title">La regla del <span class="grad">medio millón.</span></h2>
+    <span class="sec-eyebrow">La metodología</span>
+    <h2 class="sec-title">Tres fases. <span class="grad">Ninguna se saltea.</span></h2>
     <p class="sec-sub">
-      Antes teníamos 124.000 tokens. Hoy casi todos los modelos llegan a <strong>1 millón</strong>. Suena a mucho, pero colapsa más rápido de lo que creés.
+      Cada fase termina con validación explícita del cliente. No avanzamos hasta que la anterior esté firmada. Al final, tenés un <strong>Plan Maestro</strong> que el cliente aprueba y recién ahí se ejecuta.
     </p>
 
-    <p style="max-width: 62ch; font-size: 17px;">
-      Cuando la conversación está llegando a los <strong>~500k tokens</strong>, <mark>compilá</mark>. Todos los modelos tienen la opción: resume toda la conversación y reiniciás desde cero, conservando el hilo. No es un riesgo, es higiene. Si no compilás, vas a empezar a generar errores del mismo modelo: responde raro, se olvida del contexto real, confunde archivos.
-    </p>
+    <!-- ===== FASE 1 ===== -->
+    <div class="phase">
+      <div class="phase-head">
+        <div class="phase-num">1</div>
+        <div>
+          <div class="phase-subtitle">FASE 1</div>
+          <h3>Entregables · pensar desde el final</h3>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p>
+          Trabajamos de adelante hacia atrás. Primero definimos <strong>qué archivo, pantalla o experiencia tiene que existir cuando terminemos</strong>. Después vemos cómo se produce.
+        </p>
 
-    <div class="pull">
-      Compilar no es admitir derrota. Es la buena práctica más barata que existe.
+        <div class="phase-question">
+          ¿Qué cosa concreta recibe el cliente cuando el proyecto termina perfecto?
+        </div>
+
+        <h4 style="font-size:15px;margin:24px 0 12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);">Ejemplo real</h4>
+        <div class="phase-example">
+<span class="label">Entregable:</span> <span class="val">reporte-leads-abril.xlsx</span>
+<span class="label">Ubicación:</span>  <span class="val">output/reportes/</span>
+<span class="label">Frecuencia:</span> <span class="val">semanal, lunes 9am</span>
+
+<span class="label">Columnas:</span>
+  · fecha                 <span class="comment"># de Kommo API (lead.created_at)</span>
+  · nombre, email         <span class="comment"># de Kommo API (contact fields)</span>
+  · empresa               <span class="comment"># enriquecimiento con Clearbit</span>
+  · canal                 <span class="comment"># de utm_source (HubSpot form)</span>
+  · estado                <span class="comment"># de Kommo pipeline stage</span>
+  · lifetime_value_usd    <span class="comment"># calculado: SUM(deals.amount)</span>
+
+<span class="label">KPIs al final del reporte:</span>
+  · leads_totales         <span class="comment"># COUNT(*)</span>
+  · tasa_conversion       <span class="comment"># qualified / total</span>
+  · CAC                   <span class="comment"># ad_spend / leads_convertidos</span>
+  · LTV:CAC               <span class="comment"># benchmark &gt; 3:1</span>
+
+<span class="label">Aprobación:</span>
+  El cliente abre el Excel y dice: <span class="val">"sí, esto es lo que necesitaba."</span>
+</div>
+
+        <span class="phase-label bad">✗ Anti-patrón</span>
+        <p style="font-size: 15px; margin-top: 4px;"><em>"Vamos a integrar la API de Kommo"</em> → eso es <strong>stack</strong>, no entregable. Volvé al entregable primero.</p>
+
+        <span class="phase-label">✓ Validación</span>
+        <ul class="check-list">
+          <li>Formato y ubicación exactos por cada entregable</li>
+          <li>Cada columna/campo con fuente de datos trazable</li>
+          <li>KPIs con fórmula definida</li>
+          <li>Criterio de aprobación documentado</li>
+          <li>Cliente confirma por escrito antes de avanzar</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-arrow"></div>
+
+    <!-- ===== FASE 2 ===== -->
+    <div class="phase">
+      <div class="phase-head">
+        <div class="phase-num">2</div>
+        <div>
+          <div class="phase-subtitle">FASE 2</div>
+          <h3>Stack Tecnológico · investigar, no adivinar</h3>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p>
+          Con los entregables claros, ahora sí vemos <strong>con qué herramientas los producimos</strong>. Pero <mark>no alcanza con lo que dijo el cliente</mark>. Para cada herramienta, research obligatorio.
+        </p>
+
+        <div class="phase-question">
+          ¿Qué tiene hoy el cliente, qué herramientas elegimos, por qué éstas y no otras?
+        </div>
+
+        <h4 style="font-size:15px;margin:24px 0 12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);">Fuentes que consultamos (por cada herramienta)</h4>
+
+        <div class="pillars" style="grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0;">
+          <div class="card" style="padding: 20px;">
+            <div class="card-tag">Comunidad</div>
+            <h3 style="font-size: 17px;">Foros y Reddit</h3>
+            <p>StackOverflow, subreddit específico, HackerNews. ¿Qué problemas reportan los que ya integraron?</p>
+          </div>
+          <div class="card" style="padding: 20px;">
+            <div class="card-tag">Código</div>
+            <h3 style="font-size: 17px;">GitHub Issues</h3>
+            <p>Issues abiertos de los últimos 6 meses. ¿Hay bugs críticos? ¿Cambios breaking?</p>
+          </div>
+          <div class="card" style="padding: 20px;">
+            <div class="card-tag">Negocio</div>
+            <h3 style="font-size: 17px;">Precios y limits</h3>
+            <p>Tiers, rate limits, regiones, trampas en letra chica. Proyectar costo mensual real.</p>
+          </div>
+        </div>
+
+        <p style="margin-top: 24px;">
+          Para cada herramienta completamos el template <code class="inline">templates/api-research.md</code> → queda documentado en <code class="inline">documentation/stack/&lt;herramienta&gt;.md</code>.
+        </p>
+
+        <p>
+          También validamos los <strong>TDRs del cliente</strong>: qué no se puede tocar, qué estándares hay que cumplir (GDPR, ISO), cuánto es el presupuesto, qué deadline es firme.
+        </p>
+
+        <span class="phase-label">✓ Validación</span>
+        <ul class="check-list">
+          <li>Research documentado por cada herramienta externa</li>
+          <li>Al menos 2 alternativas evaluadas por decisión</li>
+          <li>Riesgos conocidos y mitigación</li>
+          <li>Costo mensual total estimado y aprobado</li>
+          <li>TDRs del cliente revisados punto por punto</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-arrow"></div>
+
+    <!-- ===== FASE 3 ===== -->
+    <div class="phase">
+      <div class="phase-head">
+        <div class="phase-num">3</div>
+        <div>
+          <div class="phase-subtitle">FASE 3</div>
+          <h3>Equipo y Plan · quién lo ejecuta y cuándo</h3>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p>
+          Ya sabemos <strong>qué</strong> (Fase 1) y <strong>con qué</strong> (Fase 2). Ahora armamos el equipo que lo va a hacer.
+        </p>
+
+        <div class="phase-question">
+          ¿Qué agentes del starter aplican, qué agentes custom hay que crear, y en qué orden se ejecuta todo?
+        </div>
+
+        <ul class="check-list">
+          <li>Agentes del starter que aplican a este proyecto</li>
+          <li>Agentes <strong>custom</strong> específicos (con descripción, tools)</li>
+          <li>Skills adicionales que hay que agregar</li>
+          <li>Plan de trabajo con Gantt (generado por el agente <code class="inline">diagramador-mermaid</code>)</li>
+          <li>Puntos de validación con el cliente en cada hito</li>
+          <li>Canal oficial de comunicación + cadencia de sync</li>
+        </ul>
+
+        <div class="phase-example" style="margin-top: 24px;">
+<span class="label">Semana 1 · Discovery</span>
+<span class="val">  ├─ onboarding-pm   → completa Plan Maestro (Fases 1-3)</span>
+<span class="val">  └─ integraciones   → research stack + credentials</span>
+
+<span class="label">Semana 2-3 · Build</span>
+<span class="val">  ├─ arquitecto      → review del plan técnico</span>
+<span class="val">  ├─ integraciones   → conecta Kommo + WhatsApp via n8n</span>
+<span class="val">  └─ compilador-datos → genera el Excel semanal</span>
+
+<span class="label">Semana 4 · Test & Handoff</span>
+<span class="val">  ├─ tester          → E2E + UAT con cliente</span>
+<span class="val">  ├─ guardian-reglas → audita cumplimiento antes de entregar</span>
+<span class="val">  └─ documentador    → handoff package final</span>
+</div>
+
+        <span class="phase-label">✓ Validación</span>
+        <ul class="check-list">
+          <li>Gantt aprobado por cliente con fechas firmes</li>
+          <li>Agentes custom creados en <code class="inline">.claude/agents/</code></li>
+          <li>Hitos de validación en el calendario del cliente</li>
+          <li>Canal de comunicación operativo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pull" style="margin-top: 64px;">
+      Si la Fase 1 no está firmada, no existe Fase 2. Si la Fase 2 no está firmada, no existe Fase 3. Disciplina.
     </div>
   </div>
 </section>
 
-<!-- ============ ESTRUCTURA ============ -->
-<section class="sec bg-alt" id="estructura">
+<!-- ============ PLAN MAESTRO ============ -->
+<section class="sec bg-alt" id="plan-maestro">
   <div class="container">
-    <span class="sec-eyebrow">04 · Arquitectura de carpetas</span>
-    <h2 class="sec-title">Donde vive todo. <span class="grad">Sin excepciones.</span></h2>
+    <span class="sec-eyebrow">El entregable de las 3 fases</span>
+    <h2 class="sec-title">El <span class="grad">Plan Maestro.</span></h2>
     <p class="sec-sub">
-      Si usás Mac, arranca en el escritorio — iCloud respalda todo automáticamente. Una carpeta madre, y dentro: <strong>una subcarpeta por cliente</strong>. Tu propia agencia es un cliente más.
+      Un único documento que el cliente firma. Vive en <code class="inline">documentation/plan-maestro.md</code>. Con este plan aprobado, recién ahí el equipo operativo arranca.
     </p>
 
     <div class="tree-block">
+      <div class="tree-header">documentation/plan-maestro.md</div>
+<pre class="tree"><span class="dir">📋 Plan Maestro · Acme · Sistema de leads</span>
+│
+├── <span class="key">🎯 FASE 1 · Entregables</span>
+│   ├── Entregable A: reporte-leads.xlsx
+│   │   ├── Formato, ubicación, frecuencia
+│   │   ├── Columnas con fuente de datos
+│   │   ├── KPIs con fórmulas
+│   │   └── Criterio de aprobación
+│   └── ✅ Checkpoint firmado por cliente
+│
+├── <span class="key">🛠️ FASE 2 · Stack Tecnológico</span>
+│   ├── Lo que ya tiene el cliente
+│   ├── TDRs / restricciones
+│   ├── Research por herramienta (→ documentation/stack/)
+│   ├── Stack final + alternativas descartadas
+│   └── ✅ Checkpoint firmado por cliente
+│
+├── <span class="key">👥 FASE 3 · Equipo y Plan</span>
+│   ├── Agentes del starter que usamos
+│   ├── Agentes custom del proyecto
+│   ├── Skills adicionales
+│   ├── Gantt de ejecución (Mermaid)
+│   ├── Puntos de validación
+│   └── ✅ Checkpoint firmado por cliente
+│
+├── 🔒 Fuera de alcance
+├── ⚠️ Riesgos conocidos
+└── 🚀 Activación — handoff al orquestador</pre>
+    </div>
+
+    <p style="margin-top: 24px; font-size: 15px;">
+      Quien guía este documento es el agente <strong><code class="inline">onboarding-pm</code></strong> — arranca todo proyecto nuevo preguntando las Fases 1→3 y no te deja avanzar hasta que estén firmadas. Template completo en <a href="https://github.com/tamibot/creators-latam-starter/blob/main/templates/plan-maestro.md" style="color:var(--pink);font-weight:600;">templates/plan-maestro.md</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SISTEMA QUE EJECUTA ============ -->
+<section class="sec" id="sistema">
+  <div class="container">
+    <span class="sec-eyebrow">El sistema que ejecuta</span>
+    <h2 class="sec-title">Cuando el Plan Maestro está firmado, <span class="grad">el sistema arranca.</span></h2>
+    <p class="sec-sub">
+      Acá es donde el starter kit entra: carpetas, agentes, skills y herramientas. Es el <strong>cómo</strong> — el <strong>qué</strong> ya lo definimos en las 3 fases.
+    </p>
+
+    <h3 style="font-size: 22px; margin: 32px 0 16px; font-weight: 700;">Arquitectura de carpetas</h3>
+    <p style="max-width: 62ch;">
+      Una carpeta madre por cliente. Adentro, una subcarpeta por proyecto. El starter replica esta estructura en todos.
+    </p>
+
+    <div class="tree-block" style="margin-top: 24px;">
       <div class="tree-header">carpeta · cliente · proyecto</div>
-<pre class="tree"><span class="dir">📁 Escritorio/</span>
-└── <span class="dir">📁 Cliente-X/</span>            <span class="note"># una carpeta por cliente</span>
-    ├── <span class="dir">📁 Proyecto-A/</span>
-    │   ├── README.md           <span class="note"># descripción del proyecto</span>
-    │   ├── CLAUDE.md           <span class="note"># reglas de oro que el modelo lee auto</span>
-    │   ├── LLM.md              <span class="note"># manual de bienvenida para agentes</span>
-    │   ├── <span class="key">.env</span>                <span class="note"># credenciales locales · NUNCA subir</span>
-    │   ├── <span class="dir">📁 .claude/agents/</span>  <span class="note"># 14 agentes preconfigurados</span>
-    │   ├── <span class="dir">📁 .claude/skills/</span>  <span class="note"># PDF→MD, Video→texto, Plan paso a paso</span>
-    │   ├── <span class="key">.claude/settings.json</span>   <span class="note"># permisos preaprobados</span>
-    │   ├── <span class="dir">📁 tooling/</span>          <span class="note"># install.sh + docs de herramientas</span>
-    │   ├── <span class="dir">📁 templates/</span>       <span class="note"># NV, brief, API research</span>
-    │   ├── <span class="dir">📁 documentation/</span>   <span class="note"># todo lo del cliente</span>
-    │   ├── <span class="dir">📁 workflows/</span>       <span class="note"># flujos específicos del proyecto</span>
-    │   ├── <span class="dir">📁 output/</span>          <span class="note"># entregables finales — lo que el cliente ve</span>
-    │   └── <span class="dir">📁 data_original/</span>   <span class="note"># PDFs, screenshots, raw uploads</span>
-    ├── <span class="dir">📁 Proyecto-B/</span>
-    └── <span class="dir">📁 Proyecto-C/</span>
-</pre>
+<pre class="tree"><span class="dir">📁 Cliente-X/Proyecto-A/</span>
+├── CLAUDE.md              <span class="note"># reglas que Claude lee auto</span>
+├── <span class="key">.env</span>                   <span class="note"># credenciales locales · NUNCA subir</span>
+├── <span class="dir">📁 .claude/</span>
+│   ├── settings.json      <span class="note"># permisos preaprobados</span>
+│   ├── <span class="dir">agents/</span>             <span class="note"># 15 agentes + customs del proyecto</span>
+│   └── <span class="dir">skills/</span>             <span class="note"># pdf→md, video→texto, plan paso a paso</span>
+├── <span class="dir">📁 templates/</span>          <span class="note"># plan-maestro, NV, brief, API research</span>
+├── <span class="dir">📁 documentation/</span>      <span class="note"># plan-maestro.md, stack/, bitacora</span>
+├── <span class="dir">📁 data_original/</span>      <span class="note"># PDFs, raw — sagrado, no se toca</span>
+└── <span class="dir">📁 output/</span>             <span class="note"># entregables finales — lo que el cliente ve</span></pre>
     </div>
 
-    <h3 style="margin: 56px 0 20px; font-size: 22px; font-weight: 700;">¿Para qué sirve cada carpeta?</h3>
-    <ul class="check">
-      <li><div><strong>README.md</strong><span>Lo primero que lee cualquier persona (o agente) que entra a la carpeta.</span></div></li>
-      <li><div><strong>.env</strong><span>Credenciales. Queda local, nunca se sube al repo.</span></div></li>
-      <li><div><strong>documentation/</strong><span>Toda la documentación que el cliente te pasa, ordenada.</span></div></li>
-      <li><div><strong>workflows/</strong><span>Flujos de trabajo específicos del proyecto, como receta.</span></div></li>
-      <li><div><strong>output/</strong><span>Lo único que le importa al cliente. Cero fricción para encontrarlo.</span></div></li>
-      <li><div><strong>data_original/</strong><span>El buzón de entrada. PDFs, contratos, screenshots. Sin tocar.</span></div></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ AGENTES ============ -->
-<section class="sec" id="agentes">
-  <div class="container">
-    <span class="sec-eyebrow">05 · El escuadrón</span>
-    <h2 class="sec-title">14 agentes. <span class="grad">Un agente, un job.</span></h2>
-    <p class="sec-sub">
-      Viven en <code class="inline">.claude/agents/</code>. Claude Code los detecta automáticamente al abrir el repo. Cuando un agente hace dos cosas, hace mal las dos — mejor catorce chicos y claros que tres "multipropósito" confundidos.
+    <h3 style="font-size: 22px; margin: 56px 0 16px; font-weight: 700;">El escuadrón de agentes</h3>
+    <p style="max-width: 62ch;">
+      <strong>15 agentes</strong>: 10 operativos ejecutan el trabajo, 5 supervisores coordinan. Claude Code los detecta automáticamente al abrir el repo.
     </p>
 
-    <div class="agents">
-      <div class="agent"><div class="agent-id">AG · 01</div><div class="agent-name">Documentador</div><div class="agent-role">Mantiene al día toda la documentación del proyecto. Lo que cambia, lo refleja.</div></div>
-      <div class="agent"><div class="agent-id">AG · 02</div><div class="agent-name">GitHub Keeper</div><div class="agent-role">Gestiona el repo: commits, branches, conflictos. El repo nunca se desordena.</div></div>
-      <div class="agent"><div class="agent-id">AG · 03</div><div class="agent-name">Compilador de Datos</div><div class="agent-role">Especializado en juntar, limpiar y estructurar datos dispersos.</div></div>
-      <div class="agent"><div class="agent-id">AG · 04</div><div class="agent-name">Chronicler</div><div class="agent-role">Documenta en vivo lo que va ocurriendo. Tu registro operativo.</div></div>
-      <div class="agent"><div class="agent-id">AG · 05</div><div class="agent-name">Credentials Manager</div><div class="agent-role">Gestiona <code class="inline">.env</code> y accesos. Último filtro antes de commit.</div></div>
-      <div class="agent"><div class="agent-id">AG · 06</div><div class="agent-name">Project Manager</div><div class="agent-role">Supervisa como PM. Orden, tiempos, bloqueos. La vista de arriba.</div></div>
-      <div class="agent"><div class="agent-id">AG · 07</div><div class="agent-name">Tester</div><div class="agent-role">Único job: testeos. Nada de código productivo, nada de otras tareas.</div></div>
-      <div class="agent"><div class="agent-id">AG · 08</div><div class="agent-name">Integraciones</div><div class="agent-role">Experto en conectar APIs, webhooks, servicios externos. Tu pegamento.</div></div>
-      <div class="agent"><div class="agent-id">AG · 09</div><div class="agent-name">Arquitecto</div><div class="agent-role">Le explicás el plan y te lo ayuda a optimizar antes de ejecutar.</div></div>
-      <div class="agent"><div class="agent-id">AG · 10</div><div class="agent-name">Versionador</div><div class="agent-role">Supervisa versiones. Regla dura: <strong>reemplazar antes que duplicar</strong>.</div></div>
-      <div class="agent"><div class="agent-id">AG · 11</div><div class="agent-name">Purgador</div><div class="agent-role">Barre lo que ya no se usa. Carpeta limpia = contexto limpio.</div></div>
-      <div class="agent"><div class="agent-id">AG · 12</div><div class="agent-name">Diagramador Mermaid</div><div class="agent-role">Diagramas validados, 0 errores de sintaxis. Flowcharts, ER, secuencia, gantt y más.</div></div>
-      <div class="agent"><div class="agent-id">AG · 13</div><div class="agent-name">Orquestador <span style="display:inline-block;padding:2px 8px;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border-radius:999px;font-size:10px;font-weight:700;margin-left:6px;letter-spacing:.05em;text-transform:uppercase;">Supervisor</span></div><div class="agent-role">Coordinador táctico. Descompone tareas, decide a qué agente delegar y en qué orden. Supervisa handoffs.</div></div>
-      <div class="agent"><div class="agent-id">AG · 14</div><div class="agent-name">Guardián de Reglas <span style="display:inline-block;padding:2px 8px;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border-radius:999px;font-size:10px;font-weight:700;margin-left:6px;letter-spacing:.05em;text-transform:uppercase;">Supervisor</span></div><div class="agent-role">Audita que se cumplan las 10 reglas de oro antes de commits, releases o entregables. Reporta, no arregla.</div></div>
+    <div class="agents" style="margin-top: 24px;">
+      <div class="agent"><div class="agent-id">AG · 15</div><div class="agent-name">Onboarding PM <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">⭐ Arranca todo proyecto nuevo. Guía las 3 fases y produce el Plan Maestro.</div></div>
+      <div class="agent"><div class="agent-id">AG · 13</div><div class="agent-name">Orquestador <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">Con el plan aprobado, descompone tareas y decide a qué agente delegar cada sub-tarea.</div></div>
+      <div class="agent"><div class="agent-id">AG · 06</div><div class="agent-name">Project Manager <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">Visión estratégica: estado, plazos, bloqueos, prioridades semanales.</div></div>
+      <div class="agent"><div class="agent-id">AG · 09</div><div class="agent-name">Arquitecto <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">Revisa planes técnicos antes de ejecutar. Filtro de calidad anticipado.</div></div>
+      <div class="agent"><div class="agent-id">AG · 14</div><div class="agent-name">Guardián de Reglas <span class="supervisor-badge">Supervisor</span></div><div class="agent-role">Audita las 10 reglas de oro antes de commits, releases y entregables.</div></div>
+      <div class="agent"><div class="agent-id">AG · 01</div><div class="agent-name">Documentador</div><div class="agent-role">Mantiene la documentación al día. Lo que cambia, lo refleja.</div></div>
+      <div class="agent"><div class="agent-id">AG · 02</div><div class="agent-name">GitHub Keeper</div><div class="agent-role">Commits, branches, conflictos. El repo no se desordena.</div></div>
+      <div class="agent"><div class="agent-id">AG · 03</div><div class="agent-name">Compilador de Datos</div><div class="agent-role">Junta, limpia y estructura datos dispersos.</div></div>
+      <div class="agent"><div class="agent-id">AG · 04</div><div class="agent-name">Chronicler</div><div class="agent-role">Bitácora viva del proyecto. Decisiones, cambios, aprendizajes.</div></div>
+      <div class="agent"><div class="agent-id">AG · 05</div><div class="agent-name">Credentials Manager</div><div class="agent-role">Gestiona <code class="inline">.env</code>. Último filtro antes de cada commit.</div></div>
+      <div class="agent"><div class="agent-id">AG · 07</div><div class="agent-name">Tester</div><div class="agent-role">Único job: testear. No arregla bugs, los reporta.</div></div>
+      <div class="agent"><div class="agent-id">AG · 08</div><div class="agent-name">Integraciones</div><div class="agent-role">Conecta APIs, webhooks, servicios externos.</div></div>
+      <div class="agent"><div class="agent-id">AG · 10</div><div class="agent-name">Versionador</div><div class="agent-role">Reemplaza &gt; duplica. Confía en git para el historial.</div></div>
+      <div class="agent"><div class="agent-id">AG · 11</div><div class="agent-name">Purgador</div><div class="agent-role">Barre lo muerto. Carpeta limpia = contexto limpio.</div></div>
+      <div class="agent"><div class="agent-id">AG · 12</div><div class="agent-name">Diagramador Mermaid</div><div class="agent-role">Diagramas validados, 0 errores de sintaxis.</div></div>
     </div>
 
-    <div style="margin-top: 40px; padding: 28px 32px; background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06)); border: 1px solid var(--line); border-radius: 16px;">
-      <h3 style="font-size: 18px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.01em;">Cómo se organiza el escuadrón</h3>
-      <p style="margin: 0 0 16px; color: var(--ink-soft); font-size: 15px;">10 agentes <strong>operativos</strong> ejecutan el trabajo. 4 agentes <strong>supervisores</strong> coordinan, revisan y auditan.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 14px;">
-        <div><strong style="color:var(--pink);">Project Manager</strong><br><span class="muted">Estado general, plazos, prioridades.</span></div>
-        <div><strong style="color:var(--pink);">Arquitecto</strong><br><span class="muted">Revisa planes antes de ejecutar.</span></div>
-        <div><strong style="color:var(--pink);">Orquestador</strong><br><span class="muted">Decide a quién delegar cada sub-tarea.</span></div>
-        <div><strong style="color:var(--pink);">Guardián</strong><br><span class="muted">Audita las 10 reglas pre-commit.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SKILLS ============ -->
-<section class="sec bg-alt">
-  <div class="container">
-    <span class="sec-eyebrow">06 · Skills fundacionales</span>
-    <h2 class="sec-title">Las tres habilidades <span class="grad">que siempre instalamos.</span></h2>
-    <p class="sec-sub">
-      Los skills son habilidades que le enseñás al sistema paso a paso. Hay tres que montamos por defecto en todo proyecto.
+    <p style="margin-top: 24px; font-size: 15px; color: var(--ink-soft);">
+      Durante la Fase 3 del Plan Maestro, el <strong>onboarding-pm</strong> puede proponer agentes custom adicionales específicos del proyecto.
     </p>
+
+    <h3 style="font-size: 22px; margin: 56px 0 16px; font-weight: 700;">Skills fundacionales</h3>
 
     <div class="pillars">
       <div class="card">
         <div class="card-tag">Skill 01</div>
-        <h3>PDF / Docs a Markdown</h3>
-        <p>Los modelos leen markdown <strong>10× más rápido y barato</strong> que PDFs. Usa <code class="inline">marker</code> para PDFs técnicos y <code class="inline">markitdown</code> para todo lo demás (DOCX, XLSX, PPTX, HTML).</p>
+        <h3>PDF / Docs → Markdown</h3>
+        <p>Los modelos leen markdown <strong>10× más rápido</strong>. Usa <code class="inline">marker</code> o <code class="inline">markitdown</code>.</p>
       </div>
       <div class="card">
         <div class="card-tag">Skill 02</div>
-        <h3>Video / Audio a texto</h3>
-        <p>Analiza videos con <strong>Gemini directo</strong>, descarga de YouTube con <code class="inline">yt-dlp</code>, o transcribe local con <code class="inline">whisper.cpp</code> cuando importa la privacidad.</p>
+        <h3>Video / Audio → texto</h3>
+        <p>Gemini directo, <code class="inline">yt-dlp</code> para online, <code class="inline">whisper.cpp</code> para privacidad.</p>
       </div>
       <div class="card">
         <div class="card-tag">Skill 03</div>
         <h3>Plan Paso a Paso</h3>
-        <p>Obliga al sistema a <mark>pensar antes de paralelizar</mark>. Sin esto, 50 tareas simultáneas colapsan la máquina. Con esto, terminan.</p>
+        <p>Obliga al sistema a <mark>pensar antes de paralelizar</mark>. Evita colapsos.</p>
       </div>
     </div>
 
-    <div class="pull">
-      El precio de un plan bien armado es un poquito más de tiempo. El precio de no tenerlo es que se te rompa el proyecto a la mitad.
-    </div>
-  </div>
-</section>
-
-<!-- ============ HERRAMIENTAS ============ -->
-<section class="sec" id="herramientas">
-  <div class="container">
-    <span class="sec-eyebrow">07 · Herramientas</span>
-    <h2 class="sec-title">Todo lo que instala <span class="grad">un comando.</span></h2>
-    <p class="sec-sub">
-      El script <code class="inline">./tooling/install.sh</code> es interactivo: te pregunta bloque por bloque qué querés instalar. Si ya tenés algo, lo saltea.
+    <h3 style="font-size: 22px; margin: 56px 0 16px; font-weight: 700;">Herramientas que monta el instalador</h3>
+    <p style="max-width: 62ch;">
+      Un único script (<code class="inline">./tooling/install.sh</code>) — <strong>detecta qué ya tenés</strong> y salta lo instalado. Solo instala lo que falta.
     </p>
 
-    <div class="pillars" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 32px;">
-      <div class="card">
-        <div class="card-tag">Prerrequisitos</div>
-        <h3>La base del sistema</h3>
-        <p><strong>Homebrew</strong> · <strong>git</strong> · <strong>GitHub CLI</strong> · <strong>Python 3.12</strong> · <strong>uv</strong> (gestor Python ultra-rápido) · <strong>nvm + Node LTS</strong> · <strong>ffmpeg</strong> · <strong>Docker Desktop</strong>.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Documentos</div>
-        <h3>PDF / Office → Markdown</h3>
-        <p><a href="https://github.com/datalab-to/marker" style="color:var(--pink);font-weight:600;">marker</a> para PDFs técnicos con tablas, ecuaciones y layout complejo. <a href="https://github.com/microsoft/markitdown" style="color:var(--pink);font-weight:600;">markitdown</a> (Microsoft) para DOCX, PPTX, XLSX, HTML, imágenes con OCR.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Video / Audio</div>
-        <h3>Todo formato → texto</h3>
-        <p><strong>Gemini API</strong> acepta <code class="inline">.mp4</code> directo. <a href="https://github.com/yt-dlp/yt-dlp" style="color:var(--pink);font-weight:600;">yt-dlp</a> baja de YouTube/TikTok/Instagram. <a href="https://github.com/ggerganov/whisper.cpp" style="color:var(--pink);font-weight:600;">whisper.cpp</a> transcribe local cuando importa la privacidad.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Terminal</div>
-        <h3>CLIs modernos</h3>
-        <p><strong>ripgrep</strong> · <strong>fd</strong> · <strong>bat</strong> · <strong>fzf</strong> · <strong>jq</strong> · <strong>delta</strong> · <strong>glow</strong> · <strong>zoxide</strong> · <strong>tree</strong>. Mejoran los comandos base de Unix.</p>
-      </div>
+    <div class="tree-block" style="margin-top: 24px;">
+      <div class="tree-header">categorías</div>
+<pre class="tree"><span class="key">Prerrequisitos</span>  Homebrew · git · gh · Python 3.12 · uv · nvm + Node · ffmpeg · Docker
+<span class="key">Documentos</span>     marker · markitdown
+<span class="key">Video/Audio</span>    yt-dlp · whisper.cpp · google-genai SDK
+<span class="key">Terminal</span>       ripgrep · fd · bat · fzf · jq · delta · glow · zoxide · tree
+<span class="key">Diagramas</span>      mermaid-cli (on-demand via npx)</pre>
     </div>
 
-    <div class="tree-block" style="margin-top: 40px;">
-      <div class="tree-header">terminal</div>
-<pre class="tree"><span class="note"># 1. Cloná el repo</span>
-<span class="key">$</span> git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto
-<span class="key">$</span> cd mi-proyecto
-
-<span class="note"># 2. Corré el instalador (te pregunta bloque por bloque)</span>
-<span class="key">$</span> ./tooling/install.sh
-
-<span class="note"># 3. Rellená credenciales y abrí tu IDE</span>
-<span class="key">$</span> cp .env.example .env
-<span class="key">$</span> claude                  <span class="note"># los 14 agentes + 3 skills ya están listos</span>
-</pre>
-    </div>
-
-    <p style="max-width: 62ch; margin-top: 32px; font-size: 15px; color: var(--ink-soft);">
-      Windows: pediles a Claude/Cursor que aplique lo mismo usando <code class="inline">winget</code> o <code class="inline">scoop</code> en vez de <code class="inline">brew</code>. Linux: <code class="inline">apt</code> o <code class="inline">dnf</code>.
-    </p>
-
-    <div style="margin-top: 48px; padding: 32px 36px; background: var(--ink); color: white; border-radius: 20px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; box-shadow: var(--shadow-lg);">
-      <div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #FF8FB5; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px;">Guía detallada</div>
-        <h3 style="font-size: 22px; font-weight: 700; margin: 0 0 6px; color: white;">¿Primera vez? Paso a paso en INSTALL.md</h3>
-        <p style="margin: 0; color: rgba(255,255,255,.7); font-size: 15px;">Desde Mac recién desempaquetada hasta Claude Code corriendo con los 14 agentes. 8 pasos, con troubleshooting y links a todas las docs oficiales.</p>
-      </div>
-      <a href="https://github.com/tamibot/creators-latam-starter/blob/main/INSTALL.md" style="background: white; color: var(--ink); padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: 14px; white-space: nowrap; box-shadow: 0 10px 24px -8px rgba(0,0,0,.3);">Ver INSTALL.md →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ RITUAL ============ -->
-<section class="sec">
-  <div class="container">
-    <span class="sec-eyebrow">08 · Ritual con el cliente</span>
-    <h2 class="sec-title">Del levantamiento <span class="grad">al output.</span></h2>
-    <p class="sec-sub">
-      Trabajar con IA sin metodología con el cliente es como manejar F1 sin pits. Este es el flujo que seguimos siempre.
-    </p>
-
-    <h3 style="font-size: 22px; margin: 40px 0 16px; font-weight: 700;">El mantra operativo</h3>
-
-    <div class="flow">
-      <span class="flow-step">MD sucio</span>
-      <span class="flow-arrow">→</span>
-      <span class="flow-step">MD limpio</span>
-      <span class="flow-arrow">→</span>
-      <span class="flow-step">Ejecutás</span>
-    </div>
-
-    <p style="max-width: 62ch; margin-top: 32px; font-size: 17px;">
-      Primero escribimos todo el contexto en un <strong>Markdown sucio</strong> — notas, requisitos, dudas, lo que sea. Después lo pasamos por un LLM de contexto grande (Gemini, GPT) y lo transformamos en un MD limpio, estructurado, ejecutable. Ese MD limpio es el <em>NV</em>: el prompt final que le pasamos al agente.
-    </p>
-
-    <h3 style="font-size: 22px; margin: 48px 0 16px; font-weight: 700;">La regla del NV: antes de que ejecute, que hable</h3>
-
-    <div class="prompt-box">
-      Antes de comenzar, decime si tenés dudas, qué no te queda claro y qué información te falta. No inicies nada hasta que yo te avise. Cuando estés listo, avanzás por pasos; si algo no avanza, te detenés y me avisás.
-    </div>
-
-    <p style="max-width: 62ch; margin-top: 24px; font-size: 17px;">
-      Esto resuelve el <strong>80% de los errores</strong> antes de que ocurran. La mitad de las veces el agente devuelve preguntas que nos hacen darnos cuenta de que el brief al cliente estaba incompleto. Barato.
-    </p>
-
-    <div class="pull">
-      Si el MD no avanza, el problema no es el modelo. Es el MD.
+    <div style="margin-top: 40px; padding: 28px 32px; background: linear-gradient(135deg, rgba(139,63,255,.06), rgba(255,59,119,.06)); border: 1px solid var(--line); border-radius: 16px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--pink); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px;">Tip</div>
+      <p style="margin: 0; color: var(--ink); font-size: 15px;">
+        Si usás <strong>Claude Code</strong>, NO necesitás setear <code class="inline">ANTHROPIC_API_KEY</code> — Claude Code usa su propia sesión. Solo necesitarías la API key si vas a llamar a la API de Anthropic desde código.
+      </p>
     </div>
   </div>
 </section>
@@ -1103,22 +719,22 @@
 <!-- ============ REGLAS ============ -->
 <section class="sec bg-alt" id="reglas">
   <div class="container">
-    <span class="sec-eyebrow">09 · Reglas de oro</span>
+    <span class="sec-eyebrow">10 reglas de oro</span>
     <h2 class="sec-title">Lo que <span class="grad">no se negocia.</span></h2>
     <p class="sec-sub">
       El resumen de lo que, con el tiempo, dejamos de discutir. Si las rompemos, el proyecto lo paga.
     </p>
 
     <div class="principles">
-      <div class="principle"><div class="principle-num">01</div><div><h3>Conectá GitHub primero.</h3><p>Repo conectado, permisos de terminal, <code class="inline">.env</code> en local. Si no, construyes sobre arena.</p></div></div>
+      <div class="principle"><div class="principle-num">01</div><div><h3>GitHub primero.</h3><p>Repo conectado, permisos de terminal, <code class="inline">.env</code> en local. Si no, construyes sobre arena.</p></div></div>
       <div class="principle"><div class="principle-num">02</div><div><h3>Un cliente = una carpeta madre.</h3><p>Incluso tu propia agencia. Así "el contexto de la empresa" siempre está junto.</p></div></div>
-      <div class="principle"><div class="principle-num">03</div><div><h3>Compilá a los 500k tokens.</h3><p>No esperes al millón. Compilar temprano es gratis; depurar errores del modelo confundido, no.</p></div></div>
+      <div class="principle"><div class="principle-num">03</div><div><h3>Compilá a los 500k tokens.</h3><p>No esperes al millón. Compilar temprano es gratis.</p></div></div>
       <div class="principle"><div class="principle-num">04</div><div><h3>Reemplazar &gt; duplicar.</h3><p>Nada de <code class="inline">plan_v2_final_final.md</code>. Git guarda el historial.</p></div></div>
-      <div class="principle"><div class="principle-num">05</div><div><h3>Purgá lo que no se usa.</h3><p>Carpeta limpia = contexto limpio. El ruido en la carpeta es ruido en el modelo.</p></div></div>
-      <div class="principle"><div class="principle-num">06</div><div><h3>Todo lo final va a <code class="inline">output/</code>.</h3><p>Cero excepciones. No gastás tiempo buscando entre archivos internos.</p></div></div>
-      <div class="principle"><div class="principle-num">07</div><div><h3>Un agente, un job.</h3><p>Cuando un agente hace dos cosas, hace mal las dos. Catorce chicos &gt; tres confundidos.</p></div></div>
-      <div class="principle"><div class="principle-num">08</div><div><h3>El NV nunca arranca sin confirmar.</h3><p>"Decime dudas antes de iniciar" es fijo. Te ahorra 40 min de ejecución errada.</p></div></div>
-      <div class="principle"><div class="principle-num">09</div><div><h3>Plan paso a paso &gt; todo en paralelo.</h3><p>Paralelización mal hecha colapsa la máquina y quema tokens.</p></div></div>
+      <div class="principle"><div class="principle-num">05</div><div><h3>Purgá lo que no se usa.</h3><p>Carpeta limpia = contexto limpio.</p></div></div>
+      <div class="principle"><div class="principle-num">06</div><div><h3>Todo lo final va a <code class="inline">output/</code>.</h3><p>Cero excepciones. El cliente no busca entre archivos internos.</p></div></div>
+      <div class="principle"><div class="principle-num">07</div><div><h3>Un agente, un job.</h3><p>Cuando un agente hace dos cosas, hace mal las dos.</p></div></div>
+      <div class="principle"><div class="principle-num">08</div><div><h3>Plan Maestro antes de ejecutar.</h3><p>Las 3 fases firmadas. Sin plan firmado, no arranca nada.</p></div></div>
+      <div class="principle"><div class="principle-num">09</div><div><h3>Plan paso a paso &gt; paralelo.</h3><p>Paralelización mal hecha colapsa la máquina y quema tokens.</p></div></div>
       <div class="principle"><div class="principle-num">10</div><div><h3>Si no avanza, no es el modelo.</h3><p>Es el prompt, el contexto o el plan. Cambiar de LLM es la última carta.</p></div></div>
     </div>
   </div>
@@ -1127,147 +743,106 @@
 <!-- ============ FAQ ============ -->
 <section class="sec" id="faq">
   <div class="container">
-    <span class="sec-eyebrow">10 · FAQ</span>
+    <span class="sec-eyebrow">FAQ</span>
     <h2 class="sec-title">Preguntas <span class="grad">frecuentes.</span></h2>
     <p class="sec-sub">
-      Lo que nos preguntan más seguido. Si no está acá, escribinos por WhatsApp al +51 995 547 575.
+      Lo que más nos preguntan. Si no está acá, escribinos por WhatsApp al +51 995 547 575.
     </p>
 
     <div class="faq-list">
       <details class="faq-item">
-        <summary>¿Esto corre en Windows?</summary>
+        <summary>¿Por qué arrancan con "Plan Maestro" y no directamente con el código?</summary>
         <div class="faq-body">
-          El script <code class="inline">tooling/install.sh</code> asume macOS. Para Windows, pedile a Claude/Cursor que aplique lo mismo usando <code class="inline">winget</code> o <code class="inline">scoop</code> en lugar de <code class="inline">brew</code>. Los paquetes Python/Node/Docker tienen instaladores nativos. En Linux, reemplazá <code class="inline">brew</code> por <code class="inline">apt</code> o <code class="inline">dnf</code>.
+          Porque sin entregable definido, stack validado y equipo armado, el código que escribís es al pedo. El 80% de los proyectos fallidos que vimos empezaron con "dale, codeá". El Plan Maestro toma 2–5 días y ahorra semanas.
         </div>
       </details>
 
       <details class="faq-item">
-        <summary>¿Necesito todas las herramientas?</summary>
+        <summary>¿Cuánto tarda la Fase 1 (entregables)?</summary>
         <div class="faq-body">
-          No. El instalador es interactivo: te pregunta bloque por bloque. Los prerrequisitos sí los recomendamos todos. El resto depende del proyecto — si no vas a procesar video, saltealo.
+          Entre 30 minutos y 3 días, dependiendo de cuán claro tenga el cliente lo que quiere. El agente <code class="inline">onboarding-pm</code> te guía con preguntas — no te deja avanzar hasta tener formato, columnas, KPIs, fuentes y criterio de aprobación por cada entregable.
         </div>
       </details>
 
       <details class="faq-item">
-        <summary>¿Por qué incluye Gemini y no otros modelos?</summary>
+        <summary>¿Es obligatorio investigar en foros en la Fase 2?</summary>
         <div class="faq-body">
-          El skill <code class="inline">video-a-texto</code> aprovecha que Gemini acepta video como input directo (hasta ~1h) — algo que Claude y GPT-4 todavía no ofrecen nativamente así de simple. Conseguís el token gratis en <a href="https://aistudio.google.com/apikey" style="color:var(--pink);">aistudio.google.com/apikey</a>. Para el resto de tareas usá el LLM que prefieras.
+          Sí. Las docs oficiales siempre están incompletas o desactualizadas. Los foros te muestran los problemas reales de la gente que ya integró. Para cada API, revisamos StackOverflow, Reddit, GitHub issues recientes y HackerNews. Queda documentado en <code class="inline">documentation/stack/&lt;herramienta&gt;.md</code>.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Necesito <code class="inline">ANTHROPIC_API_KEY</code>?</summary>
+        <div class="faq-body">
+          Si usás <strong>Claude Code</strong> como IDE, <strong>no</strong> — Claude Code usa su propia sesión de login. Solo necesitás <code class="inline">ANTHROPIC_API_KEY</code> si vas a llamar a la API de Anthropic desde tu código (ej: un script Python). El <code class="inline">.env.example</code> del starter lo aclara.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿El instalador es rápido o tarda mucho?</summary>
+        <div class="faq-body">
+          La primera vez en una Mac vacía: <strong>20–40 min</strong> (descarga de Homebrew + Python + modelos de whisper si los pedís). En corridas siguientes: <strong>segundos</strong> — el instalador <mark>detecta qué ya tenés y salta lo instalado</mark>. No reinstala Homebrew, Python, etc.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Corre en Windows?</summary>
+        <div class="faq-body">
+          El script asume macOS. Para Windows, pedile a Claude/Cursor que aplique lo mismo usando <code class="inline">winget</code> o <code class="inline">scoop</code>. Las herramientas (Python, Node, Docker, yt-dlp, marker) tienen soporte Windows nativo. Linux: reemplazar <code class="inline">brew</code> por <code class="inline">apt</code>/<code class="inline">dnf</code>.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>¿Puedo armar agentes custom para mi proyecto?</summary>
+        <div class="faq-body">
+          Sí — el <code class="inline">onboarding-pm</code> los propone en la Fase 3 del Plan Maestro. Creás un <code class="inline">.md</code> en <code class="inline">.claude/agents/</code> con frontmatter estándar (copiá cualquier agente existente como modelo). Claude Code lo detecta al reiniciar.
         </div>
       </details>
 
       <details class="faq-item">
         <summary>¿Qué hace <code class="inline">.claude/settings.json</code>?</summary>
         <div class="faq-body">
-          Define qué comandos puede ejecutar Claude Code sin pedirte autorización cada vez. Pre-aprobamos los seguros (<code class="inline">git</code>, <code class="inline">brew</code>, <code class="inline">pip</code>, <code class="inline">npm</code>, etc.) y <strong>bloqueamos</strong> los peligrosos (<code class="inline">rm -rf /</code>, <code class="inline">git push --force</code>, lectura de <code class="inline">.env</code>). Si querés ser más estricto, editá ese archivo.
+          Define qué comandos puede ejecutar Claude Code sin pedirte autorización cada vez. Pre-aprobamos los seguros (<code class="inline">git</code>, <code class="inline">brew</code>, <code class="inline">pip</code>) y bloqueamos los peligrosos (<code class="inline">rm -rf /</code>, <code class="inline">git push --force</code>, leer <code class="inline">.env</code>).
         </div>
       </details>
 
       <details class="faq-item">
-        <summary>¿Es seguro dar tantos permisos preaprobados?</summary>
+        <summary>¿Cómo actualizo el starter cuando sacamos una versión nueva?</summary>
         <div class="faq-body">
-          Sí, porque está diseñado con una lista blanca (lo que se permite) y una lista negra crítica (lo que nunca se permite). Operaciones destructivas tipo force-push, reset --hard, lectura de credenciales o borrado masivo siguen pidiendo confirmación explícita.
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary>¿Puedo agregar mis propios agentes?</summary>
-        <div class="faq-body">
-          Sí. Creá un archivo <code class="inline">.md</code> en <code class="inline">.claude/agents/</code> con el frontmatter estándar (copiá cualquier agente existente como modelo). Claude Code lo detecta al reiniciar.
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary>¿Cómo actualizo el starter a una versión más nueva?</summary>
-        <div class="faq-body">
-          <pre style="background:#0B0F1A;color:#E4E6EC;padding:16px;border-radius:10px;font-size:13px;overflow-x:auto;"><code>git remote add starter https://github.com/tamibot/creators-latam-starter.git
+          <pre style="background:#0B0F1A;color:#E4E6EC;padding:16px;border-radius:10px;font-size:13px;overflow-x:auto;margin-top:8px;"><code>git remote add starter https://github.com/tamibot/creators-latam-starter.git
 git fetch starter
 git merge starter/main --allow-unrelated-histories</code></pre>
-          Resolvé los conflictos — el agente Versionador te ayuda.
+          El agente <code class="inline">versionador</code> te ayuda con los conflictos.
         </div>
       </details>
 
       <details class="faq-item">
-        <summary>¿Por qué no hay herramienta de web scraping?</summary>
+        <summary>¿Qué diferencia tiene con starters de Vercel / Next?</summary>
         <div class="faq-body">
-          La sacamos a propósito para mantener el starter liviano. Si la necesitás para un proyecto específico, agregala en <code class="inline">tooling/</code> del proyecto y documentala ahí.
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary>¿Qué diferencia tiene con los starters de Vercel/Next?</summary>
-        <div class="faq-body">
-          Aquellos son templates de código. Éste es un <strong>starter de proceso</strong>: reglas, agentes, skills, estructura. Se monta <em>sobre</em> cualquier stack técnico (React, Python, Node, Go...).
-        </div>
-      </details>
-
-      <details class="faq-item">
-        <summary>Me rompió algo el instalador, ¿qué hago?</summary>
-        <div class="faq-body">
-          El script nunca borra nada y saltea lo que ya tenés. Si algo falló, revisá el output — te dice qué paquete específico no pudo instalar y probablemente tengas que correrlo manualmente (<code class="inline">brew install &lt;pkg&gt;</code>) para ver el error real. También podés abrir un issue en el repo.
+          Aquellos son <strong>templates de código</strong>. Éste es un <strong>starter de proceso</strong>: reglas, agentes, metodología de 3 fases. Se monta <em>sobre</em> cualquier stack técnico (React, Python, Node, Go).
         </div>
       </details>
     </div>
   </div>
 </section>
 
-<style>
-  .faq-list { display: flex; flex-direction: column; gap: 12px; }
-  .faq-item {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    box-shadow: var(--shadow-sm);
-    transition: border-color .15s, box-shadow .15s;
-    overflow: hidden;
-  }
-  .faq-item[open] { border-color: var(--pink); box-shadow: 0 8px 24px -8px rgba(255,59,119,.2); }
-  .faq-item summary {
-    padding: 20px 24px;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    letter-spacing: -0.01em;
-  }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary::after {
-    content: "+";
-    font-size: 24px;
-    font-weight: 300;
-    color: var(--pink);
-    transition: transform .2s;
-    flex-shrink: 0;
-    margin-left: 16px;
-  }
-  .faq-item[open] summary::after { transform: rotate(45deg); }
-  .faq-body {
-    padding: 0 24px 22px;
-    color: var(--ink-soft);
-    font-size: 15px;
-    line-height: 1.6;
-  }
-</style>
-
 <!-- ============ CTA FINAL ============ -->
 <section class="sec" id="cta">
   <div class="container">
     <div class="cta-final">
       <div class="cta-inner">
-        <h2>¿Listo para arrancar<br>en 3 comandos?</h2>
-        <p>Cloná, corré el instalador, abrí tu IDE. El escuadrón completo ya está esperándote.</p>
-        <div class="code-pill" style="text-align: left; max-width: 560px; margin: 24px auto;">
+        <h2>¿Listo para arrancar<br>con metodología?</h2>
+        <p>Cloná el starter, corré el instalador, invocá al <code style="background:rgba(0,0,0,.2);padding:2px 8px;border-radius:6px;">onboarding-pm</code>. Las 3 fases te guían hasta el Plan Maestro.</p>
+        <div class="code-pill" style="max-width: 600px; margin: 24px auto;">
           <span class="prompt">$ </span>git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto<br>
           <span class="prompt">$ </span>cd mi-proyecto &amp;&amp; ./tooling/install.sh<br>
-          <span class="prompt">$ </span>cp .env.example .env &amp;&amp; claude
+          <span class="prompt">$ </span>claude                      <span style="color:rgba(255,255,255,.5);">  # pedile: "invocá onboarding-pm"</span>
         </div>
         <br>
         <a href="https://github.com/tamibot/creators-latam-starter" class="btn btn-white">Ir al repositorio →</a>
         <p style="margin-top: 32px; font-size: 15px;">
           ¿Preferís que lo montemos completo para tu empresa?<br>
-          Escribinos: <strong>+51 995 547 575</strong> · <a href="https://www.creatorslatam.com/" style="text-decoration: underline;">creatorslatam.com</a>
+          <strong>+51 995 547 575</strong> · <a href="https://www.creatorslatam.com/" style="text-decoration: underline;">creatorslatam.com</a>
         </p>
       </div>
     </div>
@@ -1285,17 +860,17 @@ git merge starter/main --allow-unrelated-histories</code></pre>
         </p>
       </div>
       <div>
-        <h4>Producto</h4>
-        <a href="#filosofia">Filosofía</a>
-        <a href="#estructura">Estructura</a>
-        <a href="#agentes">Agentes</a>
-        <a href="#reglas">Reglas</a>
+        <h4>Metodología</h4>
+        <a href="#metodologia">Las 3 fases</a>
+        <a href="#plan-maestro">Plan Maestro</a>
+        <a href="#sistema">El sistema</a>
+        <a href="#reglas">Reglas de oro</a>
       </div>
       <div>
         <h4>Recursos</h4>
         <a href="https://github.com/tamibot/creators-latam-starter">Repositorio</a>
-        <a href="https://github.com/tamibot/creators-latam-starter#readme">Documentación</a>
-        <a href="https://github.com/tamibot/creators-latam-starter/tree/main/templates">Templates</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/INSTALL.md">Guía de instalación</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/templates/plan-maestro.md">Template plan maestro</a>
       </div>
       <div>
         <h4>Contacto</h4>
@@ -1306,7 +881,7 @@ git merge starter/main --allow-unrelated-histories</code></pre>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Creators Latam · Lima, Perú</span>
-      <span>Starter Kit v1.0 · Documento vivo</span>
+      <span>Starter Kit v1.3 · Metodología primero</span>
     </div>
   </div>
 </footer>

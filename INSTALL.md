@@ -1,6 +1,6 @@
 # Guía de Instalación · Creators Latam Starter
 
-Guía paso a paso desde una Mac recién abierta hasta tener el starter funcionando con Claude Code, los 14 agentes, 3 skills y todas las herramientas.
+Guía paso a paso desde una Mac recién abierta hasta tener el starter funcionando con Claude Code, los 15 agentes, 3 skills y todas las herramientas.
 
 > **Tiempo estimado:** 20–40 minutos la primera vez (mayoría es descarga). Las próximas instalaciones tardan ~2 minutos porque Homebrew cachea todo.
 
@@ -165,19 +165,26 @@ cp .env.example .env
 open -e .env   # abre en TextEdit
 ```
 
-Rellená al menos estas dos para aprovechar el starter:
+### ⚠️ Aclaración importante sobre `ANTHROPIC_API_KEY`
+
+Si usás **Claude Code** como IDE, **NO necesitás** setear `ANTHROPIC_API_KEY` — Claude Code usa tu sesión de login (`claude` te pide auth la primera vez y listo).
+
+Solo necesitás `ANTHROPIC_API_KEY` si:
+- Vas a llamar a la API de Anthropic **desde código** (Python, Node, curl).
+- Usás otro IDE que no sea Claude Code y que requiera la key.
+
+### Lo que sí querés rellenar
 
 ```bash
-# Claude (Anthropic)
-ANTHROPIC_API_KEY=sk-ant-...
-
-# Gemini (para el skill video-a-texto)
+# Gemini (para el skill video-a-texto — gratis)
 GEMINI_API_KEY=AIza...
 ```
 
+Otras keys van según el stack del cliente (definido en Fase 2 del Plan Maestro).
+
 **Dónde conseguirlas:**
-- Anthropic: [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
-- Gemini: [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (gratis)
+- Gemini (gratis): [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+- Anthropic (si hace falta): [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
 - OpenAI: [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 
 **Regla crítica:** nunca commitees `.env` al repo. Ya está en `.gitignore`, pero el `credentials-manager` revisa igual antes de cada commit.
@@ -210,14 +217,24 @@ claude
 
 Al abrir, Claude Code detecta automáticamente:
 - `.claude/settings.json` → permisos preaprobados.
-- `.claude/agents/*.md` → los 14 agentes.
+- `.claude/agents/*.md` → los 15 agentes.
 - `.claude/skills/*/SKILL.md` → los 3 skills.
 - `CLAUDE.md` → reglas del proyecto.
 
 Probá estos comandos dentro de Claude Code para verificar:
-- `/agents` → debería listar los 14.
+- `/agents` → debería listar los 15.
 - `/skills` → debería listar los 3.
-- Mensaje de prueba: *"Invocá al agente `guardian-reglas` y auditame el repo."*
+
+**🎯 Primer mensaje para un proyecto nuevo:**
+
+> *"Invocá al agente `onboarding-pm` para arrancar un proyecto nuevo. Vamos a completar las 3 fases del Plan Maestro."*
+
+El `onboarding-pm` te va a guiar paso a paso por:
+- Fase 1 → Entregables (qué recibe el cliente)
+- Fase 2 → Stack Tecnológico (con research en foros)
+- Fase 3 → Equipo y Plan (qué agentes, qué orden, Gantt)
+
+Al terminar, tenés `documentation/plan-maestro.md` listo para firmar con el cliente.
 
 ---
 

@@ -1,45 +1,92 @@
 # Creators Latam · Starter Kit para Proyectos con IA
 
-> Un esqueleto listo para arrancar proyectos con Claude Code, Cursor, Codex, Antigravity o cualquier IDE con agentes de IA. Del caos al `output/` en minutos.
+> **Metodología primero, herramientas después.** Nuestro método de 3 fases (Entregable → Stack → Equipo) para que los proyectos con IA no fallen por falta de proceso. El starter es el sistema que lo ejecuta.
 
 **Creators Latam** · [creatorslatam.com](https://www.creatorslatam.com/) · +51 995 547 575
 
----
-
-## ¿Qué es esto?
-
-Es el **repositorio base** que usamos internamente en Creators Latam para que cualquier proyecto nuevo arranque con:
-
-- **14 agentes pre-configurados** (10 operativos + 4 supervisores: Orquestador, Guardián de Reglas, Project Manager, Arquitecto)
-- **3 skills fundacionales** (PDF/Docs → MD, Video/Audio → texto, Plan Paso a Paso)
-- **Arquitectura de carpetas estándar** (`output/`, `data_original/`, `documentation/`…)
-- **Templates** del "NV" (prompt de arranque con validación), brief de cliente y research de APIs
-- **Reglas de oro** ya escritas en `CLAUDE.md` para que el modelo las siga desde el primer mensaje
-- **Permisos preaprobados** en `.claude/settings.json` para no estar autorizando cada comando
-- **Script de instalación** (`tooling/install.sh`) que te deja todas las herramientas listas
-
-Si trabajás con LLMs en serio, este repo te ahorra ~2 horas en cada proyecto nuevo.
+🌐 **Landing:** [tamibot.github.io/creators-latam-starter](https://tamibot.github.io/creators-latam-starter/)
 
 ---
 
-## Uso rápido (3 pasos)
+## La metodología (esto es lo importante)
+
+Antes de tocar una sola API, pasamos por **3 fases obligatorias**. Ninguna se saltea. Cada una termina con firma del cliente.
+
+### FASE 1 · Entregables — pensar desde el final
+
+> *¿Qué cosa concreta recibe el cliente cuando termina el proyecto?*
+
+Definimos **formato, ubicación, estructura, KPIs, fuente de cada dato y criterio de aprobación** antes que nada. Sin esto, cualquier código es al pedo.
+
+**Ejemplo:** si el entregable es `reporte-leads.xlsx`, detallamos columna por columna: `fecha` (de Kommo API), `email` (contacto CRM), `LTV` (suma de deals), `CAC` (spend / conversiones)... y el criterio: *"el cliente abre el Excel y dice sí, esto es lo que necesitaba."*
+
+### FASE 2 · Stack Tecnológico — investigar, no adivinar
+
+> *¿Con qué herramientas producimos los entregables? ¿Cuál elegimos y por qué?*
+
+Acá **no alcanza con lo que dice el cliente**. Para cada herramienta externa, research obligatorio en:
+- StackOverflow (últimos 6 meses)
+- Reddit / subreddits de la herramienta
+- GitHub issues abiertos recientes
+- HackerNews threads
+- Discord/Slack oficial
+
+Todo queda documentado en `documentation/stack/<herramienta>.md` usando el template [`templates/api-research.md`](./templates/api-research.md).
+
+### FASE 3 · Equipo y Plan — quién lo ejecuta y cuándo
+
+> *¿Qué agentes del starter usamos, qué agentes custom hay que crear, en qué orden?*
+
+Con entregables + stack claros, armamos:
+- Agentes del starter que aplican.
+- Agentes **custom** del proyecto.
+- Skills adicionales.
+- **Gantt de ejecución** (Mermaid).
+- Puntos de validación con el cliente.
+
+### El output: Plan Maestro
+
+Las 3 fases se consolidan en **un único documento** que el cliente firma: `documentation/plan-maestro.md`.
+
+**Sin Plan Maestro firmado, no arranca nada.**
+
+Template: [`templates/plan-maestro.md`](./templates/plan-maestro.md).
+Lo guía el agente [`onboarding-pm`](./.claude/agents/onboarding-pm.md).
+
+---
+
+## ¿Qué es este repo?
+
+El **sistema que ejecuta** la metodología. Cuando el Plan Maestro está firmado, el starter te da:
+
+- **15 agentes pre-configurados** (10 operativos + 5 supervisores, incluyendo el Onboarding PM que guía las 3 fases).
+- **3 skills fundacionales** (PDF→MD, Video/Audio→texto, Plan Paso a Paso).
+- **Templates** para Plan Maestro, NV, brief, research de APIs.
+- **`.claude/settings.json`** con permisos preaprobados (deja de autorizar cada comando).
+- **Instalador inteligente** (`tooling/install.sh`) que detecta qué ya tenés y no reinstala.
+
+---
+
+## Uso rápido
 
 ```bash
 # 1. Clonar como base de un proyecto nuevo
 git clone https://github.com/tamibot/creators-latam-starter.git mi-proyecto
 cd mi-proyecto && rm -rf .git && git init
 
-# 2. Instalar herramientas (interactivo — te pregunta qué querés)
+# 2. Instalar herramientas (solo lo que falta; si ya tenés todo, es segundos)
 ./tooling/install.sh
 
-# 3. Copiar variables de entorno y abrir tu IDE
-cp .env.example .env    # editá con tus credenciales
-claude                  # Claude Code detecta todo solo
+# 3. Abrir Claude Code
+claude
+# Primer mensaje: "Invocá al agente onboarding-pm para arrancar las 3 fases"
 ```
 
 📖 **Guía completa paso a paso:** [`INSTALL.md`](./INSTALL.md)
 
-En Claude Code, al abrir el repo vas a ver los 14 agentes disponibles con `/agents` y los 3 skills con `/skills`.
+### Nota sobre credenciales
+
+Si usás **Claude Code** como IDE, **no necesitás `ANTHROPIC_API_KEY`** — Claude Code usa su propia sesión. Solo necesitás API keys si tu código hace llamadas directas a APIs (ej: Gemini para el skill de video).
 
 ---
 
@@ -47,58 +94,66 @@ En Claude Code, al abrir el repo vas a ver los 14 agentes disponibles con `/agen
 
 ```
 creators-latam-starter/
-├── README.md             → este archivo
-├── CLAUDE.md             → reglas de oro que Claude lee automáticamente
-├── LLM.md                → manual de bienvenida para cualquier LLM
-├── .env.example          → plantilla de credenciales
+├── README.md                   → este archivo
+├── CLAUDE.md                   → reglas de oro (Claude las lee auto)
+├── LLM.md                      → manual de bienvenida para cualquier LLM
+├── INSTALL.md                  → guía completa de instalación
+├── LICENSE                     → MIT
+├── .env.example                → plantilla de credenciales
 ├── .claude/
-│   ├── settings.json     → permisos preaprobados para Claude Code
-│   ├── agents/           → los 14 agentes
-│   └── skills/           → pdf-a-markdown, video-a-texto, plan-paso-a-paso
+│   ├── settings.json           → permisos preaprobados
+│   ├── agents/                 → 15 agentes (incluye onboarding-pm)
+│   └── skills/                 → pdf-a-markdown, video-a-texto, plan-paso-a-paso
 ├── tooling/
-│   ├── install.sh        → instalador interactivo de herramientas
-│   └── README.md         → qué hace cada herramienta, qué instala
-├── templates/            → NV prompt, brief cliente, research API
-├── workflows/            → flujos específicos del proyecto
-├── documentation/        → todo lo que te pasa el cliente
-├── data_original/        → PDFs, screenshots, raw data
-├── output/               → los entregables finales (lo único que el cliente ve)
-└── docs/                 → landing (GitHub Pages)
+│   ├── install.sh              → instalador inteligente (detecta y salta)
+│   ├── README.md               → qué hace cada herramienta
+│   └── prerequisitos.md        → instalación manual paso a paso
+├── templates/
+│   ├── plan-maestro.md         → ⭐ template de las 3 fases
+│   ├── nv-prompt.md            → prompt de arranque para agentes
+│   ├── brief-cliente.md        → brief inicial
+│   └── api-research.md         → research por herramienta
+├── workflows/                  → flujos del proyecto
+├── documentation/              → plan-maestro.md + stack/ + bitácora
+├── data_original/              → raw del cliente (PDFs, screenshots)
+├── output/                     → entregables finales (lo que el cliente ve)
+└── docs/                       → landing (GitHub Pages)
 ```
 
 ---
 
-## El escuadrón de agentes
+## El escuadrón de agentes (15 total)
 
 Vive en `.claude/agents/`. Un agente, un job.
+
+### Supervisores (coordinan y auditan · 5)
+
+| # | Agente | Job |
+|---|---|---|
+| 15 | **Onboarding PM** ⭐ | Guía las 3 fases hasta firmar el Plan Maestro |
+| 13 | **Orquestador** | Con plan aprobado: descompone y delega tarea por tarea |
+| 06 | **Project Manager** | Visión estratégica: estado, plazos, prioridades |
+| 09 | **Arquitecto** | Revisa planes técnicos antes de ejecutar |
+| 14 | **Guardián de Reglas** | Audita las 10 reglas de oro pre-commit/release |
+
+### Operativos (ejecutan · 10)
 
 | # | Agente | Job |
 |---|---|---|
 | 01 | Documentador | Mantiene la documentación al día |
 | 02 | GitHub Keeper | Commits, branches, orden del repo |
 | 03 | Compilador de Datos | Junta, limpia y estructura datos |
-| 04 | Chronicler | Registro operativo en vivo |
+| 04 | Chronicler | Bitácora viva del proyecto |
 | 05 | Credentials Manager | Gestiona `.env` y accesos |
-| 06 | Project Manager | Orden, tiempos, bloqueos |
-| 07 | Tester | Único job: testeos |
+| 07 | Tester | Solo testeos, no arregla bugs |
 | 08 | Integraciones | APIs, webhooks, servicios externos |
-| 09 | Arquitecto | Revisa el plan antes de ejecutar |
-| 10 | Versionador | Reemplaza > duplica. Usa git para historial |
-| 11 | Purgador | Barre lo que ya no se usa |
+| 10 | Versionador | Reemplaza > duplica |
+| 11 | Purgador | Barre lo muerto |
 | 12 | Diagramador Mermaid | Diagramas validados, 0 errores de sintaxis |
-| 13 | Orquestador | Decide a quién delegar cada sub-tarea, y en qué orden |
-| 14 | Guardián de Reglas | Audita que el proyecto cumpla las 10 reglas de oro |
 
-Detalles completos en [`.claude/agents/`](./.claude/agents/).
+Durante la Fase 3 del Plan Maestro, el `onboarding-pm` puede proponer agentes custom adicionales.
 
-### Supervisión del escuadrón
-
-Los agentes 06, 09, 13 y 14 son **supervisores** — no ejecutan tareas, coordinan y auditan:
-
-- **Project Manager** (06) — visión estratégica (plazos, estado, prioridades semanales).
-- **Arquitecto** (09) — revisa planes *antes* de ejecutar. Filtro de calidad anticipado.
-- **Orquestador** (13) — delegación táctica: "para esta tarea específica, ¿quién la hace?"
-- **Guardián de Reglas** (14) — auditoría pre-commit/release: verifica las 10 reglas de oro.
+Detalles: [`.claude/agents/README.md`](./.claude/agents/README.md).
 
 ---
 
@@ -106,25 +161,9 @@ Los agentes 06, 09, 13 y 14 son **supervisores** — no ejecutan tareas, coordin
 
 Viven en `.claude/skills/`.
 
-- **`pdf-a-markdown`** → convierte PDFs/DOCX/XLSX en MD con marker o markitdown.
-- **`video-a-texto`** → YouTube/TikTok/archivos locales a texto vía Gemini, yt-dlp o whisper.
+- **`pdf-a-markdown`** → convierte PDFs/DOCX/XLSX con `marker` o `markitdown`.
+- **`video-a-texto`** → YouTube/archivos locales → texto (Gemini / yt-dlp / whisper.cpp).
 - **`plan-paso-a-paso`** → obliga al sistema a pensar antes de paralelizar.
-
----
-
-## Herramientas que instala `install.sh`
-
-Detalle completo en [`tooling/README.md`](./tooling/README.md).
-
-| Categoría | Qué se instala |
-|---|---|
-| **Prerrequisitos** | Homebrew, git, gh, Python 3.12, uv, nvm+Node LTS, ffmpeg, Docker Desktop |
-| **Documentos** | `marker-pdf`, `markitdown` |
-| **Video/Audio** | `yt-dlp`, `whisper.cpp`, SDK `google-genai` |
-| **Terminal** | `ripgrep`, `fd`, `bat`, `fzf`, `jq`, `delta`, `glow`, `zoxide`, `tree` |
-| **Diagramas** | `@mermaid-js/mermaid-cli` (on-demand vía npx) |
-
-El script es **interactivo**: pregunta antes de cada bloque. Si ya tenés algo, lo saltea.
 
 ---
 
@@ -133,72 +172,37 @@ El script es **interactivo**: pregunta antes de cada bloque. Si ya tenés algo, 
 1. **GitHub primero.** Repo conectado antes que nada.
 2. **Un cliente = una carpeta madre.**
 3. **Compilá a los 500k tokens.** No esperes al millón.
-4. **Reemplazar > duplicar versiones.** Nada de `plan_v2_final_final.md`.
-5. **Purgá lo que ya no se usa.** Carpeta limpia = contexto limpio.
-6. **Todo lo final va a `output/`.** Cero excepciones.
+4. **Reemplazar > duplicar.**
+5. **Purgá lo que ya no se usa.**
+6. **Todo lo final va a `output/`.**
 7. **Un agente, un job.**
-8. **El NV nunca arranca sin confirmar.** Ver `templates/nv-prompt.md`.
+8. **Plan Maestro antes de ejecutar.** Las 3 fases firmadas.
 9. **Plan paso a paso > todo en paralelo.**
 10. **Si no avanza, no es el modelo.** Es el prompt, el contexto o el plan.
 
-Las reglas completas están en [`CLAUDE.md`](./CLAUDE.md).
+Completas: [`CLAUDE.md`](./CLAUDE.md).
 
 ---
 
-## Filosofía: los tres pilares
+## ❓ FAQ (corta)
 
-1. **IDE** (Claude Code / Cursor / Antigravity) — la interfaz, donde vivís.
-2. **Terminal** (bash / zsh) — el control, conecta con tu máquina.
-3. **Nube** (GitHub) — el respaldo. Si no está en la nube, no existe.
+- **¿Por qué arrancar con Plan Maestro y no directo al código?** Porque sin entregable definido, stack validado y equipo armado, el código es al pedo. Ahorra semanas.
+- **¿Necesito Anthropic API Key?** No si usás Claude Code. Solo si hacés llamadas directas a la API.
+- **¿El instalador es lento?** Primera vez: 20–40 min. Siguientes: segundos (detecta qué ya hay).
+- **¿Windows?** Pedile a Claude/Cursor que aplique lo mismo con `winget`/`scoop`.
 
----
-
-## ❓ Preguntas frecuentes
-
-### ¿Esto corre en Windows?
-El script `tooling/install.sh` asume macOS. **Para Windows**, pedile a Claude/Cursor que aplique lo mismo usando `winget` o `scoop` en lugar de `brew`. Los paquetes Python/Node/Docker tienen instaladores nativos. En Linux, reemplazá `brew` por `apt`/`dnf`.
-
-### ¿Necesito todas las herramientas?
-No. El instalador es **interactivo**: te pregunta bloque por bloque. Los prerrequisitos sí los recomendamos todos. El resto depende del proyecto (si no vas a procesar video, saltealo).
-
-### ¿Por qué viene Gemini y no otros modelos?
-El skill `video-a-texto` aprovecha que **Gemini acepta video como input directo** (hasta ~1h) — algo que Claude y GPT-4 todavía no ofrecen de forma nativa tan simple. Conseguís el token gratis en [aistudio.google.com/apikey](https://aistudio.google.com/apikey). Para el resto de tareas, usá el LLM que prefieras.
-
-### ¿Qué hace `.claude/settings.json`?
-Define qué comandos puede ejecutar Claude Code sin pedirte autorización cada vez. Pre-aprobamos los seguros (`git`, `brew`, `pip`, `npm`, etc.) y **bloqueamos** los peligrosos (`rm -rf /`, `git push --force`, lectura de `.env`). Si querés ser más estricto, editá ese archivo.
-
-### ¿Es seguro dar tantos permisos preaprobados?
-El `.claude/settings.json` tiene una lista blanca (lo que se permite) y una **lista negra crítica** (lo que nunca se permite, como `rm -rf`, force-push o leer `.env`). Igual el agente te pide confirmación para operaciones destructivas o que afectan repos remotos.
-
-### ¿Puedo agregar mis propios agentes?
-Sí. Creá un `.md` en `.claude/agents/` con el frontmatter estándar (ver cualquier agente existente). Claude Code lo detecta al reiniciar.
-
-### ¿Cómo actualizo el starter a una versión más nueva?
-```bash
-git remote add starter https://github.com/tamibot/creators-latam-starter.git
-git fetch starter
-git merge starter/main --allow-unrelated-histories
-# Resolver conflictos si los hay (el Versionador te ayuda)
-```
-
-### ¿Por qué no hay herramienta de web scraping?
-La sacamos a propósito para mantener el starter liviano. Si la necesitás para un proyecto específico, agregala en `tooling/` del proyecto y documentala.
-
-### ¿Qué diferencia tiene con los starters de Vercel/Next?
-Aquellos son templates de código. Éste es un **starter de proceso**: reglas, agentes, skills, estructura. Se monta **sobre** cualquier stack técnico.
-
-### Me rompió algo el instalador, ¿qué hago?
-El script nunca borra nada y saltea lo que ya tenés. Si algo falló, revisá el output — te dice qué paquete específico no pudo instalar y probablemente tengas que correrlo manualmente (`brew install <pkg>`) para ver el error real.
+Completa en la [landing](https://tamibot.github.io/creators-latam-starter/#faq).
 
 ---
 
 ## Contacto
 
-¿Querés que montemos el sistema completo para tu empresa? Automatizamos gestión de clientes con ChatBots con IA + CRM, 24/7.
+¿Querés que montemos el sistema completo para tu empresa? Automatizamos la gestión de clientes con ChatBots con IA + CRM. 24/7.
 
 - 🌐 [creatorslatam.com](https://www.creatorslatam.com/)
 - 📱 +51 995 547 575
+- 💬 [WhatsApp directo](https://wa.me/51995547575)
 
 ---
 
-**Creators Latam** · Documento vivo · v1.1
+**Creators Latam** · Documento vivo · v1.3 · Metodología primero

@@ -9,7 +9,7 @@
 Este es un proyecto basado en el **Starter Kit de Creators Latam**. La estructura y reglas son estándar entre todos nuestros proyectos:
 
 - **`CLAUDE.md`** — las 10 reglas de oro. Son obligatorias.
-- **`.claude/agents/`** — 14 agentes especializados (10 operativos + 4 supervisores). Un agente, un job.
+- **`.claude/agents/`** — 15 agentes especializados (10 operativos + 5 supervisores, incluyendo el `onboarding-pm` que arranca las 3 fases). Un agente, un job.
 - **`.claude/skills/`** — habilidades base (PDF→MD, Plan paso a paso).
 - **`templates/`** — plantillas para el NV, brief del cliente y research de APIs.
 - **`output/`** — TODO entregable final va acá. Sin excepciones.
@@ -21,12 +21,13 @@ Este es un proyecto basado en el **Starter Kit de Creators Latam**. La estructur
 ## Cómo arrancar en cada conversación
 
 1. **Leé `CLAUDE.md`** — las reglas no se negocian.
-2. **Preguntá antes de ejecutar.** El NV template está en `templates/nv-prompt.md`.
-3. **Para tareas complejas, invocá al `orquestador`** — él decide a quién delegar.
-4. **Antes de commits grandes, invocá al `guardian-reglas`** — audita compliance.
-5. **Planificá antes de paralelizar.** Usá el skill `plan-paso-a-paso`.
-6. **Convertí PDFs a MD** con el skill `pdf-a-markdown` antes de leerlos.
-7. **Videos/audio → texto** con el skill `video-a-texto`.
+2. **¿Proyecto nuevo?** Invocá primero al `onboarding-pm`. Él guía las 3 fases (Entregables → Stack → Equipo) hasta firmar el Plan Maestro.
+3. **¿Plan Maestro firmado?** Recién ahí ejecutás. El `orquestador` decide a quién delegar cada sub-tarea.
+4. **Preguntá antes de ejecutar.** El NV template está en `templates/nv-prompt.md`.
+5. **Antes de commits grandes, invocá al `guardian-reglas`** — audita compliance.
+6. **Planificá antes de paralelizar.** Usá el skill `plan-paso-a-paso`.
+7. **Convertí PDFs a MD** con el skill `pdf-a-markdown` antes de leerlos.
+8. **Videos/audio → texto** con el skill `video-a-texto`.
 
 ---
 
