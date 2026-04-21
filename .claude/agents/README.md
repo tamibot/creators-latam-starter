@@ -1,10 +1,10 @@
 # Agentes · Creators Latam Starter
 
-**30 agentes** — un agente, un job.
+**32 agentes** — un agente, un job.
 
 Claude Code los detecta automáticamente. Invocalos con `/agents` o pediles por nombre.
 
-## 🌟 Supervisores (9 · coordinan, auditan, aprenden)
+## 🌟 Supervisores (10 · coordinan, auditan, aprenden)
 
 | # | Emoji | Nombre | Job |
 |---|---|---|---|
@@ -16,9 +16,10 @@ Claude Code los detecta automáticamente. Invocalos con `/agents` o pediles por 
 | 14 | 🛡️ | [`guardian-reglas`](guardian-reglas.md) | Audita las 10 reglas pre-commit |
 | 19 | 🗺️ | [`mapa-sistema`](mapa-sistema.md) | Catálogo visual completo del sistema |
 | 20 | 🧠 | [`analizador-patrones`](analizador-patrones.md) | Aprende entre proyectos |
-| 23 | 📈 | [`status-dashboard`](status-dashboard.md) | Foto del estado actual del proyecto |
+| 23 | 📈 | [`status-dashboard`](status-dashboard.md) | Foto del estado actual del proyecto (MD humano) |
+| 32 | 📡 | [`project-monitor`](project-monitor.md) | Status.json continuo para integrar con otros sistemas |
 
-## 🛠️ Operativos (21 · ejecutan el trabajo)
+## 🛠️ Operativos (22 · ejecutan el trabajo)
 
 | # | Emoji | Nombre | Job |
 |---|---|---|---|
@@ -43,6 +44,7 @@ Claude Code los detecta automáticamente. Invocalos con `/agents` o pediles por 
 | 29 | 🎨 | [`html-renderer`](html-renderer.md) | MD → HTML profesional con Mermaid |
 | 30 | 📄 | [`pdf-exporter`](pdf-exporter.md) | HTML → PDF con validación visual |
 | 31 | 📊 | [`dashboard-builder`](dashboard-builder.md) | Dashboards HTML standalone interactivos |
+| 33 | ⏪ | [`rollback-manager`](rollback-manager.md) | Rollback al último commit verde cuando algo rompe |
 
 ## Flujo de un proyecto
 

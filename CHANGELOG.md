@@ -6,6 +6,40 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/) · sigue [SemV
 
 ---
 
+## [1.8.0] · 2026-04-21
+
+### Added · agentes (32 totales · +2)
+- **`project-monitor`** (AG 32) 📡 — supervisor CONTINUO. Mantiene `documentation/status.json` (machine-readable) siempre actualizado. Lo pueden consumir dashboards externos, bots, webhooks. Schema versionado con campos fijos (project, plan_status, execution, entregables, milestones, risks, team, costs, quality, next_actions).
+- **`rollback-manager`** (AG 33) ⏪ — cuando algo se rompe en ejecución, identifica el último commit verde, calcula el diff, propone 3 estrategias (revert / restore selectivo / hard reset), ejecuta con confirmación doble.
+
+### Added · skills (+1)
+- **`formato-fechas`** — normaliza fechas en docs del proyecto a ISO 8601. Detecta formatos mezclados (`dd/mm/yyyy` vs `yyyy-mm-dd` vs "21 de Abril de 2026"). Dry-run por default.
+
+### Added · tooling
+- `tooling/check-duplicates.sh` — detecta agentes/skills con funcionalidad solapada. Nombres similares, keywords cruzadas, sets idénticos de tools, templates redundantes.
+
+### Added · slash commands
+- `/retrospectiva` — arranca retro post-proyecto con el template.
+- `/new-agent` — crea agente custom via `./tooling/new-agent.sh`.
+
+### Added · CI
+- Job `agent-references` — valida que cada agente mencionado en docs exista realmente como archivo.
+- Job `duplicate-check` — corre `check-duplicates.sh` en cada push.
+
+### Changed · mejoras
+- `orquestador`: preflight obligatorio con `validate-plan.sh` antes de delegar ejecución. Evita arrancar sin plan firmado.
+- `status-dashboard`: ahora delega a `project-monitor` para sincronizar `status.json` tras regenerar el MD.
+
+### Removed · consolidación
+- `templates/brief-cliente.md` eliminado — redundante con Fase 1 del `plan-maestro.md` + lo que produce `kickoff-cliente`.
+
+### Landing
+- 32 agentes visibles con emojis (AG 32 📡, AG 33 ⏪).
+- Nueva sección **"🛠️ Stack que viene preinstalado"** con 6 categorías (prerequisitos, documentos, audio/video, terminal, seguridad, excel/data) y links a cada repo.
+- Nota sobre idempotencia del installer.
+
+---
+
 ## [1.7.0] · 2026-04-21
 
 ### Removed · consolidación

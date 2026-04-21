@@ -2,7 +2,7 @@
 
 Skills que Claude Code monta automáticamente desde esta carpeta.
 
-## Skills base (4)
+## Skills base (5)
 
 | Skill | Cuándo se invoca |
 |---|---|
@@ -10,6 +10,7 @@ Skills que Claude Code monta automáticamente desde esta carpeta.
 | [`pdf-a-markdown`](pdf-a-markdown/SKILL.md) | Todo PDF/DOCX/XLSX entra acá antes de ser leído |
 | [`video-a-texto`](video-a-texto/SKILL.md) | YouTube / archivos locales → texto |
 | [`plan-paso-a-paso`](plan-paso-a-paso/SKILL.md) | Antes de procesar volumen alto |
+| [`formato-fechas`](formato-fechas/SKILL.md) | Normaliza fechas del proyecto a ISO 8601 |
 
 ## Agregar skills del proyecto
 

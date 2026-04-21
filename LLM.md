@@ -9,7 +9,7 @@
 Este es un proyecto basado en el **Starter Kit de Creators Latam**. La estructura y reglas son estándar entre todos nuestros proyectos:
 
 - **`CLAUDE.md`** — las 10 reglas de oro. Son obligatorias.
-- **`.claude/agents/`** — 30 agentes especializados (21 operativos + 9 supervisores). Un agente, un job.
+- **`.claude/agents/`** — 32 agentes especializados (22 operativos + 10 supervisores). Un agente, un job.
   - Primera reunión con cliente: `kickoff-cliente`
   - Arrancar las 3 fases: `onboarding-pm`
   - Coordinar ejecución: `orquestador`

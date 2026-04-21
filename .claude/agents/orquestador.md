@@ -97,12 +97,35 @@ flowchart LR
 - Existe artefacto en `output/` según especificación.
 ```
 
+## ⚠️ Preflight obligatorio
+
+**ANTES de delegar cualquier ejecución de trabajo real**, validás:
+
+```bash
+./tooling/validate-plan.sh
+```
+
+- Exit 0 → podés delegar. Plan firmado, adelante.
+- Exit 1 → **parás y escalás**. No delegás nada hasta que el plan esté firmado.
+
+Esto evita que arranquemos ejecución sin Plan Maestro, rompiendo la regla 01.
+
+Casos donde **sí podés** trabajar sin plan firmado:
+- Tareas de documentación (`documentador`, `chronicler`).
+- Validaciones de seguridad (`security-auditor`, `guardian-reglas`).
+- Status del proyecto (`status-dashboard`, `project-monitor`).
+- Setup inicial (`kickoff-cliente`, `onboarding-pm`).
+
+Para estas, no corrés el preflight.
+
 ## Reglas duras
 
-1. **Toda delegación justificada.** Si no podés explicar por qué ese agente, no es el correcto.
-2. **Un solo agente in-flight por vez** salvo que el skill `plan-paso-a-paso` lo autorice explícitamente.
-3. **Nunca improvisar un agente.** Si no existe uno para la tarea, proponer crearlo — no forzar a otro a cubrir.
-4. **Siempre invocar `arquitecto`** antes de ejecuciones con impacto en producción o datos reales.
-5. **Siempre invocar `credentials-manager`** si la tarea toca `.env` o secretos.
-6. **Siempre invocar `guardian-reglas`** antes de un commit grande o release.
-7. **Si la tarea es de volumen**, el primer paso es siempre el skill `plan-paso-a-paso`.
+1. **Preflight antes de ejecutar.** `validate-plan.sh` debe devolver exit 0 para tareas de ejecución.
+2. **Toda delegación justificada.** Si no podés explicar por qué ese agente, no es el correcto.
+3. **Un solo agente in-flight por vez** salvo que el skill `plan-paso-a-paso` lo autorice explícitamente.
+4. **Nunca improvisar un agente.** Si no existe uno para la tarea, proponer crearlo — no forzar a otro a cubrir.
+5. **Siempre invocar `arquitecto`** antes de ejecuciones con impacto en producción o datos reales.
+6. **Siempre invocar `credentials-manager`** si la tarea toca `.env` o secretos.
+7. **Siempre invocar `guardian-reglas`** antes de un commit grande o release.
+8. **Si la tarea es de volumen**, el primer paso es siempre el skill `plan-paso-a-paso`.
+9. **Post-ejecución** → invocar `project-monitor` para actualizar `status.json`.

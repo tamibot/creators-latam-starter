@@ -175,9 +175,66 @@ jobs:
           grep -q "</html>" docs/index.html || { echo "✗ falta </html>"; exit 1; }
           echo "✓ docs/index.html sanity OK"
 
+  agent-references:
+    name: Agentes · referencias en docs existen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar que los agentes mencionados en docs existan
+        run: |
+          # Obtener todos los nombres de agentes existentes
+          AGENTS=$(grep -h "^name:" .claude/agents/*.md 2>/dev/null \
+                   | cut -d: -f2 | tr -d ' ' | sort -u)
+
+          # Buscar referencias a agentes en código markdown
+          # Formato: backticks `nombre-agente` o [`nombre-agente`](path)
+          errors=0
+
+          # Listar todas las referencias a agentes-like en docs
+          ALL_REFS=$(grep -rohE '\`[a-z][a-z0-9-]{4,}[a-z0-9]\`' \
+                     --include="*.md" \
+                     --exclude-dir=.git \
+                     --exclude-dir=node_modules \
+                     . 2>/dev/null \
+                     | tr -d '`' \
+                     | sort -u)
+
+          # Filtrar las que LOOK LIKE agentes conocidos pero no existen
+          while IFS= read -r ref; do
+            # Solo chequear si el nombre tiene guión o es conocido como agente
+            if [[ "$ref" =~ ^(documentador|github-keeper|compilador-datos|chronicler|credentials-manager|project-manager|tester|arquitecto|versionador|purgador|diagramador-mermaid|orquestador|guardian-reglas|onboarding-pm|test-debug-loop|integrador-herramientas|kickoff-cliente|mapa-sistema|analizador-patrones|comentarios-adicionales|archivero|status-dashboard|excel-builder|cost-tracker|handoff-cliente|security-auditor|onboarder-colaborador|html-renderer|pdf-exporter|dashboard-builder|project-monitor|rollback-manager)$ ]]; then
+              if ! echo "$AGENTS" | grep -q "^${ref}$"; then
+                echo "✗ Referencia a agente '${ref}' pero no existe en .claude/agents/"
+                errors=$((errors+1))
+              fi
+            fi
+          done <<< "$ALL_REFS"
+
+          if [ $errors -gt 0 ]; then
+            echo ""
+            echo "=== $errors referencias rotas ==="
+            exit 1
+          else
+            echo "✓ Todas las referencias a agentes son válidas"
+          fi
+
+  duplicate-check:
+    name: Duplicados · check-duplicates.sh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check duplicates
+        run: |
+          chmod +x tooling/check-duplicates.sh
+          ./tooling/check-duplicates.sh
+          # El script nunca falla hard (sólo advierte), pero dejamos log
+          echo "✓ Duplicates check completado"
+
   summary:
     name: Todo OK
-    needs: [shell-lint, agents-validate, skills-validate, settings-validate, markdown-links, html-validate]
+    needs: [shell-lint, agents-validate, skills-validate, settings-validate, markdown-links, html-validate, agent-references, duplicate-check]
     runs-on: ubuntu-latest
     steps:
       - run: echo "✅ Todas las validaciones pasaron"
