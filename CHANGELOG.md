@@ -6,6 +6,49 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/) · sigue [SemV
 
 ---
 
+## [1.9.0] · 2026-04-21
+
+### Changed · enfoque de comunicación
+- Landing y README rearmados con mensaje **"base extensible"**:
+  - Reemplaza mensaje anterior "Instalá. Colaborá. Ejecutá." por **"Una base sólida para trabajar con IA"**.
+  - Enfatiza que el starter es el **piso común**, sobre el cual cada proyecto suma lo específico.
+  - Concepto claro: **"la base te da el piso; encima construís lo tuyo"**.
+
+### Changed · landing · organigrama visual de agentes
+- Reemplazada la grid plana de 32 agentes por un **organigrama funcional**:
+  - Root node animado: "Creators Latam Starter".
+  - Líneas SVG conectoras del root a las 8 ramas funcionales.
+  - 8 branches con colores propios:
+    1. 🤝 Arranque (3) — kickoff, onboarding-pm, mapa-sistema
+    2. 🎼 Coordinación (4) — orquestador, PM, arquitecto, status-dashboard
+    3. 📡 Monitoreo (4) — project-monitor, guardian-reglas, security-auditor, analizador
+    4. 📦 Ejecución (7) — compilador, integrador, tester, test-debug, github-keeper, credentials, diagramador
+    5. 📄 Entregables (4) — excel, html-renderer, pdf-exporter, dashboard-builder
+    6. 🗂️ Docs (4) — documentador, chronicler, diagramador, comentarios
+    7. 🧹 Mantenimiento (4) — versionador, purgador, archivero, rollback
+    8. 🎯 Cierre (3) — handoff, cost-tracker, onboarder-colab
+  - Cada branch con emoji + contador + "cuándo se invoca" (día 1 / continuo / pre-firma / etc).
+  - Mini-cards de los agentes con emoji individual + AG ID.
+  - Hover animado en cada branch (rotate + scale + shadow con color de la rama).
+- Nuevo bloque **"Esto es la base. Vos sumás lo específico"** que refuerza el concepto de extensibilidad.
+
+### Changed · README
+- Reescrito completo con enfoque **ES / NO ES** al inicio.
+- Sección **"Cómo se extiende esta base"** explicita los patrones:
+  agentes custom, skills custom, integraciones, templates del proyecto.
+- Sección **"Mejora continua"** explica cómo los patrones recurrentes ascienden al starter base.
+
+### Changed · INSTALL.md
+- Reordenado por fases numeradas (0 a 8).
+- Fase 0 = chequeo previo con one-liner para ver qué tenés.
+- Troubleshooting al final con problemas frecuentes resueltos.
+- Nota crítica sobre `ANTHROPIC_API_KEY` (no requerida con Claude Code).
+
+### Changed · CLAUDE.md
+- Agregada nota en el encabezado sobre extensibilidad: el repo es base común, arriba se suma lo específico.
+
+---
+
 ## [1.8.0] · 2026-04-21
 
 ### Added · agentes (32 totales · +2)

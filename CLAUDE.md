@@ -2,6 +2,8 @@
 
 Este archivo lo lee el modelo automáticamente al abrir el repo. Son las reglas que NO se negocian.
 
+> **Importante:** este repo es una **base extensible**, no una caja cerrada. Los 32 agentes y 5 skills son el piso común a todo proyecto. Arriba de esta base, cada proyecto suma lo específico (agentes custom, skills del dominio, workflows puntuales). Si detectás un patrón que aparece en 3+ proyectos, proponelo al starter base.
+
 ---
 
 ## 🎯 Metodología · lee esto primero

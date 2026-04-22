@@ -239,7 +239,235 @@
   .manifesto .split .is-not li::before { content: "✗"; color: #FF6B6B; }
   @media (max-width: 760px) { .manifesto { padding: 48px 28px; } .manifesto .split { grid-template-columns: 1fr; } }
 
-  /* ===== AGENT CARDS (con emojis visuales) ===== */
+  /* ===== ORGCHART (organigrama visual de agentes) ===== */
+  .orgchart {
+    position: relative;
+    margin: 48px auto 0;
+    max-width: 1200px;
+  }
+
+  /* Root node */
+  .orgchart-root {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .root-halo {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(255,59,119,.2), transparent 70%);
+    animation: blob 10s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(20px);
+  }
+  .root-inner {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: white;
+    padding: 24px 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px -15px rgba(139,63,255,.5);
+    position: relative;
+    z-index: 2;
+    min-width: 280px;
+  }
+  .root-emoji { font-size: 36px; margin-bottom: 6px; animation: floatY 4s ease-in-out infinite; }
+  .root-label { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .root-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.85; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* SVG connectors */
+  .orgchart-connectors {
+    width: 100%;
+    height: 80px;
+    display: block;
+    margin: -8px 0 -8px;
+  }
+  .orgchart-connectors .conn {
+    fill: none;
+    stroke: url(#conn-grad);
+    stroke-width: 2;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: drawLine 1.2s ease-out forwards;
+    animation-delay: calc(var(--d) * 1s);
+  }
+  @keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+  }
+  /* fallback via pink solid line (no SVG defs on this version) */
+  .orgchart-connectors .conn {
+    stroke: rgba(255,59,119,.4);
+  }
+
+  /* Branches grid */
+  .orgchart-branches {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 0;
+  }
+  .branch {
+    background: white;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--bc, var(--pink));
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
+    position: relative;
+  }
+  .branch::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 0; right: 0;
+    height: 100%;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--bc) 6%, transparent), transparent 40%);
+    pointer-events: none;
+  }
+  .branch:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -15px color-mix(in srgb, var(--bc) 40%, transparent);
+  }
+  .branch-head {
+    padding: 20px 18px 14px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .branch-emoji {
+    display: inline-block;
+    font-size: 30px;
+    width: 54px; height: 54px;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--bc) 12%, white);
+    border: 1px solid color-mix(in srgb, var(--bc) 30%, transparent);
+    line-height: 52px;
+    text-align: center;
+    margin-bottom: 12px;
+    transition: transform .3s;
+  }
+  .branch:hover .branch-emoji {
+    transform: rotate(-8deg) scale(1.1);
+  }
+  .branch-name {
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    color: var(--bc);
+    margin-bottom: 3px;
+  }
+  .branch-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .branch-when {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    background: color-mix(in srgb, var(--bc) 10%, white);
+    color: var(--bc);
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+  }
+  .branch-list {
+    padding: 12px 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mini-agent {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background .15s;
+    cursor: default;
+  }
+  .mini-agent:hover {
+    background: color-mix(in srgb, var(--bc) 8%, white);
+  }
+  .mini-agent span {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .mini-agent strong {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .mini-agent i {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  /* Extensible note */
+  .extensible-note {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 32px 36px;
+    background: linear-gradient(135deg, rgba(139,63,255,.04), rgba(255,59,119,.04));
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--pink);
+    border-radius: 16px;
+    align-items: center;
+  }
+  .ext-icon {
+    font-size: 56px;
+    text-align: center;
+    animation: floatY 5s ease-in-out infinite;
+  }
+  .ext-body h4 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .ext-body p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1024px) {
+    .orgchart-branches { grid-template-columns: repeat(2, 1fr); }
+    .orgchart-connectors { display: none; }
+    .orgchart-root { margin-bottom: 28px; }
+    .branch { padding-top: 0; }
+    .branch::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -20px; left: 50%;
+      width: 2px; height: 20px;
+      background: var(--bc);
+      opacity: 0.3;
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: 560px) {
+    .orgchart-branches { grid-template-columns: 1fr; gap: 14px; }
+    .extensible-note { grid-template-columns: 1fr; padding: 24px; text-align: center; }
+    .ext-icon { font-size: 44px; }
+  }
+
+  /* ===== AGENT CARDS (con emojis visuales — legacy, para backward compat) ===== */
   .agents-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -570,10 +798,10 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container">
-    <span class="eyebrow reveal"><span class="eyebrow-dot"></span> v1.7 · 2026 · Forma de trabajar</span>
-    <h1 class="display reveal">Instalá. Colaborá. <span class="grad">Ejecutá.</span></h1>
+    <span class="eyebrow reveal"><span class="eyebrow-dot"></span> v1.9 · 2026 · Base extensible para IA</span>
+    <h1 class="display reveal">Una <span class="shimmer">base sólida</span><br>para trabajar con IA.</h1>
     <p class="lead reveal">
-      Una <strong>forma de trabajar</strong> con IA — no un set de herramientas. <strong>4 pasos</strong> claros: definís el <strong>entregable</strong>, validás el <strong>stack</strong>, armás el <strong>equipo</strong> y ejecutás el <strong>plan</strong>. El starter viene con 32 agentes listos.
+      No es un boilerplate ni una caja cerrada. Es una <strong>forma de trabajar</strong> con <strong>4 pasos metodológicos</strong>, <strong>32 agentes</strong> organizados en 8 funciones y <strong>5 skills</strong>. Clonás, adaptás, sumás lo específico de tu proyecto. <mark>La base te da el piso; encima construís lo tuyo.</mark>
     </p>
 
     <div class="cta-row reveal">
@@ -712,56 +940,180 @@
   </div>
 </section>
 
-<!-- ============ EQUIPO DE AGENTES ============ -->
+<!-- ============ EQUIPO DE AGENTES · ORGANIGRAMA ============ -->
 <section class="sec bg-alt" id="equipo">
   <div class="container">
-    <span class="sec-eyebrow reveal">El equipo de IA</span>
-    <h2 class="sec-title reveal">32 agentes. <span class="grad">Cada uno con su job.</span></h2>
+    <span class="sec-eyebrow reveal">El equipo de IA · organigrama</span>
+    <h2 class="sec-title reveal">32 agentes organizados en <span class="grad">8 funciones.</span></h2>
     <p class="sec-sub reveal">
-      Los <strong>supervisores</strong> (con cinta rosa) coordinan y auditan. Los <strong>operativos</strong> ejecutan. Claude Code los detecta automático.
+      No es una lista plana — es un <strong>organigrama funcional</strong>. Cada agente cumple un rol dentro del ciclo de vida del proyecto. Pasá el mouse por cada rama para ver los agentes.
     </p>
 
-    <div class="agents-grid reveal">
-      <!-- SUPERVISORES (9) -->
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🤝</span><span class="agent-id">AG 18</span><h4>Kickoff Cliente</h4><p class="agent-job">Primera reunión, minuta, brief</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🧭</span><span class="agent-id">AG 15</span><h4>Onboarding PM</h4><p class="agent-job">Guía las 3 fases del plan</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🎼</span><span class="agent-id">AG 13</span><h4>Orquestador</h4><p class="agent-job">Delega qué agente, qué orden</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">📊</span><span class="agent-id">AG 06</span><h4>Project Manager</h4><p class="agent-job">Visión estratégica, plazos</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🏗️</span><span class="agent-id">AG 09</span><h4>Arquitecto</h4><p class="agent-job">Revisa planes pre-ejecución</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🛡️</span><span class="agent-id">AG 14</span><h4>Guardián Reglas</h4><p class="agent-job">Audita reglas pre-commit</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🗺️</span><span class="agent-id">AG 19</span><h4>Mapa Sistema</h4><p class="agent-job">Catálogo visual de todo</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">🧠</span><span class="agent-id">AG 20</span><h4>Analizador Patrones</h4><p class="agent-job">Aprende entre proyectos</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">📈</span><span class="agent-id">AG 23</span><h4>Status Dashboard</h4><p class="agent-job">Estado del proyecto ahora</p></div>
-      <div class="agent-card supervisor"><span class="agent-role">sup</span><span class="agent-emoji">📡</span><span class="agent-id">AG 32</span><h4>Project Monitor</h4><p class="agent-job">Status.json continuo para integrar</p></div>
+    <!-- Root node -->
+    <div class="orgchart">
+      <div class="orgchart-root reveal">
+        <div class="root-halo"></div>
+        <div class="root-inner">
+          <div class="root-emoji">🚀</div>
+          <div class="root-label">Creators Latam Starter</div>
+          <div class="root-sub">32 agentes · 5 skills · 7 scripts</div>
+        </div>
+      </div>
 
-      <!-- OPERATIVOS (22) -->
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📝</span><span class="agent-id">AG 01</span><h4>Documentador</h4><p class="agent-job">Docs siempre al día</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🐙</span><span class="agent-id">AG 02</span><h4>GitHub Keeper</h4><p class="agent-job">Commits, branches, orden</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📦</span><span class="agent-id">AG 03</span><h4>Compilador Datos</h4><p class="agent-job">Limpia y estructura data</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📜</span><span class="agent-id">AG 04</span><h4>Chronicler</h4><p class="agent-job">Bitácora viva</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔑</span><span class="agent-id">AG 05</span><h4>Credentials Mgr</h4><p class="agent-job">Gestiona .env y accesos</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧪</span><span class="agent-id">AG 07</span><h4>Tester</h4><p class="agent-job">Solo testea, no arregla</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧷</span><span class="agent-id">AG 10</span><h4>Versionador</h4><p class="agent-job">Reemplaza > duplica</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🧹</span><span class="agent-id">AG 11</span><h4>Purgador</h4><p class="agent-job">Barre lo muerto</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📐</span><span class="agent-id">AG 12</span><h4>Diagramador</h4><p class="agent-job">Mermaid sin errores</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔁</span><span class="agent-id">AG 16</span><h4>Test-Debug Loop</h4><p class="agent-job">Prueba → fix → re-prueba</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🌐</span><span class="agent-id">AG 17</span><h4>Integrador Tools</h4><p class="agent-job">API > SDK > MCP > hook</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">💬</span><span class="agent-id">AG 21</span><h4>Comentarios</h4><p class="agent-job">Feedback estructurado</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🗄️</span><span class="agent-id">AG 22</span><h4>Archivero</h4><p class="agent-job">Curador del filesystem</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📗</span><span class="agent-id">AG 24</span><h4>Excel Builder</h4><p class="agent-job">Genera .xlsx profesionales</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">💰</span><span class="agent-id">AG 25</span><h4>Cost Tracker</h4><p class="agent-job">Estima y monitorea costos</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📦</span><span class="agent-id">AG 26</span><h4>Handoff Cliente</h4><p class="agent-job">Paquete final al cliente</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🔐</span><span class="agent-id">AG 27</span><h4>Security Auditor</h4><p class="agent-job">Secrets, CVE, permisos</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">👋</span><span class="agent-id">AG 28</span><h4>Onboarder Colab</h4><p class="agent-job">Welcome para nuevos devs</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">🎨</span><span class="agent-id">AG 29</span><h4>HTML Renderer</h4><p class="agent-job">MD → HTML hermoso</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📄</span><span class="agent-id">AG 30</span><h4>PDF Exporter</h4><p class="agent-job">HTML → PDF validado</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">📊</span><span class="agent-id">AG 31</span><h4>Dashboard Builder</h4><p class="agent-job">HTML standalone interactivo</p></div>
-      <div class="agent-card operativo"><span class="agent-role">op</span><span class="agent-emoji">⏪</span><span class="agent-id">AG 33</span><h4>Rollback Manager</h4><p class="agent-job">Volver al último commit verde</p></div>
+      <!-- Connector lines (SVG) -->
+      <svg class="orgchart-connectors" viewBox="0 0 1000 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M500,0 L500,40 L60,40 L60,80" class="conn" style="--d:0"/>
+        <path d="M500,0 L500,40 L185,40 L185,80" class="conn" style="--d:.05"/>
+        <path d="M500,0 L500,40 L310,40 L310,80" class="conn" style="--d:.1"/>
+        <path d="M500,0 L500,40 L435,40 L435,80" class="conn" style="--d:.15"/>
+        <path d="M500,0 L500,40 L565,40 L565,80" class="conn" style="--d:.2"/>
+        <path d="M500,0 L500,40 L690,40 L690,80" class="conn" style="--d:.25"/>
+        <path d="M500,0 L500,40 L815,40 L815,80" class="conn" style="--d:.3"/>
+        <path d="M500,0 L500,40 L940,40 L940,80" class="conn" style="--d:.35"/>
+      </svg>
+
+      <!-- 8 Branches -->
+      <div class="orgchart-branches">
+
+        <!-- BRANCH 1 · ARRANQUE -->
+        <div class="branch reveal" style="--bc: #FF3B77;">
+          <div class="branch-head">
+            <div class="branch-emoji">🤝</div>
+            <div class="branch-name">Arranque</div>
+            <div class="branch-count">3 agentes</div>
+            <div class="branch-when">Día 1 del proyecto</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>🤝</span><strong>Kickoff Cliente</strong><i>AG 18</i></div>
+            <div class="mini-agent"><span>🧭</span><strong>Onboarding PM</strong><i>AG 15 ⭐</i></div>
+            <div class="mini-agent"><span>🗺️</span><strong>Mapa Sistema</strong><i>AG 19</i></div>
+          </div>
+        </div>
+
+        <!-- BRANCH 2 · COORDINACIÓN -->
+        <div class="branch reveal" style="--bc: #D426C5;">
+          <div class="branch-head">
+            <div class="branch-emoji">🎼</div>
+            <div class="branch-name">Coordinación</div>
+            <div class="branch-count">4 agentes</div>
+            <div class="branch-when">Durante ejecución</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>🎼</span><strong>Orquestador</strong><i>AG 13</i></div>
+            <div class="mini-agent"><span>📊</span><strong>Project Manager</strong><i>AG 06</i></div>
+            <div class="mini-agent"><span>🏗️</span><strong>Arquitecto</strong><i>AG 09</i></div>
+            <div class="mini-agent"><span>📈</span><strong>Status Dashboard</strong><i>AG 23</i></div>
+          </div>
+        </div>
+
+        <!-- BRANCH 3 · MONITOREO -->
+        <div class="branch reveal" style="--bc: #8B3FFF;">
+          <div class="branch-head">
+            <div class="branch-emoji">📡</div>
+            <div class="branch-name">Monitoreo</div>
+            <div class="branch-count">4 agentes</div>
+            <div class="branch-when">Continuo</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>📡</span><strong>Project Monitor</strong><i>AG 32</i></div>
+            <div class="mini-agent"><span>🛡️</span><strong>Guardián Reglas</strong><i>AG 14</i></div>
+            <div class="mini-agent"><span>🔐</span><strong>Security Auditor</strong><i>AG 27</i></div>
+            <div class="mini-agent"><span>🧠</span><strong>Analizador Patrones</strong><i>AG 20</i></div>
+          </div>
+        </div>
+
+        <!-- BRANCH 4 · EJECUCIÓN -->
+        <div class="branch reveal" style="--bc: #6A2BF5;">
+          <div class="branch-head">
+            <div class="branch-emoji">📦</div>
+            <div class="branch-name">Ejecución</div>
+            <div class="branch-count">7 agentes</div>
+            <div class="branch-when">Post-plan firmado</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>📦</span><strong>Compilador Datos</strong><i>AG 03</i></div>
+            <div class="mini-agent"><span>🌐</span><strong>Integrador Tools</strong><i>AG 17</i></div>
+            <div class="mini-agent"><span>🧪</span><strong>Tester</strong><i>AG 07</i></div>
+            <div class="mini-agent"><span>🔁</span><strong>Test-Debug Loop</strong><i>AG 16</i></div>
+            <div class="mini-agent"><span>🐙</span><strong>GitHub Keeper</strong><i>AG 02</i></div>
+            <div class="mini-agent"><span>🔑</span><strong>Credentials Mgr</strong><i>AG 05</i></div>
+            <div class="mini-agent"><span>📐</span><strong>Diagramador</strong><i>AG 12</i></div>
+          </div>
+        </div>
+
+        <!-- BRANCH 5 · ENTREGABLES -->
+        <div class="branch reveal" style="--bc: #2563EB;">
+          <div class="branch-head">
+            <div class="branch-emoji">📄</div>
+            <div class="branch-name">Entregables</div>
+            <div class="branch-count">4 agentes</div>
+            <div class="branch-when">Output final</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>📗</span><strong>Excel Builder</strong><i>AG 24</i></div>
+            <div class="mini-agent"><span>🎨</span><strong>HTML Renderer</strong><i>AG 29</i></div>
+            <div class="mini-agent"><span>📄</span><strong>PDF Exporter</strong><i>AG 30</i></div>
+            <div class="mini-agent"><span>📊</span><strong>Dashboard Builder</strong><i>AG 31</i></div>
+          </div>
+        </div>
+
+        <!-- BRANCH 6 · DOCUMENTACIÓN -->
+        <div class="branch reveal" style="--bc: #14B87A;">
+          <div class="branch-head">
+            <div class="branch-emoji">🗂️</div>
+            <div class="branch-name">Docs</div>
+            <div class="branch-count">4 agentes</div>
+            <div class="branch-when">Transversal</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>📝</span><strong>Documentador</strong><i>AG 01</i></div>
+            <div class="mini-agent"><span>📜</span><strong>Chronicler</strong><i>AG 04</i></div>
+            <div class="mini-agent"><span>📐</span><strong>Diagramador</strong><i>AG 12</i></div>
+            <div class="mini-agent"><span>💬</span><strong>Comentarios</strong><i>AG 21</i></div>
+          </div>
+        </div>
+
+        <!-- BRANCH 7 · MANTENIMIENTO -->
+        <div class="branch reveal" style="--bc: #F59E0B;">
+          <div class="branch-head">
+            <div class="branch-emoji">🧹</div>
+            <div class="branch-name">Mantenimiento</div>
+            <div class="branch-count">4 agentes</div>
+            <div class="branch-when">Periódico</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>🧷</span><strong>Versionador</strong><i>AG 10</i></div>
+            <div class="mini-agent"><span>🧹</span><strong>Purgador</strong><i>AG 11</i></div>
+            <div class="mini-agent"><span>🗄️</span><strong>Archivero</strong><i>AG 22</i></div>
+            <div class="mini-agent"><span>⏪</span><strong>Rollback Manager</strong><i>AG 33</i></div>
+          </div>
+        </div>
+
+        <!-- BRANCH 8 · CIERRE -->
+        <div class="branch reveal" style="--bc: #0A7C4F;">
+          <div class="branch-head">
+            <div class="branch-emoji">🎯</div>
+            <div class="branch-name">Cierre</div>
+            <div class="branch-count">3 agentes</div>
+            <div class="branch-when">Final del proyecto</div>
+          </div>
+          <div class="branch-list">
+            <div class="mini-agent"><span>📦</span><strong>Handoff Cliente</strong><i>AG 26</i></div>
+            <div class="mini-agent"><span>💰</span><strong>Cost Tracker</strong><i>AG 25</i></div>
+            <div class="mini-agent"><span>👋</span><strong>Onboarder Colab</strong><i>AG 28</i></div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <p style="margin-top: 32px; text-align: center; color: var(--ink-soft); font-size: 14px;">
-      + podés crear <strong>agentes custom</strong> con <code class="inline">./tooling/new-agent.sh</code> (wizard interactivo).
-    </p>
+    <div class="extensible-note reveal">
+      <div class="ext-icon">🧩</div>
+      <div class="ext-body">
+        <h4>Esto es <em>la base</em>. Vos sumás lo específico.</h4>
+        <p>Los 32 agentes cubren el ciclo completo de un proyecto con IA. Cuando tu cliente necesita algo puntual (ej: <code class="inline">analista-kommo</code>, <code class="inline">sync-shopify</code>, <code class="inline">bot-whatsapp</code>), lo agregás con <code class="inline">./tooling/new-agent.sh</code> y queda en <code class="inline">.claude/agents/</code> del proyecto. Cuando un patrón se repite en 3+ proyectos, lo promovés al starter base via issue con label <code class="inline">improvement-from-project</code>.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1282,7 +1634,7 @@ source ~/.zshrc</code></pre></div></details>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Creators Latam · Lima, Perú</span>
-      <span>Starter v1.6 · Forma de trabajar con IA</span>
+      <span>Starter v1.9 · Base extensible para trabajar con IA</span>
     </div>
   </div>
 </footer>
