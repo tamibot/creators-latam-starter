@@ -6,6 +6,68 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/) · sigue [SemV
 
 ---
 
+## [1.11.0] · 2026-04-21
+
+### Changed · landing rediseñada (3ra iteración)
+
+Landing narrativa con **13 capítulos** organizados en **5 actos**, validada
+interactivamente con browser automation y 0 errores de consola.
+
+**Estructura:**
+- **Acto I · Awakening** (2) — Hero con typewriter rotativo + split dramático "chaos vs order"
+- **Acto II · Método** (5 pasos) — Terminal animada, loop visual, stack cards, radial agents, Plan Maestro firmado
+- **Acto III · Lo que te llevás** (2) — Unboxing de tools + Timeline de crecimiento
+- **Acto IV · Sistema vivo** (2) — Dashboard con updates en tiempo real + Stats animados
+- **Acto V · Cierre** (2) — FAQ tipo terminal + Contacto dark mode
+
+**Librerías (solo canvas-confetti, por CDN):**
+- ❌ Lenis removido — causaba bugs con IntersectionObserver y scrollIntoView
+- ❌ GSAP removido — no se necesitaba realmente, scroll-behavior CSS suficiente
+- ✅ canvas-confetti 1.9.3 (11KB) — para Plan Maestro firmado + easter eggs
+
+**Animaciones (todas CSS puro + vanilla JS):**
+- Typewriter rotativo en hero con 4 palabras que se intercalan
+- Terminal typing con timer animado hasta 18:43 + progress bar
+- Loop visual de 4 nodos rotando (entregable)
+- Waveform animado con badge "📼 nota de voz 20 min"
+- Stack cards tarot con 2 aprobadas + 2 rechazadas
+- Radial SVG con 8 grupos de agentes + glow rotativo
+- SVG stroke-draw para 2 firmas del Plan Maestro
+- Caja unboxing con lid rotateX + 6 tools flotando
+- Timeline con barra que se llena + dots done
+- Dashboard con KPIs que incrementan cada 2.5s + bar chart
+- Stats counters con easeOut cubic
+- FAQ accordion con chevrons animados
+
+**UX extras:**
+- Command palette con tecla K (buscar/saltar a cualquier slide)
+- Easter egg: click 5× en logo → explosion de confetti
+- Easter egg: Konami code → 3 seg de confetti laterales
+- Cursor custom con mix-blend-mode difference (desktop)
+- Dark mode automático en Actos IV-V + meta theme-color dinámico
+- GitHub stars count vía API fetch
+- prefers-reduced-motion respetado
+
+**Mobile-first:**
+- 100dvh en vez de 100vh (iOS Safari fix)
+- Radial agents → grid 4 cols
+- Contact grid, stats, step-layout: todos con breakpoints (900px, 720px, 640px, 560px)
+- Cursor custom auto-desactivado en touch devices
+- Touch targets ≥ 44×44 en rail dots
+
+**Validación:**
+- Probado con browser automation: 65/65 elementos revelan, 13/13 chapters in-view
+- Dark theme switch OK en Actos IV-V
+- Animaciones internas verificadas (terminal 11/11, plan 4/4, launch confetti)
+- Cero errores de console
+
+**Fix crítico resuelto:**
+- IntersectionObserver no disparaba con Lenis por virtual scroll
+- content-visibility: auto rompía layout detection
+- Solucionado con scroll-event + rAF + getBoundingClientRect (+native scroll)
+
+---
+
 ## [1.10.0] · 2026-04-21
 
 ### Changed · landing rediseñada desde cero

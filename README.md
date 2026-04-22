@@ -1,6 +1,6 @@
 # Creators Latam · Starter Kit
 
-[![Version](https://img.shields.io/badge/version-1.10.0-ff3b77)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.11.0-ff3b77)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-8b3fff)](./LICENSE)
 [![Agentes](https://img.shields.io/badge/agentes-32-ff2d8a)](./.claude/agents/README.md)
 [![Skills](https://img.shields.io/badge/skills-5-14b87a)](./.claude/skills/README.md)
