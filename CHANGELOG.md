@@ -6,6 +6,41 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/) · sigue [SemV
 
 ---
 
+## [1.10.0] · 2026-04-21
+
+### Changed · landing rediseñada desde cero
+
+Landing totalmente nueva con enfoque **no-técnico**, **mobile-first** y **scroll-snap fullscreen por paso**.
+
+**Estructura nueva:**
+- **Slide 0 · Hero** — "Trabaja con IA en 5 pasos"
+- **Slide 1 · PASO 01 · Instalá** — terminal animado typing + helper "dale todos los permisos"
+- **Slide 2 · PASO 02 · Entregable** — mockup de chat con bubbles animadas (loop de preguntas del agente)
+- **Slide 3 · PASO 03 · Stack** — cards de herramientas aprobadas apareciendo
+- **Slide 4 · PASO 04 · Equipo** — 32 agentes comprimidos en 8 cards de función (mobile-friendly)
+- **Slide 5 · PASO 05 · Lanzá** — cohete animado + checks
+- **Slide 6 · Cómo te ayudamos** — 6 cards de herramientas preinstaladas
+- **Slide 7 · FAQ** — 7 preguntas esenciales
+- **Slide 8 · Contacto** — 4 cards grandes (email, WhatsApp, web, GitHub)
+
+**Mejoras técnicas:**
+- **Scroll-snap fullscreen** (`scroll-snap-type: y mandatory`) — cada slide ocupa 100dvh.
+- **Progress dots laterales** — navegación rápida + indicador de posición.
+- **Navegación por teclado** — ↑/↓ entre slides.
+- **Animaciones por slide** — se disparan cuando el slide entra en viewport (IntersectionObserver).
+- **Paleta minimalista**: ink (#0A0F1C), paper (#FAFAFA), un solo accent rosa (#FF2D6F).
+- **Mobile-first**: `100dvh` en vez de `100vh` (respeta barra del navegador móvil). Grid responsive. Illustraciones compactas.
+- **Sin librerías externas de animación** — todo CSS puro + IntersectionObserver.
+
+**Removido:**
+- Organigrama elaborado de 32 agentes (se veía mal en mobile).
+- Secciones extra (manifiesto oscuro, beneficios, timing, reglas, comandos, changelog visual, MD→HTML→PDF flow).
+- Muchas animaciones decorativas (blobs, shimmers, dashes) — reducido a lo esencial.
+
+**Resultado:** landing más liviana, más clara, funciona igual en desktop y mobile, enfoque 100% en los 5 pasos.
+
+---
+
 ## [1.9.0] · 2026-04-21
 
 ### Changed · enfoque de comunicación
