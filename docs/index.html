@@ -2539,25 +2539,43 @@
     });
   }
 
-  // ============ REVEAL ON VIEW ============
-  const revealIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.r').forEach(el => el.classList.add('in'));
-        e.target.classList.add('in-view');
-        // Trigger chapter-specific animation
-        triggerChapterAnim(e.target);
+  // ============ REVEAL ON VIEW (scroll-based, Lenis-compatible) ============
+  // IntersectionObserver no funciona bien con Lenis smooth scroll virtual.
+  // Usamos rAF + getBoundingClientRect que sí reflejan la posición real.
+  function checkChaptersVisibility() {
+    const vh = window.innerHeight;
+    chapters.forEach(ch => {
+      if (ch.classList.contains('in-view')) return;
+      const rect = ch.getBoundingClientRect();
+      // Dispara cuando el chapter tiene su parte central en viewport
+      const inView = rect.top < vh * 0.7 && rect.bottom > vh * 0.3;
+      if (inView) {
+        ch.querySelectorAll('.r').forEach(el => el.classList.add('in'));
+        ch.classList.add('in-view');
+        triggerChapterAnim(ch);
       }
     });
-  }, { threshold: 0, rootMargin: '-20% 0px -20% 0px' });
+  }
 
-  chapters.forEach(c => revealIO.observe(c));
+  let visTicking = false;
+  function scheduleVisCheck() {
+    if (visTicking) return;
+    visTicking = true;
+    requestAnimationFrame(() => {
+      checkChaptersVisibility();
+      visTicking = false;
+    });
+  }
+  window.addEventListener('scroll', scheduleVisCheck, { passive: true });
+  window.addEventListener('resize', scheduleVisCheck, { passive: true });
+  if (lenis) lenis.on('scroll', scheduleVisCheck);
 
-  // Force first chapter visible immediately
+  // Initial check + force first chapter immediate
   setTimeout(() => {
     chapters[0].querySelectorAll('.r').forEach(el => el.classList.add('in'));
     chapters[0].classList.add('in-view');
     triggerChapterAnim(chapters[0]);
+    checkChaptersVisibility();
   }, 100);
 
   // ============ CHAPTER ANIMATIONS ============
