@@ -38,14 +38,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   ::selection { background: var(--accent); color: white; }
 
-  html {
-    scroll-behavior: smooth;
-    /* Lenis va a tomar el control del scroll suave */
-  }
-  html.lenis { height: auto; }
-  html.lenis body { height: auto; }
-  html.lenis-smooth { scroll-behavior: auto; }
-  html.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
@@ -2422,10 +2415,7 @@
 </section>
 
 <!-- ============ LIBS (CDN) ============ -->
-<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
 <script>
 (function() {
@@ -2434,30 +2424,9 @@
   const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
 
-  // ============ LENIS SMOOTH SCROLL ============
-  let lenis = null;
-  if (window.Lenis && !prefersReduce) {
-    lenis = new window.Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      smoothWheel: true,
-      syncTouch: false,  // respect native mobile scroll
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // sync with GSAP
-    if (window.gsap && window.ScrollTrigger) {
-      lenis.on('scroll', window.ScrollTrigger.update);
-      window.gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-      window.gsap.ticker.lagSmoothing(0);
-    }
-  }
+  // Smooth scroll es nativo CSS (scroll-behavior: smooth)
+  // Lenis y GSAP se removieron — scroll nativo funciona mejor y
+  // no rompe IntersectionObserver ni getBoundingClientRect.
 
   // ============ PROGRESS RAIL ============
   const rail = document.getElementById('rail');
@@ -2474,8 +2443,7 @@
     tip.textContent = ch.dataset.label || `${i + 1}`;
     btn.appendChild(tip);
     btn.addEventListener('click', () => {
-      if (lenis) lenis.scrollTo(ch, { duration: 1.2 });
-      else ch.scrollIntoView({ behavior: 'smooth' });
+      ch.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     rail.appendChild(btn);
     dots.push(btn);
@@ -2568,7 +2536,6 @@
   }
   window.addEventListener('scroll', scheduleVisCheck, { passive: true });
   window.addEventListener('resize', scheduleVisCheck, { passive: true });
-  if (lenis) lenis.on('scroll', scheduleVisCheck);
 
   // Initial check + force first chapter immediate
   setTimeout(() => {
@@ -2872,8 +2839,7 @@
       btn.innerHTML = `<span class="pem">${p.icon}</span><span>${p.label}</span><span class="pnum">↵</span>`;
       btn.addEventListener('click', () => {
         closePalette();
-        if (lenis) lenis.scrollTo(p.target, { duration: 1.2 });
-        else p.target.scrollIntoView({ behavior: 'smooth' });
+        p.target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
       list.appendChild(btn);
     });
@@ -2973,8 +2939,7 @@
       const target = document.querySelector(link.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        if (lenis) lenis.scrollTo(target, { duration: 1.4 });
-        else target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
