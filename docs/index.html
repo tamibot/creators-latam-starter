@@ -1730,15 +1730,22 @@
     document.body.classList.toggle('dark-nav', isDark);
     if (themeColor) themeColor.content = isDark ? '#080B15' : '#FAFAFA';
   }
-  // Continuous rAF loop para detectar cambios de posición,
-  // incluso con scrollIntoView programmatic (que algunos browsers no
-  // dispatchan como scroll event).
+  // Triple mecanismo para máxima compatibilidad:
+  // 1. IntersectionObserver: dispara con scroll real y programmatic
+  // 2. scroll event: refresh rápido en scroll normal
+  // 3. rAF loop: para suavidad cuando hay foco
+  const io = new IntersectionObserver(updateState, {
+    threshold: [0, 0.25, 0.5, 0.75, 1],
+  });
+  chapters.forEach(ch => io.observe(ch));
+  window.addEventListener('scroll', updateState, { passive: true });
+  window.addEventListener('resize', updateState, { passive: true });
+  // Safety rAF loop (if tab is visible)
   function rafLoop() {
     updateState();
     requestAnimationFrame(rafLoop);
   }
   requestAnimationFrame(rafLoop);
-  window.addEventListener('resize', updateState, { passive: true });
 
   // Initial: reveal hero immediately
   setTimeout(() => {
