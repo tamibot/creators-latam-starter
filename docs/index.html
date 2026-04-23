@@ -1730,14 +1730,15 @@
     document.body.classList.toggle('dark-nav', isDark);
     if (themeColor) themeColor.content = isDark ? '#080B15' : '#FAFAFA';
   }
-  let ticking = false;
-  function schedule() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => { updateState(); ticking = false; });
+  // Continuous rAF loop para detectar cambios de posición,
+  // incluso con scrollIntoView programmatic (que algunos browsers no
+  // dispatchan como scroll event).
+  function rafLoop() {
+    updateState();
+    requestAnimationFrame(rafLoop);
   }
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
+  requestAnimationFrame(rafLoop);
+  window.addEventListener('resize', updateState, { passive: true });
 
   // Initial: reveal hero immediately
   setTimeout(() => {
