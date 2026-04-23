@@ -1740,6 +1740,10 @@
   chapters.forEach(ch => io.observe(ch));
   window.addEventListener('scroll', updateState, { passive: true });
   window.addEventListener('resize', updateState, { passive: true });
+  // Visibility change: re-trigger cuando user vuelve a la tab
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) updateState();
+  });
   // Safety rAF loop (if tab is visible)
   function rafLoop() {
     updateState();
