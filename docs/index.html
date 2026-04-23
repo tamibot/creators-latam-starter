@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Creators Latam · Trabaja con IA con método</title>
-<meta name="description" content="Una forma de trabajar con IA. 5 pasos, 32 agentes, una base extensible. Sin ser técnico." />
+<title>Creators Latam · Una base para trabajar con IA en Claude Code</title>
+<meta name="description" content="La base para crear proyectos con IA. Instalás, definís entregable, stack y equipo, y ejecutás con método." />
 <meta name="theme-color" content="#FAFAFA" id="themeColor" />
 
-<meta property="og:title" content="Creators Latam · Trabaja con IA con método" />
-<meta property="og:description" content="5 pasos, 32 agentes, una base extensible." />
+<meta property="og:title" content="Creators Latam · Base para proyectos con IA" />
+<meta property="og:description" content="Instalá en Claude Code. Definí entregable, stack y equipo. Ejecutá con método." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://tamibot.github.io/creators-latam-starter/" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,28 +17,26 @@
 
 <style>
   :root {
-    --ink:        #0A0F1C;
-    --ink-2:      #1A2234;
-    --paper:      #FFFFFF;
-    --bg:         #FAFAFA;
-    --bg-alt:     #F3F4F6;
-    --soft:       #6B7280;
-    --muted:      #9CA3AF;
-    --line:       #E5E7EB;
-    --accent:     #FF2D6F;
-    --accent-2:   #FF5C8A;
+    --ink:       #0A0F1C;
+    --ink-2:     #1A2234;
+    --paper:     #FFFFFF;
+    --bg:        #FAFAFA;
+    --bg-alt:    #F3F4F6;
+    --soft:      #6B7280;
+    --muted:     #9CA3AF;
+    --line:      #E5E7EB;
+    --accent:    #FF2D6F;
+    --accent-2:  #FF5C8A;
+    --accent-soft: #FFE4EC;
     --accent-glow: rgba(255,45,111,.12);
-    --ok:         #10B981;
-    --warn:       #F59E0B;
-    --dark-bg:    #080B15;
-    --dark-2:     #141926;
+    --dark-bg:   #080B15;
+    --dark-2:    #141926;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   ::selection { background: var(--accent); color: white; }
 
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--ink);
@@ -49,21 +46,10 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
-    cursor: default;
   }
-
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: 0; background: none; }
   img, svg { display: block; max-width: 100%; }
-
-  /* ============ NO-JS FALLBACK ============ */
-  .no-js-fallback { display: none; }
-  .no-js body .no-js-fallback {
-    display: block;
-    padding: 40px;
-    text-align: center;
-    background: var(--bg);
-  }
 
   /* ============ LAYOUT ============ */
   .chapter {
@@ -76,7 +62,6 @@
     position: relative;
     overflow: hidden;
   }
-  .chapter.full { padding: 24px; }
   .chapter-inner {
     max-width: 1100px;
     margin: 0 auto;
@@ -117,18 +102,7 @@
     width: 22px; height: 22px;
     border-radius: 6px;
     background: var(--accent);
-    position: relative;
-    overflow: hidden;
   }
-  .brand-dot::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,.3) 50%, transparent 60%);
-    transform: translateX(-100%);
-    transition: transform .5s;
-  }
-  .brand:hover .brand-dot::after { transform: translateX(100%); }
   .brand .lt { color: var(--soft); font-weight: 500; }
   body.dark-nav .brand .lt { color: rgba(255,255,255,.5); }
 
@@ -144,7 +118,6 @@
     padding: 6px 10px;
     border: 1px solid var(--line);
     border-radius: 6px;
-    letter-spacing: 0.04em;
   }
   .top-hint kbd {
     font-family: inherit;
@@ -182,7 +155,6 @@
     z-index: 40;
     display: flex;
     flex-direction: column;
-    gap: 0;
     padding: 12px 0;
   }
   .rail::before {
@@ -196,19 +168,6 @@
     border-radius: 2px;
     z-index: 0;
   }
-  .rail::after {
-    content: "";
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    width: 2px;
-    height: var(--rail-progress, 0%);
-    background: var(--accent);
-    transform: translateX(-50%);
-    border-radius: 2px;
-    z-index: 1;
-    transition: height .2s linear;
-  }
   body.dark-nav .rail::before { background: rgba(255,255,255,.15); }
   .rail-dot {
     width: 12px; height: 12px;
@@ -220,13 +179,9 @@
     position: relative;
     z-index: 2;
     transition: background .2s, transform .2s, box-shadow .2s;
-    padding: 0;
   }
   body.dark-nav .rail-dot { border-color: var(--dark-bg); background: rgba(255,255,255,.2); }
-  .rail-dot:hover {
-    transform: scale(1.3);
-    background: var(--accent);
-  }
+  .rail-dot:hover { transform: scale(1.3); background: var(--accent); }
   .rail-dot.active {
     background: var(--accent);
     transform: scale(1.4);
@@ -246,47 +201,30 @@
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .2s, transform .2s;
-    font-family: 'Inter';
+    transition: opacity .2s;
   }
-  .rail-dot:hover .tip { opacity: 1; transform: translateY(-50%) translateX(-4px); }
+  .rail-dot:hover .tip { opacity: 1; }
   @media (max-width: 720px) { .rail { right: 10px; } .rail-dot { width: 9px; height: 9px; margin: 8px 0; } .rail-dot .tip { display: none; } }
-
-  /* ============ CURSOR ============ */
-  .cursor-blob {
-    position: fixed;
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: var(--accent);
-    mix-blend-mode: difference;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width .2s, height .2s, background-color .2s;
-    will-change: transform;
-    opacity: 0;
-  }
-  .cursor-blob.active { opacity: 1; }
-  .cursor-blob.hover { width: 48px; height: 48px; }
-  @media (pointer: coarse) { .cursor-blob { display: none; } }
 
   /* ============ TYPOGRAPHY ============ */
   h1, h2, h3, h4 { letter-spacing: -0.028em; line-height: 1.02; font-weight: 800; text-wrap: balance; }
 
-  .eyebrow {
-    display: inline-block;
+  .step-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.15em;
     color: var(--accent);
     text-transform: uppercase;
-    padding: 5px 11px;
-    background: var(--accent-glow);
-    border-radius: 6px;
+    padding: 6px 12px;
+    background: var(--accent-soft);
+    border-radius: 7px;
     margin-bottom: 24px;
   }
-  body.dark-nav .eyebrow { background: rgba(255,45,111,.18); }
+  body.dark-nav .step-tag { background: rgba(255,45,111,.18); }
 
   .display {
     font-size: clamp(44px, 8.5vw, 120px);
@@ -299,16 +237,11 @@
     font-family: 'Instrument Serif', serif;
     font-weight: 400;
     letter-spacing: -0.02em;
-  }
-  .display em.grad {
-    background: linear-gradient(110deg, var(--accent), #AB34CC 80%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--accent);
   }
 
   .h1 {
-    font-size: clamp(36px, 6vw, 72px);
+    font-size: clamp(38px, 6.5vw, 76px);
     font-weight: 900;
     letter-spacing: -0.035em;
     line-height: 1.02;
@@ -320,18 +253,11 @@
     color: var(--accent);
   }
 
-  .h2 {
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 800;
-    letter-spacing: -0.028em;
-    line-height: 1.05;
-  }
-
   .lead {
-    font-size: clamp(17px, 2.2vw, 22px);
+    font-size: clamp(17px, 2.2vw, 21px);
     color: var(--soft);
     max-width: 58ch;
-    line-height: 1.5;
+    line-height: 1.55;
   }
   body.dark-nav .lead { color: rgba(255,255,255,.7); }
 
@@ -355,8 +281,7 @@
     border-radius: 999px;
     font-weight: 600;
     font-size: 15px;
-    transition: transform .2s, background .2s, box-shadow .2s;
-    position: relative;
+    transition: transform .2s, background .2s, box-shadow .2s, color .2s;
   }
   .btn-primary {
     background: var(--ink);
@@ -377,11 +302,8 @@
   body.dark-nav .btn-ghost { color: white; border-color: rgba(255,255,255,.2); }
   body.dark-nav .btn-ghost:hover { border-color: white; }
 
-  /* ============ SLIDE 01 · HERO ============ */
-  .hero {
-    text-align: center;
-    background: var(--bg);
-  }
+  /* ============ HERO (c1) ============ */
+  .hero { background: var(--bg); text-align: center; }
   .hero .grid-bg {
     position: absolute;
     inset: 0;
@@ -432,43 +354,21 @@
   }
   .hero-badge .ping {
     width: 7px; height: 7px; border-radius: 50%;
-    background: var(--ok);
-    box-shadow: 0 0 0 3px rgba(16,185,129,.2);
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,45,111,.25);
     animation: ping 2s infinite;
   }
   @keyframes ping {
-    0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,.2); transform: scale(1); }
-    50% { box-shadow: 0 0 0 6px rgba(16,185,129,.05); transform: scale(1.2); }
+    0%, 100% { box-shadow: 0 0 0 3px rgba(255,45,111,.25); transform: scale(1); }
+    50% { box-shadow: 0 0 0 6px rgba(255,45,111,.05); transform: scale(1.2); }
   }
-
-  .type-line {
-    display: block;
-  }
-  .type-target {
-    color: var(--accent);
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    display: inline-block;
-    min-width: 6ch;
-  }
-  .type-caret {
-    display: inline-block;
-    width: 2px;
-    height: 0.75em;
-    background: var(--accent);
-    vertical-align: -10%;
-    animation: caret 0.8s step-end infinite;
-  }
-  @keyframes caret { 50% { opacity: 0; } }
 
   .hero-sub {
     margin: 24px auto 36px;
     text-align: center;
     font-size: clamp(16px, 2vw, 20px);
     color: var(--soft);
-    max-width: 52ch;
+    max-width: 54ch;
     line-height: 1.55;
   }
 
@@ -479,18 +379,26 @@
     justify-content: center;
   }
 
-  .hero-stats {
+  .hero-chips {
     display: flex;
-    gap: 32px;
+    gap: 10px;
     justify-content: center;
     margin-top: 56px;
     flex-wrap: wrap;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--soft);
   }
-  .hero-stats .sep { color: var(--muted); }
-  @media (max-width: 480px) { .hero-stats { gap: 16px; font-size: 11px; } }
+  .hero-chip {
+    padding: 8px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-chip .em { font-size: 16px; }
 
   .scroll-hint {
     position: absolute;
@@ -516,141 +424,96 @@
     50% { transform: translateY(6px); opacity: 1; }
   }
 
-  /* ============ SLIDE 02 · PROBLEM ============ */
-  .problem {
-    background: var(--bg);
-  }
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: stretch;
-    margin-top: 48px;
-  }
-  @media (max-width: 780px) {
-    .problem-grid { grid-template-columns: 1fr; }
-  }
-  .problem-card {
-    padding: 40px 32px;
-    border-radius: 24px;
-    position: relative;
-    overflow: hidden;
-    min-height: 320px;
-  }
-  .problem-card.chaos {
-    background: var(--paper);
-    border: 1px dashed var(--muted);
-  }
-  .problem-card.order {
-    background: var(--ink);
-    color: white;
-  }
-  .problem-card h3 {
-    font-size: clamp(22px, 3vw, 28px);
-    margin-bottom: 16px;
-  }
-  .problem-card .label {
+  .type-target {
+    color: var(--accent);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    padding: 4px 10px;
-    border-radius: 5px;
-    margin-bottom: 18px;
+    min-width: 6ch;
   }
-  .chaos .label { background: rgba(239,68,68,.1); color: #EF4444; }
-  .order .label { background: rgba(16,185,129,.15); color: var(--ok); }
-
-  .chaos-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 20px;
-  }
-  .chaos-tab {
-    padding: 5px 10px;
-    background: rgba(0,0,0,.04);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--soft);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .chaos-tab.glitch { animation: glitch 3s infinite; animation-delay: calc(var(--d, 0) * 1s); }
-  @keyframes glitch {
-    0%, 90%, 100% { opacity: 1; transform: translate(0); }
-    92% { transform: translate(-1px, 1px); }
-    94% { transform: translate(1px, -1px); }
-    96% { transform: translate(-1px, 0); }
-  }
-
-  .order-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .order-step {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-  }
-  .order-step .n {
-    width: 24px; height: 24px;
+  .type-caret {
+    display: inline-block;
+    width: 2px;
+    height: 0.75em;
     background: var(--accent);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    flex-shrink: 0;
+    vertical-align: -10%;
+    animation: caret 0.8s step-end infinite;
   }
+  @keyframes caret { 50% { opacity: 0; } }
 
-  /* ============ GENERIC CHAPTER HEADER ============ */
-  .chap-head {
-    margin-bottom: 40px;
-    max-width: 700px;
-  }
-  .chap-head .lead { margin-top: 16px; }
-
-  /* ============ SLIDE 03 · TERMINAL ============ */
-  .step-layout {
+  /* ============ STEP LAYOUT (shared) ============ */
+  .step-grid {
     display: grid;
     grid-template-columns: 1fr 1.1fr;
-    gap: 48px;
+    gap: 56px;
     align-items: center;
   }
   @media (max-width: 900px) {
-    .step-layout { grid-template-columns: 1fr; gap: 28px; }
+    .step-grid { grid-template-columns: 1fr; gap: 32px; }
   }
 
-  .terminal-box {
+  .chap-head { margin-bottom: 28px; }
+  .chap-head .lead { margin-top: 14px; }
+
+  /* ============ PASO 00 · INSTALAR ============ */
+  .install-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .install-step {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .install-step .num {
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    background: var(--ink);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .install-step .txt {
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  .install-step .txt strong { font-weight: 700; color: var(--accent); }
+
+  .copy-box {
     background: #0B0F1A;
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 30px 60px -20px rgba(10,15,28,.3);
     position: relative;
   }
-  .term-bar {
+  .copy-bar {
     background: #1A2234;
     padding: 10px 14px;
     display: flex;
     align-items: center;
     gap: 6px;
   }
-  .term-dot {
+  .copy-bar .dot {
     width: 11px; height: 11px;
     border-radius: 50%;
     background: #4B5161;
   }
-  .term-dot.r { background: #FF5F57; }
-  .term-dot.y { background: #FEBC2E; }
-  .term-dot.g { background: #28C840; }
-  .term-title {
+  .copy-bar .dot.a { background: #FF5F57; }
+  .copy-bar .dot.b { background: var(--accent); }
+  .copy-bar .dot.c { background: var(--accent-2); }
+  .copy-bar .title {
     flex: 1;
     text-align: center;
     font-family: 'JetBrains Mono', monospace;
@@ -658,916 +521,534 @@
     color: #7A8196;
     letter-spacing: 0.04em;
   }
-  .term-body {
-    padding: 20px 22px;
+  .copy-bar .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 11px;
+    background: var(--accent);
+    color: white;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-family: 'Inter', sans-serif;
+    transition: background .2s, transform .2s;
+  }
+  .copy-bar .copy-btn:hover { background: var(--accent-2); transform: scale(1.05); }
+  .copy-bar .copy-btn.copied { background: #0A7C4F; }
+
+  .copy-body {
+    padding: 22px 24px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
+    font-size: 14px;
     color: #E4E6EC;
     line-height: 1.75;
-    min-height: 320px;
-    max-height: 420px;
-    overflow: hidden;
-    position: relative;
+    word-break: break-word;
   }
-  .term-line {
-    opacity: 0;
-    transform: translateX(-4px);
-  }
-  .term-line.show { animation: termIn .3s ease forwards; }
-  @keyframes termIn { to { opacity: 1; transform: translateX(0); } }
-  .term-prompt { color: var(--accent-2); }
-  .term-cmd { color: #D4D6DC; }
-  .term-out { color: #8B8F9B; }
-  .term-ok { color: #10B981; }
-  .term-warn { color: #F59E0B; }
-  .term-accent { color: var(--accent-2); font-weight: 600; }
-  .term-progress {
-    display: inline-block;
-    width: 120px;
-    height: 6px;
-    background: #1A2234;
-    border-radius: 3px;
-    vertical-align: middle;
-    margin: 0 8px;
-    overflow: hidden;
-  }
-  .term-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    border-radius: 3px;
-    width: 0;
-    transition: width .6s ease;
-  }
-  .term-cursor {
-    display: inline-block;
-    width: 8px; height: 14px;
-    background: var(--accent-2);
-    vertical-align: -2px;
-    animation: caret 1s step-end infinite;
-  }
+  .copy-body .prompt { color: var(--accent-2); user-select: none; }
+  .copy-body .line { display: block; }
 
-  .hint-box {
-    margin-top: 24px;
+  .install-tip {
+    margin-top: 16px;
     padding: 16px 20px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    border-radius: 10px;
-    font-size: 14px;
+    background: var(--accent-soft);
+    border-radius: 12px;
+    font-size: 13.5px;
     color: var(--ink);
     line-height: 1.5;
   }
-  .hint-box strong { color: var(--accent); }
+  .install-tip strong { color: var(--accent); }
 
-  /* ============ SLIDE 04 · LOOP (entregable) ============ */
-  .loop-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    max-width: 440px;
-    margin: 0 auto;
-  }
-  .loop-ring {
-    position: absolute;
-    inset: 0;
-    border: 2px dashed var(--line);
-    border-radius: 50%;
-    animation: loopSpin 40s linear infinite;
-  }
-  @keyframes loopSpin { to { transform: rotate(360deg); } }
-  .loop-ring.r2 {
-    inset: 12%;
-    border-color: var(--accent-glow);
-    animation-duration: 30s;
-    animation-direction: reverse;
-  }
-  .loop-center {
-    position: absolute;
-    inset: 26%;
-    background: var(--paper);
-    border: 2px solid var(--accent);
-    border-radius: 50%;
+  /* ============ PASO 01 · ENTREGABLE (para atrás) ============ */
+  .back-chain {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 16px;
-    box-shadow: 0 8px 24px -8px var(--accent-glow);
-    z-index: 2;
+    gap: 14px;
+    padding: 20px 0;
   }
-  .loop-center .em {
-    font-size: 32px;
-    margin-bottom: 4px;
+  .chain-item {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    transition: border-color .3s, transform .3s, box-shadow .3s;
   }
-  .loop-center .lbl {
-    font-size: 11px;
+  .chain-item.highlight {
+    border-color: var(--accent);
+    box-shadow: 0 12px 28px -12px var(--accent-glow);
+  }
+  .chain-item .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .chain-item h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.015em;
+  }
+  .chain-item p {
+    font-size: 13.5px;
+    color: var(--soft);
+    line-height: 1.5;
+  }
+  .chain-arrow {
+    text-align: center;
+    font-size: 22px;
     color: var(--accent);
     font-family: 'JetBrains Mono', monospace;
+    animation: arrowDown 2s ease-in-out infinite;
+    line-height: 1;
+    margin: -6px 0;
   }
-  .loop-center .sub {
-    font-size: 10px;
-    color: var(--soft);
-    margin-top: 2px;
+  @keyframes arrowDown {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(3px); opacity: 1; }
   }
 
-  .loop-node {
-    position: absolute;
-    width: 86px;
-    height: 86px;
+  .loop-hint {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: var(--accent-soft);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .loop-hint .loop-icon {
+    width: 48px; height: 48px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    animation: loopSpin 3s linear infinite;
+  }
+  @keyframes loopSpin { to { transform: rotate(360deg); } }
+  .loop-hint .body {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  .loop-hint .body strong { color: var(--accent); }
+
+  /* ============ PASO 02 · STACK ============ */
+  .stack-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 560px) { .stack-fields { grid-template-columns: 1fr; } }
+
+  .stack-field {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: border-color .2s, transform .2s;
+  }
+  .stack-field:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .stack-field .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .stack-field h4 {
+    font-size: 14.5px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    letter-spacing: -0.01em;
+  }
+  .stack-field p {
+    font-size: 12.5px;
+    color: var(--soft);
+    line-height: 1.45;
+  }
+
+  /* ============ PASO 03 · EQUIPO ============ */
+  .team-section {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    text-align: center;
-    box-shadow: 0 4px 16px -4px rgba(10,15,28,.08);
-    transition: transform .3s, border-color .3s, box-shadow .3s;
-    z-index: 3;
+    padding: 24px;
   }
-  .loop-node.active {
-    border-color: var(--accent);
-    transform: scale(1.1);
-    box-shadow: 0 10px 30px -5px var(--accent-glow);
+  .team-section .head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
   }
-  .loop-node .emj { font-size: 24px; margin-bottom: 3px; }
-  .loop-node .nlbl { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: var(--ink); line-height: 1.1; }
-
-  /* Position nodes at cardinal points */
-  .loop-node.n1 { top: 0; left: 50%; transform: translate(-50%, 0); }
-  .loop-node.n1.active { transform: translate(-50%, 0) scale(1.1); }
-  .loop-node.n2 { top: 50%; right: 0; transform: translate(0, -50%); }
-  .loop-node.n2.active { transform: translate(0, -50%) scale(1.1); }
-  .loop-node.n3 { bottom: 0; left: 50%; transform: translate(-50%, 0); }
-  .loop-node.n3.active { transform: translate(-50%, 0) scale(1.1); }
-  .loop-node.n4 { top: 50%; left: 0; transform: translate(0, -50%); }
-  .loop-node.n4.active { transform: translate(0, -50%) scale(1.1); }
-
-  .voice-tip {
-    margin-top: 28px;
-    padding: 18px 22px;
-    background: linear-gradient(135deg, rgba(255,45,111,.06), rgba(255,92,138,.03));
-    border: 1px solid var(--accent-glow);
-    border-radius: 14px;
-    display: flex;
-    gap: 14px;
-    align-items: center;
+  .team-section h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
   }
-  .voice-tip .waveform {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    height: 28px;
-  }
-  .voice-tip .waveform span {
-    width: 3px;
-    background: var(--accent);
-    border-radius: 2px;
-    animation: wave 1.2s ease-in-out infinite;
-  }
-  .voice-tip .waveform span:nth-child(1) { height: 30%; animation-delay: 0s; }
-  .voice-tip .waveform span:nth-child(2) { height: 70%; animation-delay: .1s; }
-  .voice-tip .waveform span:nth-child(3) { height: 100%; animation-delay: .2s; }
-  .voice-tip .waveform span:nth-child(4) { height: 50%; animation-delay: .3s; }
-  .voice-tip .waveform span:nth-child(5) { height: 80%; animation-delay: .4s; }
-  .voice-tip .waveform span:nth-child(6) { height: 40%; animation-delay: .5s; }
-  .voice-tip .waveform span:nth-child(7) { height: 90%; animation-delay: .6s; }
-  .voice-tip .waveform span:nth-child(8) { height: 60%; animation-delay: .7s; }
-  .voice-tip .waveform span:nth-child(9) { height: 30%; animation-delay: .8s; }
-  @keyframes wave {
-    0%, 100% { transform: scaleY(0.4); }
-    50% { transform: scaleY(1); }
-  }
-  .voice-tip .text {
-    font-size: 14px;
-    color: var(--ink);
+  .team-section p {
+    font-size: 13.5px;
+    color: var(--soft);
     line-height: 1.5;
   }
-  .voice-tip .text strong { color: var(--accent); }
-  .voice-tip .badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    background: var(--accent);
-    color: white;
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    display: inline-block;
-    margin-right: 6px;
-  }
-
-  /* ============ SLIDE 05 · STACK CARDS ============ */
-  .stack-deck {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-  @media (max-width: 520px) {
-    .stack-deck { grid-template-columns: 1fr 1fr; gap: 10px; }
-  }
-  .stack-tile {
-    aspect-ratio: 3 / 4;
-    border-radius: 14px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    padding: 14px;
+  .team-agent-list {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: transform .4s, border-color .3s;
+    gap: 8px;
+    margin-top: 14px;
   }
-  .stack-tile.flipped { transform: rotateY(180deg); }
-  .stack-tile.approved {
-    border-color: var(--ok);
-    box-shadow: 0 8px 24px -8px rgba(16,185,129,.25);
-  }
-  .stack-tile.rejected {
-    opacity: 0.45;
-    border-color: var(--muted);
-    filter: grayscale(0.8);
-  }
-  .tile-face {
-    position: absolute;
-    inset: 0;
-    padding: 16px;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .tile-face.front { /* default */ }
-  .tile-face.back { transform: rotateY(180deg); background: var(--bg-alt); }
-
-  .tile-emoji {
-    font-size: 38px;
-    line-height: 1;
-  }
-  .tile-name {
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-  }
-  .tile-meta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--soft);
-  }
-  .tile-verdict {
-    position: absolute;
-    top: 10px; right: 10px;
-    font-size: 12px;
-    font-weight: 700;
-  }
-  .stack-tile.approved .tile-verdict { color: var(--ok); }
-  .stack-tile.rejected .tile-verdict { color: #EF4444; }
-  .tile-research {
-    font-size: 11px;
-    color: var(--soft);
-    line-height: 1.4;
-  }
-  .tile-research strong { color: var(--ink); }
-
-  /* ============ SLIDE 06 · RADIAL AGENTS ============ */
-  .radial {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  .radial-core {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 110px; height: 110px;
-    background: var(--ink);
-    color: white;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 16px 40px -8px rgba(10,15,28,.4);
-    z-index: 5;
-    text-align: center;
-    padding: 10px;
-  }
-  .radial-core .em { font-size: 24px; }
-  .radial-core .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; margin-top: 2px; opacity: 0.7; text-transform: uppercase; }
-  .radial-core .nm { font-size: 13px; font-weight: 700; }
-
-  .radial-bubble {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 74px; height: 74px;
-    background: var(--paper);
-    border: 2px solid var(--line);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 4px;
-    cursor: default;
-    transition: transform .3s, border-color .3s, box-shadow .3s;
-    z-index: 3;
-  }
-  .radial-bubble:hover, .radial-bubble.glow {
-    transform: translate(var(--x), var(--y)) scale(1.1) !important;
-    border-color: var(--bc);
-    box-shadow: 0 10px 24px -6px color-mix(in srgb, var(--bc) 40%, transparent);
-    z-index: 4;
-  }
-  .radial-bubble .emj { font-size: 22px; }
-  .radial-bubble .cnt {
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--bc);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.05em;
-  }
-  .radial-bubble .nm { font-size: 9px; font-weight: 600; color: var(--ink); line-height: 1.1; }
-
-  /* Radial connecting lines */
-  .radial-svg {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 2;
-  }
-  .radial-svg line {
-    stroke: var(--line);
-    stroke-width: 1.5;
-    stroke-dasharray: 4 4;
-  }
-
-  /* Mobile: grid of 4 cols instead of radial */
-  @media (max-width: 640px) {
-    .radial { aspect-ratio: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 400px; }
-    .radial-core { position: relative; top: auto; left: auto; width: 100%; aspect-ratio: 2; transform: none; grid-column: span 4; margin-bottom: 8px; border-radius: 14px; padding: 14px; }
-    .radial-bubble { position: relative; top: auto; left: auto; width: 100%; aspect-ratio: 1; transform: none !important; border-radius: 12px; }
-    .radial-bubble:hover, .radial-bubble.glow { transform: scale(1.05) !important; }
-    .radial-svg { display: none; }
-  }
-
-  /* ============ SLIDE 07 · LAUNCH / PLAN ============ */
-  .plan-doc {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 32px;
-    box-shadow: 0 40px 80px -20px rgba(10,15,28,.15), 0 10px 20px -10px rgba(10,15,28,.1);
-    position: relative;
-    max-width: 440px;
-    margin: 0 auto;
-  }
-  .plan-doc::before {
-    content: "";
-    position: absolute;
-    top: -4px; left: -4px;
-    right: -4px; bottom: -4px;
-    background: linear-gradient(135deg, transparent, var(--accent-glow), transparent);
-    border-radius: 14px;
-    z-index: -1;
-  }
-  .plan-doc h4 {
-    font-size: 14px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--soft);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--line);
-  }
-  .plan-row {
+  .team-agent {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px dashed var(--line);
-  }
-  .plan-row:last-of-type { border-bottom: 0; }
-  .plan-row .n {
-    width: 24px; height: 24px;
+    padding: 10px 14px;
     background: var(--bg-alt);
+    border-radius: 8px;
+  }
+  .team-agent.custom {
+    background: var(--accent-soft);
+    border: 1px dashed var(--accent);
+  }
+  .team-agent .em { font-size: 18px; }
+  .team-agent .nm {
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .team-agent .custom-tag {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    background: white;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+  }
+
+  /* ============ PASO 04 · PLAN MAESTRO ============ */
+  .plan-stack {
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .plan-input {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    opacity: 0.6;
+    transition: opacity .4s, border-color .4s, transform .4s;
+  }
+  .plan-input.activated {
+    opacity: 1;
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px -8px var(--accent-glow);
+  }
+  .plan-input .idx {
+    width: 28px; height: 28px;
     border-radius: 50%;
+    background: var(--bg-alt);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     font-weight: 700;
     color: var(--soft);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
     flex-shrink: 0;
-    transition: background .3s, color .3s;
   }
-  .plan-row.done .n { background: var(--ok); color: white; }
-  .plan-row .nm {
-    font-size: 14px;
-    font-weight: 600;
+  .plan-input.activated .idx {
+    background: var(--accent);
+    color: white;
+  }
+  .plan-input .content {
     flex: 1;
   }
-  .plan-row .check {
-    color: var(--ok);
-    font-weight: 700;
-    opacity: 0;
-    transform: scale(0);
-    transition: opacity .3s, transform .3s;
-  }
-  .plan-row.done .check { opacity: 1; transform: scale(1); }
-
-  .signature {
-    margin-top: 28px;
-    padding-top: 20px;
-    border-top: 2px solid var(--line);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    font-size: 11px;
-    color: var(--soft);
-  }
-  .signature .sig-line {
-    height: 36px;
-    border-bottom: 1.5px solid var(--ink);
-    position: relative;
-    margin-bottom: 6px;
-  }
-  .sig-line svg {
-    position: absolute;
-    bottom: 2px;
-    left: 4px;
-    width: 100%;
-    height: 32px;
-    pointer-events: none;
-  }
-  .sig-line svg path {
-    stroke: var(--accent);
-    stroke-width: 2;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .launch-btn {
-    display: block;
-    width: 100%;
-    margin-top: 28px;
-    padding: 14px 24px;
-    background: var(--ink);
-    color: white;
-    border-radius: 10px;
+  .plan-input .ttl {
     font-weight: 700;
     font-size: 14px;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.04em;
-    transition: background .2s, transform .2s;
-    cursor: pointer;
-    border: 0;
-    text-align: center;
+    margin-bottom: 2px;
   }
-  .launch-btn:hover { background: var(--accent); transform: translateY(-2px); }
-  .launch-btn.launched { background: var(--ok); }
-
-  .launch-log {
-    margin-top: 16px;
-    font-family: 'JetBrains Mono', monospace;
+  .plan-input .sub {
     font-size: 12px;
     color: var(--soft);
-    line-height: 1.6;
   }
-  .launch-log .line { display: block; opacity: 0; transform: translateY(4px); transition: opacity .3s, transform .3s; }
-  .launch-log .line.show { opacity: 1; transform: translateY(0); }
-  .launch-log .ok { color: var(--ok); }
 
-  /* ============ SLIDE 08 · UNBOXING ============ */
-  .box {
-    position: relative;
-    width: 340px;
-    height: 280px;
-    margin: 0 auto 40px;
-    transform-style: preserve-3d;
-  }
-  .box-body {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 180px;
-    background: linear-gradient(135deg, #2A334A, #1A2234);
-    border-radius: 10px;
-    box-shadow: 0 24px 48px -12px rgba(10,15,28,.35);
-    border: 1px solid #3A4558;
-  }
-  .box-lid {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 40px;
-    background: linear-gradient(135deg, #1A2234, #0F1520);
-    border-radius: 8px 8px 2px 2px;
-    transform-origin: bottom left;
-    transition: transform 1.2s cubic-bezier(.34,1.56,.64,1);
-    border: 1px solid #3A4558;
-    z-index: 3;
-  }
-  .box.open .box-lid { transform: rotateX(-100deg); }
-  .box-glow {
-    position: absolute;
-    top: 30px; left: 50%;
-    transform: translateX(-50%);
-    width: 240px; height: 100px;
-    background: radial-gradient(ellipse, rgba(255,200,100,.6), transparent 70%);
-    filter: blur(20px);
+  .plan-arrow-down {
+    text-align: center;
+    font-size: 18px;
+    color: var(--accent);
     opacity: 0;
-    transition: opacity .8s .5s;
-    z-index: 2;
+    transition: opacity .4s;
+    margin: 6px 0;
+    line-height: 1;
   }
-  .box.open .box-glow { opacity: 1; }
+  .plan-arrow-down.show { opacity: 1; }
 
-  .tool-icon {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    width: 56px; height: 56px;
+  .plan-master {
+    background: linear-gradient(135deg, var(--ink), var(--ink-2));
+    color: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-top: 8px;
+    position: relative;
+    opacity: 0.4;
+    transition: opacity .6s, transform .6s;
+  }
+  .plan-master.ready {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  .plan-master .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-2);
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .plan-master h4 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .plan-master p {
+    font-size: 13px;
+    color: rgba(255,255,255,.7);
+    line-height: 1.5;
+  }
+
+  /* ============ PASO 5: INCLUYE + CRECE (combinado) ============ */
+  .bundle-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 780px) {
+    .bundle-wrap { grid-template-columns: 1fr; }
+  }
+  .bundle-side {
     background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    box-shadow: 0 10px 24px -6px rgba(10,15,28,.2);
-    transform: translate(-50%, 0) scale(0);
-    opacity: 0;
-    z-index: 4;
-    transition: transform .9s cubic-bezier(.34,1.56,.64,1), opacity .4s;
-    cursor: pointer;
+    border-radius: 16px;
+    padding: 24px;
   }
-  .tool-icon:hover { transform: translate(var(--tx, -50%), var(--ty, -180px)) scale(1.12); }
-  .box.open .tool-icon {
-    opacity: 1;
-    transform: translate(var(--tx, -50%), var(--ty, -180px)) scale(1);
-  }
-  .tool-icon.t1 { --tx: -300%; --ty: -220px; transition-delay: .6s; }
-  .tool-icon.t2 { --tx: -200%; --ty: -260px; transition-delay: .7s; }
-  .tool-icon.t3 { --tx: -100%; --ty: -290px; transition-delay: .8s; }
-  .tool-icon.t4 { --tx: 0%; --ty: -290px; transition-delay: .9s; }
-  .tool-icon.t5 { --tx: 100%; --ty: -260px; transition-delay: 1.0s; }
-  .tool-icon.t6 { --tx: 200%; --ty: -220px; transition-delay: 1.1s; }
-
-  .tool-tag {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--soft);
-    text-align: center;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    margin-top: 6px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-  }
-
-  @media (max-width: 640px) {
-    .box { width: 280px; height: 220px; }
-    .box-body { height: 140px; }
-    .tool-icon { width: 46px; height: 46px; font-size: 22px; border-radius: 12px; }
-    .tool-icon.t1 { --tx: -250%; --ty: -170px; }
-    .tool-icon.t2 { --tx: -150%; --ty: -200px; }
-    .tool-icon.t3 { --tx: -50%; --ty: -220px; }
-    .tool-icon.t4 { --tx: 50%; --ty: -220px; }
-    .tool-icon.t5 { --tx: 150%; --ty: -200px; }
-    .tool-icon.t6 { --tx: 250%; --ty: -170px; }
-  }
-
-  /* ============ SLIDE 09 · TIMELINE ============ */
-  .timeline {
-    position: relative;
-    margin: 48px 0;
-    padding-bottom: 40px;
-  }
-  .timeline-line {
-    position: absolute;
-    left: 0; right: 0;
-    top: 42px;
-    height: 2px;
-    background: var(--line);
-  }
-  .timeline-line-fill {
-    position: absolute;
-    left: 0; top: 0;
-    height: 100%;
-    width: var(--tp, 0%);
-    background: var(--accent);
-    transition: width .8s ease;
-  }
-  .timeline-pts {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    position: relative;
-  }
-  @media (max-width: 640px) {
-    .timeline-pts { grid-template-columns: 1fr; gap: 24px; }
-    .timeline-line { top: 0; bottom: 0; left: 22px; width: 2px; height: auto; }
-    .timeline-line-fill { width: 100%; height: var(--tp, 0%); }
-  }
-  .tl-pt {
-    text-align: center;
-    position: relative;
-  }
-  @media (max-width: 640px) {
-    .tl-pt { text-align: left; padding-left: 60px; }
-  }
-  .tl-dot {
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: var(--paper);
-    border: 2px solid var(--line);
-    margin: 30px auto 20px;
-    position: relative;
-    z-index: 2;
-    transition: background .4s, border-color .4s, transform .4s;
-  }
-  @media (max-width: 640px) {
-    .tl-dot { position: absolute; left: 12px; top: 0; margin: 0; }
-  }
-  .tl-pt.done .tl-dot {
-    background: var(--accent);
-    border-color: var(--accent);
-    box-shadow: 0 0 0 6px var(--accent-glow);
-  }
-  .tl-when {
+  .bundle-side .side-title {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
-  }
-  .tl-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    letter-spacing: -0.01em;
-  }
-  .tl-desc {
-    font-size: 12.5px;
-    color: var(--soft);
-    line-height: 1.4;
-  }
-
-  /* ============ SLIDE 10 · DASHBOARD LIVE ============ */
-  .dash-chap { background: var(--dark-bg); color: white; }
-  .dash-chap .chap-head .lead { color: rgba(255,255,255,.65); }
-  .dash-chap .eyebrow { background: rgba(255,45,111,.2); color: var(--accent-2); }
-
-  .dash-frame {
-    background: var(--dark-2);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 40px 80px -20px rgba(0,0,0,.5);
-  }
-  .dash-header {
-    padding: 12px 20px;
-    background: rgba(255,255,255,.03);
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .dash-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: rgba(255,255,255,.7);
-  }
-  .dash-live {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--ok);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-  .dash-live::before {
-    content: "";
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--ok);
-    box-shadow: 0 0 8px var(--ok);
-    animation: ping 1.5s infinite;
-  }
-  .dash-body {
-    padding: 24px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-  }
-  @media (max-width: 700px) { .dash-body { grid-template-columns: 1fr; } }
-  .dash-kpis {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    grid-column: 1 / -1;
-  }
-  .kpi {
-    background: rgba(255,255,255,.03);
-    border: 1px solid rgba(255,255,255,.06);
-    border-radius: 10px;
-    padding: 14px;
-  }
-  .kpi .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: 0.1em; text-transform: uppercase; }
-  .kpi .val { font-size: 24px; font-weight: 800; color: white; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
-  .kpi .val.accent { color: var(--accent-2); }
-  .kpi .val.ok { color: var(--ok); }
-  .kpi .delta { font-size: 11px; color: var(--ok); font-family: 'JetBrains Mono', monospace; }
-
-  .dash-section {
-    background: rgba(255,255,255,.03);
-    border: 1px solid rgba(255,255,255,.06);
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .dash-section h5 {
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    color: rgba(255,255,255,.5);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 10px;
     font-weight: 700;
+    margin-bottom: 12px;
   }
-  .dash-entry {
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(255,255,255,.04);
-    font-size: 12.5px;
-    color: rgba(255,255,255,.8);
+  .bundle-side h4 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .bundle-side h4 em {
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .bundle-side p {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.55;
+  }
+  .bundle-list {
+    margin-top: 16px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .bundle-list li {
+    list-style: none;
+    padding: 10px 14px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    font-size: 13px;
+    display: flex;
     align-items: center;
     gap: 10px;
   }
-  .dash-entry:last-child { border-bottom: 0; }
-  .dash-entry .when {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: rgba(255,255,255,.4);
+  .bundle-list li .ic { font-size: 16px; }
+  .bundle-list li strong { font-weight: 600; }
+  .bundle-list li a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
   }
 
-  .bar-chart {
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    height: 80px;
-    margin-top: 6px;
-  }
-  .bar-chart .bar {
-    flex: 1;
-    background: linear-gradient(180deg, var(--accent-2), var(--accent));
-    border-radius: 3px 3px 0 0;
-    min-height: 8px;
-    transition: height .6s ease;
-  }
-
-  .dash-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 8px;
-    background: rgba(16,185,129,.15);
-    color: var(--ok);
-    border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-  }
-  .dash-badge.warn { background: rgba(245,158,11,.15); color: var(--warn); }
-
-  /* ============ SLIDE 11 · STATS ============ */
-  .stats-chap { background: var(--dark-bg); color: white; }
-  .stats-chap .chap-head .lead { color: rgba(255,255,255,.65); }
-  .stats-chap .eyebrow { background: rgba(255,45,111,.2); color: var(--accent-2); }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 40px;
-  }
-  @media (max-width: 720px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
-  .stat-card {
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 16px;
-    padding: 28px 20px;
-    text-align: center;
-  }
-  .stat-num {
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 900;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-  .stat-num.accent { color: var(--accent-2); }
-  .stat-lbl {
-    font-size: 11px;
-    color: rgba(255,255,255,.6);
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 10px;
-    font-weight: 700;
-  }
-
-  /* ============ SLIDE 12 · FAQ TERMINAL ============ */
+  /* ============ FAQ ============ */
   .faq-chap { background: var(--dark-bg); color: white; }
   .faq-chap .chap-head .lead { color: rgba(255,255,255,.65); }
-  .faq-chap .eyebrow { background: rgba(255,45,111,.2); color: var(--accent-2); }
+  .faq-chap h2 em { color: var(--accent-2); }
 
-  .faq-term {
-    background: #0B0F1A;
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 14px;
-    padding: 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    max-width: 720px;
+  .faq-list {
+    max-width: 760px;
     margin: 32px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-  .faq-q {
-    display: block;
-    padding: 10px 14px;
-    margin: 6px 0;
-    background: rgba(255,255,255,.03);
-    border-left: 2px solid var(--accent);
-    border-radius: 4px;
+  .faq-item {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    transition: border-color .2s, background .2s;
+  }
+  .faq-item[open] {
+    border-color: var(--accent);
+    background: rgba(255,45,111,.05);
+  }
+  .faq-item summary {
+    list-style: none;
+    padding: 18px 22px;
+    font-weight: 600;
+    font-size: 15.5px;
     cursor: pointer;
-    transition: background .2s;
-    color: rgba(255,255,255,.92);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: -0.01em;
+    color: white;
   }
-  .faq-q:hover { background: rgba(255,45,111,.1); }
-  .faq-q::before {
-    content: "$ ";
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+";
     color: var(--accent-2);
-    font-weight: 700;
-  }
-  .faq-q .chev {
-    float: right;
-    color: rgba(255,255,255,.4);
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 300;
     transition: transform .2s;
+    flex-shrink: 0;
+    margin-left: 12px;
   }
-  .faq-q.open .chev { transform: rotate(90deg); color: var(--accent-2); }
-  .faq-a {
-    display: none;
-    padding: 10px 14px 10px 28px;
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+  .faq-item .body {
+    padding: 0 22px 20px;
     color: rgba(255,255,255,.7);
     line-height: 1.6;
-    font-family: 'Inter', sans-serif;
-    font-size: 13.5px;
-    border-left: 2px dashed rgba(255,255,255,.15);
-    margin-left: 10px;
-    background: rgba(255,255,255,.02);
-    border-radius: 4px;
+    font-size: 14px;
   }
-  .faq-q.open + .faq-a { display: block; animation: faqOpen .3s ease; }
-  @keyframes faqOpen { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+  .faq-item .body code.inline {
+    background: rgba(255,255,255,.08);
+    color: var(--accent-2);
+  }
 
-  /* ============ SLIDE 13 · CONTACT ============ */
+  /* ============ CONTACT ============ */
   .contact-chap {
     background: var(--dark-bg);
     color: white;
     text-align: center;
   }
   .contact-chap .chap-head .lead { color: rgba(255,255,255,.7); margin-left: auto; margin-right: auto; }
-  .contact-chap .eyebrow { background: rgba(255,45,111,.2); color: var(--accent-2); }
-  .contact-chap h2 { color: white; }
+  .contact-chap h2 em { color: var(--accent-2); }
   .contact-chap .chap-inner { text-align: center; }
+
+  .github-hero {
+    margin: 40px auto 32px;
+    max-width: 640px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, rgba(255,45,111,.1), rgba(255,92,138,.05));
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .github-hero:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px -20px rgba(255,45,111,.4);
+  }
+  .github-hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,45,111,.2), transparent 40%);
+    pointer-events: none;
+  }
+  .github-hero .gh-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: block;
+    position: relative;
+  }
+  .github-hero .gh-main {
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .github-hero .gh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: white;
+    color: var(--ink);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    position: relative;
+    transition: transform .2s, background .2s;
+  }
+  .github-hero .gh-btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.05);
+  }
+  .github-hero .gh-icon {
+    font-size: 20px;
+  }
 
   .contact-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    margin: 40px auto 32px;
+    margin: 0 auto;
     max-width: 640px;
   }
   @media (max-width: 560px) { .contact-grid { grid-template-columns: 1fr; } }
@@ -1575,70 +1056,53 @@
   .contact-card {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 20px;
+    gap: 12px;
+    padding: 16px 18px;
     background: rgba(255,255,255,.04);
     border: 1px solid rgba(255,255,255,.1);
-    border-radius: 14px;
+    border-radius: 12px;
     transition: background .2s, border-color .2s, transform .2s;
     text-align: left;
   }
   .contact-card:hover {
     background: rgba(255,45,111,.15);
     border-color: var(--accent);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
   .contact-ic {
-    width: 44px; height: 44px;
+    width: 36px; height: 36px;
     background: var(--accent);
     color: white;
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 16px;
     flex-shrink: 0;
   }
   .contact-card .lbl {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 0.1em;
     color: rgba(255,255,255,.5);
     text-transform: uppercase;
   }
   .contact-card .val {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     color: white;
     margin-top: 2px;
     word-break: break-all;
   }
 
   .contact-final {
-    margin-top: 48px;
-    padding-top: 32px;
+    margin-top: 40px;
+    padding-top: 24px;
     border-top: 1px solid rgba(255,255,255,.08);
-  }
-  .contact-final .byline {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: rgba(255,255,255,.4);
-    letter-spacing: 0.1em;
-    margin-bottom: 20px;
-  }
-  .contact-final .cta-final-btn {
-    display: inline-block;
-    padding: 14px 32px;
-    background: var(--accent);
-    color: white;
-    border-radius: 999px;
-    font-weight: 700;
-    font-size: 15px;
-    transition: transform .2s, background .2s;
-  }
-  .contact-final .cta-final-btn:hover {
-    transform: translateY(-2px);
-    background: var(--accent-2);
+    letter-spacing: 0.08em;
   }
 
   /* ============ COMMAND PALETTE (K) ============ */
@@ -1713,13 +1177,29 @@
     }
     .r { opacity: 1 !important; transform: none !important; }
   }
+
+  /* ============ TOAST ============ */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--ink);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 300;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+    pointer-events: none;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,.4);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 
 <body>
-
-<!-- ============ CUSTOM CURSOR (desktop only) ============ -->
-<div class="cursor-blob" id="cursor"></div>
 
 <!-- ============ NAV ============ -->
 <nav class="topbar">
@@ -1728,8 +1208,8 @@
     Creators <span class="lt">Latam</span>
   </a>
   <div class="top-actions">
-    <div class="top-hint">Presiona <kbd>K</kbd> para navegar</div>
-    <a href="https://github.com/tamibot/creators-latam-starter" class="top-cta" target="_blank" rel="noopener">Repo ↗</a>
+    <div class="top-hint">Presiona <kbd>K</kbd></div>
+    <a href="https://github.com/tamibot/creators-latam-starter" class="top-cta" target="_blank" rel="noopener">Ver repo ↗</a>
   </div>
 </nav>
 
@@ -1739,38 +1219,41 @@
 <!-- ============ COMMAND PALETTE ============ -->
 <div class="palette-overlay" id="paletteOverlay">
   <div class="palette">
-    <input type="text" id="paletteInput" placeholder="Buscá sección (ej: 'paso 3', 'faq')..." autocomplete="off" />
+    <input type="text" id="paletteInput" placeholder="Buscá sección..." autocomplete="off" />
     <div class="palette-list" id="paletteList"></div>
   </div>
 </div>
 
-<!-- ============ CHAPTER 1 · HERO ============ -->
-<section class="chapter hero" id="c1" data-label="Hero" data-theme="light">
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast">✓ Comando copiado</div>
+
+<!-- ============ 01 · HERO ============ -->
+<section class="chapter hero" id="c1" data-label="Inicio" data-theme="light">
   <div class="grid-bg"></div>
   <div class="dot-bg"></div>
   <div class="dot-bg right"></div>
   <div class="chapter-inner" style="text-align: center;">
-    <div class="hero-badge r"><span class="ping"></span> v1.11 · Open source · MIT</div>
+    <div class="hero-badge r"><span class="ping"></span>v1.12 · MIT · Open source</div>
 
     <h1 class="display r r-1">
-      <span class="type-line">Trabajá con <em class="grad" id="typeTarget">método</em><span class="type-caret"></span></span>
+      La base para trabajar<br>con IA en <em id="typeTarget">Claude Code</em><span class="type-caret"></span>
     </h1>
 
     <p class="hero-sub r r-2">
-      Una forma de trabajar con IA. No es un boilerplate ni una caja cerrada.
-      Cloná, seguí los 5 pasos, y arrancás con un equipo de 32 agentes listos.
+      Una metodología + 32 agentes + 5 skills + herramientas, listos para que arranques tu proyecto con Claude Code sin perder tiempo en setup.
     </p>
 
     <div class="hero-cta-row r r-3">
-      <a href="#c3" class="btn btn-primary">Empezar ahora →</a>
-      <a href="https://github.com/tamibot/creators-latam-starter" target="_blank" rel="noopener" class="btn btn-ghost">Ver código</a>
+      <a href="#c2" class="btn btn-primary">Empezar por el Paso 00 →</a>
+      <a href="https://github.com/tamibot/creators-latam-starter" target="_blank" rel="noopener" class="btn btn-ghost">Ver en GitHub</a>
     </div>
 
-    <div class="hero-stats r r-4">
-      <span>5 pasos</span><span class="sep">·</span>
-      <span>32 agentes</span><span class="sep">·</span>
-      <span>Mac · Linux · Win</span><span class="sep">·</span>
-      <span id="ghStars">GitHub</span>
+    <div class="hero-chips r r-4">
+      <span class="hero-chip"><span class="em">📦</span>Instalar</span>
+      <span class="hero-chip"><span class="em">🎯</span>Entregable</span>
+      <span class="hero-chip"><span class="em">🛠️</span>Stack</span>
+      <span class="hero-chip"><span class="em">👥</span>Equipo</span>
+      <span class="hero-chip"><span class="em">📋</span>Plan Maestro</span>
     </div>
   </div>
 
@@ -1780,212 +1263,101 @@
   </div>
 </section>
 
-<!-- ============ CHAPTER 2 · PROBLEM ============ -->
-<section class="chapter problem" id="c2" data-label="El problema" data-theme="light">
+<!-- ============ 02 · PASO 00 · INSTALAR ============ -->
+<section class="chapter" id="c2" data-label="Paso 00 · Instalar" data-theme="light">
   <div class="chapter-inner">
-    <div class="chap-head">
-      <span class="eyebrow r">El problema</span>
-      <h2 class="h1 r r-1">Instalar un stack<br><em>no es tener un proceso.</em></h2>
-      <p class="lead r r-2">
-        La IA se rompe cuando no hay claridad. No por falta de herramientas.
-      </p>
-    </div>
-
-    <div class="problem-grid">
-      <div class="problem-card chaos r r-3">
-        <span class="label">✗ Sin método</span>
-        <h3>27 tabs abiertas,<br>0 claridad.</h3>
-        <p style="color: var(--soft); font-size: 14px; line-height: 1.5; margin-top: 10px;">
-          Cada proyecto empieza de cero. La IA adivina. El cliente se sorprende. Hay que rehacer.
-        </p>
-        <div class="chaos-tabs">
-          <span class="chaos-tab glitch" style="--d:0">ChatGPT</span>
-          <span class="chaos-tab glitch" style="--d:.3">Kommo</span>
-          <span class="chaos-tab glitch" style="--d:.6">n8n</span>
-          <span class="chaos-tab glitch" style="--d:.9">WhatsApp</span>
-          <span class="chaos-tab glitch" style="--d:1.2">Notion</span>
-          <span class="chaos-tab glitch" style="--d:1.5">Slack</span>
-          <span class="chaos-tab glitch" style="--d:1.8">Figma</span>
-          <span class="chaos-tab glitch" style="--d:2.1">Drive</span>
-          <span class="chaos-tab glitch" style="--d:2.4">Gmail</span>
-          <span class="chaos-tab glitch" style="--d:2.7">Airtable</span>
-        </div>
-      </div>
-
-      <div class="problem-card order r r-4">
-        <span class="label">✓ Con método</span>
-        <h3>5 pasos,<br>un proceso claro.</h3>
-        <p style="color: rgba(255,255,255,.7); font-size: 14px; line-height: 1.5; margin-top: 10px;">
-          Cada proyecto sigue el mismo flujo. La IA ejecuta lo definido. El cliente firma. No hay sorpresas.
-        </p>
-        <div class="order-steps">
-          <div class="order-step"><span class="n">1</span>Instalar</div>
-          <div class="order-step"><span class="n">2</span>Definir entregable</div>
-          <div class="order-step"><span class="n">3</span>Validar stack</div>
-          <div class="order-step"><span class="n">4</span>Armar equipo</div>
-          <div class="order-step"><span class="n">5</span>Firmar y lanzar</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CHAPTER 3 · PASO 1 INSTALL ============ -->
-<section class="chapter" id="c3" data-label="1. Instalar" data-theme="light">
-  <div class="chapter-inner">
-    <div class="step-layout">
+    <div class="step-grid">
       <div>
-        <span class="eyebrow r">PASO 01 · INSTALAR</span>
-        <h2 class="h1 r r-1">Cloná y <em>esperá.</em></h2>
-        <p class="lead r r-2">
-          Un único comando. El instalador detecta qué te falta, descarga solo lo necesario, y deja listo el entorno con los 32 agentes.
-        </p>
-        <div class="hint-box r r-3">
-          🍿 <strong>Puede tardar 15–30 min la primera vez.</strong> Son descargas de tools + modelos de IA (~2GB). Dale todos los permisos cuando pregunte — es seguro y 100% auditable.
-        </div>
-      </div>
-      <div class="terminal-box r r-2" id="term1Box">
-        <div class="term-bar">
-          <span class="term-dot r"></span>
-          <span class="term-dot y"></span>
-          <span class="term-dot g"></span>
-          <span class="term-title">~/mi-proyecto — install.sh</span>
-        </div>
-        <div class="term-body" id="term1Body">
-          <div class="term-line"><span class="term-prompt">$ </span><span class="term-cmd">git clone creators-latam/starter mi-proyecto</span></div>
-          <div class="term-line"><span class="term-out">Cloning into 'mi-proyecto'... done.</span></div>
-          <div class="term-line"><span class="term-prompt">$ </span><span class="term-cmd">cd mi-proyecto &amp;&amp; ./tooling/install.sh</span></div>
-          <div class="term-line"><span class="term-out">▸ Auditando sistema...</span></div>
-          <div class="term-line"><span class="term-ok">✓ Homebrew</span><span class="term-out"> ya instalado</span></div>
-          <div class="term-line"><span class="term-ok">✓ Python 3.12</span><span class="term-out"> ya instalado</span></div>
-          <div class="term-line"><span class="term-out">▸ Instalando marker + whisper... </span><span class="term-progress"><span class="term-progress-fill" id="pg1"></span></span><span class="term-accent" id="pg1pct"> 0%</span></div>
-          <div class="term-line"><span class="term-ok">✓ 32 agentes configurados</span></div>
-          <div class="term-line"><span class="term-ok">✓ 5 skills fundacionales</span></div>
-          <div class="term-line"><span class="term-ok">✓ Pre-commit hooks activos</span></div>
-          <div class="term-line"><span class="term-accent">🎉 Listo en </span><span class="term-ok" id="timer">00:00</span><span class="term-cursor"></span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        <span class="step-tag r">PASO 00 · INSTALAR</span>
+        <h2 class="h1 r r-1">Instalá la <em>base.</em></h2>
+        <p class="lead r r-2">Una sola vez. Con este paso quedás con Claude Code abierto en una carpeta del escritorio y los 32 agentes listos para usar.</p>
 
-<!-- ============ CHAPTER 4 · PASO 2 ENTREGABLE LOOP ============ -->
-<section class="chapter" id="c4" data-label="2. Entregable" data-theme="light">
-  <div class="chapter-inner">
-    <div class="step-layout">
-      <div>
-        <span class="eyebrow r">PASO 02 · ENTREGABLE</span>
-        <h2 class="h1 r r-1">Definí <em>qué entregás.</em></h2>
-        <p class="lead r r-2">
-          Antes de tocar código, el agente de onboarding te guía en un <strong>loop iterativo</strong> hasta que quede 100% claro qué recibe el cliente.
-        </p>
-
-        <div class="voice-tip r r-3">
-          <div class="waveform" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <div class="install-flow r r-3">
+          <div class="install-step">
+            <span class="num">1</span>
+            <span class="txt">Abrí <strong>Claude Code</strong> en tu Mac. Si no lo tenés, bajalo de <a href="https://claude.com/download" target="_blank" style="color:var(--accent);font-weight:600;">claude.com/download</a>.</span>
           </div>
-          <div class="text">
-            <span class="badge">PRO TIP</span>
-            <strong>Mandá una nota de voz de 20 minutos</strong> detallando todo: tipo de cliente, qué espera ver, cómo lo usa. Gemini la entiende perfecto y la convierte en especificación.
+          <div class="install-step">
+            <span class="num">2</span>
+            <span class="txt">Creá una carpeta en tu <strong>Escritorio</strong> exclusiva para este proyecto. Ej: <code class="inline">~/Desktop/mi-proyecto</code>.</span>
           </div>
-        </div>
-
-        <div class="hint-box r r-4" style="margin-top: 12px;">
-          💡 El loop se cierra solo cuando <strong>sabés dónde se guarda, qué columnas tiene, con qué frecuencia se genera y cómo lo firma el cliente</strong>. Ni antes.
+          <div class="install-step">
+            <span class="num">3</span>
+            <span class="txt">En Claude Code, abrí esa carpeta (<code class="inline">cd</code> o drag-and-drop), <strong>copiá el comando de la derecha</strong> y pegalo en el chat de Claude.</span>
+          </div>
+          <div class="install-step">
+            <span class="num">4</span>
+            <span class="txt"><strong>Dale todos los permisos</strong> que te pida Claude. Son seguros — el instalador es auditable y open source.</span>
+          </div>
         </div>
       </div>
 
       <div class="r r-2">
-        <div class="loop-wrap">
-          <div class="loop-ring"></div>
-          <div class="loop-ring r2"></div>
-          <svg class="radial-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <marker id="arrowhead" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto">
-                <polygon points="0 0, 4 2, 0 4" fill="var(--accent)" />
-              </marker>
-            </defs>
-            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent)" stroke-width="0.4" stroke-dasharray="264" stroke-dashoffset="0" marker-end="url(#arrowhead)" opacity="0.5"/>
-          </svg>
-          <div class="loop-center">
-            <div class="em">🎯</div>
-            <div class="lbl">LOOP</div>
-            <div class="sub">hasta que cierre</div>
+        <div class="copy-box">
+          <div class="copy-bar">
+            <span class="dot a"></span>
+            <span class="dot b"></span>
+            <span class="dot c"></span>
+            <span class="title">Copia esto en Claude Code</span>
+            <button class="copy-btn" id="copyBtn">
+              <span id="copyLabel">COPIAR</span>
+            </button>
           </div>
-          <div class="loop-node n1" data-i="0">
-            <div class="emj">❓</div>
-            <div class="nlbl">Pregunto</div>
-          </div>
-          <div class="loop-node n2" data-i="1">
-            <div class="emj">🎙️</div>
-            <div class="nlbl">Respondés</div>
-          </div>
-          <div class="loop-node n3" data-i="2">
-            <div class="emj">🔄</div>
-            <div class="nlbl">Aclaro</div>
-          </div>
-          <div class="loop-node n4" data-i="3">
-            <div class="emj">✓</div>
-            <div class="nlbl">¿Cerramos?</div>
-          </div>
+          <div class="copy-body" id="copyCmd"><span class="line"><span class="prompt">&gt; </span>Clonar https://github.com/tamibot/creators-latam-starter.git acá, correr ./tooling/install.sh con todos los permisos, y cuando termine abrir el repo.</span></div>
+        </div>
+
+        <div class="install-tip">
+          🍿 <strong>Paciencia:</strong> la primera vez tarda <strong>15–30 min</strong>. Descarga herramientas, modelos de IA (~2GB) y configura los 32 agentes. Dejalo corriendo y volvé después.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CHAPTER 5 · PASO 3 STACK ============ -->
-<section class="chapter" id="c5" data-label="3. Stack" data-theme="light">
+<!-- ============ 03 · PASO 01 · ENTREGABLE (para atrás) ============ -->
+<section class="chapter" id="c3" data-label="Paso 01 · Entregable" data-theme="light">
   <div class="chapter-inner">
-    <div class="step-layout">
+    <div class="step-grid">
       <div>
-        <span class="eyebrow r">PASO 03 · STACK</span>
-        <h2 class="h1 r r-1">Validá el <em>stack.</em></h2>
+        <span class="step-tag r">PASO 01 · EL ENTREGABLE</span>
+        <h2 class="h1 r r-1">Definí qué <em>entregás.</em></h2>
         <p class="lead r r-2">
-          El agente investiga en foros, issues de GitHub y docs por vos. Compara 3–4 opciones con pros, contras y precio real antes de comprometerte con una.
+          Antes de tocar una sola herramienta: <strong>ponete en el final</strong>. ¿Qué recibe el cliente? ¿Un informe? ¿Un correo automatizado? ¿Un sistema? Con eso claro, <strong>caminás hacia atrás</strong> hasta la fuente original de los datos.
         </p>
-        <div class="hint-box r r-3">
-          🔍 <strong>Research ≠ copiar docs oficiales.</strong> Los foros te muestran los problemas reales: rate limits no documentados, bugs conocidos, alternativas mejores.
+
+        <div class="loop-hint r r-3">
+          <div class="loop-icon">🔄</div>
+          <div class="body">
+            <strong>Hay un agente</strong> que te hace preguntas en loop hasta que cada pieza quede definida. Podés responder por texto, nota de voz de 20 min, o pegando un brief — Gemini lo entiende todo.
+          </div>
         </div>
       </div>
 
       <div class="r r-2">
-        <div class="stack-deck" id="stackDeck">
-          <div class="stack-tile" data-status="approved">
-            <div class="tile-verdict">✓</div>
-            <div class="tile-emoji">📊</div>
-            <div>
-              <div class="tile-name">Kommo CRM</div>
-              <div class="tile-meta">USD 15/user/mo</div>
-              <div class="tile-research" style="margin-top: 8px;"><strong>34 comentarios</strong> en foros · API estable</div>
-            </div>
+        <div style="font-size: 11px; color: var(--soft); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace;">EJEMPLO · Informe mensual</div>
+        <div class="back-chain" id="backChain">
+          <div class="chain-item" data-i="0">
+            <div class="k">🎯 ENTREGABLE FINAL</div>
+            <h4>Informe PDF · primer lunes del mes</h4>
+            <p>Ventas del mes, 3 KPIs clave, gráficos comparativos vs mes anterior.</p>
           </div>
-          <div class="stack-tile" data-status="rejected">
-            <div class="tile-verdict">✗</div>
-            <div class="tile-emoji">💼</div>
-            <div>
-              <div class="tile-name">HubSpot</div>
-              <div class="tile-meta">USD 800/mo (tier req.)</div>
-              <div class="tile-research" style="margin-top: 8px;"><strong>Caro</strong> para el caso · tier básico limita features</div>
-            </div>
+          <div class="chain-arrow">↑</div>
+          <div class="chain-item" data-i="1">
+            <div class="k">📊 KPIs QUE APARECEN</div>
+            <h4>Ingresos · conversión · CAC</h4>
+            <p>Calculados a partir de ventas cerradas + gasto en ads + visitas web.</p>
           </div>
-          <div class="stack-tile" data-status="approved">
-            <div class="tile-verdict">✓</div>
-            <div class="tile-emoji">⚙️</div>
-            <div>
-              <div class="tile-name">n8n (self-host)</div>
-              <div class="tile-meta">USD 5/mo Railway</div>
-              <div class="tile-research" style="margin-top: 8px;"><strong>Comunidad activa</strong> · templates listos</div>
-            </div>
+          <div class="chain-arrow">↑</div>
+          <div class="chain-item" data-i="2">
+            <div class="k">📁 DATOS QUE ALIMENTAN</div>
+            <h4>CRM · Ads API · Google Analytics</h4>
+            <p>Cada KPI viene de una fuente. Todas las fuentes quedan documentadas.</p>
           </div>
-          <div class="stack-tile" data-status="rejected">
-            <div class="tile-verdict">✗</div>
-            <div class="tile-emoji">⚡</div>
-            <div>
-              <div class="tile-name">Zapier</div>
-              <div class="tile-meta">USD 49/mo · 750 tasks</div>
-              <div class="tile-research" style="margin-top: 8px;"><strong>Limita</strong> ejecuciones · sin control total del flujo</div>
-            </div>
+          <div class="chain-arrow">↑</div>
+          <div class="chain-item" data-i="3">
+            <div class="k">🗄️ FUENTE ORIGINAL</div>
+            <h4>Base de datos transaccional</h4>
+            <p>Registro de cada venta al momento que ocurre. El resto se deriva de acá.</p>
           </div>
         </div>
       </div>
@@ -1993,70 +1365,57 @@
   </div>
 </section>
 
-<!-- ============ CHAPTER 6 · PASO 4 EQUIPO RADIAL ============ -->
-<section class="chapter" id="c6" data-label="4. Equipo" data-theme="light">
+<!-- ============ 04 · PASO 02 · STACK ============ -->
+<section class="chapter" id="c4" data-label="Paso 02 · Stack" data-theme="light">
   <div class="chapter-inner">
-    <div class="step-layout">
+    <div class="step-grid">
       <div>
-        <span class="eyebrow r">PASO 04 · EQUIPO</span>
-        <h2 class="h1 r r-1">Armá tu <em>equipo.</em></h2>
+        <span class="step-tag r">PASO 02 · STACK TECNOLÓGICO</span>
+        <h2 class="h1 r r-1">Definí <em>con qué</em> lo producimos.</h2>
         <p class="lead r r-2">
-          32 agentes base agrupados en 8 funciones. Cada proyecto activa los que necesita + suma custom si hace falta (wizard interactivo: <code class="inline">./tooling/new-agent.sh</code>).
+          Ya sabés qué entregar. Ahora: <strong>qué plataformas usás, qué credenciales tenés, dónde está alojado, qué suscripciones pagás y qué limitantes te imponen.</strong> Cada proyecto es distinto.
         </p>
-        <div class="hint-box r r-3">
-          🧩 <strong>Extensible por diseño.</strong> La base te da el piso. Los agentes custom de tu cliente viven en tu repo. Si un patrón se repite en 3+ proyectos, lo subimos al starter.
+
+        <div class="loop-hint r r-3">
+          <div class="loop-icon" style="background: var(--ink);">🔍</div>
+          <div class="body">
+            <strong>Un agente investiga</strong> en foros, GitHub y Reddit las herramientas que elegiste: precios reales, rate limits no documentados, bugs conocidos. No te quedás con la letra chica que nadie lee.
+          </div>
         </div>
       </div>
 
       <div class="r r-2">
-        <div class="radial" id="radial">
-          <svg class="radial-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" id="radialSvg"></svg>
-
-          <div class="radial-core">
-            <div class="em">🚀</div>
-            <div class="lbl">32 agentes</div>
-            <div class="nm">Tu equipo</div>
+        <div style="font-size: 11px; color: var(--soft); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace;">LO QUE DEFINIMOS ACÁ</div>
+        <div class="stack-fields">
+          <div class="stack-field">
+            <div class="label">🔌 PLATAFORMAS</div>
+            <h4>CRM · workflow · hosting</h4>
+            <p>Qué herramientas ya usás y cuáles podríamos sumar.</p>
           </div>
-
-          <div class="radial-bubble" style="--bc: #FF2D6F;" data-group="kickoff">
-            <div class="emj">🤝</div>
-            <div class="cnt">3</div>
-            <div class="nm">Arranque</div>
+          <div class="stack-field">
+            <div class="label">🔑 CREDENCIALES</div>
+            <h4>APIs · OAuth · tokens</h4>
+            <p>Qué accesos ya tenés activos y cuáles hay que pedir.</p>
           </div>
-          <div class="radial-bubble" style="--bc: #D426C5;" data-group="coord">
-            <div class="emj">🎼</div>
-            <div class="cnt">4</div>
-            <div class="nm">Coord</div>
+          <div class="stack-field">
+            <div class="label">☁️ HOSTING</div>
+            <h4>AWS · Vercel · Railway</h4>
+            <p>Dónde corre lo que construimos. Y quién paga la factura.</p>
           </div>
-          <div class="radial-bubble" style="--bc: #8B3FFF;" data-group="monitor">
-            <div class="emj">📡</div>
-            <div class="cnt">4</div>
-            <div class="nm">Monit</div>
+          <div class="stack-field">
+            <div class="label">💳 SUSCRIPCIONES</div>
+            <h4>Planes + limitantes</h4>
+            <p>Qué límites tiene tu plan: rate limits, regiones, usuarios.</p>
           </div>
-          <div class="radial-bubble" style="--bc: #3B5BFF;" data-group="exec">
-            <div class="emj">📦</div>
-            <div class="cnt">7</div>
-            <div class="nm">Ejec</div>
+          <div class="stack-field">
+            <div class="label">📋 TDRs</div>
+            <h4>Normas · estándares</h4>
+            <p>Si hay términos de referencia, GDPR, ISO o políticas que cumplir.</p>
           </div>
-          <div class="radial-bubble" style="--bc: #2563EB;" data-group="deliver">
-            <div class="emj">📄</div>
-            <div class="cnt">4</div>
-            <div class="nm">Entreg</div>
-          </div>
-          <div class="radial-bubble" style="--bc: #10B981;" data-group="docs">
-            <div class="emj">🗂️</div>
-            <div class="cnt">4</div>
-            <div class="nm">Docs</div>
-          </div>
-          <div class="radial-bubble" style="--bc: #F59E0B;" data-group="maint">
-            <div class="emj">🧹</div>
-            <div class="cnt">4</div>
-            <div class="nm">Mant</div>
-          </div>
-          <div class="radial-bubble" style="--bc: #059669;" data-group="close">
-            <div class="emj">🎯</div>
-            <div class="cnt">3</div>
-            <div class="nm">Cierre</div>
+          <div class="stack-field">
+            <div class="label">💰 PRESUPUESTO</div>
+            <h4>Costo mensual máximo</h4>
+            <p>Qué APIs están dentro del budget y cuáles quedan afuera.</p>
           </div>
         </div>
       </div>
@@ -2064,71 +1423,114 @@
   </div>
 </section>
 
-<!-- ============ CHAPTER 7 · PASO 5 LANZAR ============ -->
-<section class="chapter" id="c7" data-label="5. Firmar y lanzar" data-theme="light">
+<!-- ============ 05 · PASO 03 · EQUIPO ============ -->
+<section class="chapter" id="c5" data-label="Paso 03 · Equipo" data-theme="light">
   <div class="chapter-inner">
-    <div class="step-layout">
+    <div class="step-grid">
       <div>
-        <span class="eyebrow r">PASO 05 · FIRMAR Y LANZAR</span>
-        <h2 class="h1 r r-1">Firmá y <em>lanzá.</em></h2>
+        <span class="step-tag r">PASO 03 · EL EQUIPO</span>
+        <h2 class="h1 r r-1">Definí <em>quién</em> lo hace.</h2>
         <p class="lead r r-2">
-          Con las 4 etapas cerradas, el Plan Maestro queda listo. El cliente firma, el orquestador toma el relevo, los agentes ejecutan.
+          Según tu entregable y tu stack, <strong>definís los agentes específicos que tu proyecto necesita</strong>. El starter trae una base general — vos sumás los especialistas puntuales (Google Ads, Kommo, tu industria).
         </p>
-        <div class="hint-box r r-3">
-          🔒 <strong>Regla 01:</strong> sin plan firmado no arranca código. El validador <code class="inline">./tooling/validate-plan.sh</code> bloquea ejecución si falta alguna firma.
+
+        <div class="loop-hint r r-3">
+          <div class="loop-icon" style="background: var(--ink);">🧩</div>
+          <div class="body">
+            <strong>Wizard interactivo</strong> (<code class="inline">./tooling/new-agent.sh</code>) para crear agentes custom. Nombre, descripción, tools — y ya queda integrado con los 32 de base.
+          </div>
+        </div>
+      </div>
+
+      <div class="r r-2" style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="team-section">
+          <div class="head">📦 VIENE EN LA BASE</div>
+          <h4>32 agentes generales</h4>
+          <p>Documentador, testeador, git keeper, integraciones, guardian de reglas, orquestador... los que usa cualquier proyecto.</p>
+        </div>
+
+        <div class="team-section" style="border-color: var(--accent); background: linear-gradient(135deg, var(--accent-soft), white);">
+          <div class="head">🎯 AGENTES DE TU PROYECTO</div>
+          <h4>Los que vos definís</h4>
+          <p style="margin-bottom: 14px;">Ejemplo: si tu proyecto es de Google Ads, necesitás agentes especialistas en esa plataforma.</p>
+
+          <div class="team-agent-list">
+            <div class="team-agent custom">
+              <span class="em">📈</span>
+              <span class="nm">analista-google-ads</span>
+              <span class="custom-tag">CUSTOM</span>
+            </div>
+            <div class="team-agent custom">
+              <span class="em">📊</span>
+              <span class="nm">reportador-campañas</span>
+              <span class="custom-tag">CUSTOM</span>
+            </div>
+            <div class="team-agent custom">
+              <span class="em">🔔</span>
+              <span class="nm">alerta-budget</span>
+              <span class="custom-tag">CUSTOM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · PASO 04 · PLAN MAESTRO ============ -->
+<section class="chapter" id="c6" data-label="Paso 04 · Plan Maestro" data-theme="light">
+  <div class="chapter-inner">
+    <div class="step-grid">
+      <div>
+        <span class="step-tag r">PASO 04 · PLAN MAESTRO</span>
+        <h2 class="h1 r r-1">Consolidá <em>todo.</em></h2>
+        <p class="lead r r-2">
+          Los 3 pasos anteriores se consolidan en <strong>un único documento</strong> — el Plan Maestro. Con eso firmado, tu proyecto tiene una hoja de ruta clara y el orquestador arranca la ejecución.
+        </p>
+
+        <div class="loop-hint r r-3">
+          <div class="loop-icon" style="background: var(--ink);">📝</div>
+          <div class="body">
+            <strong>Un agente revisa el plan</strong> y lo itera con vos hasta que cubra todo sin huecos. Si algo queda poco claro, loop hasta resolver. Recién ahí se lanza.
+          </div>
         </div>
       </div>
 
       <div class="r r-2">
-        <div class="plan-doc" id="planDoc">
-          <h4>Plan Maestro · Acme Corp</h4>
-          <div class="plan-row" data-n="1">
-            <span class="n">1</span>
-            <span class="nm">Entregable definido</span>
-            <span class="check">✓</span>
-          </div>
-          <div class="plan-row" data-n="2">
-            <span class="n">2</span>
-            <span class="nm">Stack validado</span>
-            <span class="check">✓</span>
-          </div>
-          <div class="plan-row" data-n="3">
-            <span class="n">3</span>
-            <span class="nm">Equipo armado</span>
-            <span class="check">✓</span>
-          </div>
-          <div class="plan-row" data-n="4">
-            <span class="n">4</span>
-            <span class="nm">Plan consolidado</span>
-            <span class="check">✓</span>
-          </div>
+        <div style="font-size: 11px; color: var(--soft); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace;">CÓMO SE ARMA</div>
 
-          <div class="signature">
-            <div>
-              <div class="sig-line" id="sig1">
-                <svg viewBox="0 0 180 32" preserveAspectRatio="none">
-                  <path id="sigPath1" d="M 8 24 Q 20 8, 32 18 T 60 14 Q 80 4, 100 20 T 140 12 Q 160 22, 170 16" />
-                </svg>
-              </div>
-              <div>Cliente</div>
-            </div>
-            <div>
-              <div class="sig-line" id="sig2">
-                <svg viewBox="0 0 180 32" preserveAspectRatio="none">
-                  <path id="sigPath2" d="M 8 22 Q 18 10, 30 16 T 58 20 Q 78 8, 98 16 T 128 10 Q 148 20, 168 14" />
-                </svg>
-              </div>
-              <div>Creators Latam</div>
+        <div class="plan-stack">
+          <div class="plan-input" data-i="0">
+            <span class="idx">1</span>
+            <div class="content">
+              <div class="ttl">🎯 Entregable definido</div>
+              <div class="sub">Qué recibe el cliente, en qué formato</div>
             </div>
           </div>
+          <div class="plan-arrow-down" data-i="0">↓</div>
 
-          <button class="launch-btn" id="launchBtn">🚀 Lanzar proyecto</button>
-          <div class="launch-log" id="launchLog">
-            <span class="line" data-delay="200">▸ <span class="ok">validate-plan.sh → OK (3/3 firmas)</span></span>
-            <span class="line" data-delay="700">▸ Inicializando orquestador...</span>
-            <span class="line" data-delay="1200">▸ Delegando a: compilador-datos, integraciones, tester</span>
-            <span class="line" data-delay="1700">▸ <span class="ok">git push origin main → 2 commits</span></span>
-            <span class="line" data-delay="2200">🚀 <span class="ok">Proyecto en ejecución</span></span>
+          <div class="plan-input" data-i="1">
+            <span class="idx">2</span>
+            <div class="content">
+              <div class="ttl">🛠️ Stack validado</div>
+              <div class="sub">Plataformas, credenciales, hosting</div>
+            </div>
+          </div>
+          <div class="plan-arrow-down" data-i="1">↓</div>
+
+          <div class="plan-input" data-i="2">
+            <span class="idx">3</span>
+            <div class="content">
+              <div class="ttl">👥 Equipo listo</div>
+              <div class="sub">Agentes base + tus especialistas</div>
+            </div>
+          </div>
+          <div class="plan-arrow-down" data-i="2">↓</div>
+
+          <div class="plan-master" id="planMaster">
+            <div class="label">📋 PLAN MAESTRO</div>
+            <h4>Hoja de ruta lista</h4>
+            <p>Documento consolidado: qué se hace, con qué, quién lo hace, cuándo. Firma del cliente → arrancás ejecución.</p>
           </div>
         </div>
       </div>
@@ -2136,244 +1538,119 @@
   </div>
 </section>
 
-<!-- ============ CHAPTER 8 · UNBOXING ============ -->
-<section class="chapter" id="c8" data-label="Unboxing" data-theme="light">
-  <div class="chapter-inner" style="text-align: center;">
-    <div class="chap-head" style="margin: 0 auto 40px;">
-      <span class="eyebrow r">LO QUE YA VIENE ADENTRO</span>
-      <h2 class="h1 r r-1">No instales <em>nada más.</em></h2>
-      <p class="lead r r-2" style="margin: 16px auto 0;">
-        Todo lo que los 32 agentes necesitan ya está empaquetado. Hacé click en cada herramienta para abrir su repo.
+<!-- ============ 07 · QUÉ INCLUYE + CÓMO CRECE ============ -->
+<section class="chapter" id="c7" data-label="Incluye + Crece" data-theme="light">
+  <div class="chapter-inner">
+    <div class="chap-head" style="text-align: center; margin: 0 auto 32px; max-width: 700px;">
+      <span class="step-tag r">LA BASE + CÓMO CRECE</span>
+      <h2 class="h1 r r-1">Es tu <em>piso</em>,<br>no tu techo.</h2>
+      <p class="lead r r-2" style="margin: 14px auto 0;">
+        Lo que viene en la caja es el piso común. Arriba, cada proyecto agrega lo suyo.
       </p>
     </div>
 
-    <div class="box r r-2" id="box">
-      <div class="box-body"></div>
-      <div class="box-lid"></div>
-      <div class="box-glow"></div>
-      <a href="https://github.com/datalab-to/marker" target="_blank" rel="noopener" class="tool-icon t1" title="marker · PDF → MD" style="text-decoration:none;">
-        📄
-        <span class="tool-tag">marker</span>
-      </a>
-      <a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener" class="tool-icon t2" title="markitdown · Office → MD" style="text-decoration:none;">
-        📝
-        <span class="tool-tag">markitdown</span>
-      </a>
-      <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener" class="tool-icon t3" title="yt-dlp · Video → local" style="text-decoration:none;">
-        🎬
-        <span class="tool-tag">yt-dlp</span>
-      </a>
-      <a href="https://github.com/ggerganov/whisper.cpp" target="_blank" rel="noopener" class="tool-icon t4" title="whisper.cpp · Audio → texto" style="text-decoration:none;">
-        🎙️
-        <span class="tool-tag">whisper.cpp</span>
-      </a>
-      <a href="https://github.com/gitleaks/gitleaks" target="_blank" rel="noopener" class="tool-icon t5" title="gitleaks · Secrets scanner" style="text-decoration:none;">
-        🔐
-        <span class="tool-tag">gitleaks</span>
-      </a>
-      <a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener" class="tool-icon t6" title="ripgrep · Search x100 más rápido" style="text-decoration:none;">
-        ⚡
-        <span class="tool-tag">ripgrep</span>
-      </a>
-    </div>
+    <div class="bundle-wrap r r-3">
+      <div class="bundle-side">
+        <div class="side-title">📦 VIENE INCLUIDO</div>
+        <h4>La <em>base común</em></h4>
+        <p>Herramientas, agentes y skills que sirven para <em>cualquier</em> tipo de proyecto con IA.</p>
 
-    <p class="lead r r-3" style="font-size: 15px; color: var(--soft); margin: 32px auto 0; max-width: 44ch;">
-      Todos open source. Mantenidos. Con API estable. Integrados a los agentes.
-    </p>
+        <ul class="bundle-list">
+          <li><span class="ic">🤖</span><strong>32 agentes</strong> generales</li>
+          <li><span class="ic">🎨</span><strong>5 skills</strong> (PDF, video, fechas, plan...)</li>
+          <li><span class="ic">📄</span><a href="https://github.com/datalab-to/marker" target="_blank">marker</a>, <a href="https://github.com/microsoft/markitdown" target="_blank">markitdown</a></li>
+          <li><span class="ic">🎬</span><a href="https://github.com/yt-dlp/yt-dlp" target="_blank">yt-dlp</a>, <a href="https://github.com/ggerganov/whisper.cpp" target="_blank">whisper.cpp</a></li>
+          <li><span class="ic">🔐</span><a href="https://github.com/gitleaks/gitleaks" target="_blank">gitleaks</a> + pre-commit hook</li>
+          <li><span class="ic">⚙️</span>7 scripts de tooling (doctor, install, migrate...)</li>
+        </ul>
+      </div>
+
+      <div class="bundle-side" style="border-color: var(--accent); background: linear-gradient(135deg, var(--accent-soft), white);">
+        <div class="side-title">🚀 LO QUE AGREGÁS</div>
+        <h4>La <em>capa específica</em></h4>
+        <p>Lo que hace <em>tu</em> proyecto único. Agentes, skills y workflows propios.</p>
+
+        <ul class="bundle-list">
+          <li><span class="ic">🧩</span><strong>Agentes custom</strong> (tu industria)</li>
+          <li><span class="ic">🛠️</span><strong>Skills puntuales</strong> del dominio</li>
+          <li><span class="ic">🔗</span><strong>Integraciones</strong> específicas</li>
+          <li><span class="ic">📐</span><strong>Workflows</strong> de n8n / Make / Zapier</li>
+          <li><span class="ic">📋</span><strong>Templates</strong> del cliente</li>
+          <li><span class="ic">♻️</span>Si lo usás en 3+ proyectos → asciende a la base</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ CHAPTER 9 · TIMELINE EXTENSIBLE ============ -->
-<section class="chapter" id="c9" data-label="Cómo crece" data-theme="light">
+<!-- ============ 08 · FAQ ============ -->
+<section class="chapter faq-chap" id="c8" data-label="FAQ" data-theme="dark">
   <div class="chapter-inner">
-    <div class="chap-head">
-      <span class="eyebrow r">CÓMO CRECE TU PROYECTO</span>
-      <h2 class="h1 r r-1">La base es <em>tu piso,</em><br>no tu techo.</h2>
-      <p class="lead r r-2">
-        Arrancás con 32 agentes. Tu proyecto los usa + suma custom. Si un patrón se repite en otros proyectos, asciende al starter.
-      </p>
+    <div class="chap-head" style="text-align: center; margin: 0 auto; max-width: 640px;">
+      <span class="step-tag r">PREGUNTAS FRECUENTES</span>
+      <h2 class="h1 r r-1" style="color: white;">Lo que más <em>preguntan.</em></h2>
     </div>
 
-    <div class="timeline r r-3" id="timeline">
-      <div class="timeline-line">
-        <div class="timeline-line-fill" id="tlFill"></div>
-      </div>
-      <div class="timeline-pts">
-        <div class="tl-pt done">
-          <div class="tl-dot"></div>
-          <div class="tl-when">DÍA 1</div>
-          <div class="tl-title">Clonás el starter</div>
-          <div class="tl-desc">32 agentes base + 5 skills + tooling</div>
-        </div>
-        <div class="tl-pt">
-          <div class="tl-dot"></div>
-          <div class="tl-when">DÍA 10</div>
-          <div class="tl-title">Agregás 2 agentes custom</div>
-          <div class="tl-desc"><code class="inline">analista-kommo</code>, <code class="inline">gen-reporte</code></div>
-        </div>
-        <div class="tl-pt">
-          <div class="tl-dot"></div>
-          <div class="tl-when">DÍA 30</div>
-          <div class="tl-title">Sumás skill de dominio</div>
-          <div class="tl-desc">Pack "vendedor automático" listo</div>
-        </div>
-        <div class="tl-pt">
-          <div class="tl-dot"></div>
-          <div class="tl-when">DÍA 60+</div>
-          <div class="tl-title">Promovés al starter</div>
-          <div class="tl-desc">Los patrones útiles vuelven a la base</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CHAPTER 10 · DASHBOARD LIVE ============ -->
-<section class="chapter dash-chap" id="c10" data-label="Sistema vivo" data-theme="dark">
-  <div class="chapter-inner">
-    <div class="chap-head">
-      <span class="eyebrow r">EL SISTEMA FUNCIONANDO</span>
-      <h2 class="h1 r r-1" style="color: white;">El status <em style="color: var(--accent-2);">en vivo.</em></h2>
-      <p class="lead r r-2">
-        El agente <code class="inline">project-monitor</code> mantiene un <code class="inline">status.json</code> siempre actualizado. Otros sistemas (bots, dashboards, webhooks) lo consumen.
-      </p>
-    </div>
-
-    <div class="dash-frame r r-3">
-      <div class="dash-header">
-        <span class="dash-title">documentation/status.json · proyecto Acme</span>
-        <span class="dash-live">LIVE</span>
-      </div>
-      <div class="dash-body">
-        <div class="dash-kpis">
-          <div class="kpi">
-            <div class="lbl">Fase actual</div>
-            <div class="val accent" id="dashPhase">build</div>
-            <div class="delta">semana 2/4</div>
-          </div>
-          <div class="kpi">
-            <div class="lbl">Progreso</div>
-            <div class="val" id="dashProgress">62%</div>
-            <div class="delta">↑ 18% vs semana pasada</div>
-          </div>
-          <div class="kpi">
-            <div class="lbl">Health</div>
-            <div class="val ok" id="dashHealth">🟢 GREEN</div>
-            <div class="delta">último check hace 3m</div>
-          </div>
-        </div>
-
-        <div class="dash-section">
-          <h5>Agentes activos</h5>
-          <div class="dash-entry"><span>🌐 integrador-herramientas</span><span class="when" id="dashA1">hace 2m</span></div>
-          <div class="dash-entry"><span>📦 compilador-datos</span><span class="when" id="dashA2">hace 5m</span></div>
-          <div class="dash-entry"><span>🧪 tester</span><span class="when" id="dashA3">hace 12m</span></div>
-          <div class="dash-entry"><span>🛡️ guardian-reglas</span><span class="when" id="dashA4">hace 1h</span></div>
-        </div>
-
-        <div class="dash-section">
-          <h5>Commits últimos 7 días</h5>
-          <div class="bar-chart">
-            <div class="bar" style="height: 40%"></div>
-            <div class="bar" style="height: 70%"></div>
-            <div class="bar" style="height: 55%"></div>
-            <div class="bar" style="height: 85%"></div>
-            <div class="bar" style="height: 60%"></div>
-            <div class="bar" style="height: 90%"></div>
-            <div class="bar" id="barToday" style="height: 30%"></div>
-          </div>
-          <div class="dash-entry" style="margin-top: 10px; border: 0;">
-            <span class="dash-badge">14 commits</span>
-            <span class="dash-badge warn">3 PRs abiertos</span>
-          </div>
-        </div>
-      </div>
+    <div class="faq-list r r-2">
+      <details class="faq-item">
+        <summary>¿Necesito ser técnico para usar esto?</summary>
+        <div class="body">No. El flujo está pensado para que cualquiera pueda ejecutarlo en Claude Code. El Paso 00 es una sola instrucción que copias y pegas. Los pasos 01-04 son guiados — el sistema te hace preguntas, vos respondés (incluso por nota de voz).</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué es Claude Code y cómo lo instalo?</summary>
+        <div class="body">Claude Code es el IDE oficial de Anthropic para trabajar con Claude. Se descarga de <a href="https://claude.com/download" target="_blank" style="color:var(--accent-2);">claude.com/download</a>. Requiere cuenta en Anthropic (gratis para empezar).</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cuánto tarda la instalación?</summary>
+        <div class="body">Primera vez en una Mac vacía: <strong>15–30 min</strong>. Descarga herramientas (Python, Node, Docker), modelos de IA (~2GB) y configura todo. Siguientes corridas: segundos — detecta qué tenés y salta lo instalado.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Funciona en Windows y Linux?</summary>
+        <div class="body">El installer asume macOS. En Windows pedile a Claude que adapte usando <code class="inline">winget</code> o <code class="inline">scoop</code>. En Linux, <code class="inline">apt</code> o <code class="inline">dnf</code>. Las herramientas subyacentes existen en todas las plataformas.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Necesito Anthropic API Key?</summary>
+        <div class="body">Si usás Claude Code como IDE, <strong>no</strong> — usa tu sesión de login. Solo la necesitás si vas a hacer llamadas a la API desde código externo.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Puedo agregar mis propios agentes?</summary>
+        <div class="body">Sí — es el Paso 03. Corré <code class="inline">./tooling/new-agent.sh</code> (wizard interactivo). Valida nombre único, frontmatter correcto, y queda integrado con los 32 de base.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Puedo trabajar en equipo con otros devs?</summary>
+        <div class="body">Sí. Invitás colaboradores al repo de GitHub. Cada uno clona, corre install y tiene los mismos 32 agentes. El guardian de reglas audita antes de cada merge.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Qué pasa si se rompe algo en medio del proyecto?</summary>
+        <div class="body">Hay un agente <code class="inline">rollback-manager</code> que te lleva al último commit verde (validado por CI). El script <code class="inline">./tooling/doctor.sh --fix</code> diagnostica y repara automáticamente lo que puede.</div>
+      </details>
+      <details class="faq-item">
+        <summary>¿Es open source? ¿Gratis?</summary>
+        <div class="body">Sí, 100% open source con licencia MIT. Usalo, clonalo, modificalo. Si encontrás mejoras generales, proponé un PR y las subimos al starter base.</div>
+      </details>
     </div>
   </div>
 </section>
 
-<!-- ============ CHAPTER 11 · STATS ============ -->
-<section class="chapter stats-chap" id="c11" data-label="Por qué funciona" data-theme="dark">
-  <div class="chapter-inner">
-    <div class="chap-head">
-      <span class="eyebrow r">POR QUÉ FUNCIONA</span>
-      <h2 class="h1 r r-1" style="color: white;">Los números <em style="color: var(--accent-2);">hablan.</em></h2>
-      <p class="lead r r-2">
-        Base probada en proyectos reales con método iterativo desde 2025.
-      </p>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card r r-1">
-        <div class="stat-num accent" data-target="32" data-suffix="">0</div>
-        <div class="stat-lbl">Agentes</div>
-      </div>
-      <div class="stat-card r r-2">
-        <div class="stat-num" data-target="5" data-suffix="">0</div>
-        <div class="stat-lbl">Skills base</div>
-      </div>
-      <div class="stat-card r r-3">
-        <div class="stat-num accent" data-target="60" data-suffix="%">0</div>
-        <div class="stat-lbl">Menos rework</div>
-      </div>
-      <div class="stat-card r r-4">
-        <div class="stat-num" data-target="0" data-suffix="$">0</div>
-        <div class="stat-lbl">MIT License</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CHAPTER 12 · FAQ TERMINAL ============ -->
-<section class="chapter faq-chap" id="c12" data-label="FAQ" data-theme="dark">
-  <div class="chapter-inner">
-    <div class="chap-head" style="text-align: center; margin: 0 auto 0;">
-      <span class="eyebrow r">PREGUNTAS FRECUENTES</span>
-      <h2 class="h1 r r-1" style="color: white;">Lo que más <em style="color: var(--accent-2);">preguntan.</em></h2>
-    </div>
-
-    <div class="faq-term r r-2" id="faqTerm">
-      <div class="faq-item">
-        <button class="faq-q">¿Necesito ser técnico para usar esto?<span class="chev">›</span></button>
-        <div class="faq-a">No. Los 5 pasos están pensados para que cualquiera que clone y siga el onboarding pueda lanzar un proyecto. El sistema pregunta, vos respondés (incluso por nota de voz).</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Cuánto tarda la instalación?<span class="chev">›</span></button>
-        <div class="faq-a">Primera vez en Mac vacía: 15–30 min. Siguientes corridas: segundos — el script detecta qué ya tenés y salta lo instalado.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Funciona en Windows?<span class="chev">›</span></button>
-        <div class="faq-a">El script asume macOS. En Windows pedile a Claude/Cursor que adapte con <code class="inline">winget</code> o <code class="inline">scoop</code>. En Linux, <code class="inline">apt</code> o <code class="inline">dnf</code>.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Necesito Anthropic API Key?<span class="chev">›</span></button>
-        <div class="faq-a">Si usás Claude Code como IDE, no. Usa tu sesión de login. Solo la necesitás si hacés llamadas directas a la API desde código.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Puedo sumar mis propios agentes?<span class="chev">›</span></button>
-        <div class="faq-a">Sí. Corré <code class="inline">./tooling/new-agent.sh</code> — wizard interactivo que valida nombre único, frontmatter correcto, y te abre el archivo listo para editar.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Qué pasa si se rompe algo a la mitad?<span class="chev">›</span></button>
-        <div class="faq-a">El agente <code class="inline">rollback-manager</code> vuelve al último commit verde (identificado por CI). El script <code class="inline">./tooling/doctor.sh</code> diagnostica issues con modo <code class="inline">--fix</code>.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Puedo trabajar en equipo?<span class="chev">›</span></button>
-        <div class="faq-a">Sí. Invitás colaboradores a tu repo de GitHub. Cada uno clona, corre install, y tiene los mismos 32 agentes. El <code class="inline">guardian-reglas</code> audita antes de cada merge. El <code class="inline">onboarder-colaborador</code> genera welcome personalizado.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CHAPTER 13 · CONTACT ============ -->
-<section class="chapter contact-chap" id="c13" data-label="Contacto" data-theme="dark">
+<!-- ============ 09 · CONTACTO ============ -->
+<section class="chapter contact-chap" id="c9" data-label="Contacto" data-theme="dark">
   <div class="chapter-inner">
     <div class="chap-head" style="text-align: center; margin: 0 auto;">
-      <span class="eyebrow r">CONTACTO</span>
-      <h2 class="h1 r r-1" style="color: white;">¿Querés que lo <em style="color: var(--accent-2);">montemos con vos?</em></h2>
-      <p class="lead r r-2" style="text-align: center;">
-        Te ayudamos a implementar el sistema en tu empresa, adaptarlo a tu industria, o sumar integraciones puntuales.
-      </p>
+      <span class="step-tag r">PRIMERA PARADA</span>
+      <h2 class="h1 r r-1" style="color: white;">Todo arranca en el <em>repo.</em></h2>
+    </div>
+
+    <a href="https://github.com/tamibot/creators-latam-starter" target="_blank" rel="noopener" class="github-hero r r-2">
+      <span class="gh-label">Empezar ahora</span>
+      <div class="gh-main">github.com/tamibot/creators-latam-starter</div>
+      <span class="gh-btn">
+        <span class="gh-icon">🐙</span>
+        Clonar / forkear / leer docs
+      </span>
+    </a>
+
+    <div style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,.5); margin-bottom: 24px; letter-spacing: 0.1em; text-transform: uppercase;">
+      ¿Preguntas? Escribinos
     </div>
 
     <div class="contact-grid r r-3">
@@ -2394,190 +1671,105 @@
       <a href="https://www.creatorslatam.com/" target="_blank" rel="noopener" class="contact-card">
         <div class="contact-ic">🌐</div>
         <div>
-          <div class="lbl">Web oficial</div>
+          <div class="lbl">Web</div>
           <div class="val">creatorslatam.com</div>
-        </div>
-      </a>
-      <a href="https://github.com/tamibot/creators-latam-starter" target="_blank" rel="noopener" class="contact-card">
-        <div class="contact-ic">🐙</div>
-        <div>
-          <div class="lbl">GitHub</div>
-          <div class="val">tamibot/creators-latam-starter</div>
         </div>
       </a>
     </div>
 
-    <div class="contact-final r r-4" style="text-align: center;">
-      <div class="byline">© 2026 Creators Latam · Lima, Perú · MIT License</div>
-      <a href="#c1" class="cta-final-btn" id="topBtn">Volver arriba ↑</a>
+    <div class="contact-final" style="text-align: center;">
+      © 2026 Creators Latam · Lima, Perú · MIT License · v1.12
     </div>
   </div>
 </section>
 
-<!-- ============ LIBS (CDN) ============ -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
+<!-- ============ SCRIPTS ============ -->
 <script>
 (function() {
   'use strict';
 
-  const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-
-  // Smooth scroll es nativo CSS (scroll-behavior: smooth)
-  // Lenis y GSAP se removieron — scroll nativo funciona mejor y
-  // no rompe IntersectionObserver ni getBoundingClientRect.
+  const chapters = Array.from(document.querySelectorAll('.chapter'));
 
   // ============ PROGRESS RAIL ============
   const rail = document.getElementById('rail');
-  const chapters = Array.from(document.querySelectorAll('.chapter'));
-  const dots = [];
-
   chapters.forEach((ch, i) => {
     const btn = document.createElement('button');
     btn.className = 'rail-dot';
-    btn.title = ch.dataset.label || `Chapter ${i + 1}`;
-    btn.setAttribute('aria-label', ch.dataset.label);
+    btn.title = ch.dataset.label || `Capítulo ${i+1}`;
     const tip = document.createElement('span');
     tip.className = 'tip';
-    tip.textContent = ch.dataset.label || `${i + 1}`;
+    tip.textContent = ch.dataset.label || `${i+1}`;
     btn.appendChild(tip);
-    btn.addEventListener('click', () => {
-      ch.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    btn.addEventListener('click', () => ch.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     rail.appendChild(btn);
-    dots.push(btn);
   });
+  const dots = rail.querySelectorAll('.rail-dot');
 
-  // Update rail progress + active dot + theme
+  // ============ ACTIVE + THEME + REVEAL (scroll-based) ============
   const themeColor = document.getElementById('themeColor');
-  function updateActive() {
+  const animated = new Set();
+
+  function updateState() {
     const vh = window.innerHeight;
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const fullHeight = document.body.scrollHeight - vh;
-    const progress = Math.min(100, Math.max(0, (scrollY / fullHeight) * 100));
-    rail.style.setProperty('--rail-progress', progress + '%');
-
-    // Active chapter
     let activeIdx = 0;
-    for (let i = 0; i < chapters.length; i++) {
-      const rect = chapters[i].getBoundingClientRect();
+    chapters.forEach((ch, i) => {
+      const rect = ch.getBoundingClientRect();
       if (rect.top <= vh * 0.4) activeIdx = i;
-    }
-
+      // Reveal trigger
+      if (!ch.classList.contains('in-view') && rect.top < vh * 0.75 && rect.bottom > vh * 0.25) {
+        ch.querySelectorAll('.r').forEach(el => el.classList.add('in'));
+        ch.classList.add('in-view');
+        if (!animated.has(ch.id)) {
+          animated.add(ch.id);
+          triggerAnim(ch);
+        }
+      }
+    });
     dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
-
-    // Dark theme toggle
-    const chapter = chapters[activeIdx];
-    const isDark = chapter.dataset.theme === 'dark';
+    const isDark = chapters[activeIdx].dataset.theme === 'dark';
     document.body.classList.toggle('dark-nav', isDark);
     if (themeColor) themeColor.content = isDark ? '#080B15' : '#FAFAFA';
   }
-  window.addEventListener('scroll', updateActive, { passive: true });
-  window.addEventListener('resize', updateActive, { passive: true });
-  updateActive();
-
-  // ============ CUSTOM CURSOR ============
-  if (!isTouch && !prefersReduce) {
-    const cursor = document.getElementById('cursor');
-    let mx = 0, my = 0, cx = 0, cy = 0;
-    document.addEventListener('mousemove', (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-      cursor.classList.add('active');
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (!e.relatedTarget) cursor.classList.remove('active');
-    });
-    function tick() {
-      cx += (mx - cx) * 0.18;
-      cy += (my - cy) * 0.18;
-      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-
-    // Hover targets
-    const hoverTargets = 'a, button, [role="button"], .rail-dot, .stack-tile, .loop-node, .tool-icon, .radial-bubble';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(hoverTargets)) cursor.classList.add('hover');
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(hoverTargets)) cursor.classList.remove('hover');
-    });
+  let ticking = false;
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { updateState(); ticking = false; });
   }
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
 
-  // ============ REVEAL ON VIEW (scroll-based, Lenis-compatible) ============
-  // IntersectionObserver no funciona bien con Lenis smooth scroll virtual.
-  // Usamos rAF + getBoundingClientRect que sí reflejan la posición real.
-  function checkChaptersVisibility() {
-    const vh = window.innerHeight;
-    chapters.forEach(ch => {
-      if (ch.classList.contains('in-view')) return;
-      const rect = ch.getBoundingClientRect();
-      // Dispara cuando el chapter tiene su parte central en viewport
-      const inView = rect.top < vh * 0.7 && rect.bottom > vh * 0.3;
-      if (inView) {
-        ch.querySelectorAll('.r').forEach(el => el.classList.add('in'));
-        ch.classList.add('in-view');
-        triggerChapterAnim(ch);
-      }
-    });
-  }
-
-  let visTicking = false;
-  function scheduleVisCheck() {
-    if (visTicking) return;
-    visTicking = true;
-    requestAnimationFrame(() => {
-      checkChaptersVisibility();
-      visTicking = false;
-    });
-  }
-  window.addEventListener('scroll', scheduleVisCheck, { passive: true });
-  window.addEventListener('resize', scheduleVisCheck, { passive: true });
-
-  // Initial check + force first chapter immediate
+  // Initial: reveal hero immediately
   setTimeout(() => {
     chapters[0].querySelectorAll('.r').forEach(el => el.classList.add('in'));
     chapters[0].classList.add('in-view');
-    triggerChapterAnim(chapters[0]);
-    checkChaptersVisibility();
+    if (!animated.has('c1')) { animated.add('c1'); triggerAnim(chapters[0]); }
+    updateState();
   }, 100);
 
-  // ============ CHAPTER ANIMATIONS ============
-  const animated = new Set();
-  function triggerChapterAnim(chapter) {
-    if (animated.has(chapter.id)) return;
-    animated.add(chapter.id);
-    switch (chapter.id) {
-      case 'c1': animHero(); break;
-      case 'c3': animTerminal(); break;
-      case 'c4': animLoop(); break;
-      case 'c5': animStack(); break;
-      case 'c6': animRadial(); break;
-      case 'c7': animPlan(); break;
-      case 'c8': animBox(); break;
-      case 'c9': animTimeline(); break;
-      case 'c10': animDash(); break;
-      case 'c11': animStats(); break;
+  // ============ CHAPTER-SPECIFIC ANIMATIONS ============
+  function triggerAnim(ch) {
+    switch (ch.id) {
+      case 'c1': animHeroType(); break;
+      case 'c3': animBackChain(); break;
+      case 'c6': animPlanStack(); break;
     }
   }
 
   // --- Hero typewriter ---
-  function animHero() {
+  function animHeroType() {
     const target = document.getElementById('typeTarget');
     if (!target) return;
-    const words = ['método', 'equipo', 'proceso', 'claridad', 'método'];
+    const words = ['Claude Code', 'método', 'claridad', 'tu equipo'];
     let wi = 0, ci = 0, deleting = false;
     target.textContent = '';
     function loop() {
-      const word = words[wi % words.length];
+      const w = words[wi % words.length];
       if (!deleting) {
-        target.textContent = word.slice(0, ++ci);
-        if (ci === word.length) { deleting = true; setTimeout(loop, 1400); return; }
+        target.textContent = w.slice(0, ++ci);
+        if (ci === w.length) { deleting = true; setTimeout(loop, 1600); return; }
       } else {
-        target.textContent = word.slice(0, --ci);
+        target.textContent = w.slice(0, --ci);
         if (ci === 0) { deleting = false; wi++; }
       }
       setTimeout(loop, deleting ? 40 : 90);
@@ -2585,250 +1777,72 @@
     setTimeout(loop, 500);
   }
 
-  // --- Terminal typing ---
-  function animTerminal() {
-    const lines = document.querySelectorAll('#term1Body .term-line');
-    lines.forEach((line, i) => {
-      setTimeout(() => line.classList.add('show'), i * 320);
-    });
-    // Progress bar
-    const pg = document.getElementById('pg1');
-    const pgPct = document.getElementById('pg1pct');
-    if (pg) setTimeout(() => {
-      pg.style.width = '100%';
-      let p = 0;
-      const iv = setInterval(() => {
-        p += 4;
-        if (pgPct) pgPct.textContent = ' ' + p + '%';
-        if (p >= 100) clearInterval(iv);
-      }, 50);
-    }, 6 * 320);
-    // Timer
-    const timer = document.getElementById('timer');
-    if (timer) {
-      let s = 0;
-      setTimeout(() => {
-        const iv2 = setInterval(() => {
-          s++;
-          const m = String(Math.floor(s / 60)).padStart(2, '0');
-          const sec = String(s % 60).padStart(2, '0');
-          timer.textContent = `${m}:${sec}`;
-          if (s >= 18 * 60 + 43) clearInterval(iv2);
-        }, 10);
-      }, 9 * 320);
-    }
-  }
-
-  // --- Loop animation ---
-  function animLoop() {
-    const nodes = document.querySelectorAll('#c4 .loop-node');
-    let i = 0;
+  // --- Back chain: highlight one at a time from bottom to top ---
+  function animBackChain() {
+    const items = document.querySelectorAll('#backChain .chain-item');
+    if (!items.length) return;
+    let i = items.length - 1;
     function step() {
-      nodes.forEach(n => n.classList.remove('active'));
-      nodes[i].classList.add('active');
-      i = (i + 1) % nodes.length;
+      items.forEach(it => it.classList.remove('highlight'));
+      items[i].classList.add('highlight');
+      i--;
+      if (i < 0) i = items.length - 1;
     }
     step();
-    setInterval(step, 1400);
+    setInterval(step, 1600);
   }
 
-  // --- Stack cards flip + stagger ---
-  function animStack() {
-    const tiles = document.querySelectorAll('#stackDeck .stack-tile');
-    tiles.forEach((t, i) => {
-      t.style.opacity = '0';
-      t.style.transform = 'translateY(20px)';
+  // --- Plan Maestro: stack inputs activate one by one ---
+  function animPlanStack() {
+    const inputs = document.querySelectorAll('#c6 .plan-input');
+    const arrows = document.querySelectorAll('#c6 .plan-arrow-down');
+    const master = document.getElementById('planMaster');
+    inputs.forEach((input, i) => {
       setTimeout(() => {
-        t.style.transition = 'opacity .5s, transform .5s';
-        t.style.opacity = '';
-        t.style.transform = '';
-      }, i * 250 + 300);
+        input.classList.add('activated');
+        if (arrows[i]) arrows[i].classList.add('show');
+      }, 400 + i * 600);
     });
+    setTimeout(() => master && master.classList.add('ready'), 400 + inputs.length * 600 + 400);
   }
 
-  // --- Radial agents distribution ---
-  function animRadial() {
-    const bubbles = document.querySelectorAll('#c6 .radial-bubble');
-    const svg = document.getElementById('radialSvg');
-    const total = bubbles.length;
-
-    // Only on desktop (radial layout)
-    if (window.matchMedia('(max-width: 640px)').matches) return;
-
-    bubbles.forEach((b, i) => {
-      const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
-      const radius = 180;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
-      b.style.setProperty('--x', `calc(-50% + ${x}px)`);
-      b.style.setProperty('--y', `calc(-50% + ${y}px)`);
-      b.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-      // Line from center
-      if (svg) {
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', '50');
-        line.setAttribute('y1', '50');
-        line.setAttribute('x2', 50 + (x / 260) * 50);
-        line.setAttribute('y2', 50 + (y / 260) * 50);
-        line.setAttribute('stroke', b.style.getPropertyValue('--bc'));
-        line.setAttribute('stroke-width', '0.3');
-        line.setAttribute('stroke-dasharray', '2 2');
-        line.setAttribute('opacity', '0.3');
-        svg.appendChild(line);
+  // ============ COPY BUTTON ============
+  const copyBtn = document.getElementById('copyBtn');
+  const copyCmd = document.getElementById('copyCmd');
+  const toast = document.getElementById('toast');
+  if (copyBtn && copyCmd) {
+    copyBtn.addEventListener('click', async () => {
+      const text = copyCmd.textContent.trim().replace(/^>\s*/, '');
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        // Fallback: select text
+        const range = document.createRange();
+        range.selectNodeContents(copyCmd);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
       }
-    });
-
-    // Pulse through groups
-    let i = 0;
-    setInterval(() => {
-      bubbles.forEach(b => b.classList.remove('glow'));
-      bubbles[i].classList.add('glow');
-      i = (i + 1) % bubbles.length;
-    }, 1600);
-  }
-
-  // --- Plan doc with signatures ---
-  let planAnimated = false;
-  function animPlan() {
-    if (planAnimated) return;
-    planAnimated = true;
-    const rows = document.querySelectorAll('#planDoc .plan-row');
-    rows.forEach((r, i) => setTimeout(() => r.classList.add('done'), 400 + i * 300));
-    // Signatures
-    setTimeout(() => {
-      const p1 = document.getElementById('sigPath1');
-      const p2 = document.getElementById('sigPath2');
-      [p1, p2].forEach((p, i) => {
-        if (!p) return;
-        const len = p.getTotalLength();
-        p.style.strokeDasharray = len;
-        p.style.strokeDashoffset = len;
-        p.style.transition = `stroke-dashoffset 1.5s ease`;
-        setTimeout(() => { p.style.strokeDashoffset = 0; }, 200 + i * 600);
-      });
-    }, 1800);
-  }
-
-  // --- Launch button ---
-  const launchBtn = document.getElementById('launchBtn');
-  if (launchBtn) {
-    launchBtn.addEventListener('click', () => {
-      if (launchBtn.classList.contains('launched')) return;
-      launchBtn.classList.add('launched');
-      launchBtn.textContent = '✓ Lanzado';
-      // Log lines
-      document.querySelectorAll('#launchLog .line').forEach(l => {
-        const d = parseInt(l.dataset.delay || 0, 10);
-        setTimeout(() => l.classList.add('show'), d);
-      });
-      // Confetti
-      if (window.confetti) {
-        const count = window.matchMedia('(max-width: 640px)').matches ? 60 : 120;
-        window.confetti({
-          particleCount: count,
-          spread: 75,
-          origin: { y: 0.7 },
-          colors: ['#FF2D6F', '#FF5C8A', '#D426C5', '#8B3FFF', '#ffffff']
-        });
-      }
+      copyBtn.classList.add('copied');
+      document.getElementById('copyLabel').textContent = '✓ COPIADO';
+      toast.classList.add('show');
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        document.getElementById('copyLabel').textContent = 'COPIAR';
+        toast.classList.remove('show');
+      }, 2000);
     });
   }
-
-  // --- Box open ---
-  function animBox() {
-    const box = document.getElementById('box');
-    if (box) setTimeout(() => box.classList.add('open'), 300);
-  }
-
-  // --- Timeline fill ---
-  function animTimeline() {
-    const points = document.querySelectorAll('#timeline .tl-pt');
-    const line = document.getElementById('tlFill');
-    let p = 0;
-    const target = 100;
-    const iv = setInterval(() => {
-      p += 3;
-      if (line) line.style.setProperty('width', p + '%');
-      if (window.matchMedia('(max-width: 640px)').matches && line) {
-        line.style.setProperty('width', '100%');
-        line.style.setProperty('--tp', p + '%');
-      }
-      if (p >= target) clearInterval(iv);
-    }, 40);
-
-    points.forEach((pt, i) => {
-      setTimeout(() => pt.classList.add('done'), 300 + i * 450);
-    });
-  }
-
-  // --- Dashboard live ---
-  function animDash() {
-    const phase = document.getElementById('dashPhase');
-    const progress = document.getElementById('dashProgress');
-    const a1 = document.getElementById('dashA1');
-    const a2 = document.getElementById('dashA2');
-    const bar = document.getElementById('barToday');
-
-    let progressVal = 62;
-    setInterval(() => {
-      if (!document.getElementById('c10').classList.contains('in-view')) return;
-      // Tiny progress increments
-      progressVal = Math.min(99, progressVal + (Math.random() > 0.7 ? 1 : 0));
-      if (progress) progress.textContent = progressVal + '%';
-      // Bar grows
-      if (bar) {
-        const h = parseInt(bar.style.height) || 30;
-        bar.style.height = Math.min(100, h + 1) + '%';
-      }
-    }, 2500);
-
-    // Update "hace X minutos"
-    let minutes = { a1: 2, a2: 5 };
-    setInterval(() => {
-      if (!document.getElementById('c10').classList.contains('in-view')) return;
-      minutes.a1++;
-      minutes.a2++;
-      if (a1) a1.textContent = `hace ${minutes.a1}m`;
-      if (a2) a2.textContent = `hace ${minutes.a2}m`;
-    }, 8000);
-  }
-
-  // --- Stats counter ---
-  function animStats() {
-    const nums = document.querySelectorAll('.stat-num[data-target]');
-    nums.forEach(el => {
-      const target = parseInt(el.dataset.target, 10);
-      const suffix = el.dataset.suffix || '';
-      const dur = 1200;
-      const start = performance.now();
-      function step(now) {
-        const p = Math.min(1, (now - start) / dur);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased) + suffix;
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
-  }
-
-  // ============ FAQ ============
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      q.classList.toggle('open');
-    });
-  });
 
   // ============ COMMAND PALETTE (K) ============
   const overlay = document.getElementById('paletteOverlay');
   const input = document.getElementById('paletteInput');
   const list = document.getElementById('paletteList');
-
-  const paletteItems = chapters.map((ch, i) => ({
-    label: ch.dataset.label || `Chapter ${i + 1}`,
-    icon: i === 0 ? '🏠' : i < 7 ? '📋' : i < 10 ? '📦' : i < 12 ? '💎' : '💬',
+  const paletteItems = chapters.map(ch => ({
+    label: ch.dataset.label || ch.id,
+    icon: ch.id === 'c1' ? '🏠' : ch.id === 'c9' ? '💬' : ch.id === 'c8' ? '❓' : '📋',
     target: ch
   }));
-
   function renderPalette(filter = '') {
     const f = filter.toLowerCase();
     list.innerHTML = '';
@@ -2838,28 +1852,19 @@
       btn.className = 'palette-item' + (i === 0 ? ' focused' : '');
       btn.innerHTML = `<span class="pem">${p.icon}</span><span>${p.label}</span><span class="pnum">↵</span>`;
       btn.addEventListener('click', () => {
-        closePalette();
+        overlay.classList.remove('open');
         p.target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
       list.appendChild(btn);
     });
   }
-  function openPalette() {
-    overlay.classList.add('open');
-    input.value = '';
-    renderPalette();
-    setTimeout(() => input.focus(), 50);
-  }
-  function closePalette() {
-    overlay.classList.remove('open');
-  }
-  input.addEventListener('input', (e) => renderPalette(e.target.value));
-  input.addEventListener('keydown', (e) => {
+  input.addEventListener('input', e => renderPalette(e.target.value));
+  input.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       const f = list.querySelector('.palette-item.focused') || list.querySelector('.palette-item');
       if (f) f.click();
     } else if (e.key === 'Escape') {
-      closePalette();
+      overlay.classList.remove('open');
     } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
       const items = list.querySelectorAll('.palette-item');
@@ -2871,89 +1876,26 @@
       if (items[idx]) items[idx].classList.add('focused');
     }
   });
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closePalette(); });
-
-  document.addEventListener('keydown', (e) => {
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+  document.addEventListener('keydown', e => {
     if ((e.key === 'k' || e.key === 'K') && !overlay.classList.contains('open') && !e.target.matches('input,textarea')) {
       e.preventDefault();
-      openPalette();
+      overlay.classList.add('open');
+      input.value = '';
+      renderPalette();
+      setTimeout(() => input.focus(), 50);
     }
   });
 
-  // ============ EASTER EGG · click 5x en logo ============
-  let logoClicks = 0;
-  const logo = document.getElementById('brandLogo');
-  logo.addEventListener('click', (e) => {
-    logoClicks++;
-    if (logoClicks === 5) {
-      e.preventDefault();
-      if (window.confetti) {
-        window.confetti({
-          particleCount: 200,
-          spread: 180,
-          startVelocity: 50,
-          origin: { y: 0.3 },
-          colors: ['#FF2D6F', '#FF5C8A', '#D426C5']
-        });
-      }
-      setTimeout(() => { logoClicks = 0; }, 2000);
-    }
-  });
-
-  // ============ KONAMI CODE ============
-  const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  let konIdx = 0;
-  document.addEventListener('keydown', (e) => {
-    if (e.key === konami[konIdx] || e.key.toLowerCase() === konami[konIdx]) {
-      konIdx++;
-      if (konIdx === konami.length) {
-        if (window.confetti) {
-          const end = Date.now() + 3000;
-          (function frame() {
-            window.confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#FF2D6F', '#D426C5'] });
-            window.confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#FF5C8A', '#8B3FFF'] });
-            if (Date.now() < end) requestAnimationFrame(frame);
-          }());
-        }
-        konIdx = 0;
-      }
-    } else {
-      konIdx = 0;
-    }
-  });
-
-  // ============ GITHUB STARS (optional) ============
-  fetch('https://api.github.com/repos/tamibot/creators-latam-starter')
-    .then(r => r.json())
-    .then(data => {
-      if (data.stargazers_count !== undefined) {
-        const el = document.getElementById('ghStars');
-        if (el) el.textContent = `⭐ ${data.stargazers_count} GitHub`;
-      }
-    })
-    .catch(() => {});
-
-  // ============ SMOOTH SCROLL anchors ============
+  // Smooth anchors
   document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    link.addEventListener('click', e => {
+      const t = document.querySelector(link.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
-
 })();
 </script>
-
-<noscript>
-  <div class="no-js-fallback">
-    <h1 style="font-size: 32px; margin-bottom: 16px;">Creators Latam · Starter Kit</h1>
-    <p>Necesitás JavaScript habilitado para ver esta landing.</p>
-    <p>Mientras tanto, visitá <a href="https://github.com/tamibot/creators-latam-starter">github.com/tamibot/creators-latam-starter</a></p>
-  </div>
-</noscript>
 
 </body>
 </html>
