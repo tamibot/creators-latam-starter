@@ -97,7 +97,7 @@
     box-shadow: 0 0 12px var(--accent-glow);
   }
 
-  /* ============ CUSTOM CURSOR · DISABLED v1.16 (was creating confusion) ============ */
+  /* ============ CUSTOM CURSOR · DISABLED v1.17 (was creating confusion) ============ */
   .cursor-dot, .cursor-ring { display: none !important; }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: 0; background: none; }
@@ -1960,7 +1960,7 @@
   .sec-head-big h2 { margin-top: 14px; }
 
   /* ================================================================
-     v1.16 — METHOD OVERVIEW CHAPTER + MOBILE POLISH
+     v1.17 — METHOD OVERVIEW CHAPTER + MOBILE POLISH
      ============ METHOD DIAGRAM ================================ */
   .method-chap { background: linear-gradient(180deg, var(--bg) 0%, #EFECE2 100%); }
   .method-chap .chap-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
@@ -2129,6 +2129,41 @@
     .hero .orb.b, .hero .orb.c { animation: none !important; }
   }
 
+  /* ============ MOBILE: KILL ALL HEAVY/ROTATING ANIMATIONS ============
+     El usuario reportó que "algo gira, no entra, se alarga y mueve todo".
+     Causa raíz: animaciones rotate/scale en pseudo-elementos absolutos que
+     generan bounding-boxes inestables en iOS Safari, combinadas con el
+     reflow del URL-bar al scrollear. Apagadas todas en móvil. */
+  @media (max-width: 720px) {
+    html { scroll-behavior: auto; }
+    /* conic gradients rotando */
+    .copy-box::before { animation: none !important; opacity: 0 !important; display: none !important; }
+    .github-hero::after { animation: none !important; display: none !important; }
+    /* SVG constellation animations */
+    .constellation .c-link,
+    .constellation .c-ring.pulse,
+    .constellation .c-node.active { animation: none !important; }
+    /* loop-icon que gira */
+    .loop-hint .loop-icon { animation: none !important; }
+    /* pulse del hero-badge .ping */
+    .hero-badge .ping { animation: none !important; }
+    /* step-tag::before pulse */
+    .step-tag::before { animation: none !important; box-shadow: none !important; }
+    /* hero orbs: cero animación */
+    .hero .orb,
+    .hero .orb.a,
+    .hero .orb.b,
+    .hero .orb.c { animation: none !important; }
+    /* floaty tags ya están display:none en mobile */
+    /* remover will-change: transform de TODO (ahorra capas compositor) */
+    * { will-change: auto !important; }
+    /* drop-shadow filters pesados en SVG */
+    .constellation .c-core { filter: none !important; }
+    .pipeline-viz .p-path { filter: none !important; }
+    /* blur filters en orbs: reducir o eliminar */
+    .hero .orb { filter: none !important; opacity: .25 !important; }
+  }
+
   /* ============ MOBILE OPTIMIZATION ============ */
   @media (max-width: 720px) {
     /* typography breathing room */
@@ -2190,8 +2225,13 @@
     .bundle-side { padding: 22px 20px; }
     .bundle-side h4 { font-size: 18px; }
 
-    /* ticker text smaller */
+    /* ticker en mobile: pausar animación (la translateX puede causar
+       layout shifts cuando el browser recalcula viewport) */
     .ticker { padding: 14px 0; }
+    .ticker-track {
+      animation: tickerScroll 80s linear infinite !important;
+      /* más lento, menos repaints */
+    }
     .ticker-item { font-size: 13px; }
     .ticker-item em { font-size: 15px; }
 
@@ -2312,7 +2352,7 @@
       <div class="hero-text">
         <div class="hero-badge r">
           <span class="ping"></span>
-          <span>v1.16</span>
+          <span>v1.17</span>
           <span class="sep"></span>
           <span>MIT</span>
           <span class="sep"></span>
@@ -2904,7 +2944,7 @@
     </div>
 
     <div class="contact-final" style="text-align: center;">
-      © 2026 Creators Latam · Lima, Perú · MIT License · v1.16
+      © 2026 Creators Latam · Lima, Perú · MIT License · v1.17
     </div>
   </div>
 </section>
@@ -2956,7 +2996,7 @@
     document.body.classList.toggle('dark-nav', isDark);
     if (themeColor) themeColor.content = isDark ? '#080B15' : '#FAFAFA';
   }
-  // v1.16: rAF loop eliminado — consumía batería y en iOS Safari
+  // v1.17: rAF loop eliminado — consumía batería y en iOS Safari
   // causaba jitter al combinarse con cambios de dvh en URL-bar.
   // Con IO + scroll + resize + visibilitychange alcanza perfectamente.
   const io = new IntersectionObserver(updateState, {
@@ -3295,15 +3335,19 @@
       svg.appendChild(c);
     });
 
-    // random active pulses — rotate through the nodes
-    setInterval(() => {
-      const circles = svg.querySelectorAll('.c-node');
-      circles.forEach(c => c.classList.remove('active'));
-      for (let k = 0; k < 5; k++) {
-        const c = circles[Math.floor(Math.random() * circles.length)];
-        if (c) c.classList.add('active');
-      }
-    }, 900);
+    // random active pulses — solo en desktop; en mobile causaba jank
+    // por repaints SVG durante el scroll con URL-bar reflow.
+    if (window.matchMedia('(min-width: 720px) and (hover: hover)').matches) {
+      setInterval(() => {
+        if (document.hidden) return;
+        const circles = svg.querySelectorAll('.c-node');
+        circles.forEach(c => c.classList.remove('active'));
+        for (let k = 0; k < 5; k++) {
+          const c = circles[Math.floor(Math.random() * circles.length)];
+          if (c) c.classList.add('active');
+        }
+      }, 900);
+    }
 
     // central core
     const core = document.createElementNS(SVG_NS, 'circle');
@@ -3362,11 +3406,13 @@
     kpiSpans.forEach(el => obs.observe(el));
   })();
 
-  // ============ AGENT GRID FIRING ANIMATION ============
+  // ============ AGENT GRID FIRING · desktop only ============
   (function agentFiring() {
     const cells = document.querySelectorAll('#agentGrid .agent-cell');
     if (!cells.length) return;
+    if (!window.matchMedia('(min-width: 720px) and (hover: hover)').matches) return;
     setInterval(() => {
+      if (document.hidden) return;
       cells.forEach(c => c.classList.remove('firing'));
       const count = 3 + Math.floor(Math.random() * 3);
       for (let k = 0; k < count; k++) {
