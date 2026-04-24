@@ -97,7 +97,7 @@
     box-shadow: 0 0 12px var(--accent-glow);
   }
 
-  /* ============ CUSTOM CURSOR · DISABLED v1.17 (was creating confusion) ============ */
+  /* ============ CUSTOM CURSOR · DISABLED v1.18 (was creating confusion) ============ */
   .cursor-dot, .cursor-ring { display: none !important; }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: 0; background: none; }
@@ -460,41 +460,9 @@
     50%      { transform: translate(30px, -40px) scale(1.12); }
   }
 
-  /* Floating editorial tags around the headline */
-  .hero .float-tag {
-    position: absolute;
-    font-family: 'Geist Mono', monospace;
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 7px 11px 6px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    color: var(--ink-soft);
-    box-shadow: 0 6px 18px -6px rgba(10,15,28,.12);
-    white-space: nowrap;
-    animation: floatTag 8s var(--ease-smooth) infinite;
-    will-change: transform;
-  }
-  .hero .float-tag .ft-dot {
-    display: inline-block;
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    margin-right: 6px;
-    vertical-align: 1px;
-  }
-  .hero .float-tag.ft-1 { top: 18%; left: 8%; animation-delay: -2s; transform: rotate(-3deg); }
-  .hero .float-tag.ft-2 { top: 26%; right: 10%; animation-delay: -5s; transform: rotate(4deg); }
-  .hero .float-tag.ft-3 { bottom: 28%; left: 14%; animation-delay: -1s; transform: rotate(2deg); }
-  .hero .float-tag.ft-4 { bottom: 22%; right: 14%; animation-delay: -7s; transform: rotate(-5deg); }
-  @keyframes floatTag {
-    0%, 100% { transform: translateY(0) rotate(var(--rot,0deg)); }
-    50%      { transform: translateY(-12px) rotate(var(--rot,0deg)); }
-  }
-  @media (max-width: 860px) { .hero .float-tag { display: none; } }
+  /* v1.18: float-tags eliminadas — al tener el hero altura variable
+     (hero-split + steps + KPI strip), los bottom:% caían fuera de la
+     sección y pisaban contenido de abajo. */
 
   .hero-badge {
     display: inline-flex;
@@ -1458,13 +1426,101 @@
   }
 
   .contact-final {
-    margin-top: 40px;
-    padding-top: 24px;
+    margin-top: 56px;
+    padding-top: 32px;
     border-top: 1px solid rgba(255,255,255,.08);
-    font-family: 'JetBrains Mono', monospace;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Geist Mono', monospace;
     font-size: 11px;
+    color: rgba(255,255,255,.55);
+    letter-spacing: 0.1em;
+  }
+  @media (max-width: 720px) {
+    .contact-final { grid-template-columns: 1fr; gap: 12px; text-align: center; padding-top: 24px; margin-top: 40px; }
+  }
+  .contact-final .f-l { text-align: left; }
+  .contact-final .f-c { text-align: center; display: inline-flex; gap: 8px; align-items: center; }
+  .contact-final .f-r { text-align: right; }
+  @media (max-width: 720px) {
+    .contact-final .f-l, .contact-final .f-r, .contact-final .f-c { text-align: center; justify-content: center; }
+  }
+  .contact-final .f-dot {
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,45,111,.22);
+    animation: pulse 2.4s var(--ease-out-expo) infinite;
+  }
+  .contact-final .f-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    transition: border-color .25s, color .25s, background .25s;
+  }
+  .contact-final .f-pill:hover {
+    border-color: var(--accent);
+    color: white;
+    background: rgba(255,45,111,.12);
+  }
+  .contact-final .f-heart {
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 15px;
+    text-transform: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* Little marquee strip above footer for personality */
+  .contact-strip {
+    margin-top: 28px;
+    overflow: hidden;
+    position: relative;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .contact-strip::before, .contact-strip::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; width: 60px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .contact-strip::before { left: 0;  background: linear-gradient(90deg, var(--dark-bg), transparent); }
+  .contact-strip::after  { right: 0; background: linear-gradient(270deg, var(--dark-bg), transparent); }
+  .contact-strip-track {
+    display: inline-flex;
+    gap: 36px;
+    white-space: nowrap;
+    animation: tickerScroll 50s linear infinite;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
     color: rgba(255,255,255,.4);
-    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-right: 36px;
+  }
+  .contact-strip-track em {
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: -0.02em;
   }
 
   /* ============ COMMAND PALETTE (K) ============ */
@@ -1584,10 +1640,61 @@
   /* ============ 32-AGENT CONSTELLATION SVG ============ */
   .constellation {
     width: 100%;
-    max-width: 420px;
+    max-width: 440px;
     aspect-ratio: 1;
     margin: 0 auto;
     position: relative;
+  }
+  /* Dashed rotating outer ring for extra visible motion (desktop) */
+  .constellation::before {
+    content: "";
+    position: absolute;
+    inset: 2%;
+    border: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+    border-radius: 50%;
+    animation: slowRot 60s linear infinite;
+    pointer-events: none;
+  }
+  .constellation::after {
+    content: "";
+    position: absolute;
+    inset: 16%;
+    border: 1px dashed color-mix(in srgb, var(--accent) 14%, transparent);
+    border-radius: 50%;
+    animation: slowRot 90s linear infinite reverse;
+    pointer-events: none;
+  }
+  @keyframes slowRot { to { transform: rotate(360deg); } }
+  /* Little orbiting dots for extra life */
+  .constellation-sparks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .constellation-sparks i {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 6px; height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px 2px rgba(255,45,111,.5);
+    animation: orbit var(--d,12s) linear infinite;
+    transform-origin: 50% 50%;
+  }
+  .constellation-sparks i:nth-child(1) { --d: 14s; animation-delay:  -0s; }
+  .constellation-sparks i:nth-child(2) { --d: 19s; animation-delay: -5s; }
+  .constellation-sparks i:nth-child(3) { --d: 24s; animation-delay: -11s; background: var(--accent-3); box-shadow: 0 0 8px 2px rgba(255,180,84,.5); }
+  @keyframes orbit {
+    from { transform: rotate(0deg)   translateX(var(--r,42%)) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(var(--r,42%)) rotate(-360deg); }
+  }
+  .constellation-sparks i:nth-child(1) { --r: 40%; }
+  .constellation-sparks i:nth-child(2) { --r: 48%; }
+  .constellation-sparks i:nth-child(3) { --r: 36%; }
+
+  @media (max-width: 720px) {
+    .constellation::before, .constellation::after, .constellation-sparks i { animation: none !important; }
   }
   .constellation svg { width: 100%; height: 100%; display: block; overflow: visible; }
   .constellation .c-link {
@@ -1960,7 +2067,7 @@
   .sec-head-big h2 { margin-top: 14px; }
 
   /* ================================================================
-     v1.17 — METHOD OVERVIEW CHAPTER + MOBILE POLISH
+     v1.18 — METHOD OVERVIEW CHAPTER + MOBILE POLISH
      ============ METHOD DIAGRAM ================================ */
   .method-chap { background: linear-gradient(180deg, var(--bg) 0%, #EFECE2 100%); }
   .method-chap .chap-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
@@ -2066,17 +2173,17 @@
     font-weight: 600;
   }
 
-  /* ============ CONTACT POLISH ============ */
+  /* ============ CONTACT POLISH (v1.18 simplificado) ============ */
   .contact-chap { position: relative; overflow: hidden; }
+  /* Glow suave, más abajo, sin filter:blur (causaba halo en el título) */
   .contact-chap::before {
     content: "";
     position: absolute;
-    top: -200px; left: 50%;
-    transform: translateX(-50%);
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(255,45,111,.18), transparent 60%);
+    top: 40%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(255,45,111,.10), transparent 62%);
     pointer-events: none;
-    filter: blur(40px);
   }
   .contact-chap::after {
     content: "";
@@ -2084,26 +2191,12 @@
     bottom: 0; left: 0; right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: .5;
   }
 
-  /* github-hero polish */
+  /* github-hero · simplificado (sin conic animado que creaba bugs visuales) */
   .github-hero {
-    box-shadow: 0 0 0 1px rgba(255,45,111,.25) inset, 0 40px 80px -40px rgba(255,45,111,.5);
-    backdrop-filter: blur(6px);
-  }
-  .github-hero::after {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: conic-gradient(from 180deg at 50% 50%, transparent 50%, rgba(255,45,111,.6) 70%, transparent 90%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    animation: rot 8s linear infinite;
-    pointer-events: none;
+    box-shadow: 0 0 0 1px rgba(255,45,111,.3) inset, 0 30px 60px -30px rgba(255,45,111,.45);
   }
 
   /* Disable hover transforms on touch devices: evita "sticky hover"
@@ -2342,17 +2435,12 @@
   <div class="orb b" data-parallax="0.04"></div>
   <div class="orb c" data-parallax="-0.05"></div>
 
-  <span class="float-tag ft-1" data-parallax="0.02"><span class="ft-dot"></span>32 agentes</span>
-  <span class="float-tag ft-2" data-parallax="-0.03"><span class="ft-dot"></span>MIT · Open source</span>
-  <span class="float-tag ft-3" data-parallax="0.04"><span class="ft-dot"></span>Plan Maestro</span>
-  <span class="float-tag ft-4" data-parallax="-0.02"><span class="ft-dot"></span>Un comando · 15 min</span>
-
   <div class="chapter-inner">
     <div class="hero-split">
       <div class="hero-text">
         <div class="hero-badge r">
           <span class="ping"></span>
-          <span>v1.17</span>
+          <span>v1.18</span>
           <span class="sep"></span>
           <span>MIT</span>
           <span class="sep"></span>
@@ -2376,16 +2464,17 @@
       <div class="hero-viz r r-2">
         <div class="constellation" id="heroConstellation" aria-hidden="true">
           <!-- SVG generated by JS -->
+          <span class="constellation-sparks"><i></i><i></i><i></i></span>
         </div>
       </div>
     </div>
 
     <div class="hero-steps r r-4">
-      <div class="hero-step"><span class="n">00</span><span class="lbl">Instalar</span></div>
-      <div class="hero-step"><span class="n">01</span><span class="lbl">Entregable</span></div>
-      <div class="hero-step"><span class="n">02</span><span class="lbl">Stack</span></div>
-      <div class="hero-step"><span class="n">03</span><span class="lbl">Equipo</span></div>
-      <div class="hero-step"><span class="n">04</span><span class="lbl">Plan Maestro</span></div>
+      <a href="#c2"  class="hero-step"><span class="n">00</span><span class="lbl">Instalar</span></a>
+      <a href="#c3"  class="hero-step"><span class="n">01</span><span class="lbl">Entregable</span></a>
+      <a href="#c4"  class="hero-step"><span class="n">02</span><span class="lbl">Stack</span></a>
+      <a href="#c5"  class="hero-step"><span class="n">03</span><span class="lbl">Equipo</span></a>
+      <a href="#c6"  class="hero-step"><span class="n">04</span><span class="lbl">Plan Maestro</span></a>
     </div>
 
     <div class="kpi-strip r r-4" id="kpiStrip">
@@ -2943,8 +3032,44 @@
       </a>
     </div>
 
-    <div class="contact-final" style="text-align: center;">
-      © 2026 Creators Latam · Lima, Perú · MIT License · v1.17
+    <div class="contact-strip" aria-hidden="true">
+      <div class="contact-strip-track">
+        <span>32 <em>agentes</em></span>
+        <span>·</span>
+        <span>22 <em>design skills</em></span>
+        <span>·</span>
+        <span>5 <em>process skills</em></span>
+        <span>·</span>
+        <span>método <em>en 4 pasos</em></span>
+        <span>·</span>
+        <span>MIT · <em>open source</em></span>
+        <span>·</span>
+        <span>hecho en <em>Lima</em></span>
+        <span>·</span>
+        <span>32 <em>agentes</em></span>
+        <span>·</span>
+        <span>22 <em>design skills</em></span>
+        <span>·</span>
+        <span>5 <em>process skills</em></span>
+        <span>·</span>
+        <span>método <em>en 4 pasos</em></span>
+        <span>·</span>
+        <span>MIT · <em>open source</em></span>
+        <span>·</span>
+        <span>hecho en <em>Lima</em></span>
+      </div>
+    </div>
+
+    <div class="contact-final">
+      <div class="f-l">© 2026 · Creators Latam · Lima, Perú</div>
+      <div class="f-c">
+        <span class="f-dot"></span>
+        Hecho con <span class="f-heart">claude code</span>
+      </div>
+      <div class="f-r">
+        <a href="https://github.com/tamibot/creators-latam-starter/blob/main/LICENSE" target="_blank" rel="noopener" class="f-pill">MIT License</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/releases" target="_blank" rel="noopener" class="f-pill" style="margin-left:8px;">v1.18</a>
+      </div>
     </div>
   </div>
 </section>
@@ -2996,7 +3121,7 @@
     document.body.classList.toggle('dark-nav', isDark);
     if (themeColor) themeColor.content = isDark ? '#080B15' : '#FAFAFA';
   }
-  // v1.17: rAF loop eliminado — consumía batería y en iOS Safari
+  // v1.18: rAF loop eliminado — consumía batería y en iOS Safari
   // causaba jitter al combinarse con cambios de dvh en URL-bar.
   // Con IO + scroll + resize + visibilitychange alcanza perfectamente.
   const io = new IntersectionObserver(updateState, {
