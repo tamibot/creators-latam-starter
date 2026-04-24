@@ -12,7 +12,7 @@ jobs:
     name: Shell · syntax + shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Bash syntax check
         run: |
@@ -31,7 +31,7 @@ jobs:
     name: Agentes · frontmatter + nombres únicos
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validar frontmatter de cada agente
         run: |
@@ -90,7 +90,7 @@ jobs:
     name: Skills · frontmatter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validar skills
         run: |
@@ -113,7 +113,7 @@ jobs:
     name: Settings.json · JSON válido
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validar JSON
         run: |
@@ -131,7 +131,7 @@ jobs:
     name: Markdown · links internos no rotos
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check links relativos
         run: |
@@ -163,7 +163,7 @@ jobs:
     name: Landing · HTML básico válido
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: HTML sanity check
         run: |
@@ -179,7 +179,7 @@ jobs:
     name: Agentes · referencias en docs existen
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validar que los agentes mencionados en docs existan
         run: |
@@ -223,7 +223,7 @@ jobs:
     name: Duplicados · check-duplicates.sh
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check duplicates
         run: |
