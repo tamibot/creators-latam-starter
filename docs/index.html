@@ -97,7 +97,7 @@
     box-shadow: 0 0 12px var(--accent-glow);
   }
 
-  /* ============ CUSTOM CURSOR · DISABLED v1.18 (was creating confusion) ============ */
+  /* ============ CUSTOM CURSOR · DISABLED v1.19 (was creating confusion) ============ */
   .cursor-dot, .cursor-ring { display: none !important; }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: 0; background: none; }
@@ -460,7 +460,7 @@
     50%      { transform: translate(30px, -40px) scale(1.12); }
   }
 
-  /* v1.18: float-tags eliminadas — al tener el hero altura variable
+  /* v1.19: float-tags eliminadas — al tener el hero altura variable
      (hero-split + steps + KPI strip), los bottom:% caían fuera de la
      sección y pisaban contenido de abajo. */
 
@@ -1293,69 +1293,130 @@
   .contact-chap h2 em { color: var(--accent-2); }
   .contact-chap .chap-inner { text-align: center; }
 
+  /* v1.19: github-hero card rediseñada compacta y proporcionada */
   .github-hero {
-    margin: 40px auto 32px;
-    max-width: 640px;
-    padding: 36px 32px;
-    background: linear-gradient(135deg, rgba(255,45,111,.1), rgba(255,92,138,.05));
-    border: 1px solid var(--accent);
-    border-radius: 20px;
+    margin: 32px auto 28px;
+    max-width: 620px;
+    padding: 28px 32px 30px;
+    background: linear-gradient(135deg, rgba(255,45,111,.10), rgba(255,180,84,.04));
+    border: 1px solid rgba(255,45,111,.4);
+    border-radius: var(--r-xl);
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: transform .3s, box-shadow .3s;
+    transition: transform .3s var(--ease-out-expo), box-shadow .3s, border-color .3s;
+    display: block;
   }
   .github-hero:hover {
     transform: translateY(-4px);
-    box-shadow: 0 30px 60px -20px rgba(255,45,111,.4);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px -20px rgba(255,45,111,.5);
   }
   .github-hero::before {
     content: "";
     position: absolute;
-    top: -50%; right: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,45,111,.2), transparent 40%);
+    top: -120px; right: -120px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(255,45,111,.18), transparent 60%);
     pointer-events: none;
+    border-radius: 50%;
   }
   .github-hero .gh-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
     color: var(--accent-2);
     text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 16px;
-    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     position: relative;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,92,138,.3);
+    border-radius: 999px;
+  }
+  .github-hero .gh-label::before {
+    content: "";
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,45,111,.25);
+    animation: pulse 2.4s var(--ease-out-expo) infinite;
   }
   .github-hero .gh-main {
-    font-size: clamp(22px, 3.5vw, 32px);
-    font-weight: 800;
+    font-size: clamp(15px, 2.2vw, 19px);
+    font-weight: 500;
     color: white;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
+    letter-spacing: -0.015em;
+    margin: 16px auto 22px;
     position: relative;
+    font-family: 'Geist Mono', monospace;
+    word-break: break-word;
+    max-width: 100%;
+  }
+  .github-hero .gh-main strong {
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.25em;
+    letter-spacing: -0.03em;
   }
   .github-hero .gh-btn {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    padding: 16px 32px;
+    padding: 14px 26px;
     background: white;
     color: var(--ink);
     border-radius: 999px;
-    font-weight: 700;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: -0.01em;
     position: relative;
-    transition: transform .2s, background .2s;
+    transition: transform .25s var(--ease-spring), background .25s, color .25s;
+    box-shadow: 0 12px 28px -8px rgba(255,45,111,.6);
+    animation: ctaBreath 3.6s var(--ease-smooth) infinite;
   }
+  @keyframes ctaBreath {
+    0%, 100% { box-shadow: 0 12px 28px -8px rgba(255,45,111,.55); }
+    50%      { box-shadow: 0 12px 38px -8px rgba(255,45,111,.85); }
+  }
+  @media (max-width: 720px) { .github-hero .gh-btn { animation: none; } }
   .github-hero .gh-btn:hover {
-    background: var(--accent);
+    background: var(--ink);
     color: white;
     transform: scale(1.05);
   }
-  .github-hero .gh-icon {
-    font-size: 20px;
+  .github-hero .gh-btn .gh-arr {
+    transition: transform .25s var(--ease-out-expo);
+  }
+  .github-hero .gh-btn:hover .gh-arr { transform: translateX(4px); }
+  .github-hero .gh-icon { font-size: 18px; }
+
+  /* Editorial divider · ─── ¿Preguntas? Escribinos ─── */
+  .contact-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 28px auto 22px;
+    max-width: 520px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    color: rgba(255,255,255,.4);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .contact-divider::before,
+  .contact-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
   }
 
   .contact-grid {
@@ -2067,7 +2128,7 @@
   .sec-head-big h2 { margin-top: 14px; }
 
   /* ================================================================
-     v1.18 — METHOD OVERVIEW CHAPTER + MOBILE POLISH
+     v1.19 — METHOD OVERVIEW CHAPTER + MOBILE POLISH
      ============ METHOD DIAGRAM ================================ */
   .method-chap { background: linear-gradient(180deg, var(--bg) 0%, #EFECE2 100%); }
   .method-chap .chap-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
@@ -2173,7 +2234,7 @@
     font-weight: 600;
   }
 
-  /* ============ CONTACT POLISH (v1.18 simplificado) ============ */
+  /* ============ CONTACT POLISH (v1.19 simplificado) ============ */
   .contact-chap { position: relative; overflow: hidden; }
   /* Glow suave, más abajo, sin filter:blur (causaba halo en el título) */
   .contact-chap::before {
@@ -2328,13 +2389,50 @@
     .ticker-item { font-size: 13px; }
     .ticker-item em { font-size: 15px; }
 
-    /* contact */
+    /* contact (v1.19 mobile-tight) */
     .contact-chap .chap-head { margin-left: auto; margin-right: auto; }
-    .github-hero { padding: 26px 22px; margin: 32px auto 24px; }
-    .github-hero .gh-main { font-size: 18px; word-break: break-word; }
-    .github-hero .gh-btn { padding: 13px 22px; font-size: 14px; }
-    .contact-grid { gap: 10px; }
+    .github-hero {
+      padding: 22px 18px 24px;
+      margin: 24px auto 20px;
+      border-radius: 22px;
+    }
+    .github-hero .gh-label { font-size: 10px; letter-spacing: 0.16em; }
+    .github-hero .gh-main {
+      font-size: 14px;
+      margin: 12px auto 18px;
+      line-height: 1.4;
+    }
+    .github-hero .gh-main strong { font-size: 1.15em; }
+    .github-hero .gh-btn {
+      padding: 12px 20px;
+      font-size: 13.5px;
+      gap: 8px;
+    }
+    .contact-divider {
+      margin: 22px auto 18px;
+      gap: 10px;
+      font-size: 9.5px;
+      max-width: 100%;
+    }
+    .contact-grid { gap: 10px; grid-template-columns: 1fr; }
     .contact-card { padding: 14px 16px; }
+    .contact-card .val { font-size: 13px; }
+    .contact-strip-track { font-size: 10.5px; gap: 24px; }
+    .contact-strip-track em { font-size: 13px; }
+    .contact-final {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      text-align: center;
+      padding-top: 24px;
+      margin-top: 32px;
+      font-size: 10.5px;
+    }
+    .contact-final .f-l, .contact-final .f-r, .contact-final .f-c {
+      text-align: center;
+      justify-content: center;
+    }
+    .contact-final .f-pill { padding: 4px 9px; font-size: 10px; }
+    .contact-final .f-heart { font-size: 14px; }
 
     /* pipeline viz smaller */
     .pipeline-viz { max-width: 100%; }
@@ -2353,10 +2451,78 @@
 
   /* tiny phones */
   @media (max-width: 420px) {
-    .hero-steps { flex-direction: column; border-radius: var(--r-md); overflow: hidden; }
+    .chapter { padding: 64px 16px 32px; }
+    .hero-steps {
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: var(--r-md);
+      max-width: 100%;
+    }
     .hero-step { padding: 12px 16px; border-right: 0 !important; border-bottom: 1px solid var(--line); }
     .hero-step:last-child { border-bottom: 0; }
-    .display { font-size: 34px !important; }
+    .display { font-size: 32px !important; line-height: 1.0; }
+    .h1 { font-size: 26px; }
+    .lead { font-size: 15px; }
+    .step-tag { font-size: 10px; padding: 6px 11px; gap: 8px; }
+    /* hero KPI: 2 cols con divisores limpios */
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); margin-top: 36px; }
+    .kpi-cell { padding: 16px 10px; }
+    .kpi-cell .num { font-size: 28px; }
+    .kpi-cell .lbl { font-size: 9.5px; letter-spacing: 0.1em; }
+    /* method flow → cards horizontales (icono+texto) en lugar de columna vertical */
+    .method-flow { grid-template-columns: 1fr; gap: 10px; }
+    .method-step {
+      flex-direction: row;
+      text-align: left;
+      padding: 14px 14px;
+      gap: 14px;
+      align-items: center;
+    }
+    .method-step .ms-num {
+      width: 50px; height: 50px;
+      font-size: 22px;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+    .method-step .ms-ico { display: none; }
+    .method-step h4 { font-size: 14.5px; margin-bottom: 4px; }
+    .method-step p { font-size: 12px; line-height: 1.4; }
+    .method-step .ms-tag { font-size: 9px; margin-top: 6px; }
+    /* nav tight */
+    nav.topbar { padding: 8px 12px; }
+    .top-cta { padding: 6px 11px; font-size: 11.5px; }
+    /* terminal compacto */
+    .copy-bar { padding: 8px 11px; }
+    .copy-bar .title { font-size: 9.5px; }
+    .copy-bar .copy-btn { padding: 5px 9px; font-size: 9.5px; }
+    .copy-body { font-size: 11.5px; padding: 14px 16px; }
+    /* install steps tight */
+    .install-step { padding: 12px 14px; gap: 10px; }
+    .install-step .num { width: 26px; height: 26px; font-size: 11px; }
+    .install-step .txt { font-size: 12.5px; }
+    /* loop hint smaller icon */
+    .loop-hint { padding: 14px 16px; gap: 10px; }
+    .loop-hint .loop-icon { width: 38px; height: 38px; font-size: 18px; }
+    .loop-hint .body { font-size: 12.5px; }
+    /* agent grid 5 cols on tiny phones */
+    .agent-grid { grid-template-columns: repeat(5, 1fr); gap: 5px; }
+    .agent-cell { font-size: 13px; border-radius: 7px; }
+    /* bundle list lines tight */
+    .bundle-list li { padding: 8px 11px; font-size: 12.5px; }
+    .filetree { font-size: 11px; padding: 14px 16px; }
+    .filetree::before { font-size: 9px; top: 10px; right: 12px; }
+    /* faq tight */
+    .faq-item summary { padding: 12px 14px; font-size: 13.5px; }
+    .faq-item .body { padding: 0 14px 14px; font-size: 12.5px; }
+    /* contact ultra tight */
+    .github-hero { padding: 18px 14px 22px; border-radius: 18px; }
+    .github-hero .gh-main { font-size: 12.5px; margin: 10px auto 16px; }
+    .github-hero .gh-btn { padding: 11px 16px; font-size: 12.5px; }
+    .contact-grid { gap: 8px; }
+    .contact-card { padding: 12px 14px; gap: 12px; }
+    .contact-ic { width: 34px; height: 34px; font-size: 14px; border-radius: 9px; }
+    .contact-card .lbl { font-size: 8.5px; }
+    .contact-card .val { font-size: 12.5px; }
   }
 
   /* ============ REDUCED MOTION ============ */
@@ -2440,7 +2606,7 @@
       <div class="hero-text">
         <div class="hero-badge r">
           <span class="ping"></span>
-          <span>v1.18</span>
+          <span>v1.19</span>
           <span class="sep"></span>
           <span>MIT</span>
           <span class="sep"></span>
@@ -2990,23 +3156,25 @@
 <!-- ============ 09 · CONTACTO ============ -->
 <section class="chapter contact-chap" id="c9" data-label="Contacto" data-theme="dark">
   <div class="chapter-inner">
-    <div class="chap-head" style="text-align: center; margin: 0 auto;">
+    <div class="chap-head" style="text-align: center; margin: 0 auto 8px; max-width: 720px;">
       <span class="step-tag r">PRIMERA PARADA</span>
       <h2 class="h1 r r-1" style="color: white;">Todo arranca en el <em>repo.</em></h2>
+      <p class="lead r r-2" style="margin: 16px auto 0; max-width: 520px;">
+        Cloná, forkeá o solo lee la doc. Es MIT, podés hacer lo que quieras con el starter.
+      </p>
     </div>
 
     <a href="https://github.com/tamibot/creators-latam-starter" target="_blank" rel="noopener" class="github-hero r r-2">
-      <span class="gh-label">Empezar ahora</span>
-      <div class="gh-main">github.com/tamibot/creators-latam-starter</div>
+      <span class="gh-label">EMPEZAR AHORA</span>
+      <div class="gh-main">github.com/tamibot/<strong>creators-latam-starter</strong></div>
       <span class="gh-btn">
         <span class="gh-icon">🐙</span>
         Clonar / forkear / leer docs
+        <span class="gh-arr">→</span>
       </span>
     </a>
 
-    <div style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,.5); margin-bottom: 24px; letter-spacing: 0.1em; text-transform: uppercase;">
-      ¿Preguntas? Escribinos
-    </div>
+    <div class="contact-divider r r-3">¿Preguntas? Escribinos</div>
 
     <div class="contact-grid r r-3">
       <a href="mailto:info@creatorslatam.com?subject=Starter%20kit%20-%20Consulta" class="contact-card">
@@ -3068,7 +3236,7 @@
       </div>
       <div class="f-r">
         <a href="https://github.com/tamibot/creators-latam-starter/blob/main/LICENSE" target="_blank" rel="noopener" class="f-pill">MIT License</a>
-        <a href="https://github.com/tamibot/creators-latam-starter/releases" target="_blank" rel="noopener" class="f-pill" style="margin-left:8px;">v1.18</a>
+        <a href="https://github.com/tamibot/creators-latam-starter/releases" target="_blank" rel="noopener" class="f-pill" style="margin-left:8px;">v1.19</a>
       </div>
     </div>
   </div>
@@ -3121,7 +3289,7 @@
     document.body.classList.toggle('dark-nav', isDark);
     if (themeColor) themeColor.content = isDark ? '#080B15' : '#FAFAFA';
   }
-  // v1.18: rAF loop eliminado — consumía batería y en iOS Safari
+  // v1.19: rAF loop eliminado — consumía batería y en iOS Safari
   // causaba jitter al combinarse con cambios de dvh en URL-bar.
   // Con IO + scroll + resize + visibilitychange alcanza perfectamente.
   const io = new IntersectionObserver(updateState, {
