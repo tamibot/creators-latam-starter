@@ -2,7 +2,9 @@
 
 Este archivo lo lee el modelo automáticamente al abrir el repo. Son las reglas que NO se negocian.
 
-> **Importante:** este repo es una **base extensible**, no una caja cerrada. Los 32 agentes y 5 skills son el piso común a todo proyecto. Arriba de esta base, cada proyecto suma lo específico (agentes custom, skills del dominio, workflows puntuales). Si detectás un patrón que aparece en 3+ proyectos, proponelo al starter base.
+> **Importante:** este repo es una **base extensible**, no una caja cerrada. Los **33 agentes** y **26 skills** (5 de proceso + 21 de diseño) son el piso común a todo proyecto. Arriba de esta base, cada proyecto suma lo específico (agentes custom, skills del dominio, workflows puntuales). Si detectás un patrón que aparece en 3+ proyectos, proponelo al starter base.
+
+> 📋 **Para entender el estado completo del proyecto** (estructura, lecciones, historia de versiones, bugs resueltos, sistema de diseño del landing, política de credenciales), leé [`HANDOFF.md`](./HANDOFF.md) antes de tocar nada. Este `CLAUDE.md` son las reglas duras; el handoff es el compile completo.
 
 ---
 
@@ -88,17 +90,31 @@ MD sucio  →  MD limpio (NV)  →  Ejecutás
 
 ```
 ./
-├── .claude/settings.json  → permisos preaprobados para Claude
-├── .claude/agents/        → 32 agentes (10 operativos + 5 supervisores)
-├── .claude/skills/        → 3 skills base (pdf, video, plan)
-├── tooling/               → install.sh + docs de herramientas externas
-├── templates/             → NV, brief, API research
+├── CLAUDE.md              → este doc (10 mandamientos)
+├── HANDOFF.md             → compile completo del estado del proyecto
+├── LLM.md                 → bienvenida corta para cualquier LLM
+├── README.md              → quick start público
+├── INSTALL.md             → instalación detallada
+├── CHANGELOG.md           → historial de versiones
+├── .env.example           → template de credenciales (commited, vacío)
+├── .gitignore             → excluye .env, secrets/, *.key
+├── .claude/
+│   ├── settings.json      → permisos preaprobados para Claude
+│   ├── agents/            → 33 agentes (operativos + supervisores)
+│   ├── skills/            → 26 skills (5 proceso + 21 diseño)
+│   └── commands/          → slash commands custom
+├── docs/index.html        → landing pública (GitHub Pages)
+├── tooling/               → 7 scripts bash (install, doctor, migrate...)
+├── templates/             → NV, plan-maestro, api-research, retro, handoff
+├── .github/workflows/     → CI con 8 jobs de validación
 ├── workflows/             → flujos específicos del proyecto
 ├── documentation/         → lo que pasa el cliente (incluye diagramas)
-├── data_original/         → PDFs, raw uploads (no tocar)
-├── output/                → entregables finales
+├── data_original/         → PDFs, raw uploads (git-ignored, no tocar)
+├── output/                → entregables finales (git-ignored)
 └── .env                   → credenciales locales (NUNCA subir)
 ```
+
+Detalle exhaustivo en [`HANDOFF.md §2`](./HANDOFF.md#2--estructura-del-repo).
 
 - Todo PDF que entra a `data_original/` se convierte a MD antes de usarse (skill `pdf-a-markdown`).
 - Todo video/audio pasa por skill `video-a-texto` antes de análisis.

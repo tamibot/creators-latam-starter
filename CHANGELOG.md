@@ -6,6 +6,123 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/) · sigue [SemV
 
 ---
 
+## [1.19.0] · 2026-04-25
+
+### Fixed · landing
+- **Contact section rediseñada:** `github-hero` con padding 28px, gh-label
+  como pill con punto pulsante, URL en Geist Mono con `creators-latam-starter`
+  en Fraunces italic rosa, divider editorial `── ¿PREGUNTAS? ESCRIBINOS ──`
+  con líneas gradient.
+- **CTA breath animation:** botón "Clonar / forkear / leer docs" con shadow
+  rosa pulsante 3.6s (desktop only).
+- **Pasada mobile agresiva (≤420px):** method-flow a cards horizontales,
+  KPI strip 2 cols con num 28px, agent-grid a 5 cols, terminal y contact
+  ultra compactos.
+
+## [1.18.0] · 2026-04-24
+
+### Fixed · landing
+- **Float-tags removidas:** las 4 `.float-tag` (32 AGENTES, MIT, PLAN
+  MAESTRO, UN COMANDO) tenían `bottom: 22%/28%` relativo al hero. Al
+  crecer la sección con hero-split + steps + KPI, los porcentajes caían
+  fuera y pisaban contenido de abajo.
+- **github-hero::after conic-gradient eliminado:** la combinación
+  `mask-composite: exclude + animation: rot 8s` causaba halo
+  y línea diagonal cruzando el título en Chrome/Safari.
+- **contact-chap::before glow atenuado** (520×520, opacity .10, sin
+  filter:blur) en lugar del nubarrón de 700×700.
+- **Footer rediseñado:** ticker strip + 3 columnas (copyright, hecho con
+  *claude code* en Fraunces italic rosa, MIT License + version pills).
+- **Hero-steps ahora son `<a>` con anchor scroll** al capítulo
+  correspondiente.
+
+### Added
+- 2 anillos dasheados rotando 60s/90s alrededor de la constelación.
+- 3 sparks orbitando rosa + dorado con drop-shadow tipo estrella.
+
+## [1.17.0] · 2026-04-24
+
+### Fixed · landing · scroll jump en mobile
+Apaga TODAS las rotaciones infinitas en `@media (max-width: 720px)`:
+- `.copy-box::before` conic 14s → display:none
+- `.github-hero::after` conic 8s con mask-composite → display:none (era el
+  culpable principal del "algo gira, no entra, se alarga")
+- `.loop-hint .loop-icon` loopSpin → animation:none
+- `.constellation .c-link / c-ring.pulse / c-node.active` → animation:none
+- `.hero-badge .ping`, `.step-tag::before` → animation:none
+- `.hero .orb` (filter:blur 60px) → filter:none, opacity .25
+- `* { will-change: auto !important }`
+- `scroll-behavior: auto` en mobile (no compite con URL bar reflow de iOS)
+- Intervalos JS de firing pausados con `matchMedia` + `document.hidden`
+
+## [1.15.0] · 2026-04-23
+
+### Added · landing · método overview chapter
+- Nueva sección `c1b` entre hero e install con 4 cards horizontales
+  (método 00→04) conectadas por línea punteada rosa.
+- Cada card: número en círculo (Fraunces italic, gira -8° al hover),
+  icono, título, descripción, tag del agente responsable.
+- Stagger reveal al entrar al viewport (130ms entre cards).
+
+### Fixed
+- Email y URL en contact-cards ya no se cortan en `m.com` (text-overflow:
+  ellipsis con white-space: nowrap).
+- Custom cursor desactivado (causaba confusión visual con el difference
+  blend mode).
+- Footer version sincronizada.
+
+## [1.14.0] · 2026-04-23
+
+### Added · landing · visualizaciones masivas
+- **Constelación SVG generada en runtime:** 32 nodos en 2 anillos (20 +
+  12) alrededor del núcleo "32 AGENTES", 14 líneas firing entre nodos
+  random con stroke-dashoffset loop, 5 nodos pulsando rosa cada 900ms.
+- **KPI counters:** count-up 0→N con ease-out-expo cuando entran al
+  viewport (32 agentes · 22 design skills · 5 process skills · ∞ custom).
+- **Install-run simulation:** panel terminal con 4 pasos marcándose en
+  verde con delay 1s + barra de progreso 4.2s.
+- **Agent grid 8×5:** 35 celdas con tooltip del nombre real de cada
+  agente, 3-5 firing rosa rotando cada 1.4s.
+- **Pipeline SVG en Plan Maestro:** 3 inputs convergen al núcleo
+  📋 → pill "FIRMA OK" con stroke-draw animation (2.4s stagger 300ms).
+- **File tree reveal:** 10 líneas entran una a una desde la izquierda
+  con stagger 70ms.
+- **3D tilt** reactivo al cursor en bundle-side, copy-box, constellation.
+
+## [1.13.0] · 2026-04-23
+
+### Added · 22 design skills
+Instaladas en `.claude/skills/`:
+- `impeccable/` (de pbakaus/impeccable) con sub-skills `typography`,
+  `color`, `layout`, `animate`, `polish`
+- `design-motion-principles/` (de kylezantos/design-motion-principles)
+  con los 12 principios de Disney aplicados a UI motion
+- `frontend-design/` (de anthropics/claude-code/plugins/frontend-design)
+  con production-grade frontend guidelines
+
+### Changed · landing
+Pase de diseño completo con eases Emil Kowalski, tipografía Geist +
+Fraunces variable serif, magnetic buttons, parallax orbs, scroll progress
+rail, custom cursor con mix-blend-mode (luego removido en v1.15).
+
+## [1.12.0] · 2026-04-22
+
+### Changed · landing rearmada con framing "base para Claude Code"
+- Hero directo a PASO 00 (instalar) en lugar de "el problema"
+- Copy button con toast en el comando de install
+- PASO 01: cadena backwards (entregable → KPIs → datos → fuente)
+- PASO 02: 6 tipos de info en lugar de logos de plataformas
+- PASO 03: "define TUS agentes para TU proyecto" (ej. Google Ads agents)
+- PASO 04: renombrado de "Firmar y lanzar" a "Plan Maestro" con
+  visualización accumulator
+- Merge unboxing + timeline
+- Dashboard y stats slides removidas
+- GitHub prominente en contacto
+- Fixes de detección de scroll (triple mecanismo: IO + scroll event +
+  rAF loop) + visibilitychange handler
+
+---
+
 ## [1.11.0] · 2026-04-21
 
 ### Changed · landing rediseñada (3ra iteración)
